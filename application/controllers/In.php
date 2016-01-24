@@ -28,14 +28,17 @@ class In extends CI_Controller {
 				$check2 = $this->Company->log_in($login_id,$pass);
 				
 				if ($check2 == false) {
-					redirect($prev_page);
+					// redirect($prev_page);
+					echo "ga ada di database dua duanya";
 				}
 				else {
 					foreach ($check2 as $row) { //LOOPING FOR A USERNAME
 					}
 
 					$this->session->set_userdata('logged',$row->username);
-					redirect($prev_page);	
+					// redirect($prev_page);
+					echo "ada di company";
+					echo $this->session->userdata('logged');	
 				}
 			}
 			else {
@@ -43,11 +46,14 @@ class In extends CI_Controller {
 				}	
 
 				$this->session->set_userdata('logged',$row->username);
-				redirect($prev_page);
+				// redirect($prev_page);
+				echo "ada di worker";
+				echo $this->session->userdata('logged');	
 			}	
 		}
 		else {
 			redirect($prev_page);
+			echo "tombol ga kepencet";
 		}
 		
 	}
