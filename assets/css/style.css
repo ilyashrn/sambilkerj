@@ -1,0 +1,157 @@
+body{
+    font-family: "Open Sans",sans-serif;
+}
+
+.browse-cat li{
+    margin-left: 10px;
+}
+
+.cat-head{
+  background-color: #ff444c;
+  margin-left: 0px;
+}
+
+.portfolio-item-hover h3 {
+  text-transform: uppercase;
+  color: white;
+}
+
+.login-dropdown {
+  padding: 0;
+  position: absolute;
+  top: 45px;
+  max-width: none;
+  left: -120px;
+  width: 300px;
+  background: #F2F5F8;
+
+}
+
+.login-dropdown .dropdown-content, .login-dropdown .dropdown-footer{
+  padding: 15px;
+  width: 100%
+}
+
+.dropdown-content form input[type="text"], .dropdown-content form input[type="password"] {
+  background: white;
+}
+
+.login-dropdown .dropdown-footer {
+  padding: 0;
+  font-size: 12px;
+  background: white;
+}
+
+.dropdown-footer a {
+  text-align: center;
+  color: #337ab7;
+}
+
+.form-detail {
+  /*border-left: 1px solid #E1E1E1;*/
+  padding: 2px;
+  background: #F2F5F8;
+  border-radius: 30px;
+}
+
+#page-header {
+  padding : 20px 0px;
+  text-transform: uppercase;
+}
+
+.job-box {
+  padding: 20px;
+}
+
+.title-job a, h6 .title-job, h6 .worker-name {
+  text-transform: none;
+  font-weight: normal;
+  font-size: 18px;
+  color: #FF444C;
+}
+
+h6 .worker-name {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+
+.point-detail {
+  line-height: 30px;
+}
+
+.point-detail i {
+  font-size: 25px;
+}
+.subtitle-job, .subtitle-job a {
+  text-transform: none;
+  color: #6E6E6E;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+.required-skills, .learned-languages {
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.required-skills span, .learned-languages span {
+  display: inline-block;
+}
+
+.post-owner, .profil-log {
+  font-size: 12px;
+  text-align: right;
+}
+
+.counter-jobs {
+  font-size: 10px;
+  font-weight: normal;
+  background-color: #282E3A;
+}
+
+.category-title {
+  font-size: 12px;
+}
+
+#categories {
+    /*font-size: 12px;*/
+}
+
+.profil-information {
+  text-align: left;
+  font-size: 12px;
+}
+
+.profil-point i {
+  font-size: 16px;
+}
+
+.profil-log {
+  line-height: 15px;
+}
+
+.worker-header {
+  margin-left: 0px;
+  padding-left: 0;
+  margin-bottom: 15px;
+}
+
+.worker-header img {
+  width: 30%;
+  height: 30%;
+  float: left;
+}
+
+.worker-header h6 {
+  margin-top: 25px;
+}
+
+.about-me-image img {
+  width: 95%;
+  height: 95%;
+}
+
+.help-block {
+  font-size: 12px;
+}
