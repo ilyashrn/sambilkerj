@@ -5,15 +5,21 @@ class Main extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
+
+		if ($this->session->userdata('logged') !== true) {
+			$sess_data = array('last_page' => current_url());
+			$this->session->set_userdata($sess_data);
+		}
 	}
 
 	public function index()
 	{
 		$data = array('title' => "SambilKerja.com");
+		echo $this->session->userdata('logged');
 		$this->load->view('html_head', $data);
-    $this->load->view('header', $data);
-    $this->load->view('content/home', $data);
-    $this->load->view('footer', $data);
+	    $this->load->view('header', $data);
+	    $this->load->view('content/home', $data);
+	    $this->load->view('footer', $data);
 	}
 
 	public function new_user()
@@ -56,7 +62,6 @@ class Main extends CI_Controller {
 		else {
 			redirect('Main');
 		}
-
 	}
 
 }

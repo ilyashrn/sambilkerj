@@ -7,7 +7,10 @@ class Workers extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Worker');
 
-		// $this->load->model('Job');
+		if ($this->session->userdata('logged') != true) {
+			$sess_data = array('last_page' => current_url());
+			$this->session->set_userdata($sess_data);
+		}
 	}
 
 	public function index()

@@ -5,6 +5,22 @@
       parent::__construct();
     }
 
+    function log_in($login_id,$pass) {
+      $this->db->select('*');
+      $this->db->from('company');
+      $this->db->where('username',$login_id);
+      $this->db->or_where('email',$login_id);
+      $this->db->where('password',$pass);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      }
+      else {
+        return false;
+      }
+    }
+
     function get_all() {
       $this->db->select('*');
       $this->db->from('company');

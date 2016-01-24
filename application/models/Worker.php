@@ -18,6 +18,22 @@
       }
     }
 
+    function log_in($login_id,$pass) {
+      $this->db->select('*');
+      $this->db->from('worker');
+      $this->db->where('username',$login_id);
+      $this->db->or_where('email',$login_id);
+      $this->db->where('password',$pass);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      }
+      else {
+        return false;
+      }
+    }
+
     function get($where_what,$where_value) {
       $this->db->select('*');
       $this->db->from('worker');

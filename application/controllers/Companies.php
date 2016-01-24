@@ -7,7 +7,10 @@ class Companies extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Company');
 
-		// $this->load->model('Job');
+		if ($this->session->userdata('logged') != true) {
+			$sess_data = array('last_page' => current_url());
+			$this->session->set_userdata($sess_data);
+		}
 	}
 
 	public function index()
@@ -25,7 +28,7 @@ class Companies extends CI_Controller {
 	}
 
 	function inserting() {
-		
+
 		$data = array( //ARRAY FOR INPUTS FROM FORM
 			'company_name' => $this->input->post('company_name'),
 			'username' => $this->input->post('username'),

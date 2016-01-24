@@ -105,19 +105,22 @@
                   </div>
                 </li>
                 <li>
-                  <a href="<?php echo base_url().'index.php/Members/new_user';?>">Regrister</a>
+                  <a href="<?php echo base_url().'index.php/Main/new_user';?>">Regrister</a>
                 </li>
                 <li class="dropdown">
                   <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
                   <div class="dropdown-menu login-dropdown">
                     <div class="dropdown-content">
-                      <form action="" method="post" accept-charset="UTF-8">
-                        Username or E-mail<input id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" placeholder="Username or E-mail" />
-                        Password<input id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" placeholder="Password" />
-                        <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+                      <?php
+                      echo form_open('in/process');
+                      ?>
+                        Username or E-mail
+                        <input id="user_username" style="margin-bottom: 15px;" type="text" name="name_email" size="30" placeholder="Username or E-mail" />
+                        Password
+                        <input id="user_password" style="margin-bottom: 15px;" type="password" name="password" size="30" placeholder="Password" />
+                        <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" value="1" />
                         <label class="string optional" for="user_remember_me"> Remember me</label>
-
-                        <input class="btn btn-primary" style="float: right; font-size: 12px; text-transform: none;" type="submit" name="commit" value="Sign me in" />
+                        <input class="btn btn-primary" style="float: right; font-size: 12px; text-transform: none;" type="submit" name="in" value="Sign me in" />
                       </form>
                     </div>
                     <div class="dropdown-footer">
