@@ -20,7 +20,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12 text-center">
-        Hello <?php echo $fullname; ?>
+        Hello <b><?php echo $fullname; ?></b>
         <h4>Terima kasih telah mendaftar di <span class="text-default">SambilKerja.com</span>. Silahkan perbarui dan lengkapi profilmu sekarang juga! </h4>
         <br>
         <a class="btn btn-default" href="index.html">to my profil</a>

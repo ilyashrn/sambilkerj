@@ -12,7 +12,7 @@ class Workers extends CI_Controller {
 
 	public function index()
 	{
-    $data = array('title' => "Pekerja yang tersedia | SambilKerja.com");
+    	$data = array('title' => "Pekerja yang tersedia | SambilKerja.com");
 		$this->load->view('html_head', $data);
 		$this->load->view('header', $data);
 		$this->load->view('content/worker-list', $data);

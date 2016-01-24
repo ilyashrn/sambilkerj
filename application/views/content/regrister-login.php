@@ -59,12 +59,6 @@
                         <span class="help-block">Typed password should matches</span>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="telp" class="col-sm-4 control-label">Nomor Telepon</label>
-                      <div class="col-sm-7">
-                        <input type="number" data-minlength="7" class="form-control" id="telp" name="telp" placeholder="Nomor Telepon/Handphone" required="required">
-                      </div>
-                    </div>
                     <div class="form-group pull-right">
                       <div class="col-sm-offset-2 col-sm-10">
                         <button name="ins_worker" type="submit" class="btn btn-default">Regrister me</button>
@@ -77,64 +71,61 @@
               <div class="col-sm-5">
 
 						<div class="service-box style-3 default">
-
-							<!-- <i class="mt-icon-email2"></i> -->
 							<h6><a href="#">Daftar sebagai pekerja</a></h6>
-
 							<div class="service-box-content">
-
 								<p>Quisque porta dui id risus luctus porta. Sed eu lacus semper, viverra sapien vel, ullamcorper turpis lacina omis elit.</p>
-
 							</div><!-- services-boxes-content -->
-
 						</div><!-- services-boxes -->
-
 					</div><!-- col -->
             </div><!-- row -->
           </div><!-- tab-pane -->
           <div class="tab-pane fade" id="tab-1-2">
             <div class="row">
               <div class="col-sm-7">
-                <form class="form-horizontal">
+                <?php
+                $attributes = array('class' =>'form-horizontal', 'data-toggle' => 'validator');
+                echo form_open('Companies/inserting', $attributes);
+                ?>
                   <div class="form-group">
                     <label for="company_name" class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Nama Perusahaan/Organisasi">
+                      <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Nama Perusahaan/Organisasi" required="required">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="username" class="col-sm-4 control-label">Username</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                      <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="email" class="col-sm-4 control-label">E-mail</label>
                     <div class="col-sm-7">
-                      <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                      <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required="required">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email" class="col-sm-4 control-label">E-mail Kedua</label>
+                    <div class="col-sm-7">
+                      <input type="email" class="form-control" id="2ndemail" name="2nd_email" placeholder="Secondary E-mail" required="required">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
                     <div class="col-sm-7">
-                      <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password">
+                      <input type="password" class="form-control" id="inputPassword2" name="password" placeholder="Password" required="required">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword4" class="col-sm-4 control-label">Confirm Password</label>
                     <div class="col-sm-7">
-                      <input type="password" class="form-control" id="inputPassword4" name="confirm_password" placeholder="Confirm Password">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="telp" class="col-sm-4 control-label">Nomor Telepon</label>
-                    <div class="col-sm-7">
-                      <input type="text" class="form-control" id="telp" name="telp" placeholder="Nomor Telepon/Handphone">
+                      <input type="password" class="form-control" id="matchPassword" data-match="#inputPassword2" data-match-error="Whoops, these don't match" name="confirm_password" placeholder="Confirm Password" required="required" style="margin-bottom:10px;">
+                      <span class="help-block">Typed password should matches</span>
                     </div>
                   </div>
                   <div class="form-group pull-right">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-default">Regrister my company</button>
+                      <button name="ins_comp" type="submit" class="btn btn-default">Regrister my company</button>
                     </div>
                   </div>
                 </form>
@@ -142,27 +133,20 @@
               <div class="col-sm-5">
 
 						<div class="service-box style-3 default">
-
 							<!-- <i class="mt-icon-writingtool"></i> -->
 							<h6><a href="#">Daftarkan perusahaan anda</a></h6>
-
 							<div class="service-box-content">
-
 								<p>Quisque porta dui id risus luctus porta. Sed eu lacus semper, viverra sapien vel, ullamcorper turpis lacina omis elit.</p>
-
 							</div><!-- services-boxes-content -->
-
 						</div><!-- services-boxes -->
-
 					</div><!-- col -->
             </div><!-- row -->
           </div><!-- tab-pane -->
         </div><!-- tab-content -->
-
       </div><!-- horizontal-tabs -->
-
     </div><!-- col -->
   </div><!-- row -->
 </div><!-- container -->
-
 </div><!-- PAGE CONTENT -->
+
+

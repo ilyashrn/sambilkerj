@@ -27,15 +27,36 @@ class Main extends CI_Controller {
 
 	public function regristration_success()
 	{
-		$data = array( //DATA FOR VIEWS
-			'title' => "Regristration sucessfull! | SambilKerja.com",
-			'fullname' => $this->session->userdata('fullname')
-			);
+		if ($this->session->userdata('fullname') !== false) {
+			$data = array( //DATA FOR VIEWS
+				'title' => "Regristration sucessfull! | SambilKerja.com",
+				'fullname' => $this->session->userdata('fullname')
+				);
 
-		$this->load->view('html_head', $data);
-		$this->load->view('header', $data);
-		$this->load->view('content/regristration-success', $data);
-		$this->load->view('footer', $data);
+			$this->load->view('html_head', $data);
+			$this->load->view('header', $data);
+			$this->load->view('content/regristration-success', $data);
+			$this->load->view('footer', $data);
+
+			$this->session->sess_destroy();
+		}
+		elseif ($this->session->userdata('company_name') !==  false) {
+			$data = array( //DATA FOR VIEWS
+				'title' => "Regristration sucessfull! | SambilKerja.com",
+				'fullname' => $this->session->userdata('company_name')
+				);
+
+			$this->load->view('html_head', $data);
+			$this->load->view('header', $data);
+			$this->load->view('content/regristration-success', $data);
+			$this->load->view('footer', $data);
+
+			$this->session->sess_destroy();
+		}
+		else {
+			redirect('Main');
+		}
+
 	}
 
 }
