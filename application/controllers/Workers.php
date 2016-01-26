@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Workers extends CI_Controller {
 
+	private $username = null; 
+	private $mem_id = null;
+	private $mem_type = null;
+	private $fullname = null;
+
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Worker');
@@ -10,6 +15,10 @@ class Workers extends CI_Controller {
 		if ($this->session->userdata('logged') != true) {
 			$sess_data = array('last_page' => current_url());
 			$this->session->set_userdata($sess_data);
+		} else {
+			$this->username = $this->session->userdata('logged');
+			$this->mem_id = $this->session->userdata('mem_id');
+			$this->mem_type = $this->session->userdata('mem_type');
 		}
 	}
 
@@ -52,12 +61,20 @@ class Workers extends CI_Controller {
 		}
 	}
 
-	function test($fullname) {
-		$sess_array = array('fullname' => $fullname);
-		$this->session->set_userdata($sess_array);
+	function updating_ident() {
+		$mem_id = $this->session->userdata('mem_id');
 
-		if ($this->session->userdata('fullname') !== false) {
-			redirect('Main/regristration_success');
+		if (null !== $this->input->post('ins_ident')) {
+			$dob = implode("-", array_reverse(explode("/", $this->input->post('dob'))));	
+			$mem_data = array(
+				'dob' => $dob,
+				'telp_number' => $this->input->post('telp_number'),
+				'about' => $this->input->post('about'),
+				'domicile' =>$this->input->post('domicile')
+				);
+			
+			$insert = $this->Worker->update_identity($mem_data,$this->mem_id);
+			redirect('Members/'.$username);
 		}
 	}
 

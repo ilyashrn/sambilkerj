@@ -186,6 +186,7 @@
 		border-radius: 20px;
 		background-color: transparent;
 		border: 2px solid #e1e1e1;
+		width: 100%;
 	}
 	
 	select {

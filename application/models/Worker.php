@@ -98,6 +98,11 @@
       $this->db->insert('w_identity',$data);
     }
 
+    function update_identity($data,$where_value) {
+      $this->db->update('w_identity',$data);
+      $this->db->where('id_worker',$where_value);
+    }
+
     function update($data,$where_what,$where_value) {
       $this->db->update('worker',$data);
       $this->db->where($where_what,$where_value);

@@ -155,8 +155,17 @@ h6 .worker-name {
 .help-block {
   font-size: 12px;
 }
+.profil-tab h4 {
+  font-weight: 700;
+  text-transform: uppercase;
+}
 
 .profil-alert .text-box {
   padding: 25px;
   /*font-size: 12px;*/
+}
+
+.profil-tab li a{
+  font-size: 12px;
+  font-weight: normal;
 }
