@@ -155,3 +155,8 @@ h6 .worker-name {
 .help-block {
   font-size: 12px;
 }
+
+.profil-alert .text-box {
+  padding: 25px;
+  /*font-size: 12px;*/
+}

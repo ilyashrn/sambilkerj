@@ -48,6 +48,48 @@
       }
     }
 
+    function get_ident($where_value) {
+      $this->db->select('*');
+      $this->db->from('w_identity');
+      $this->db->where('id_worker',$where_value);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      }
+      else {
+        return false;
+      }
+    }
+
+    function get_lang($where_value) {
+        $this->db->select('*');
+        $this->db->from('w_language');
+        $this->db->where('id_worker',$where_value);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+          return $query->result();
+        }
+        else {
+          return false;
+        }
+    }
+
+    function get_skill($where_value) {
+        $this->db->select('*');
+        $this->db->from('w_skill');
+        $this->db->where('id_worker',$where_value);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+          return $query->result();
+        }
+        else {
+          return false;
+        }
+    }
+
     function insert($data) {
       $this->db->insert('worker',$data);
     }

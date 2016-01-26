@@ -14,7 +14,13 @@
 						<a href="#">#Creative</a>
 					</div><!-- social-media -->
 				</div><!-- about-me-image -->
-          <div class="service-box style-3 profil-information default">
+        <?php
+        if ($ident_data == false) { ?>
+          
+        <?php 
+        } else {
+        ?>
+          <div class="service-box style-3 profil-information default" style="padding-top: 0;">
             <h6>Informasi Singkat</h6>
               <div class="service-box-content">
                 <div class="point-detail profil-point">
@@ -26,23 +32,46 @@
                 </div>
 					   </div><!-- services-boxes-content -->
 				</div><!-- services-boxes -->
+        <?php
+        }
+        ?>
 			</div><!-- about-me -->
 		</div><!-- col -->
 
+    <?php
+    foreach ($basic_data as $basic_row) {
+    }
+    // foreach ($ident_data as $ident_row) {
+    // }
+    ?>
         <div class="col-md-8">
           <div class="job-box service-box style-3 default" style="padding:20px;">
             <h6>
-              <a href="#" class="worker-name">Ilyas Habiburrahman</a><br>
-              <span class="subtitle-job">ilyashrn<br></span>
+              <a href="#" class="worker-name"><?php echo $basic_row->fullname; ?></a><br>
+              <span class="subtitle-job"><?php echo $basic_row->username; ?><br></span>
             </h6>
             <div class="service-box-content">
               <div class="row">
+                <?php
+                if ($ident_data == false) { ?>
+                
+                <div class="col-sm-12 profil-alert">
+                  <div class="text-box">
+                    <p>Maaf! sepertinya anda belum melengkapi profil anda. Silahkan lengkapi sekarang juga <a href="<?php echo "edit/".$basic_row->username; ?>">disini.</a></p>
+                  </div><!-- text-box -->
+                </div><!-- col -->  
+                <?php
+                } else {
+                ?>
                 <div class="col-sm-8">
                   <b>Sedikit Tentang saya</b>
                   <p>Quisque porta dui id risus luctus porta. Sed eu lacus semper, viverra sapien vel, ullamcorper turpis lacina omis elit.</p>
                 </div>
+                <?php
+                }
+                ?>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-sm-12">
                   <span><b>Keahlian yang dimiliki</b></span>
                   <div class="widget-tags required-skills">
@@ -58,10 +87,12 @@
                       <a href="#">Jerman</a>
                       <a href="#">Prancis</a>
                   </div>
-                </div>
-                <div class="col-sm-6 pull-right profil-log">
-                  bergabung pada 5 Januari 2015 <br>
+                </div> -->
+                <div class="row">
+                  <div class="col-sm-6 pull-right profil-log">
+                  bergabung pada <?php echo date('j M Y', strtotime($basic_row->created_time)) ;?><br>
                   terakhir login pada 6 Januari 2015
+                  </div>  
                 </div>
               </div>
             </div><!-- services-boxes-content -->

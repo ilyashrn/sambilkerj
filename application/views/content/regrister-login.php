@@ -67,9 +67,9 @@
                   <?php
                   echo form_close();
                   ?>
-              </div><!-- col -->
-              <div class="col-sm-5">
-
+            </div><!-- col -->
+          
+          <div class="col-sm-5">
 						<div class="service-box style-3 default">
 							<h6><a href="#">Daftar sebagai pekerja</a></h6>
 							<div class="service-box-content">
@@ -77,7 +77,8 @@
 							</div><!-- services-boxes-content -->
 						</div><!-- services-boxes -->
 					</div><!-- col -->
-            </div><!-- row -->
+        </div><!-- row -->
+
           </div><!-- tab-pane -->
           <div class="tab-pane fade" id="tab-1-2">
             <div class="row">
