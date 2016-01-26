@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "Main";
 $route['404_override'] = 'errors/Page_not_found';
+$route['Members/(:any)'] = 'Members/index'; 
 
 
 /* End of file routes.php */

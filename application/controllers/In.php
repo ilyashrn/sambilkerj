@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class In extends CI_Controller {
+class In extends CI_Controller { //LOGIN CONTROLLER
 
 	public function __construct() {
 		parent::__construct();
@@ -14,9 +14,9 @@ class In extends CI_Controller {
 		
 	}
 
-	public function process()
+	public function process() //PROCESSING LOGIN
 	{
-		$prev_page = $this->session->userdata('last_page');
+		$prev_page = $this->session->userdata('last_page'); // RETRIEVING LAST PAGE WHERE LOGIN PANEL WAS ACCESSED
 
 		if (null !== $this->input->post('in')) {
 			$login_id = $this->input->post('name_email');
@@ -24,44 +24,45 @@ class In extends CI_Controller {
 
 			$check1 = $this->Worker->log_in($login_id,$pass);
 
-			if ($check1 == false) {
+			if ($check1 == false) { //USERNAME/EMAIL ISN'T IN WORKER
 				$check2 = $this->Company->log_in($login_id,$pass);
 				
-				if ($check2 == false) {
-					// redirect($prev_page);
-					echo "ga ada di database dua duanya";
+				if ($check2 == false) { // USERNAME/EMAIL ISN'T IN ANY TABLES
+					redirect($prev_page);
 				}
-				else {
-					foreach ($check2 as $row) { //LOOPING FOR A USERNAME
+				else { //USERNAME/EMAIL IS IN COMPANY
+					foreach ($check2 as $row) { //LOOPING FOR A COMPANY USERNAME
 					}
+					$sess_array = array(
+						'logged' => $row->username,
+						'mem_type' => 'C' );
 
-					$this->session->set_userdata('logged',$row->username);
-					// redirect($prev_page);
-					echo "ada di company";
-					echo $this->session->userdata('logged');	
+					$this->session->set_userdata($sess_array); //SET USERDATA WITH LOGGED IN USER
+					redirect($prev_page);
 				}
 			}
-			else {
-				foreach ($check1 as $row) { //LOOPING FOR A USERNAME
+			else { //USERNAME/EMAIL IS IN WORKER
+				foreach ($check1 as $row) { //LOOPING FOR A WORKER USERNAME
 				}	
-
-				$this->session->set_userdata('logged',$row->username);
-				// redirect($prev_page);
-				echo "ada di worker";
-				echo $this->session->userdata('logged');	
+				$sess_array = array(
+					'logged' => $row->username,
+					'mem_type' => 'W' 
+					);
+				$this->session->set_userdata($sess_array); //SET USERDATA WITH LOGGED IN USER
+				redirect($prev_page);
 			}	
 		}
-		else {
+		else { // SUBMIT BUTTON WASN'T PRESSED
 			redirect($prev_page);
-			echo "tombol ga kepencet";
 		}
 		
 	}
 
-	public function out()
+	public function out() //LOGOUT 
 	{
-		$prev_page = $this->session->userdata('last_page');
+		// $prev_page = $this->session->userdata('last_page');
 		$this->session->unset_userdata('logged');
+		redirect('Main','refresh');
 	}
 
 }

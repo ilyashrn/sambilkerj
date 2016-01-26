@@ -104,6 +104,18 @@
                     </div>
                   </div>
                 </li>
+                <?php
+                if ($this->session->userdata('logged') !== false) { //NAVBAR IF USER IS A LOGGED IN USER
+                  $cur_username = $this->session->userdata('logged');
+                ?>
+
+                <li>
+                  <a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>">Hi, <?php echo $cur_username;?>! </a>
+                </li>
+
+                <?php 
+                } else {
+                ?>
                 <li>
                   <a href="<?php echo base_url().'index.php/Main/new_user';?>">Regrister</a>
                 </li>
@@ -127,7 +139,10 @@
                       <a href="#" style="color: #337ab7;">I forgot my password.</a>
                     </div>
                   </div>
-                </li>
+                </li> 
+                <?php
+                }
+                ?>
                 <li class="search">
                   <a class="hidden-xs hidden-sm" href="#"><i class="mt-icon-search"></i></a>
                   <div id="search-form-container">
