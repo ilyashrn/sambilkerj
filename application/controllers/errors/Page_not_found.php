@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Members extends CI_Controller {
+class Page_not_found extends CI_Controller {
 
 	public function index()
 	{

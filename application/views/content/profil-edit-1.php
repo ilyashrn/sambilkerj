@@ -1,24 +1,25 @@
 <script>
     $(function(){
-      // turn the element to select2 select style
       $('#test').select2();
     });
-	$(document).ready(function () {
-	     $("#dob").datepicker();
-	 });
+    $(function(){
+      $('#test2').select2();
+    });
  </script>	
 
 
- <div class="tab-pane fade in active" id="tab-6-6">
+ <div class="tab-pane fade <?php echo ($tab_param == 'I') ? 'in active': '';?>" id="tab-6-6">
 	<div class="col-sm-12 service-box style-3 green profil-tab">
 	<div class="col-sm-12">
-		<h4>Informasi Dasar</h4>	
+		<h3>Informasi Dasar</h3>	
         <?php
-        $attributes = array('class' => 'form-horizontal','data-toggle' => 'validator');
-        echo form_open('Workers/updating_ident', $attributes);
+        $attributes = array('id' => 'fileForm','class' => 'form-horizontal','data-toggle' => 'validator');
+        echo form_open_multipart('Workers/updating_ident', $attributes);
         foreach ($basic_data as $row) {}
     	if ($ident_data !== false) {
-	    	foreach ($ident_data as $row2) {}	
+	    	foreach ($ident_data as $row2) {
+	    		$dob = implode("/", array_reverse(explode("-", $row2->dob)));	
+	    	}	
 	    }
         ?>
           <!-- <form class="form-horizontal"> -->
@@ -30,19 +31,29 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="gender" class="col-sm-4 control-label">Jenis Kelamin</label>
+              <div class="col-sm-7">
+          		<select name="gender" id="test2" style="width:100%; height:20%;" >
+          			<option>Pilih Jenis Kelamin</option>
+          			<option <?php echo ($ident_data !== false && $row2->gender == 0) ? 'selected="selected"': '';?>>Laki-laki</option>
+          			<option <?php echo ($ident_data !== false && $row2->gender == 1) ? 'selected="selected"': '';?>value="1">Perempuan</option>
+			    </select>
+              </div>
+            </div>
+            <div class="form-group">
               <label for="dob" class="col-sm-4 control-label">Tanggal Lahir</label>
               <div class="col-sm-7">
-                <input type="date" id="dob" name="dob" placeholder="mm/dd/yyyy">
+                <input type="date" id="dob" name="dob" placeholder="mm/dd/yyyy" value="<?php echo ($ident_data !== false) ? $dob: '';?>">
               </div>
             </div>
             <div class="form-group">
               <label for="telp_number" class="col-sm-4 control-label">Nomor Handphone</label>
               <div class="col-sm-7">
-                <input type="text"  id="telp_number" name="telp_number" placeholder="Nomor Handphone">
+                <input type="text"  id="telp_number" name="telp_number" placeholder="Nomor Handphone" value="<?php echo ($ident_data !== false) ? $row2->telp_number: '';?>">
               </div>
             </div>
             <div class="form-group">
-              <label for="telp_number" class="col-sm-4 control-label">Domisili</label>
+              <label for="domicile" class="col-sm-4 control-label">Domisili</label>
               <div class="col-sm-7">
           		<select name="domicile" id="test" style="width:100%; height:20%;" >
           			<option>Pilih Kota Domisili</option>
@@ -53,7 +64,7 @@
       					<optgroup label="<?php echo $prov->province_name; ?>"> 
       					<?php
       					foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
-      						<option value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>		
+      						<option <?php echo ($ident_data !== false &&  $row2->domicile == $city->id_city) ? 'selected="selected"': '';?> value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>		
       					<?php }
       					?>
       					</optgroup>
@@ -65,14 +76,16 @@
             <div class="form-group">
               <label for="about" class="col-sm-4 control-label">Tentang saya</label>
               <div class="col-sm-7">
-                <textarea rows="5" columns="12" data-minlength="10" id="about" name="about" placeholder="Tentang saya" style="margin-bottom:10px;"></textarea>
+                <textarea rows="5" columns="12" data-minlength="10" id="about" name="about" placeholder="Tentang saya" style="margin-bottom:10px;"><?php echo ($ident_data !== false) ? $row2->about: '';?></textarea>
                 <span class="help-block">Minimum: 10 characters</span>
               </div>
             </div>
             <div class="form-group">
               <label for="avatar" class="col-sm-4 control-label">Foto Profil</label>
-              <div class="col-sm-7">
-                <input type="file" id="avatar" name="avatar" placeholder="Upload gambar">
+              <div class="col-sm-7 cur-avatar">
+				<img class="" src="<?php echo base_url().'images/nobody.jpg';?>" alt="">
+                <input data-fv-file-maxsize="300" type="file" id="avatar" name="avatar" placeholder="Upload gambar">
+                <span class="help-block">Max size of photo: 400 KB</span>
               </div>
             </div>
             <div class="form-group pull-right">

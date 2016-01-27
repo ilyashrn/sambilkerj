@@ -109,7 +109,7 @@
                   $cur_username = $this->session->userdata('logged');
                 ?>
 
-                <li>
+                <li class="<?php echo active_link('edit'); ?>">
                   <a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>">Hi, <?php echo $cur_username;?>! </a>
                 </li>
 

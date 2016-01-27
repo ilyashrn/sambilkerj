@@ -63,8 +63,9 @@
     }
 
     function get_lang($where_value) {
-        $this->db->select('*');
-        $this->db->from('w_language');
+        $this->db->select('w.id_worker as id_worker,l.language_name as language_name');
+        $this->db->from('w_language as w');
+        $this->db->join('languages_set as l','l.id_language = w.id_language');
         $this->db->where('id_worker',$where_value);
 
         $query = $this->db->get();
@@ -77,9 +78,10 @@
     }
 
     function get_skill($where_value) {
-        $this->db->select('*');
-        $this->db->from('w_skill');
-        $this->db->where('id_worker',$where_value);
+        $this->db->select('w.id_worker as id_worker,s.skill_name as skill_name');
+        $this->db->from('w_skill as w');
+        $this->db->join('skills_set as s','w.id_skill = s.id_skill');
+        $this->db->where('w.id_worker',$where_value);
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

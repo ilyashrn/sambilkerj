@@ -30,42 +30,70 @@ class Members extends CI_Controller {
 		}
 	}
 
-	public function index()
+	public function index($username)
 	{
-		$prov_data = $this->Location->get_all_prov(); 
-		$loc_data = $this->Location->get_all_cities();
+		if ($this->username == $username) { //IF USERNAME = LOGGED IN USERNAME
+			$prov_data = $this->Location->get_all_prov(); 
 
-		if ($this->mem_type == 'W') { //IDENTIFY MEMBER (WORKER OR COMPANY)
-			//LOAD ALL MEMBER'S DATA
-			$basic_data = $this->Worker->get('username',$this->username);
-			$ident_data = $this->Worker->get_ident($this->mem_id);
-			$lang_data = $this->Worker->get_lang($this->mem_id);
-			$skill_data = $this->Worker->get_skill($this->mem_id);
+			if ($this->mem_type == 'W') { //IDENTIFY MEMBER (WORKER)
+				//LOAD ALL MEMBER'S DATA
+				$basic_data = $this->Worker->get('username',$this->username);
+				$ident_data = $this->Worker->get_ident($this->mem_id);
+				$lang_data = $this->Worker->get_lang($this->mem_id);
+				$skill_data = $this->Worker->get_skill($this->mem_id);
 
-			foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
-				$this->fullname = $key->fullname;
+				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
+					$this->fullname = $key->fullname;
+				}
+
+				$data = array( //INSERTING DATA FOR VIEW
+					'title' => $this->fullname." | SambilKerja.com",
+					'username' => $username,
+					'fullname' => $this->fullname,
+					'basic_data' => $basic_data,
+					'ident_data' => $ident_data,
+					'lang_data' => $lang_data,
+					'skill_data' => $skill_data,
+					'prov_data' => $prov_data
+					);
+
+				//LOADING VIEWS
+				$this->load->view('html_head', $data);
+				$this->load->view('header', $data);
+				$this->load->view('content/profil-detail', $data);
+				$this->load->view('footer', $data);	
 			}
+			elseif ($this->mem_type == 'C') { //IDENTIFY MEMBER (COMPANY)
+				//LOAD ALL MEMBER'S DATA
+				$basic_data = $this->Company->get('username',$this->username);
+				$ident_data = $this->Company->get_ident($this->mem_id);
 
-			$data = array( //INSERTING DATA FOR VIEW
-				'title' => $this->fullname." | SambilKerja.com",
-				'basic_data' => $basic_data,
-				'ident_data' => $ident_data,
-				'lang_data' => $lang_data,
-				'skill_data' => $skill_data,
-				'loc_data' => $loc_data,
-				'prov_data' => $prov_data
-				);
+				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
+					$this->fullname = $key->fullname;
+				}
 
-			//LOADING VIEWS
-			$this->load->view('html_head', $data);
-			$this->load->view('header', $data);
-			$this->load->view('content/profil-detail', $data);
-			$this->load->view('footer', $data);	
-		}
+				$data = array( //INSERTING DATA FOR VIEW
+					'title' => $this->fullname." | SambilKerja.com",
+					'basic_data' => $basic_data,
+					'ident_data' => $ident_data,
+					'prov_data' => $prov_data 
+					);
+
+				//LOADING VIEWS
+				$this->load->view('html_head', $data);
+				$this->load->view('header', $data);
+				$this->load->view('content/profil-detail', $data);
+				$this->load->view('footer', $data);		
+			}
+		}  
+		
 	}
 
-	public function edit($username) 
+	public function edit_w($param) 
 	{
+		$tab_param = $param[0];
+		$this->username = $param[1];
+
 		$prov_data = $this->Location->get_all_prov(); 
 		$loc_data = $this->Location->get_all_cities();
 		$basic_data = $this->Worker->get('username',$this->username);
@@ -75,14 +103,15 @@ class Members extends CI_Controller {
 
 		foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 			$this->fullname = $key->fullname;
-
 		}
+
 		if ($ident_data == false) {
 			$input = array('id_worker' => $this->mem_id);
 			$add_ident = $this->Worker->insert_identity($input);
 		}
 
 		$data = array( //INSERTING DATA FOR VIEW
+			'tab_param' => $tab_param,
 			'title' => $this->fullname." | SambilKerja.com",
 			'basic_data' => $basic_data,
 			'ident_data' => $ident_data,
@@ -100,5 +129,16 @@ class Members extends CI_Controller {
 		$this->load->view('content/profil-edit-3', $data);
 		$this->load->view('footer', $data);
 	}
+
+	// public function edit_ident($username)
+	// {
+	// 		$this->load->view('html_head', $data);
+	// 	$this->load->view('header', $data);
+	// 	$this->load->view('content/profil-edit-tabs', $data);
+	// 	$this->load->view('content/profil-edit-1', $data);
+	// 	$this->load->view('content/profil-edit-2', $data);
+	// 	$this->load->view('content/profil-edit-3', $data);
+	// 	$this->load->view('footer', $data);		
+	// }
 
 }

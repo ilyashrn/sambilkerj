@@ -24,7 +24,7 @@
 
       <br>
 
-      <a class="btn btn-default" href="index.html">Take me home</a>
+      <a class="btn btn-default" href="../Main">Take me home</a>
 
     </div><!-- col -->
   </div><!-- row -->

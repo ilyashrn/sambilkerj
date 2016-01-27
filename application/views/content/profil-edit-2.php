@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="tab-6-2">
+<div class="tab-pane fade <?php echo ($tab_param == 'KB') ? 'in active': '';?>" id="tab-6-2">
 	<div class="col-sm-12 service-box style-3 green">
 		<h4>Informasi Dasar</h4>
         <?php

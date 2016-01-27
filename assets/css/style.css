@@ -93,6 +93,7 @@ h6 .worker-name {
 .required-skills, .learned-languages {
   font-size: 10px;
   margin-top: 10px;
+  /*float: left;*/
 }
 
 .required-skills span, .learned-languages span {
@@ -156,8 +157,8 @@ h6 .worker-name {
   font-size: 12px;
 }
 .profil-tab h4 {
-  font-weight: 700;
-  text-transform: uppercase;
+  /*font-weight: bold;*/
+  /*text-transform: uppercase;*/
 }
 
 .profil-alert .text-box {
@@ -169,3 +170,25 @@ h6 .worker-name {
   font-size: 12px;
   font-weight: normal;
 }
+
+.a-white{
+  color: white;
+  font-size: 10px;
+  font-weight: normal;
+  text-transform: none;
+  margin-left: 5px;
+  float: right;
+}
+
+.hover-to:hover .a-white, .hover-to-2:hover .a-white{
+  color: #FF444C;
+  transition: color 0.3s ease 0s;
+}
+
+.cur-avatar img {
+  width: 25%;
+  height: 25%;
+  float: left;
+  margin-bottom: 10px;
+}
+
