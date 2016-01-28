@@ -65,56 +65,133 @@ class Workers extends CI_Controller {
 		$mem_id = $this->session->userdata('mem_id');
 
 		if (false !== $this->input->post('ins_ident')) {
-			$config['upload_path'] = './images/profil_photo/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['encrypt_name'] = TRUE;
-			$config['overwrite'] = FALSE;
-			// $config['max_size']	= '300';
-			// $config['max_width']  = '1024';
-			// $config['max_height']  = '1024';
+			if ($_FILES['avatar']['size'] == 0) {
+				$file_name = $this->input->post('cur_avatar');	
+			} 
+			else {
+				$config['upload_path'] = './images/profil_photo/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['encrypt_name'] = TRUE;
+				$config['overwrite'] = FALSE;
+				// $config['max_size']	= '300';
+				// $config['max_width']  = '1024';
+				// $config['max_height']  = '1024';
 
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-			$upload = $this->upload->do_upload('avatar');
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				$upload = $this->upload->do_upload('avatar');	
+				$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
+				$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
+			}
 			
-			$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
-			$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
-
 			$dob = implode("-", array_reverse(explode("/", $this->input->post('dob'))));	
 			$mem_data = array(
 				'dob' => $dob,
 				'telp_number' => $this->input->post('telp_number'),
 				'about' => $this->input->post('about'),
 				'domicile' => $this->input->post('domicile'),
+				'gender' => $this->input->post('gender'),
 				'avatar' => $file_name
 				);
 			
 			$insert = $this->Worker->update_identity($mem_data,$this->mem_id);
 			redirect('Members/'.$this->username);
-			
-			// if ( ! $this->upload->do_upload('userfile'))
-			// {
-			// 	$error = array('error' => $this->upload->display_errors());
-
-			// 	$this->load->view('upload_form', $error);
-			// }
-			// else
-			// {
-			// 	$upload_data = $this->upload->data();
-			// 	$file_name = $upload_data['file_name'];
-			// 	$data = array(
-			// 		'upload_data' => $upload_data,
-			// 		'file_name' => $file_name
-			// 		);
-
-			// 	$this->load->view('upload_success', $data);
-			// }
-
-			
 		}
 		else{
 			redirect('errors/Page_not_found','refresh');
 		}
+	}
+
+	function updating_KB() {
+		if (!empty($this->mem_id) && false !== $this->input->post('ins_KB')) {
+			$cleaning = $this->Worker->remove_skill($this->mem_id);
+			$cleaning2 = $this->Worker->remove_lang($this->mem_id);
+			if (false !== $this->input->post('skills')) {
+				foreach ($this->input->post('skills') as $row ) {
+					$data = array(
+						'id_worker' => $this->mem_id,
+						'id_skill' => $row
+						 );
+					$ins_skill = $this->Worker->insert_skill($data); 
+				}	
+			}
+			
+			if (false !== $this->input->post('languages')) {
+				foreach ($this->input->post('languages') as $rows) {
+					$data = array(
+						'id_worker' => $this->mem_id,
+						'id_language' => $rows 
+						);
+					$ins_lang = $this->Worker->insert_lang($data);
+				}
+			}
+			// $sess_array = array('alert' => 'Informasi Keahlian dan Bahasa berhasil diperbarui!');
+			// $this->session->set_flashdata($sess_array);
+			redirect('Members/'.$this->username,'refresh');
+		}
+	}
+
+	function updating_edu() {
+		if (!empty($this->mem_id) && false !== $this->input->post('ins_edu')) {
+			$edu_data = array(
+				'id_worker' => $this->mem_id,
+				'id_school' => $this->input->post('univ'),
+				'id_mayor' => $this->input->post('mayor'),
+				'year_in' => $this->input->post('year_in'),
+				'year_out' => $this->input->post('year_out')
+				 );
+			$ins_edu = $this->Worker->insert_edu($edu_data);
+			redirect('Members/'.$this->username,'refresh');
+		}	
+	}
+
+	function updating_exp() {
+		if (!empty($this->mem_id) && false !== $this->input->post('ins_exp')) {
+			$exp_data = array(
+				'id_worker' => $this->mem_id,
+				'company' => $this->input->post('company'),
+				'position' => $this->input->post('position'),
+				'year_in' => $this->input->post('year_in'),
+				'year_out' => $this->input->post('year_out')
+				 );
+			$ins_exp = $this->Worker->insert_exp($exp_data);
+			redirect('Members/'.$this->username,'refresh');
+		}
+	}
+
+	function updating_train() {
+		if (!empty($this->mem_id) && false !== $this->input->post('ins_train')) {
+			$train_data = array(
+				'id_worker' => $this->mem_id,
+				'course_name' => $this->input->post('course_name'),
+				'institution' => $this->input->post('institution'),
+				'year' => $this->input->post('year')
+				 );
+			$ins_exp = $this->Worker->insert_train($train_data);
+			redirect('Members/'.$this->username,'refresh');
+		}
+	}
+
+	function removing_edu($id_w_education) {
+		$remove_edu = $this->Worker->remove_edu($id_w_education);
+		redirect('Members/edit_w/PP/'.$this->username,'refresh');
+	}
+
+	function removing_exp($id_w_experience) {
+		$remove_exp = $this->Worker->remove_exp($id_w_experience);
+		redirect('Members/edit_w/PP/'.$this->username,'refresh');
+	}
+
+	function removing_train($id_w_training) {
+		$remove_exp = $this->Worker->remove_train($id_w_training);
+		redirect('Members/edit_w/PP/'.$this->username,'refresh');
+	}	
+
+	function removing_photo($mem_id,$file_name) {
+		$data = array('avatar' => '');
+		$remove = $this->Worker->update_identity($data,$mem_id);
+		unlink("./images/profil_photo/".$file_name);
+		redirect('Members/edit_w/I/'.$this->username,'refresh');
 	}
 
 }

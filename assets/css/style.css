@@ -180,6 +180,15 @@ h6 .worker-name {
   float: right;
 }
 
+.a-photo {
+  font-size: 10px;
+  font-weight: normal;
+  text-transform: none;
+  margin-left: 5px;
+  border: 1px dashed #FF444C;
+  padding: 5px;
+}
+
 .hover-to:hover .a-white, .hover-to-2:hover .a-white{
   color: #FF444C;
   transition: color 0.3s ease 0s;
@@ -192,3 +201,42 @@ h6 .worker-name {
   margin-bottom: 10px;
 }
 
+.form-label span {
+  font-size: 11px;
+}
+
+.form-label .PP{
+  margin-bottom: 30px;
+}
+
+.profil-span {
+  color: black;
+}
+
+.edu-span {
+  font-weight: bold;
+}
+
+.edu-div h4, .exp-div h4 {
+  font-size: 13px;
+  margin-bottom: -8px;
+  font-weight: bold;
+  color: #6E6E6E;
+  text-decoration: underline;
+}
+
+.edu-div h5, .exp-div h5{
+  margin-bottom: -5px;
+}
+
+.edu-div h5, .exp-div h5, .edu-div h6, .exp-div h6 {
+  font-size: 12px;
+  font-weight: normal;
+  color: #6E6E6E;
+}
+
+
+.edu-box .style-3{
+  padding-top: 10px;
+  margin-right: 10px;
+}

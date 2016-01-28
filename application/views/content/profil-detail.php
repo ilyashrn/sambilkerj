@@ -2,7 +2,7 @@
 foreach ($basic_data as $basic_row) {}
 if ($ident_data !== false) {
   foreach ($ident_data as $row) {
-    $gender = ($row->gender == 0) ? 'Laki-laki': 'Perempuan';
+    $gender = ($row->gender == 1) ? 'Laki-laki': 'Perempuan';
   }
 }
 ?>
@@ -75,7 +75,7 @@ if ($ident_data !== false) {
                   foreach ($ident_data as $ident_row) {}
                 ?>
                 <div class="col-sm-12">
-                  <b>Sedikit tentang saya</b> <a href="<?php echo base_url().'index.php/Members/edit_w/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah tentang saya</a><br>  
+                  <span class="profil-span"><b>Sedikit tentang saya</b></span> <a href="<?php echo base_url().'index.php/Members/edit_w/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah tentang saya</a><br>  
                   <p><?php echo ($ident_row->about !== '') ? $ident_row->about: '-';?></p>
                 </div>
                 <?php
@@ -84,8 +84,52 @@ if ($ident_data !== false) {
               </div>
               <div class="row">
                 <div class="col-sm-12">
-                  <span><b>Keahlian yang dimiliki</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan keahlian</a><br>  
+                  <span class="profil-span"><b>Riwayat Pendidikan</b></span> 
+                  <a href="<?php echo base_url().'index.php/Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Pendidikan</a><br>  
+                  <?php
+                    if ($edu_data == false) {
+                      echo '-'; }
+                    else { 
+                      foreach ($edu_data as $edu) { ?>
+                        <div class="edu-div col-md-5">
+                          <h4><?php echo $edu->school_name; ?></h4>
+                          <h5><?php echo $edu->mayor_name; ?></h5>
+                          <h6><?php echo $edu->year_in.' - '.$edu->year_out; ?></h6>
+                        </div>
+                      <?php } } ?>
+                </div>
+                <div class="col-sm-12">
+                  <span class="profil-span"><b>Pengalaman Kerja</b></span> 
+                  <a href="<?php echo base_url().'index.php/Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Ubah/Kurangi/Tambah Pengalaman Kerja</a><br>  
+                  <?php
+                    if ($exp_data == false) {
+                      echo '-'; }
+                    else { 
+                      foreach ($exp_data as $exp) { ?>
+                        <div class="edu-div col-md-5">
+                          <h4><?php echo $exp->company; ?></h4>
+                          <h5><?php echo $exp->position; ?></h5>
+                          <h6><?php echo $exp->year_in.' - '.$exp->year_out; ?></h6>
+                        </div>
+                      <?php } } ?>
+                </div>
+                <div class="col-sm-12">
+                  <span class="profil-span"><b>Riwayat Pelatihan</b></span> 
+                  <a href="<?php echo base_url().'index.php/Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Ubah/Kurangi/Tambah Pengalaman Kerja</a><br>  
+                  <?php
+                    if ($train_data == false) {
+                      echo '-'; }
+                    else { 
+                      foreach ($train_data as $train) { ?>
+                        <div class="edu-div col-md-5">
+                          <h4><?php echo $train->course_name.' ('.$train->year.')'; ?></h4>
+                          <h5><?php echo 'Penyelenggara: '.$train->institution; ?></h5>
+                        </div>
+                      <?php } } ?>
+                </div>
+                <div class="col-sm-12">
+                  <span class="profil-span"><b>Keahlian yang dimiliki</b></span> 
+                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Ubah/Kurangi/Tambah keahlian</a><br>  
                   <div class="widget-tags required-skills">
                     <?php if ($skill_data == false) { ?>
                       <p>-</p>
@@ -94,8 +138,8 @@ if ($ident_data !== false) {
                       <a href="#"><?php echo $skill->skill_name;?></a>
                     <?php } } ?>
                   </div>
-                  <span><b>Bahasa yang dikuasai</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Bahasa</a>
+                  <span class="profil-span"><b>Bahasa yang dikuasai</b></span> 
+                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Ubah/Kurangi/Tambah Bahasa</a>
                   <div class="widget-tags learned-languages">
                       <?php if ($lang_data == false) { ?>
                       <p>-</p>

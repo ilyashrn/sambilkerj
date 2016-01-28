@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,300italic,300,500,500italic,700,700italic">
 
     <!-- SELECT2 CSS -->
-    <link rel="stylesheet" href="<?php echo base_url().'assets/css/select2.css';?>">
+    <!-- <link rel="stylesheet" href="<?php echo base_url().'assets/css/select2.css';?>"> -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
 
     <!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css';?>">
@@ -70,8 +71,10 @@
 
     <!-- jQUERY -->
     <script src="<?php echo base_url().'assets/plugins/jquery/jquery-2.1.4.min.js';?>"></script>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
 
-    <script src="<?php echo base_url().'assets/js/select2.js';?>"></script>
+    <!-- <script src="<?php echo base_url().'assets/js/select2.js';?>"></script> -->
 
     <!-- BOOTSTRAP JS -->
     <script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js';?>"></script>
@@ -111,8 +114,8 @@
     <script src="<?php echo base_url().'assets/plugins/submit/jquery.form.min.js';?>"></script>
 
     <!-- GOOGLE MAPS -->
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script src="<?php echo base_url().'assets/plugins/googlemaps/gmap3.min.js';?>"></script>
+    <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+    <!-- <script src="<?php echo base_url().'assets/plugins/googlemaps/gmap3.min.js';?>"></script> -->
 
     <!-- CHARTS -->
     <script src="<?php echo base_url().'assets/plugins/charts/jquery.easypiechart.min.js';?>"></script>

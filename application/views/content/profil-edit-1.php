@@ -11,7 +11,7 @@
  <div class="tab-pane fade <?php echo ($tab_param == 'I') ? 'in active': '';?>" id="tab-6-6">
 	<div class="col-sm-12 service-box style-3 green profil-tab">
 	<div class="col-sm-12">
-		<h3>Informasi Dasar</h3>	
+		<h4>Informasi Dasar</h4>	
         <?php
         $attributes = array('id' => 'fileForm','class' => 'form-horizontal','data-toggle' => 'validator');
         echo form_open_multipart('Workers/updating_ident', $attributes);
@@ -35,8 +35,8 @@
               <div class="col-sm-7">
           		<select name="gender" id="test2" style="width:100%; height:20%;" >
           			<option>Pilih Jenis Kelamin</option>
-          			<option <?php echo ($ident_data !== false && $row2->gender == 0) ? 'selected="selected"': '';?>>Laki-laki</option>
-          			<option <?php echo ($ident_data !== false && $row2->gender == 1) ? 'selected="selected"': '';?>value="1">Perempuan</option>
+          			<option <?php echo ($ident_data !== false && $row2->gender == 1) ? 'selected="selected"': '';?> value="1">Laki-laki</option>
+          			<option <?php echo ($ident_data !== false && $row2->gender == 2) ? 'selected="selected"': '';?>value="2">Perempuan</option>
 			    </select>
               </div>
             </div>
@@ -83,15 +83,24 @@
             <div class="form-group">
               <label for="avatar" class="col-sm-4 control-label">Foto Profil</label>
               <div class="col-sm-7 cur-avatar">
-				<img class="" src="<?php echo base_url().'images/nobody.jpg';?>" alt="">
-                <input data-fv-file-maxsize="300" type="file" id="avatar" name="avatar" placeholder="Upload gambar">
-                <span class="help-block">Max size of photo: 400 KB</span>
+				<?php
+		        if ($ident_data == false || $row2->avatar == '') { ?>
+		          <img src="<?php echo base_url().'images/nobody.jpg';?>" alt="">
+		          <input type="hidden" name="cur_avatar" value="">
+		        <?php 
+		        } else { ?>
+		          <img src="<?php echo base_url().'images/profil_photo/'.$row2->avatar;?>" alt="">
+		          <input type="hidden" name="cur_avatar" value="<?php echo $row2->avatar; ?>">
+		          <a href="../../../Workers/removing_photo/<?php echo $row2->id_worker.'/'.$row2->avatar;?>" class="a-photo"><i class="glyphicon glyphicon-remove"></i>Hapus gambar</a>
+		        <?php }
+		        ?>
+                <input type="file" id="avatar" name="avatar" placeholder="Upload gambar">
               </div>
             </div>
             <div class="form-group pull-right">
               <div class="col-sm-offset-2 col-sm-10">
                 <button name="ins_ident" type="submit" class="btn btn-default" style="float:left;">Save</button>
-                <button name="cancel" class="btn btn-white">Cancel</button>
+                <a href="../../<?php echo $username; ?>" class="btn btn-white">Cancel</a>
               </div>
             </div>
           <?php
