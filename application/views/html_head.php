@@ -17,6 +17,17 @@
 
     <!-- FONTS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,300italic,300,500,500italic,700,700italic">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,700" rel="stylesheet" type="text/css">
+    
+    <!-- NOTIFICATIONSTYLES -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/normalize.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/demo.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-default.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-style-growl.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-style-bar.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-style-other.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-style-attached.css');?>" />
+    
 
     <!-- SELECT2 CSS -->
     <!-- <link rel="stylesheet" href="<?php echo base_url().'assets/css/select2.css';?>"> -->
@@ -72,6 +83,11 @@
     <!-- jQUERY -->
     <script src="<?php echo base_url().'assets/plugins/jquery/jquery-2.1.4.min.js';?>"></script>
     
+    <!-- NOTIFICATIONSTYLES -->
+    <script src="<?php echo base_url('assets/js/NotificationStyles/modernizr.custom.js');?>"></script>
+    <script src="<?php echo base_url('assets/js/NotificationStyles/classie.js');?>"></script>
+    <script src="<?php echo base_url('assets/js/NotificationStyles/notificationFx.js');?>"></script>
+    <!-- SELECT2 -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
 
     <!-- <script src="<?php echo base_url().'assets/js/select2.js';?>"></script> -->

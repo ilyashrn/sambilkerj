@@ -161,3 +161,18 @@ if ($ident_data !== false) {
         </div>
         </div>
       </div>
+<script src="<?php echo base_url('assets/js/NotificationStyles/classie.js');?>"></script>
+<script src="<?php echo base_url('assets/js/NotificationStyles/notificationFx.js');?>"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      setTimeout(function() {
+        var notification = new NotificationFx({
+            message : '<p>This notification has slight elasticity to it thanks to <a href="http://bouncejs.com/">bounce.js</a>.</p>',
+              layout : 'growl',
+              effect : 'slide',
+            type : 'notice', // notice, warning or error
+        });
+          notification.show();
+      });
+        });
+  </script>
