@@ -23,7 +23,7 @@
       $this->db->from('worker');
       $this->db->where('username',$login_id);
       $this->db->or_where('email',$login_id);
-      $this->db->where('password',$pass);
+      $this->db->having('password',$pass);
 
       $query = $this->db->get();
       if ($query->num_rows() > 0) {
@@ -32,6 +32,14 @@
       else {
         return false;
       }
+    }
+
+    function update_login($id_worker) {
+      $datestring = '%Y-%m-%d %h:%i:%s';
+      $this->db->set('last_login',mdate($datestring,now('Asia/Jakarta')));
+      $this->db->where('id_worker',$id_worker);
+      $this->db->update('worker');
+
     }
 
     function get($where_what,$where_value) {
@@ -124,6 +132,39 @@
         }
     }
 
+    function get_loc($where_value) {
+      $this->db->select('w.id_worker as id_worker, w.domicile as domicile, c.city_name as city_name, p.province_name as province_name');
+      $this->db->from('w_identity as w');
+      $this->db->join('city as c','w.domicile = c.id_city');
+      $this->db->join('location l','c.id_city = l.id_city');
+      $this->db->join('province p','l.id_province = p.id_province');
+      $this->db->where('w.id_worker',$where_value);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      }
+      else {
+        return false;
+      }
+    }
+
+    function get_pob($where_value) {
+      $this->db->select('w.id_worker as id_worker, w.pob as pob, c.city_name as city_name');
+      $this->db->from('w_identity as w');
+      $this->db->join('city as c','w.pob = c.id_city');
+      $this->db->join('location l','c.id_city = l.id_city');
+      $this->db->where('w.id_worker',$where_value);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      }
+      else {
+        return false;
+      }
+    }
+
     function get_exp($where_value) {
         $this->db->select('*');
         $this->db->from('w_experience');
@@ -152,6 +193,20 @@
         }
     }
 
+    function get_ach($where_value) {
+        $this->db->select('*');
+        $this->db->from('w_achievement');
+        $this->db->where('id_worker',$where_value);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+          return $query->result();
+        }
+        else {
+          return false;
+        }
+    }
+
     function insert($data) { //INSERT WORKER
       $this->db->insert('worker',$data);
     }
@@ -161,8 +216,8 @@
     }
 
     function update_identity($data,$where_value) { //UPDATE IDENITY OF WORKER
-      $this->db->update('w_identity',$data);
       $this->db->where('id_worker',$where_value);
+      $this->db->update('w_identity',$data);
     }
 
     function insert_skill($data) { //INSERT SKILL OF WORKER
@@ -210,9 +265,18 @@
       $this->db->delete('w_training');
     }
 
-    function update($data,$where_what,$where_value) {
+    function insert_ach($data) { //INSERT EXPERIENCE OF WORKER
+      $this->db->insert('w_achievement',$data);
+    }
+
+    function remove_ach($where_value) { //REMOVE OR CLEAN EXPERIENCE OF WORKER
+      $this->db->where('id_w_achievement',$where_value);
+      $this->db->delete('w_achievement');
+    }
+
+    function update($data,$where_value) {
+      $this->db->where('id_worker',$where_value);
       $this->db->update('worker',$data);
-      $this->db->where($where_what,$where_value);
     }
   }
 ?>

@@ -11,7 +11,7 @@
 				                  <a href="#tab-6-2" data-toggle="tab">Keahlian dan Bahasa</a>
 				                </li>
 								<li <?php echo ($tab_param == 'PP') ? 'class="active"': '';?>>
-									<a href="#tab-6-3" data-toggle="tab">Pendidikan dan Pengalaman</a>
+									<a href="#tab-6-3" data-toggle="tab">Riwayat Pengalaman</a>
 								</li>
 								<li <?php echo ($tab_param == 'PA') ? 'class="active"': '';?>>
 									<a href="#tab-6-4" data-toggle="tab">Pengaturan Akun</a>

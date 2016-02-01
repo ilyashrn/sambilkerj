@@ -88,7 +88,7 @@
           </div>
         </div><!-- col -->
 
-        <h4>Pengalaman Pekerjaan</h4> 
+        <h4>Riwayat Pekerjaan</h4> 
         <div class="col-sm-12 edu-box">
               <?php
               if ($exp_data !== false) {
@@ -105,7 +105,7 @@
         </div>
         <div class="col-sm-12 service-box style-3 green profil-tab">
           <div class="col-sm-12">
-            <h4>Tambahkan Pengalaman Pekerjaan</h4> 
+            <h4>Tambahkan Riwayat Pekerjaan</h4> 
             <div class="form-label">
               <span>Tambahkan pengalaman pekerjaan yang sudah pernah anda lakukan guna menunjang karir anda disini dan menarik para perekrut.</span>
             </div>
@@ -212,5 +212,64 @@
                       ?>
                   </div>
                 </div><!-- col -->
+
+                <h4>Riwayat Prestasi</h4> 
+                <div class="col-sm-12 edu-box">
+                      <?php
+                      if ($ach_data !== false) {
+                        foreach ($ach_data as $ach) {    ?>
+                          <div class="col-md-5 service-box style-3 blue">
+                            <div class="edu-div hover-to">
+                              <a href="../../../Workers/removing_ach/<?php echo $train->id_w_achievement; ?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
+                              <h4><?php echo $ach->achievement; ?></h4>
+                              <h5><?php echo $ach->institution; ?></h5>
+                              <h6><?php echo $ach->year; ?></h6>
+                            </div>
+                          </div>
+                      <?php } } ?>
+                </div>
+                <div class="col-sm-12 service-box style-3 green profil-tab">
+                  <div class="col-sm-12">
+                    <h4>Tambahkan Riwayat Prestasi</h4> 
+                    <div class="form-label">
+                      <span>Tambahkan pengalaman prestasi yang sudah pernah anda raih guna menunjang karir anda disini dan menarik para perekrut.</span>
+                    </div>
+                        <?php
+                        $attributes = array('id' => 'fileForm','class' => 'form-horizontal','data-toggle' => 'validator');
+                        echo form_open_multipart('Workers/updating_ach', $attributes);
+                        ?>
+                          <!-- <form class="form-horizontal"> -->
+                            <div class="form-group">
+                              <label for="achievement" class="col-sm-4 control-label" >Nama Penghargaan</label>
+                              <div class="col-sm-7">
+                                <input type="text" id="achievement" name="achievement" placeholder="Nama Penghargaan"
+                                value="">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="institution" class="col-sm-4 control-label" >Institusi Pemberi</label>
+                              <div class="col-sm-7">
+                                <input type="text" id="institution" name="institution" placeholder="Institusi Penyelanggara"
+                                value="">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="year" class="col-sm-4 control-label" >Tahun Mendapatkan</label>
+                              <div class="col-sm-7">
+                                <input type="text" id="year" name="year" placeholder="Tahun Mengikuti"
+                                value="">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                <button name="ins_ach" type="submit" class="btn btn-default" style="float:left;">Save</button>
+                                <a href="../../<?php echo $username; ?>" name="cancel" class="btn btn-white">Cancel</a>
+                              </div>
+                            </div>
+                          <?php
+                          echo form_close();
+                          ?>
+                    </div>
+                  </div><!-- col -->
       </div>
 </div>

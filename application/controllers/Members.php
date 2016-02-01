@@ -48,6 +48,9 @@ class Members extends CI_Controller {
 				$edu_data = $this->Worker->get_edu($this->mem_id);
 				$exp_data = $this->Worker->get_exp($this->mem_id);
 				$train_data = $this->Worker->get_train($this->mem_id);
+				$ach_data = $this->Worker->get_ach($this->mem_id);
+				$loc_data = $this->Worker->get_loc($this->mem_id);
+				$pob_data = $this->Worker->get_pob($this->mem_id);
 
 				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 					$this->fullname = $key->fullname;
@@ -64,7 +67,9 @@ class Members extends CI_Controller {
 					'edu_data' => $edu_data,
 					'exp_data' => $exp_data,
 					'train_data' => $train_data,
-					'prov_data' => $prov_data
+					'loc_data' => $loc_data,
+					'pob_data' => $pob_data,
+					'ach_data' => $ach_data
 					);
 
 				//LOADING VIEWS FOR WORKER PROFIL
@@ -117,6 +122,7 @@ class Members extends CI_Controller {
 			$edu_data = $this->Worker->get_edu($this->mem_id);
 			$exp_data = $this->Worker->get_exp($this->mem_id);
 			$train_data = $this->Worker->get_train($this->mem_id);
+			$ach_data = $this->Worker->get_ach($this->mem_id);
 
 			foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 				$this->fullname = $key->fullname;
@@ -138,6 +144,7 @@ class Members extends CI_Controller {
 				'edu_data' => $edu_data,
 				'exp_data' => $exp_data,
 				'train_data' => $train_data,
+				'ach_data' => $ach_data,
 				'prov_data' => $prov_data,
 				'lang_sets' => $lang_sets,
 				'skill_sets' => $skill_sets,

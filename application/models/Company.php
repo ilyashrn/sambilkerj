@@ -57,8 +57,9 @@
     }
 
     function update($data,$where_what,$where_value) {
-      $this->db->update('company',$data);
       $this->db->where($where_what,$where_value);
+      $this->db->update('company',$data);
+      
     }
   }
 ?>

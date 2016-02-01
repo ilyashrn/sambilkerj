@@ -4,6 +4,13 @@ if ($ident_data !== false) {
   foreach ($ident_data as $row) {
     $gender = ($row->gender == 1) ? 'Laki-laki': 'Perempuan';
   }
+  if ($loc_data !== false) {
+    foreach ($loc_data as $location) {}
+  }
+  if ($pob_data !== false) {
+    foreach ($pob_data as $pob) {}
+  }
+
 }
 ?>
 <div id="page-content">
@@ -18,7 +25,7 @@ if ($ident_data !== false) {
 			<div class="about-me">
 				<div class="about-me-image">
         <?php
-        if ($row->avatar == '') { ?>
+        if ($ident_data == false || $row->avatar == '') { ?>
           <img src="<?php echo base_url().'images/nobody.jpg';?>" alt="">
         <?php 
         } else { ?>
@@ -33,8 +40,8 @@ if ($ident_data !== false) {
             <h6>Informasi Singkat</h6>  
               <div class="service-box-content">
                 <div class="point-detail profil-point">
-                  <i class="mt-icon-map-marker2"></i> Bekasi, Jawa Barat<br>
-                  <i class="mt-icon-timetable"></i> <?php echo ($ident_data !== false) ? 'Lahir pada '.date('j M Y', strtotime($row->dob)): '-';?> <br>
+                  <i class="mt-icon-map-marker2"></i> <?php echo ($ident_data !== false) ? $row->address.'<br>'.$location->city_name.', '.$location->province_name: '-';?><br>
+                  <i class="mt-icon-timetable"></i> <?php echo ($ident_data !== false) ? 'Lahir di '.$pob->city_name.', '.date('j M Y', strtotime($row->dob)): '-';?> <br>
                   <i class="glyphicon glyphicon-user"></i> <?php echo ($ident_data !== false) ? $gender: '-';?> <br>
                   <i class="mt-icon-phone1"></i> <?php echo ($ident_data !== false) ? $row->telp_number: '-';?><br>
                   <i class="mt-icon-at-sign"></i> <?php echo $basic_row->email; ?> <br>
@@ -45,16 +52,11 @@ if ($ident_data !== false) {
 			</div><!-- about-me -->
 		</div><!-- col -->
 
-    <?php
-    foreach ($basic_data as $basic_row) {
-    }
-    // foreach ($ident_data as $ident_row) {
-    // }
-    ?>
+    <?php foreach ($basic_data as $basic_row) {} ?>
         <div class="col-md-8 hover-to">
           <div class="job-box service-box style-3 default" style="padding:20px; margin-bottom:10px;">
             <h6 style="">
-              <a href="#" class="worker-name"><?php echo $basic_row->fullname; ?></a>
+              <a href="#" class="worker-name"><?php echo ($ident_data !== false) ? $basic_row->fullname.' ('.$row->nickname.')': $basic_row->fullname; ?></a>
               <a href="<?php echo base_url().'index.php/Members/edit_w/PA/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah nama/username</a>
               <br>
               <span class="subtitle-job"><?php echo $basic_row->username; ?><br></span> 
@@ -67,7 +69,7 @@ if ($ident_data !== false) {
                 
                 <div class="col-sm-12 profil-alert">
                   <div class="text-box">
-                    <p>Maaf! sepertinya anda belum melengkapi profil anda. Silahkan lengkapi sekarang juga <a href="<?php echo "edit_w/I/".$basic_row->username; ?>">disini.</a></p>
+                    <p>Maaf! sepertinya anda baru terdaftar. Silahkan lengkapi informasi diri anda sekarang juga <a href="<?php echo "edit_w/I/".$basic_row->username; ?>">disini.</a></p>
                   </div><!-- text-box -->
                 </div><!-- col -->  
                 <?php
@@ -85,7 +87,7 @@ if ($ident_data !== false) {
               <div class="row">
                 <div class="col-sm-12">
                   <span class="profil-span"><b>Riwayat Pendidikan</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Pendidikan</a><br>  
+                  <a href="<?php echo base_url().'index.php/Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan/Kurangi Riwayat</a><br>  
                   <?php
                     if ($edu_data == false) {
                       echo '-'; }
@@ -99,8 +101,7 @@ if ($ident_data !== false) {
                       <?php } } ?>
                 </div>
                 <div class="col-sm-12">
-                  <span class="profil-span"><b>Pengalaman Kerja</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Ubah/Kurangi/Tambah Pengalaman Kerja</a><br>  
+                  <span class="profil-span"><b>Riwayat Pekerjaan</b></span> <br>
                   <?php
                     if ($exp_data == false) {
                       echo '-'; }
@@ -114,8 +115,7 @@ if ($ident_data !== false) {
                       <?php } } ?>
                 </div>
                 <div class="col-sm-12">
-                  <span class="profil-span"><b>Riwayat Pelatihan</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Ubah/Kurangi/Tambah Pengalaman Kerja</a><br>  
+                  <span class="profil-span"><b>Riwayat Pelatihan</b></span> <br>
                   <?php
                     if ($train_data == false) {
                       echo '-'; }
@@ -128,8 +128,21 @@ if ($ident_data !== false) {
                       <?php } } ?>
                 </div>
                 <div class="col-sm-12">
-                  <span class="profil-span"><b>Keahlian yang dimiliki</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Ubah/Kurangi/Tambah keahlian</a><br>  
+                  <span class="profil-span"><b>Riwayat Prestasi</b></span> <br>
+                  <?php
+                    if ($ach_data == false) {
+                      echo '-'; }
+                    else { 
+                      foreach ($train_data as $train) { ?>
+                        <div class="edu-div col-md-5">
+                          <h4><?php echo $ach->course_name.' ('.$ach->year.')'; ?></h4>
+                          <h5><?php echo 'Dianugerahkan oleh: '.$ach->institution; ?></h5>
+                        </div>
+                      <?php } } ?>
+                </div>
+                <div class="col-sm-12">
+                  <span class="profil-span"><b>Keahlian yang dimiliki</b></span>
+                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Keahlian</a><br>  
                   <div class="widget-tags required-skills">
                     <?php if ($skill_data == false) { ?>
                       <p>-</p>
@@ -139,7 +152,7 @@ if ($ident_data !== false) {
                     <?php } } ?>
                   </div>
                   <span class="profil-span"><b>Bahasa yang dikuasai</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Ubah/Kurangi/Tambah Bahasa</a>
+                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Bahasa</a><br>  
                   <div class="widget-tags learned-languages">
                       <?php if ($lang_data == false) { ?>
                       <p>-</p>
@@ -152,7 +165,7 @@ if ($ident_data !== false) {
                 <div class="row">
                   <div class="col-sm-6 pull-right profil-log">
                   bergabung pada <?php echo date('j M Y', strtotime($basic_row->created_time)) ;?><br>
-                  terakhir login pada 6 Januari 2015
+                  terakhir login pada <?php echo date('j M Y (H:m)', strtotime($basic_row->last_login)) ;?>
                   </div>  
                 </div>
               </div>
@@ -161,18 +174,4 @@ if ($ident_data !== false) {
         </div>
         </div>
       </div>
-<script src="<?php echo base_url('assets/js/NotificationStyles/classie.js');?>"></script>
-<script src="<?php echo base_url('assets/js/NotificationStyles/notificationFx.js');?>"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-      setTimeout(function() {
-        var notification = new NotificationFx({
-            message : '<p>This notification has slight elasticity to it thanks to <a href="http://bouncejs.com/">bounce.js</a>.</p>',
-              layout : 'growl',
-              effect : 'slide',
-            type : 'notice', // notice, warning or error
-        });
-          notification.show();
-      });
-        });
-  </script>
+      </div>

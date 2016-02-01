@@ -5,6 +5,9 @@
     $(function(){
       $('#test2').select2();
     });
+    $(function() {
+      $('#pob').select2();
+    });
  </script>	
 
 
@@ -31,6 +34,20 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="nickname" class="col-sm-4 control-label" >Nama Panggilan</label>
+              <div class="col-sm-7">
+                <input type="text" id="nickname" name="nickname" placeholder="Nama Panggilan"
+                value="<?php echo ($ident_data !== false) ? $row2->nickname: '';?>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="nickname" class="col-sm-4 control-label" >E-mail</label>
+              <div class="col-sm-7">
+                <input type="email" id="email" name="email" placeholder="E-mail"
+                value="<?php echo $row->email;?>">
+              </div>
+            </div>
+            <div class="form-group">
               <label for="gender" class="col-sm-4 control-label">Jenis Kelamin</label>
               <div class="col-sm-7">
           		<select name="gender" id="test2" style="width:100%; height:20%;" >
@@ -41,9 +58,25 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="dob" class="col-sm-4 control-label">Tanggal Lahir</label>
+              <label for="dob" class="col-sm-4 control-label">Tempat dan Tanggal Lahir</label>
               <div class="col-sm-7">
-                <input type="date" id="dob" name="dob" placeholder="mm/dd/yyyy" value="<?php echo ($ident_data !== false) ? $dob: '';?>">
+                <select name="pob" id="pob" style="width:100%; height:20%;" >
+                   <option>Pilih Kota Kelahiran</option>
+                    <?php
+                  foreach ($prov_data as $prov) { //PROVINCE LOOPING
+                    $cur_id = $prov->id_province;
+                    $cities = $this->Location->get_cities($cur_id); ?>
+                    <optgroup label="<?php echo $prov->province_name; ?>"> 
+                    <?php
+                    foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
+                      <option <?php echo ($ident_data !== false &&  $row2->pob == $city->id_city) ? 'selected="selected"': '';?> value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>   
+                    <?php }
+                    ?>
+                    </optgroup>
+                    <?php } 
+                    ?>
+                 </select>
+                <input style="margin-top:15px;"type="date" id="dob" name="dob" placeholder="mm/dd/yyyy" value="<?php echo ($ident_data !== false) ? $row2->dob: '';?>">
               </div>
             </div>
             <div class="form-group">
@@ -55,22 +88,28 @@
             <div class="form-group">
               <label for="domicile" class="col-sm-4 control-label">Domisili</label>
               <div class="col-sm-7">
-          		<select name="domicile" id="test" style="width:100%; height:20%;" >
-          			<option>Pilih Kota Domisili</option>
-          			<?php
-      				foreach ($prov_data as $prov) { //PROVINCE LOOPING
-      					$cur_id = $prov->id_province;
-      					$cities = $this->Location->get_cities($cur_id); ?>
-      					<optgroup label="<?php echo $prov->province_name; ?>"> 
-      					<?php
-      					foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
-      						<option <?php echo ($ident_data !== false &&  $row2->domicile == $city->id_city) ? 'selected="selected"': '';?> value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>		
-      					<?php }
-      					?>
-      					</optgroup>
-          			<?php }	
-          			?>
-			    </select>
+          		  <select name="domicile" id="test" style="width:100%; height:20%;" >
+          			 <option>Pilih Kota Domisili</option>
+            			<?php
+        				foreach ($prov_data as $prov) { //PROVINCE LOOPING
+        					$cur_id = $prov->id_province;
+        					$cities = $this->Location->get_cities($cur_id); ?>
+        					<optgroup label="<?php echo $prov->province_name; ?>"> 
+        					<?php
+        					foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
+        						<option <?php echo ($ident_data !== false &&  $row2->domicile == $city->id_city) ? 'selected="selected"': '';?> value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>		
+        					<?php }
+        					?>
+        					</optgroup>
+            			<?php }	
+            			?>
+  			       </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address" class="col-sm-4 control-label">Alamat lengkap</label>
+              <div class="col-sm-7">
+                <textarea rows="3" columns="12" id="address" name="address" placeholder="Alamat lengkap" style="margin-bottom:10px;"><?php echo ($ident_data !== false) ? $row2->address: '';?></textarea>
               </div>
             </div>
             <div class="form-group">

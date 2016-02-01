@@ -24,13 +24,9 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/demo.css');?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-default.css');?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-style-growl.css');?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-style-bar.css');?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-style-other.css');?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/ns-style-attached.css');?>" />
     
 
     <!-- SELECT2 CSS -->
-    <!-- <link rel="stylesheet" href="<?php echo base_url().'assets/css/select2.css';?>"> -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
 
     <!-- BOOTSTRAP CSS -->
@@ -49,18 +45,12 @@
     <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/owl-carousel/owl.carousel.css';?>">
 	<link rel="stylesheet" href="<?php echo base_url().'assets/plugins/owl-carousel/owl.transitions.css';?>">
 
-	<!-- YOUTUBE PLAYER -->
-    <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/ytplayer/css/jquery.mb.YTPlayer.min.css';?>">
-
     <!-- ANIMATIONS -->
     <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/animations/animate.min.css';?>">
 
     <!-- CUSTOM & PAGES STYLE -->
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/custom.css';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/pages-style.css';?>">
-
-    <!-- STYLE SWITCHER -->
-    <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/style-switcher/style-switcher.css';?>">
 
     <!-- ALTERNATIVE STYLES -->
     <link rel="stylesheet" href="#" data-style="styles">
@@ -85,12 +75,9 @@
     
     <!-- NOTIFICATIONSTYLES -->
     <script src="<?php echo base_url('assets/js/NotificationStyles/modernizr.custom.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/NotificationStyles/classie.js');?>"></script>
-    <script src="<?php echo base_url('assets/js/NotificationStyles/notificationFx.js');?>"></script>
+    
     <!-- SELECT2 -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
-
-    <!-- <script src="<?php echo base_url().'assets/js/select2.js';?>"></script> -->
 
     <!-- BOOTSTRAP JS -->
     <script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js';?>"></script>
@@ -128,10 +115,6 @@
     <!-- CONTACT FORM VALIDATE & SUBMIT -->
     <script src="<?php echo base_url().'assets/plugins/validate/jquery.validate.min.js';?>"></script>
     <script src="<?php echo base_url().'assets/plugins/submit/jquery.form.min.js';?>"></script>
-
-    <!-- GOOGLE MAPS -->
-    <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
-    <!-- <script src="<?php echo base_url().'assets/plugins/googlemaps/gmap3.min.js';?>"></script> -->
 
     <!-- CHARTS -->
     <script src="<?php echo base_url().'assets/plugins/charts/jquery.easypiechart.min.js';?>"></script>

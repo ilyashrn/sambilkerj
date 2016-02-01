@@ -37,7 +37,7 @@
           <div class="col-sm-3">
             <!-- LOGO -->
             <div id="logo">
-              <a href="index.html">
+              <a href="<?php echo base_url();?>">
                 <img src="<?php echo base_url().'assets/images/logo.png';?>" alt="">
               </a>
             </div><!-- logo -->
@@ -109,8 +109,12 @@
                   $cur_username = $this->session->userdata('logged');
                 ?>
 
-                <li class="<?php echo active_link('edit'); ?>">
+                <li class="dropdown">
                   <a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>">Hi, <?php echo $cur_username;?>! </a>
+                  <ul>
+                    <li><a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>">Profil saya</a></li>
+                    <li><a href="<?php echo base_url().'index.php/In/out';?>">Logout</a></li>
+                  </ul>
                 </li>
 
                 <?php 

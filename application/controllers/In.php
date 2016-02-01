@@ -51,6 +51,11 @@ class In extends CI_Controller { //LOGIN CONTROLLER
 					'mem_type' => 'W' 
 					);
 				$this->session->set_userdata($sess_array); //SET USERDATA WITH LOGGED IN USER
+				$update_login = $this->Worker->update_login($row->id_worker);
+				$this->session->set_flashdata(
+					'msg', 
+					'Login berhasil. Selamat datang kembali!'
+					);
 				redirect($prev_page);
 			}	
 		}
