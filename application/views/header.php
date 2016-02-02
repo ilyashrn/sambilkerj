@@ -107,12 +107,15 @@
                 <?php
                 if ($this->session->userdata('logged') !== false) { //NAVBAR IF USER IS A LOGGED IN USER
                   $cur_username = $this->session->userdata('logged');
+                  if ($this->session->userdata('mem_type') == 'C') { ?>
+                  <li><a href="<?php echo base_url().'index.php/Jobs/new_job';?>">Open New Job</a></li>
+                <?php }
                 ?>
-
                 <li class="dropdown">
-                  <a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>">Hi, <?php echo $cur_username;?>! </a>
+                  <a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>"><?php echo $cur_username;?> <strong class="caret"></strong></a>
                   <ul>
-                    <li><a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>">Profil saya</a></li>
+                    <li><a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>">Profile</a></li>
+                    <li><a href="<?php echo ($this->session->userdata('mem_type') == 'W') ? base_url().'index.php/Members/edit_w/PA/'.$cur_username : base_url().'index.php/Members/edit_c/PA/'.$cur_username ;?>">Settings</a></li>
                     <li><a href="<?php echo base_url().'index.php/In/out';?>">Logout</a></li>
                   </ul>
                 </li>

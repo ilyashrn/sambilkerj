@@ -10,7 +10,7 @@
       $this->db->from('company');
       $this->db->where('username',$login_id);
       $this->db->or_where('email',$login_id);
-      $this->db->where('password',$pass);
+      $this->db->having('password',$pass);
 
       $query = $this->db->get();
       if ($query->num_rows() > 0) {
@@ -19,6 +19,13 @@
       else {
         return false;
       }
+    }
+
+    function update_login($id_company) {
+      $datestring = '%Y-%m-%d %h:%i:%s';
+      $this->db->set('last_login',mdate($datestring,now('Asia/Jakarta')));
+      $this->db->where('id_company',$id_company);
+      $this->db->update('company'); 
     }
 
     function get_all() {
@@ -65,6 +72,23 @@
       else {
         return false;
       }
+    }
+
+    function get_loc($id_company) {
+      $this->db->select('w.id_company as id_company, w.domicile as domicile, c.city_name as city_name, p.province_name as province_name');
+      $this->db->from('c_identity as w');
+      $this->db->join('city as c','w.domicile = c.id_city');
+      $this->db->join('location l','c.id_city = l.id_city');
+      $this->db->join('province p','l.id_province = p.id_province');
+      $this->db->where('w.id_company',$id_company);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      }
+      else {
+        return false;
+      } 
     }
 
     function insert($data) {

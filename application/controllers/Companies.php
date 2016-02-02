@@ -76,8 +76,9 @@ class Companies extends CI_Controller {
 			}
 			
 			$mem_data = array(
-				'npwp' => $this->input->post('npwp'),
+				'NPWP' => $this->input->post('npwp'),
 				'telp_number' => $this->input->post('telp_number'),
+				'ownership' => $this->input->post('ownership'),
 				'about' => $this->input->post('about'),
 				'domicile' => $this->input->post('domicile'),
 				'bidang' => $this->input->post('bidang'),
@@ -98,9 +99,63 @@ class Companies extends CI_Controller {
 					);
 			redirect('Members/'.$this->username);
 		}
-		else{
+		else {
 			redirect('errors/Page_not_found','refresh');
 		}
+	}
+
+	function updating_password() {
+		if (!empty($this->mem_id) && false !== $this->input->post('upd_pass')) {
+			$check = $this->Company->log_in($this->username,md5($this->input->post('password')));
+			if ($check == false) {
+				$this->session->set_flashdata(
+					'msg', 
+					'<b>Password lama</b> yang anda masukkan salah! Silahkan coba lagi.'
+					);
+				redirect('Members/edit_c/PA/'.$this->username,'refresh');
+			}
+			else {
+				$pass_data = array(
+						'password' => md5($this->input->post('new_pass'))
+						);
+				$ins_edu = $this->Company->update($pass_data,$this->mem_id);
+				$this->session->set_flashdata(
+						'msg', 
+						'<b>Password</b> berhasil diperbarui!'
+						);
+				redirect('Members/edit_c/PA/'.$this->username,'refresh');
+			}
+		}
+		else {
+			redirect('errors/Page_not_found','refresh');
+		}	
+	}
+
+	function updating_username() {
+		if (!empty($this->mem_id) && false !== $this->input->post('upd_ue')) {
+				$data = array('username' => $this->input->post('username'));
+				$check = $this->Company->get('username',$this->input->post('username'));
+				if ($check !== false) {
+					$this->session->set_flashdata(
+						'msg', 
+						'<b>Username</b> ini sudah dipakai. Silahkan pilih username lain.'
+						);
+					redirect('Members/edit_c/PA/'.$this->username,'refresh');	
+				}
+				else {
+					$update = $this->Company->update($data,$this->mem_id);
+					
+					$sess_array = array('logged' => $this->input->post('username'));
+					$this->session->set_userdata($sess_array);
+					$this->session->set_flashdata(
+						'msg', 
+						'<b>Username</b> berhasil diperbarui!'
+						);
+					redirect('Members/edit_c/PA/'.$this->session->userdata('logged'),'refresh');
+				}			
+		} else {
+			redirect('errors/Page_not_found','refresh');
+		}		
 	}
 
 	function removing_photo($id_company) {

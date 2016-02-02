@@ -19,12 +19,13 @@ class Members extends CI_Controller {
 		$this->load->model('School');
 		$this->load->model('Mayor');
 
-		if ($this->session->userdata != false) {
+		if ($this->session->userdata('logged') !== false) {
 			$this->username = $this->session->userdata('logged');
 			$this->mem_id = $this->session->userdata('mem_id');
 			$this->mem_type = $this->session->userdata('mem_type');
 		} else {
-
+			$sess_data = array('last_page' => current_url());
+			$this->session->set_userdata($sess_data);
 		}
 	}
 
@@ -104,7 +105,7 @@ class Members extends CI_Controller {
 				//LOAD ALL MEMBER'S DATA
 				$basic_data = $this->Company->get('username',$username);
 				$ident_data = $this->Company->get_ident($this->mem_id);
-				$loc_data = $this->Worker->get_loc($this->mem_id);
+				$loc_data = $this->Company->get_loc($this->mem_id);
 
 				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 					$this->fullname = $key->company_name;
@@ -115,7 +116,8 @@ class Members extends CI_Controller {
 					'username' => $username,
 					'not_logged' => $not_logged,
 					'basic_data' => $basic_data,
-					'ident_data' => $ident_data
+					'ident_data' => $ident_data,
+					'loc_data' => $loc_data
 					);
 
 				//LOADING VIEWS FOR COMPANY PROFIL
@@ -129,77 +131,6 @@ class Members extends CI_Controller {
 			redirect('errors/Page_not_found','refresh');
 		}
 	}
-
-	// public function index($username)
-	// {	
-
-	// 	if ($this->username == $username) { //IF USERNAME = LOGGED IN USERNAME
-	// 		$prov_data = $this->Location->get_all_prov(); 
-
-	// 		if ($this->mem_type == 'W') { //IDENTIFY MEMBER (WORKER)
-	// 			//LOAD ALL MEMBER'S DATA
-	// 			$basic_data = $this->Worker->get('username',$this->username);
-	// 			$ident_data = $this->Worker->get_ident($this->mem_id);
-	// 			$lang_data = $this->Worker->get_lang($this->mem_id);
-	// 			$skill_data = $this->Worker->get_skill($this->mem_id);
-	// 			$edu_data = $this->Worker->get_edu($this->mem_id);
-	// 			$exp_data = $this->Worker->get_exp($this->mem_id);
-	// 			$train_data = $this->Worker->get_train($this->mem_id);
-	// 			$ach_data = $this->Worker->get_ach($this->mem_id);
-	// 			$loc_data = $this->Worker->get_loc($this->mem_id);
-	// 			$pob_data = $this->Worker->get_pob($this->mem_id);
-
-	// 			foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
-	// 				$this->fullname = $key->fullname;
-	// 			}
-
-	// 			$data = array( //INSERTING DATA FOR VIEW
-	// 				'title' => $this->fullname." | SambilKerja.com",
-	// 				'username' => $username,
-	// 				'fullname' => $this->fullname,
-	// 				'basic_data' => $basic_data,
-	// 				'ident_data' => $ident_data,
-	// 				'lang_data' => $lang_data,
-	// 				'skill_data' => $skill_data,
-	// 				'edu_data' => $edu_data,
-	// 				'exp_data' => $exp_data,
-	// 				'train_data' => $train_data,
-	// 				'loc_data' => $loc_data,
-	// 				'pob_data' => $pob_data,
-	// 				'ach_data' => $ach_data
-	// 				);
-
-	// 			//LOADING VIEWS FOR WORKER PROFIL
-	// 			$this->load->view('html_head', $data);
-	// 			$this->load->view('header', $data);
-	// 			$this->load->view('content/profil-detail', $data);
-	// 			$this->load->view('footer', $data);	
-	// 		}
-	// 		elseif ($this->mem_type == 'C') { //IDENTIFY MEMBER (COMPANY)
-	// 			//LOAD ALL MEMBER'S DATA
-	// 			$basic_data = $this->Company->get('username',$this->username);
-	// 			$ident_data = $this->Company->get_ident($this->mem_id);
-	// 			$loc_data = $this->Worker->get_loc($this->mem_id);
-
-	// 			foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
-	// 				$this->fullname = $key->company_name;
-	// 			}
-
-	// 			$data = array( //INSERTING DATA FOR VIEW
-	// 				'title' => $this->fullname." | SambilKerja.com",
-	// 				'username' => $username,
-	// 				'basic_data' => $basic_data,
-	// 				'ident_data' => $ident_data
-	// 				);
-
-	// 			//LOADING VIEWS FOR COMPANY PROFIL
-	// 			$this->load->view('html_head', $data);
-	// 			$this->load->view('header', $data);
-	// 			$this->load->view('content/profil-detail-c', $data);
-	// 			$this->load->view('footer', $data);		
-	// 		}
-	// 	}  	
-	// }
 
 	public function edit_w($param) 
 	{
@@ -264,7 +195,7 @@ class Members extends CI_Controller {
 	}
 
 	public function edit_c($param) {
-		if ($this->session->userdata('logged') !== false) {
+		if ($this->session->userdata('logged') != false) {
 			$tab_param = $param[0];
 			$this->username = $param[1];
 
@@ -273,17 +204,17 @@ class Members extends CI_Controller {
 			$ident_data = $this->Company->get_ident($this->mem_id);
 
 			foreach ($basic_data as $key) {
-				$this->fullname = $key->fullname;
+				$this->company_name = $key->company_name;
 			}
 
 			if ($ident_data == false) {
-				$input = array('id_worker' => $this->mem_id);
+				$input = array('id_company' => $this->mem_id);
 				$add_ident = $this->Company->insert_identity($input);
 			}
 
 			$data = array(
 				'tab_param' => $tab_param,
-				'title' => $this->fullname." | SambilKerja.com",
+				'title' => $this->company_name." | SambilKerja.com",
 				'username' => $this->username,
 				'basic_data' => $basic_data,
 				'ident_data' => $ident_data,
@@ -294,8 +225,8 @@ class Members extends CI_Controller {
 			$this->load->view('header', $data);
 			$this->load->view('content/profil-edit-tabs-c', $data);
 			$this->load->view('content/profil-edit-1-c', $data);
-			// $this->load->view('content/profil-edit-2-c', $data);
-			// $this->load->view('content/profil-edit-3-c', $data);
+			$this->load->view('content/profil-edit-2-c', $data);
+			$this->load->view('content/profil-edit-3-c', $data);
 			$this->load->view('footer', $data);	
 		}
 	}

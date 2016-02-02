@@ -52,7 +52,7 @@ if ($ident_data !== false) {
               <a href="#" class="worker-name"><?php echo $basic_row->company_name; ?></a>
               <?php
               if ($not_logged !== true) { ?>
-                <a href="<?php echo base_url().'index.php/Members/edit_w/PA/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah nama/username</a>  
+                <a href="<?php echo base_url().'index.php/Members/edit_c/PA/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah nama/username</a>  
               <?php } ?>
               <br>
               <span class="subtitle-job"><?php echo $basic_row->username; ?><br></span> 
@@ -64,7 +64,7 @@ if ($ident_data !== false) {
                 if ($ident_data == false && $not_logged == false) { ?>
                 <div class="col-sm-12 profil-alert">
                   <div class="text-box">
-                    <p>Maaf! sepertinya anda baru terdaftar. Silahkan lengkapi informasi diri anda sekarang juga <a href="<?php echo "edit_w/I/".$basic_row->username; ?>">disini.</a></p>
+                    <p>Maaf! sepertinya anda baru terdaftar. Silahkan lengkapi informasi diri anda sekarang juga <a href="<?php echo "edit_c/I/".$basic_row->username; ?>">disini.</a></p>
                   </div><!-- text-box -->
                 </div><!-- col -->  
                 <?php
@@ -79,16 +79,20 @@ if ($ident_data !== false) {
                   foreach ($ident_data as $ident_row) {}
                 ?>
                 <div class="col-sm-12">
-                  <span class="profil-span"><b>Kepemiikan akun</b></span> 
-                  <p><?php echo ($ident_row->ownership !== '') ? $ident_row->ownership: '-';?></p>
-                  <span class="profil-span"><b>Tentang Perusahaan</b></span> <a href="<?php echo base_url().'index.php/Members/edit_w/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah tentang saya</a><br>  
-                  <p><?php echo ($ident_row->about !== '') ? $ident_row->about: '-';?></p>
+                  <span class="profil-span"><b>Kepemiikan akun</b></span>  
+                  <?php
+                  if ($not_logged !== true) { ?>
+                    <a href="<?php echo base_url().'index.php/Members/edit_c/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah informasi utama</a><br>
+                  <?php } ?>
+                  <p><?php echo ($ident_row->ownership !== '') ? 'atas nama '.$ident_row->ownership: '-';?></p>
                   <span class="profil-span"><b>Nomor Pokok Wajib Pajak</b></span> 
-                  <p><?php echo ($ident_row->about !== '') ? $ident_row->npwp: '-';?></p>
+                  <p><?php echo ($ident_row->about !== '') ? $ident_row->NPWP: '-';?></p>
                   <span class="profil-span"><b>Bentuk Usaha</b></span> 
-                  <p><?php echo ($ident_row->businsess_form !== '') ? $ident_row->businsess_form: '-';?></p>
+                  <p><?php echo ($ident_row->business_form !== '') ? $ident_row->business_form: '-';?></p>
                   <span class="profil-span"><b>Bidang Kegiatan</b></span> 
                   <p><?php echo ($ident_row->bidang !== '') ? $ident_row->bidang: '-';?></p>
+                  <span class="profil-span"><b>Tentang Perusahaan</b></span>  
+                  <p><?php echo ($ident_row->about !== '') ? $ident_row->about: '-';?></p>
                 </div>
                 <?php
                 }
@@ -102,8 +106,26 @@ if ($ident_data !== false) {
                 </div>
               </div>
             </div><!-- services-boxes-content -->
+            <div class="col-sm-12">    
+            <div class="horizontal-tabs">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab-1-1" data-toggle="tab">Lowongan oleh perusahaan</a></li>
+                <li><a href="#tab-1-2" data-toggle="tab">Pekerja saat ini</a></li>
+              </ul>                                            
+               <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab-1-1">
+                  <p><strong>Proin at velit tincidunt.</strong></p>
+                  <p>Lorem ipsum dolor sit consectetur adipiscing elit proin sit amet placerat ut gravida purus ul. Curabitur at lacinia erat, vitae metus sed ligula sodales at ornare nunc.</p>
+                </div><!-- tab-pane -->
+                <div class="tab-pane fade" id="tab-1-2">
+                  <p><strong>Quisque eu tortor sed.</strong></p>
+                  <p>Quisque dapibus, purus non congue pulvinar, odio nulla sodales tortor, fringilla faucibus risus massa nec nulla. Phasellus tempus erat elit vitae metus sed.</p>
+                </div><!-- tab-pane -->
+              </div><!-- tab-content -->
+            </div><!-- horizontal-tabs -->
+          </div><!-- col -->
           </div><!-- services-boxes -->
-        </div>
-        </div>
-      </div>
-      </div>
+        </div> <!-- col-md-8 -->
+        </div> <!-- row -->
+      </div> <!-- container -->
+      </div> <!-- page-content -->

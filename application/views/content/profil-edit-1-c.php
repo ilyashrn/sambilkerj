@@ -17,9 +17,7 @@
         echo form_open_multipart('Companies/updating_ident', $attributes);
         foreach ($basic_data as $row) {}
     	if ($ident_data !== false) {
-	    	foreach ($ident_data as $row2) {
-	    		$dob = implode("/", array_reverse(explode("-", $row2->dob)));	
-	    	}	
+	    	foreach ($ident_data as $row2) {}	
 	    }
         ?>
           <!-- <form class="form-horizontal"> -->
@@ -31,10 +29,17 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="ownership" class="col-sm-4 control-label" >Kepemelikan Akun</label>
+              <div class="col-sm-7">
+                <input type="text" id="ownership" name="ownership" placeholder="Kepemilikan Akun"
+                value="<?php echo ($ident_data !== false) ? $row2->ownership: '';?>">
+              </div>
+            </div>
+            <div class="form-group">
               <label for="npwp" class="col-sm-4 control-label" >NPWP</label>
               <div class="col-sm-7">
                 <input type="number" id="npwp" name="npwp" placeholder="Nomor Pokok Wajib Pajak"
-                value="<?php echo ($ident_data !== false) ? $row2->npwp: '';?>">
+                value="<?php echo ($ident_data !== false) ? $row2->NPWP: '';?>">
               </div>
             </div>
             <div class="form-group">
@@ -81,28 +86,28 @@
             <div class="form-group">
               <label for="address" class="col-sm-4 control-label">Alamat Lengkap</label>
               <div class="col-sm-7">
-                <textarea rows="3" columns="12" id="address" name="address" placeholder="Alamat lengkap" style="margin-bottom:10px;"><?php echo ($ident_data !== false) ? $row2->address: '';?></textarea>
+                <textarea rows="3" columns="12" id="address" name="address" placeholder="Alamat lengkap perusahaan" style="margin-bottom:10px;"><?php echo ($ident_data !== false) ? $row2->address: '';?></textarea>
               </div>
             </div>
             <div class="form-group">
               <label for="about" class="col-sm-4 control-label">Tentang Perusahaan</label>
               <div class="col-sm-7">
-                <textarea rows="5" columns="12" data-minlength="10" id="about" name="about" placeholder="Tentang saya" style="margin-bottom:10px;"><?php echo ($ident_data !== false) ? $row2->about: '';?></textarea>
+                <textarea rows="5" columns="12" data-minlength="10" id="about" name="about" placeholder="Tentang Perusahaan" style="margin-bottom:10px;"><?php echo ($ident_data !== false) ? $row2->about: '';?></textarea>
                 <span class="help-block">Minimum: 10 characters</span>
               </div>
             </div>
             <div class="form-group">
               <label for="bidang" class="col-sm-4 control-label" >Bidang Kegiatan</label>
               <div class="col-sm-7">
-                <input type="text" id="bidang" name="bidang" placeholder="Bidang Kegiatan Perusahaan" required="required"
-                value="<?php echo $row->company_name;?>">
+                <input type="text" id="bidang" name="bidang" placeholder="Bidang Kegiatan Perusahaan"
+                value="<?php echo ($ident_data !== false) ? $row2->bidang: '';?>">
               </div>
             </div>
             <div class="form-group">
               <label for="bentuk_usaha" class="col-sm-4 control-label">Bentuk Usaha</label>
               <div class="col-sm-7">
                 <select name="business_form" id="business" style="width:100%; height:20%;" >
-                 <option>Pilih Bentuk Usaha Perusahaan</option>
+                 <option value="-">Pilih Bentuk Usaha Perusahaan</option>
                  <option <?php echo ($ident_data !== false &&  $row2->business_form == 'BUMN') ? 'selected="selected"': '';?> value="BUMN">Badan Usaha Milik Negara</option>
                  <option <?php echo ($ident_data !== false &&  $row2->business_form == 'PT') ? 'selected="selected"': '';?> value="PT">Perseroan Terbatas</option>
                  <option <?php echo ($ident_data !== false &&  $row2->business_form == 'CV') ? 'selected="selected"': '';?>value="CV">Commanditaire Vennootschap</option>

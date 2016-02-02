@@ -39,6 +39,11 @@ class In extends CI_Controller { //LOGIN CONTROLLER
 						'mem_type' => 'C' );
 
 					$this->session->set_userdata($sess_array); //SET USERDATA WITH LOGGED IN USER
+					$update_login = $this->Company->update_login($row->id_company);
+					$this->session->set_flashdata(
+						'msg', 
+						'Login berhasil. Selamat datang kembali!'
+						);
 					redirect($prev_page);
 				}
 			}
@@ -69,6 +74,10 @@ class In extends CI_Controller { //LOGIN CONTROLLER
 	{
 		// $prev_page = $this->session->userdata('last_page');
 		$this->session->unset_userdata('logged');
+		$this->session->set_flashdata(
+					'msg', 
+					'Anda sudah logout. Sampai bertemu kembali!'
+					);
 		redirect('Main','refresh');
 	}
 
