@@ -2,6 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Companies extends CI_Controller {
+	
+	private $username = null; 
+	private $mem_id = null;
+	private $mem_type = null;
+	private $fullname = null;
 
 	public function __construct() {
 		parent::__construct();
@@ -10,6 +15,10 @@ class Companies extends CI_Controller {
 		if ($this->session->userdata('logged') != true) {
 			$sess_data = array('last_page' => current_url());
 			$this->session->set_userdata($sess_data);
+		} else {
+			$this->username = $this->session->userdata('logged');
+			$this->mem_id = $this->session->userdata('mem_id');
+			$this->mem_type = $this->session->userdata('mem_type');
 		}
 	}
 
@@ -48,13 +57,60 @@ class Companies extends CI_Controller {
 		}
 	}
 
-	function test($fullname) {
-		$sess_array = array('fullname' => $fullname);
-		$this->session->set_userdata($sess_array);
+	function updating_ident() {
+		if (!empty($this->mem_id) && false !== $this->input->post('ins_ident')) {
+			if ($_FILES['avatar']['size'] == 0) {
+				$file_name = $this->input->post('cur_avatar');	
+			} 
+			else {
+				$config['upload_path'] = './images/profil_photo/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['encrypt_name'] = TRUE;
+				$config['overwrite'] = FALSE;
 
-		if ($this->session->userdata('fullname') !== false) {
-			redirect('Main/regristration_success');
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				$upload = $this->upload->do_upload('avatar');	
+				$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
+				$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
+			}
+			
+			$mem_data = array(
+				'npwp' => $this->input->post('npwp'),
+				'telp_number' => $this->input->post('telp_number'),
+				'about' => $this->input->post('about'),
+				'domicile' => $this->input->post('domicile'),
+				'bidang' => $this->input->post('bidang'),
+				'business_form' => $this->input->post('business_form'),
+				'address' => $this->input->post('address'),
+				'avatar' => $file_name
+				);
+			$basic = array(
+				'company_name' => $this->input->post('company_name'),
+				'email' => $this->input->post('email'),
+				'secondary_email' => $this->input->post('secondary_email')
+				);
+			$update = $this->Company->update($basic,$this->mem_id);
+			$insert = $this->Company->update_identity($mem_data,$this->mem_id);
+			$this->session->set_flashdata(
+					'msg', 
+					'<b>Identitas Perusahaan</b> berhasil diperbarui!'
+					);
+			redirect('Members/'.$this->username);
+		}
+		else{
+			redirect('errors/Page_not_found','refresh');
 		}
 	}
 
+	function removing_photo($id_company) {
+		$data = array('avatar' => '');
+		$remove = $this->Company->update_identity($data,$id_company);
+		unlink("./images/profil_photo/".$file_name);
+		$this->session->set_flashdata(
+					'msg', 
+					'<b>Foto profil</b> berhasil dihapus!'
+					);
+		redirect('Members/edit_c/I/'.$this->username,'refresh');
+	}
 }

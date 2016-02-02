@@ -49,7 +49,6 @@ class Main extends CI_Controller {
 			$this->load->view('html_head', $data);
 			$this->load->view('header', $data);
 			$this->load->view('content/regristration-success', $data);
-			$this->load->view('footer', $data);
 
 			$this->session->sess_destroy();
 		}
@@ -62,7 +61,6 @@ class Main extends CI_Controller {
 			$this->load->view('html_head', $data);
 			$this->load->view('header', $data);
 			$this->load->view('content/regristration-success', $data);
-			$this->load->view('footer', $data);
 
 			$this->session->sess_destroy();
 		}

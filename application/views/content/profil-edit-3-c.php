@@ -8,7 +8,7 @@
 </script>	
 
 
- <div class="tab-pane fade <?php echo ($tab_param == 'PP') ? 'in active': '';?>" id="tab-6-3">
+ <div class="tab-pane fade <?php echo ($tab_param == 'PA') ? 'in active': '';?>" id="tab-6-3">
   <div class="col-sm-12 service-box style-3 green profil-tab">
     <h4>Riwayat Pendidikan</h4> 
   	<div class="col-sm-12 edu-box">

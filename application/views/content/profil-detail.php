@@ -40,8 +40,8 @@ if ($ident_data !== false) {
             <h6>Informasi Singkat</h6>  
               <div class="service-box-content">
                 <div class="point-detail profil-point">
-                  <i class="mt-icon-map-marker2"></i> <?php echo ($ident_data !== false) ? $row->address.'<br>'.$location->city_name.', '.$location->province_name: '-';?><br>
-                  <i class="mt-icon-timetable"></i> <?php echo ($ident_data !== false) ? 'Lahir di '.$pob->city_name.', '.date('j M Y', strtotime($row->dob)): '-';?> <br>
+                  <i class="mt-icon-map-marker2"></i> <?php echo ($ident_data !== false && $loc_data !== false ) ? $row->address.'<br>'.$location->city_name.', '.$location->province_name: '-';?><br>
+                  <i class="mt-icon-timetable"></i> <?php echo ($ident_data !== false && $pob_data !== false) ? 'Lahir di '.$pob->city_name.', '.date('j M Y', strtotime($row->dob)): '-';?> <br>
                   <i class="glyphicon glyphicon-user"></i> <?php echo ($ident_data !== false) ? $gender: '-';?> <br>
                   <i class="mt-icon-phone1"></i> <?php echo ($ident_data !== false) ? $row->telp_number: '-';?><br>
                   <i class="mt-icon-at-sign"></i> <?php echo $basic_row->email; ?> <br>
@@ -165,7 +165,7 @@ if ($ident_data !== false) {
                 <div class="row">
                   <div class="col-sm-6 pull-right profil-log">
                   bergabung pada <?php echo date('j M Y', strtotime($basic_row->created_time)) ;?><br>
-                  terakhir login pada <?php echo date('j M Y (H:m)', strtotime($basic_row->last_login)) ;?>
+                  terakhir login pada <?php echo date('j M Y', strtotime($basic_row->last_login)) ;?>
                   </div>  
                 </div>
               </div>

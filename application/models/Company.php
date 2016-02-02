@@ -34,6 +34,25 @@
       }
     }
 
+    function get_ident($where_value) {
+      $this->db->select('*');
+      $this->db->from('c_identity');
+      $this->db->where('id_company',$where_value);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      }
+      else {
+        return false;
+      }      
+    }
+
+    function update_identity($data,$where_value) {
+      $this->db->where('id_company',$where_value);
+      $this->db->update('c_identity',$data);
+    }
+
     function get($where_what,$where_value) {
       $this->db->select('*');
       $this->db->from('company');
@@ -56,8 +75,8 @@
       $this->db->insert('c_identity',$data);
     }
 
-    function update($data,$where_what,$where_value) {
-      $this->db->where($where_what,$where_value);
+    function update($data,$where_value) {
+      $this->db->where('id_company',$where_value);
       $this->db->update('company',$data);
       
     }

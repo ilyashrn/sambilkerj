@@ -3,10 +3,7 @@
       $('#test').select2();
     });
     $(function(){
-      $('#test2').select2();
-    });
-    $(function() {
-      $('#pob').select2();
+      $('#business').select2();
     });
  </script>	
 
@@ -17,7 +14,7 @@
 		<h4>Informasi Dasar</h4>	
         <?php
         $attributes = array('id' => 'fileForm','class' => 'form-horizontal','data-toggle' => 'validator');
-        echo form_open_multipart('Workers/updating_ident', $attributes);
+        echo form_open_multipart('Companies/updating_ident', $attributes);
         foreach ($basic_data as $row) {}
     	if ($ident_data !== false) {
 	    	foreach ($ident_data as $row2) {
@@ -27,62 +24,37 @@
         ?>
           <!-- <form class="form-horizontal"> -->
             <div class="form-group">
-              <label for="fullname" class="col-sm-4 control-label" >Nama Lengkap</label>
+              <label for="company_name" class="col-sm-4 control-label" >Nama Perusahaan</label>
               <div class="col-sm-7">
-                <input type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" required="required"
-                value="<?php echo $row->fullname;?>">
+                <input type="text" id="company_name" name="company_name" placeholder="Nama Perusahaan" required="required"
+                value="<?php echo $row->company_name;?>">
               </div>
             </div>
             <div class="form-group">
-              <label for="nickname" class="col-sm-4 control-label" >Nama Panggilan</label>
+              <label for="npwp" class="col-sm-4 control-label" >NPWP</label>
               <div class="col-sm-7">
-                <input type="text" id="nickname" name="nickname" placeholder="Nama Panggilan"
-                value="<?php echo ($ident_data !== false) ? $row2->nickname: '';?>">
+                <input type="number" id="npwp" name="npwp" placeholder="Nomor Pokok Wajib Pajak"
+                value="<?php echo ($ident_data !== false) ? $row2->npwp: '';?>">
               </div>
             </div>
             <div class="form-group">
-              <label for="nickname" class="col-sm-4 control-label" >E-mail</label>
+              <label for="email" class="col-sm-4 control-label" >E-mail Primer</label>
               <div class="col-sm-7">
-                <input type="email" id="email" name="email" placeholder="E-mail"
+                <input type="email" id="email" name="email" placeholder="E-mail Primer"
                 value="<?php echo $row->email;?>">
               </div>
             </div>
             <div class="form-group">
-              <label for="gender" class="col-sm-4 control-label">Jenis Kelamin</label>
+              <label for="email_2nc" class="col-sm-4 control-label" >E-mail Sekunder</label>
               <div class="col-sm-7">
-          		<select name="gender" id="test2" style="width:100%; height:20%;" >
-          			<option>Pilih Jenis Kelamin</option>
-          			<option <?php echo ($ident_data !== false && $row2->gender == 1) ? 'selected="selected"': '';?> value="1">Laki-laki</option>
-          			<option <?php echo ($ident_data !== false && $row2->gender == 2) ? 'selected="selected"': '';?>value="2">Perempuan</option>
-			    </select>
+                <input type="email" id="secondary_email" name="secondary_email" placeholder="E-mail Sekunder"
+                value="<?php echo $row->secondary_email;?>">
               </div>
             </div>
             <div class="form-group">
-              <label for="dob" class="col-sm-4 control-label">Tempat dan Tanggal Lahir</label>
+              <label for="telp_number" class="col-sm-4 control-label">Nomor Telepon</label>
               <div class="col-sm-7">
-                <select name="pob" id="pob" style="width:100%; height:20%;" >
-                   <option>Pilih Kota Kelahiran</option>
-                    <?php
-                  foreach ($prov_data as $prov) { //PROVINCE LOOPING
-                    $cur_id = $prov->id_province;
-                    $cities = $this->Location->get_cities($cur_id); ?>
-                    <optgroup label="<?php echo $prov->province_name; ?>"> 
-                    <?php
-                    foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
-                      <option <?php echo ($ident_data !== false &&  $row2->pob == $city->id_city) ? 'selected="selected"': '';?> value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>   
-                    <?php }
-                    ?>
-                    </optgroup>
-                    <?php } 
-                    ?>
-                 </select>
-                <input style="margin-top:15px;"type="date" id="dob" name="dob" placeholder="mm/dd/yyyy" value="<?php echo ($ident_data !== false) ? $row2->dob: '';?>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="telp_number" class="col-sm-4 control-label">Nomor Handphone</label>
-              <div class="col-sm-7">
-                <input type="text"  id="telp_number" name="telp_number" placeholder="Nomor Handphone" value="<?php echo ($ident_data !== false) ? $row2->telp_number: '';?>">
+                <input type="text"  id="telp_number" name="telp_number" placeholder="Nomor Telepon" value="<?php echo ($ident_data !== false) ? $row2->telp_number: '';?>">
               </div>
             </div>
             <div class="form-group">
@@ -107,22 +79,42 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="address" class="col-sm-4 control-label">Alamat lengkap</label>
+              <label for="address" class="col-sm-4 control-label">Alamat Lengkap</label>
               <div class="col-sm-7">
                 <textarea rows="3" columns="12" id="address" name="address" placeholder="Alamat lengkap" style="margin-bottom:10px;"><?php echo ($ident_data !== false) ? $row2->address: '';?></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label for="about" class="col-sm-4 control-label">Tentang saya</label>
+              <label for="about" class="col-sm-4 control-label">Tentang Perusahaan</label>
               <div class="col-sm-7">
                 <textarea rows="5" columns="12" data-minlength="10" id="about" name="about" placeholder="Tentang saya" style="margin-bottom:10px;"><?php echo ($ident_data !== false) ? $row2->about: '';?></textarea>
                 <span class="help-block">Minimum: 10 characters</span>
               </div>
             </div>
             <div class="form-group">
+              <label for="bidang" class="col-sm-4 control-label" >Bidang Kegiatan</label>
+              <div class="col-sm-7">
+                <input type="text" id="bidang" name="bidang" placeholder="Bidang Kegiatan Perusahaan" required="required"
+                value="<?php echo $row->company_name;?>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="bentuk_usaha" class="col-sm-4 control-label">Bentuk Usaha</label>
+              <div class="col-sm-7">
+                <select name="business_form" id="business" style="width:100%; height:20%;" >
+                 <option>Pilih Bentuk Usaha Perusahaan</option>
+                 <option <?php echo ($ident_data !== false &&  $row2->business_form == 'BUMN') ? 'selected="selected"': '';?> value="BUMN">Badan Usaha Milik Negara</option>
+                 <option <?php echo ($ident_data !== false &&  $row2->business_form == 'PT') ? 'selected="selected"': '';?> value="PT">Perseroan Terbatas</option>
+                 <option <?php echo ($ident_data !== false &&  $row2->business_form == 'CV') ? 'selected="selected"': '';?>value="CV">Commanditaire Vennootschap</option>
+                 <option <?php echo ($ident_data !== false &&  $row2->business_form == 'Firma') ? 'selected="selected"': '';?> value="Firma">Firma</option>
+                 <option <?php echo ($ident_data !== false &&  $row2->business_form == 'Perorangan') ? 'selected="selected"': '';?> value="Perorangan">Perorangan</option>
+               </select>
+              </div>
+            </div>
+            <div class="form-group">
               <label for="avatar" class="col-sm-4 control-label">Foto Profil</label>
               <div class="col-sm-7 cur-avatar">
-				<?php
+				    <?php
 		        if ($ident_data == false || $row2->avatar == '') { ?>
 		          <img src="<?php echo base_url().'images/nobody.jpg';?>" alt="">
 		          <input type="hidden" name="cur_avatar" value="">
@@ -130,7 +122,7 @@
 		        } else { ?>
 		          <img src="<?php echo base_url().'images/profil_photo/'.$row2->avatar;?>" alt="">
 		          <input type="hidden" name="cur_avatar" value="<?php echo $row2->avatar; ?>">
-		          <a href="../../../Workers/removing_photo/<?php echo $row2->id_worker.'/'.$row2->avatar;?>" class="a-photo"><i class="glyphicon glyphicon-remove"></i>Hapus gambar</a>
+		          <a href="../../../Companies/removing_photo/<?php echo $row2->id_company.'/'.$row2->avatar;?>" class="a-photo"><i class="glyphicon glyphicon-remove"></i>Hapus gambar</a>
 		        <?php }
 		        ?>
                 <input type="file" id="avatar" name="avatar" placeholder="Upload gambar">
