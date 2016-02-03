@@ -105,6 +105,10 @@ h6 .worker-name {
   text-align: right;
 }
 
+.post-owner img {
+  width: 100%;
+}
+
 .counter-jobs {
   font-size: 10px;
   font-weight: normal;

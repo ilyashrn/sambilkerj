@@ -3,7 +3,7 @@
 		$('#category').select2();
 	});
   $(function() {
-    $('#location').select2();
+    $('#skills').select2();
   });
 </script>
 <!-- CONTENT -->
@@ -17,10 +17,15 @@
             </div><!-- row -->
         </div><!-- container -->
     </div><!-- page-header -->
+
+    <div class="headline">
+        <h3><strong>Mulai Lowongan Baru</strong></h3>
+        <p>Sertakan informasi mengenai lowongan anda melalui form dibawah ini.</p>
+    </div>
+    
     <div class="container">
       <div class="row">
         <div class="col-sm-12 service-box style-3 default profil-tab">
-          <h4>Form Buka Lowongan baru</h4>
           <?php
           $attributes = array('id' => 'fileForm','class' => 'form-horizontal','data-toggle' => 'validator');
           echo form_open_multipart('Jobs/inserting', $attributes);
@@ -59,6 +64,22 @@
             <label for="jobdesc" class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
             <div class="col-sm-7">
               <textarea rows="5" columns="12" id="jobdesc" name="jobdesc" placeholder="Deksripsi Pekerjaan" style="margin-bottom:10px;"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">
+              <label for="jobdesc" class="col-sm-4 control-label">Keahlian yang dibutuhkan</label>
+              <span>Tambahkan keahlian yang sebaiknya dimiliki pekerja.</span>
+            </div>
+            <div class="col-sm-7">
+              <select name="skills[]" id="skills" style="width:100%;" multiple="multiple" >
+                <?php
+                foreach ($skill_sets as $skill) { ?>
+                  <option value="<?php echo $skill->id_skill;?>"><?php echo $skill->skill_name;?></option>  
+                <?php 
+                }
+                ?>
+              </select>
             </div>
           </div>
           <div class="form-group">

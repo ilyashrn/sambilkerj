@@ -13,30 +13,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-4">
-          <!-- <div class="widget widget-search">
-            <form name="search" method="get" action="#">
-              <fieldset>
-                <input type="search" name="search" placeholder="search...">
-                <input type="submit" name="submit" value="">
-              </fieldset>
-            </form>
-          </div><!-- widget-search -->
-
-          <div class="panel-group" id="categories">
-							<div class="panel">
-								<div class="panel-heading">
-									<h4 class="panel-title category-title">
-										<a data-toggle="collapse" data-parent="#accordion1" href="#collapse1-1" aria-expanded="true">Lorem ispum dolor</a>
-									</h4>
-								</div><!-- panel-heading -->
-								<div id="collapse1-1" class="panel-collapse collapse in">
-									<div class="panel-body">
-										<p>Phasellus rhoncus non mi sed faucibus. Donec sollicitudin posuere ante, in tristique velit pellentesque id.
-										Nulla nibh arcu, cursus eu consectetur ut, tincidunt ac magna. Donec lobortis nunc turpis, vel ultricies lacus
-										tincidunt sollicitudin posuere.</p>
-									</div><!-- panel-body -->
-								</div><!-- panel-collapse -->
-							</div><!-- panel -->
+          <div class="panel-group" id="categories">		
 							<div class="panel">
 								<div class="panel-heading">
 									<h4 class="panel-title category-title">
@@ -83,107 +60,68 @@
         </div><!-- col -->
 
         <div class="col-sm-8">
-          <div class="job-box service-box style-3 default" style="padding:20px;">
-            <h6>
-              <a href="#" class="title-job">AngularJS Developer</a><br>
-              <span class="subtitle-job"><a href="#">Jasa Internet </a> <span class="subtitle-job"> > </span><a href="#">Pembuatan Website</a></span>
-            </h6>
-            <div class="service-box-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <p>Quisque porta dui id risus luctus porta. Sed eu lacus semper, viverra sapien vel, ullamcorper turpis lacina omis elit.</p>
-                </div>
-                <div class="col-sm-4 point-detail">
-                  <i class="mt-icon-map-marker2"></i> Bekasi, Jawa Barat<br>
-                  <i class="mt-icon-timetable"></i> 10 Januari 2015 <br>
-                  <i class="mt-icon-money"></i> IDR 2,000,000 <br>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <span>Keahlian yang dibutuhkan:</span>
-                  <div class="widget-tags required-skills">
-                      <a href="#">AngularJS</a>
-                      <a href="#">HTML Programming</a>
-                      <a href="#">CSS</a>
-                      <a href="#">mySQL Database</a>
+          <?php
+          if ($job_data !== false) {
+            foreach ($job_data as $job) {
+              $description = character_limiter($job->description,100);
+             ?>
+              <div class="job-box service-box style-3 default" style="padding:20px;">
+              <h6>
+                <a href="#" class="title-job"><?php echo $job->post_title;?></a><br>
+                <span class="subtitle-job"><a href="#"><?php echo $job->category_name;?> </a> <span class="subtitle-job"> > </span><a href="#"><?php echo $job->sub_category_name;?></a></span>
+              </h6>
+              <div class="service-box-content">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <p>
+                    <?php echo $description;?></p>
+                  </div>
+                  <div class="col-sm-4 point-detail">
+                    <i class="mt-icon-timetable"></i> <?php echo date('j M Y', strtotime($job->deadline));?> <br>
+                    <i class="mt-icon-money"></i> IDR <?php setlocale(LC_MONETARY, 'id_ID'); echo number_format($job->salary) ;?> <br>
                   </div>
                 </div>
-                <div class="col-sm-6 pull-right post-owner">
-                  oleh <a href="#">PT Pertamina Trans Kontinental</a> <br>
-                  5 Januari 2015
-                </div>
-              </div>
-            </div><!-- services-boxes-content -->
-          </div><!-- services-boxes -->
-          <div class="job-box service-box style-3 default" style="padding:20px;">
-            <h6>
-              <a href="#" class="title-job">AngularJS Developer</a><br>
-              <span class="subtitle-job"><a href="#">Jasa Internet </a> <span class="subtitle-job"> > </span><a href="#">Pembuatan Website</a></span>
-            </h6>
-            <div class="service-box-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <p>Quisque porta dui id risus luctus porta. Sed eu lacus semper, viverra sapien vel, ullamcorper turpis lacina omis elit.</p>
-                </div>
-                <div class="col-sm-4 point-detail">
-                  <i class="mt-icon-map-marker2"></i> Bekasi, Jawa Barat<br>
-                  <i class="mt-icon-timetable"></i> 10 Januari 2015 <br>
-                  <i class="mt-icon-money"></i> IDR 2,000,000 <br>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <span>Keahlian yang dibutuhkan:</span>
-                  <div class="widget-tags required-skills">
-                      <a href="#">AngularJS</a>
-                      <a href="#">HTML Programming</a>
-                      <a href="#">CSS</a>
-                      <a href="#">mySQL Database</a>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <span>Keahlian yang dibutuhkan:</span>
+                    <div class="widget-tags required-skills">
+                        <?php
+                        $req_skills = $this->Job->get_req_skill($job->id_post);
+                        if ($req_skills == false) {
+                          echo '-';
+                        } else{
+                        foreach ($req_skills as $req) { ?>
+                          <a href="#"><?php echo $req->skill_name;?></a>  
+                        <?php } } ?>
+                        
+                    </div>
+                  </div>
+                  <div class="col-sm-2 pull-right post-owner">
+                    <img src="<?php echo base_url().'images/profil_photo/'.$job->avatar;?>">
+                  </div>
+                  <div class="col-sm-6 pull-right post-owner" style="padding-right:0;">
+                    oleh <a href="#"><?php echo $job->company_name;?></a> <br>
+                    dibuat <?php echo date('j M Y', strtotime($job->created_time));?>
                   </div>
                 </div>
-                <div class="col-sm-6 pull-right post-owner">
-                  oleh <a href="#">PT Pertamina Trans Kontinental</a> <br>
-                  5 Januari 2015
-                </div>
-              </div>
-            </div><!-- services-boxes-content -->
-          </div><!-- services-boxes -->
-          <div class="job-box service-box style-3 default" style="padding:20px;">
-            <h6>
-              <a href="#" class="title-job">AngularJS Developer</a><br>
-              <span class="subtitle-job"><a href="#">Jasa Internet </a> <span class="subtitle-job"> > </span><a href="#">Pembuatan Website</a></span>
-            </h6>
-            <div class="service-box-content">
-              <div class="row">
-                <div class="col-sm-8">
-                  <p>Quisque porta dui id risus luctus porta. Sed eu lacus semper, viverra sapien vel, ullamcorper turpis lacina omis elit.</p>
-                </div>
-                <div class="col-sm-4 point-detail">
-                  <i class="mt-icon-map-marker2"></i> Bekasi, Jawa Barat<br>
-                  <i class="mt-icon-timetable"></i> 10 Januari 2015 <br>
-                  <i class="mt-icon-money"></i> IDR 2,000,000 <br>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <span>Keahlian yang dibutuhkan:</span>
-                  <div class="widget-tags required-skills">
-                      <a href="#">AngularJS</a>
-                      <a href="#">HTML Programming</a>
-                      <a href="#">CSS</a>
-                      <a href="#">mySQL Database</a>
-                  </div>
-                </div>
-                <div class="col-sm-6 pull-right post-owner">
-                  oleh <a href="#">PT Pertamina Trans Kontinental</a> <br>
-                  5 Januari 2015
-                </div>
-              </div>
-            </div><!-- services-boxes-content -->
-          </div><!-- services-boxes -->
+              </div><!-- services-boxes-content -->
+            </div><!-- services-boxes -->
+          <?php } } ?>
         </div><!-- col -->
-
       </div><!-- row -->
+    </div><!-- container -->
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- <ul class="pagination text-center">
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                </ul> -->
+                <?php echo $links;?>
+            </div><!-- col -->
+        </div><!-- row -->
+    
     </div><!-- container -->
   </div>
