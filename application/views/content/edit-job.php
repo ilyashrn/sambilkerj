@@ -10,26 +10,19 @@
   });
 </script>
 <!-- CONTENT -->
-<?php
-  if ($edit == true) { //IF EDIT PAGE THE FOREACH(S) EXIST
-    if ($post_data !== false) {
-      foreach ($post_data as $post) {}
-    }
-  }
-?>
 <div id="page-content">
     <div id="page-header">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4><?php echo $sub_title;?></h4>
+                    <h4>Buka Lowongan baru</h4>
                 </div><!-- col -->
             </div><!-- row -->
         </div><!-- container -->
     </div><!-- page-header -->
 
     <div class="headline">
-        <h3><strong><?php echo $sub_subtitle;?></strong></h3>
+        <h3><strong>Mulai Lowongan Baru</strong></h3>
         <p>Sertakan informasi mengenai lowongan anda melalui form dibawah ini.</p>
     </div>
     
@@ -38,16 +31,17 @@
         <div class="col-sm-12 service-box style-3 default profil-tab">
           <?php
           $attributes = array('id' => 'fileForm','class' => 'form-horizontal','data-toggle' => 'validator');
-          echo form_open_multipart(($edit == false) ? 'Jobs/inserting' : 'Jobs/updating/'.$id_post, $attributes);
+          echo form_open_multipart('Jobs/inserting', $attributes);
           ?>
           <div class="form-group">
             <div class="form-label">
               <label for="post_title" class="col-sm-4 control-label" >Judul Informasi Lowongan</label>
               <span>Tentukan judul lowongan yang informatif, deksriptif, dan menarik.</span>  
             </div>
+            
             <div class="col-sm-7">
               <input type="text" id="post_title" name="post_title" placeholder="Judul Informasi Lowongan" required="required"
-              value="<?php echo ($edit == true) ? $post->post_title : '';?>">
+              value="">
             </div>
           </div>
           <div class="form-group">
@@ -62,7 +56,7 @@
                   ?>
                     <optgroup label="<?php echo $cat->category_name; ?>"> 
                       <?php foreach ($sub_cat as $sub) { ?> 
-                      <option <?php echo ($edit == true && $post->id_job_category == $sub->id_sub_category) ? 'selected="selected"' : '';?> value="<?php echo $sub->id_sub_category; ?>"><?php echo $sub->sub_category_name; ?></option>
+                      <option value="<?php echo $sub->id_sub_category; ?>"><?php echo $sub->sub_category_name; ?></option>
                       <?php } ?>
                     </optgroup>
                   <?php } ?>
@@ -72,7 +66,7 @@
           <div class="form-group">
             <label for="jobdesc" class="col-sm-4 control-label">Deskripsi Pekerjaan</label>
             <div class="col-sm-7">
-              <textarea rows="5" columns="12" id="jobdesc" name="jobdesc" placeholder="Deksripsi Pekerjaan" style="margin-bottom:10px;"><?php echo ($edit == true) ? $post->description : '';?></textarea>
+              <textarea rows="5" columns="12" id="jobdesc" name="jobdesc" placeholder="Deksripsi Pekerjaan" style="margin-bottom:10px;"></textarea>
             </div>
           </div>
           <div class="form-group">
@@ -83,21 +77,11 @@
             <div class="col-sm-7">
               <select name="skills[]" id="skills" style="width:100%;" multiple="multiple" >
                 <?php
-                  foreach ($skill_sets as $skill) { ?>
-                    <option value="<?php echo $skill->id_skill;?>"
-                      <?php
-                        if ($req_skill_data !== false) {
-                          foreach ($req_skill_data as $sk) {
-                            if ($skill->id_skill == $sk->id_skill) {
-                              echo 'selected="selected"';
-                            }
-                          }
-                        }
-                      ?>
-                    ><?php echo $skill->skill_name;?></option>  
-                  <?php 
-                  }
-                  ?>
+                foreach ($skill_sets as $skill) { ?>
+                  <option value="<?php echo $skill->id_skill;?>"><?php echo $skill->skill_name;?></option>  
+                <?php 
+                }
+                ?>
               </select>
             </div>
           </div>
@@ -113,7 +97,7 @@
                   <optgroup label="<?php echo $prov->province_name; ?>"> 
                   <?php
                   foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
-                    <option <?php echo ($edit == true && $post->id_location == $city->id_city) ? 'selected="selected"' : '';?> value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>   
+                    <option value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>   
                   <?php }
                   ?>
                   </optgroup>
@@ -128,8 +112,7 @@
               <span>Sertakan gaji yang menarik para pelamar.</span>
             </div>
             <div class="col-sm-7">
-              <input type="number" id="salary" name="salary" placeholder="Gaji dalam IDR"
-              value="<?php echo ($edit == true) ? $post->salary : '';?>">
+              <input type="number" id="salary" name="salary" placeholder="Gaji dalam IDR">
             </div>
           </div>
           <div class="form-group">
@@ -139,20 +122,19 @@
             </div>
             <div class="col-sm-7">
               <input type="file" id="file" name="file" placeholder="Upload file">
-              <input type="text" id="file_desc" name="file_desc" placeholder="Keterangan/nama file"
-              value="<?php echo ($edit == true) ? $post->file_desc : '';?>">
+              <input type="text" id="file_desc" name="file_desc" placeholder="Keterangan/nama file">
             </div>
           </div>
           <div class="form-group">
             <label for="deadline" class="col-sm-4 control-label" >Deadline Lowongan</label>
             <div class="col-sm-7">
               <input type="date" id="deadline" name="deadline" placeholder="mm/dd/yyyy"
-              value="<?php echo ($edit == true) ? $post->deadline : '';?>">
+              value="">
             </div>
           </div>
           <div class="form-group pull-right">
             <div class="col-sm-offset-2 col-sm-10">
-              <button name="ins_job" type="submit" class="btn btn-default" style="margin-right:30px;"><?php echo ($edit == true) ? 'update the job' : 'insert the job' ;?></button>
+              <button name="ins_job" type="submit" class="btn btn-default" style="float:left;">insert the job</button>
             </div>
           </div>
           <?php

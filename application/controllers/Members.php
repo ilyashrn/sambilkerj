@@ -18,6 +18,7 @@ class Members extends CI_Controller {
 		$this->load->model('Language');
 		$this->load->model('School');
 		$this->load->model('Mayor');
+		$this->load->model('Job');
 
 		if ($this->session->userdata('logged') !== false) {
 			$this->username = $this->session->userdata('logged');
@@ -106,6 +107,7 @@ class Members extends CI_Controller {
 				$basic_data = $this->Company->get('username',$username);
 				$ident_data = $this->Company->get_ident($this->mem_id);
 				$loc_data = $this->Company->get_loc($this->mem_id);
+				$job_data = $this->Job->get_per_comp($this->mem_id);
 
 				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 					$this->fullname = $key->company_name;
@@ -117,6 +119,7 @@ class Members extends CI_Controller {
 					'not_logged' => $not_logged,
 					'basic_data' => $basic_data,
 					'ident_data' => $ident_data,
+					'job_data' => $job_data,
 					'loc_data' => $loc_data
 					);
 

@@ -106,26 +106,57 @@ if ($ident_data !== false) {
                 </div>
               </div>
             </div><!-- services-boxes-content -->
-            <div class="col-sm-12">    
+          </div><!-- services-boxes -->
+        </div> <!-- col-md-8 -->
+        <div class="row">
+          <div class="col-sm-12">    
             <div class="horizontal-tabs">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab-1-1" data-toggle="tab">Lowongan oleh perusahaan</a></li>
                 <li><a href="#tab-1-2" data-toggle="tab">Pekerja saat ini</a></li>
               </ul>                                            
-               <div class="tab-content">
-                <div class="tab-pane fade in active" id="tab-1-1">
-                  <p><strong>Proin at velit tincidunt.</strong></p>
-                  <p>Lorem ipsum dolor sit consectetur adipiscing elit proin sit amet placerat ut gravida purus ul. Curabitur at lacinia erat, vitae metus sed ligula sodales at ornare nunc.</p>
+               <div class="tab-content" style="margin-top:0;">
+                <div class="tab-pane fade in active " id="tab-1-1">
+                  <div class="col-sm-12 service-box style-3 default"> 
+                <?php
+                if ($job_data == false) {
+                  echo 'Belum ada lowongan yang dibuat perusahaan.';
+                } else { 
+                    foreach ($job_data as $job) { ?>
+                    <div class="col-sm-10 job-profil-box service-box style-3 default" style="padding:20px;margin-bottom:10px;padding-bottom:10px;">
+                      <span><a href="../Jobs/detail/<?php echo $job->id_post;?>"><strong><?php echo $job->post_title;?></strong></a></span>
+                      <span class="small-span"><?php echo $job->created_time;?></span><br>
+                      <span class="subtitle-job"><?php echo $job->category_name;?><span class="subtitle-job"> > </span><?php echo $job->sub_category_name;?></span><br>
+                      <div class="col-sm-9 i-div">
+                        <i class="mt-icon-timetable"> <b>Deadline:</b> <?php echo date('j M Y', strtotime($job->deadline));?></i> 
+                        <i class="mt-icon-money"> <b>Gaji:</b> IDR <?php setlocale(LC_MONETARY, 'id_ID'); echo number_format($job->salary) ;?></i>
+                        <i class="mt-icon-map-marker1"> <b>Domisili:</b> <?php echo $job->city_name.', '.$job->province_name?></i>
+                      </div>
+                      <div class="col-sm-2 pull-right" style="font-size:12px;">
+                        <a href="../Jobs/detail/<?php echo $job->id_post;?>">Baca selengkapnya</a>
+                      </div>
+                    </div>
+                    <div class="col-sm-2 btn-div">
+                      <?php
+                      if ($not_logged !== true) { ?>
+                          <a href="../Jobs/edit_job/<?php echo $job->id_post;?>" class="btn btn-black"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                          <a href="../Jobs/removing/<?php echo $job->id_post;?>" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
+                      <?php } else { ?>
+                          <a href="../Jobs/edit_job/<?php echo $job->id_post;?>" class="btn btn-green"><i class="glyphicon glyphicon-check"></i> Daftar</a>
+                      <?php  } ?>
+                    </div>
+                <?php } }
+                ?>
+                  </div>
                 </div><!-- tab-pane -->
                 <div class="tab-pane fade" id="tab-1-2">
-                  <p><strong>Quisque eu tortor sed.</strong></p>
+                  <h3><strong>Quisque eu tortor sed.</strong></h3>
                   <p>Quisque dapibus, purus non congue pulvinar, odio nulla sodales tortor, fringilla faucibus risus massa nec nulla. Phasellus tempus erat elit vitae metus sed.</p>
                 </div><!-- tab-pane -->
               </div><!-- tab-content -->
             </div><!-- horizontal-tabs -->
           </div><!-- col -->
-          </div><!-- services-boxes -->
-        </div> <!-- col-md-8 -->
+        </div>
         </div> <!-- row -->
       </div> <!-- container -->
       </div> <!-- page-content -->
