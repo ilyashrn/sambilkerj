@@ -153,7 +153,11 @@
                 <li class="search">
                   <a class="hidden-xs hidden-sm" href="#"><i class="mt-icon-search"></i></a>
                   <div id="search-form-container">
-                    <form id="search-form" action="#">
+                    <!-- <form id="search-form" action="#"> -->
+                    <?php
+                    $attributes = array('id' => 'search-form'); 
+                    echo form_open('Jobs/search',$attributes);
+                    ?>
                       <input id="search" type="search" name="search" placeholder="Enter keywords...">
                       <input id="search-submit" type="submit" value="">
                     </form>

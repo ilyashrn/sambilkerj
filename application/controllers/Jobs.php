@@ -13,6 +13,7 @@ class Jobs extends CI_Controller {
 		$this->load->model('Company');
 		$this->load->model('Job');
 		$this->load->model('Skill');
+		$this->load->model('Location');
 
 		if ($this->session->userdata('logged') != true) {
 			$sess_data = array('last_page' => current_url());
@@ -36,22 +37,20 @@ class Jobs extends CI_Controller {
 
 	public function index()
 	{
-
+		redirect('Jobs/lists','refresh');
 	}
 
 	public function lists()
 	{
 		//PAGINATION SETUP
 		$config = array();
-        $config["base_url"] = base_url()."index.php/Jobs/lists/";
+        $config["base_url"] = base_url("index.php/Jobs/lists");
         $config["total_rows"] = $this->Job->record_count();
-        $config["per_page"] = 5;
+        $config['per_page'] = "2";
         $config["uri_segment"] = 3;
         $config['use_page_numbers'] = TRUE;
-        $config["page_query_string"] = true;
-        $config["enable_query_strings"] = true;
-        $config['query_string_segment'] = 'page';
 
+        //PAGINATION VIEW
         $config['full_tag_open'] = '<ul class="pagination text-center">';
         $config['full_tag_close'] = '</ul>';
         $config['first_link'] = false;
@@ -64,13 +63,76 @@ class Jobs extends CI_Controller {
         $config['num_tag_close'] = '</li>';
 
         $this->pagination->initialize($config);
-
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $order_by = '';
+        $sort = '';
+        
+        if (!empty($this->input->post('sort_by'))) {
+        	$order_by = $this->input->post('sort_by');
+        	$sort = $this->input->post('sort_method');
+        	$sess_array = array('order_by' => $order_by, 'sort' => $sort);
+        	$this->session->set_userdata($sess_array);
+        }
 
     	$data = array(
     		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
-    		'job_data' => $this->Job->get_all($config["per_page"], $page),
+    		'job_data' => $this->Job->get_all($config["per_page"], $page, $order_by, $sort),
     		'links' => $this->pagination->create_links()
+    		);
+		$this->load->view('html_head', $data);
+		$this->load->view('header', $data);
+		$this->load->view('content/job-list', $data);
+		$this->load->view('footer', $data);
+	}
+
+	public function search()
+	{
+		$keyword = ($this->input->post('search')) ? $this->input->post('search') : "NIL";
+
+		$keyword = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyword;
+
+		//PAGINATION SETUP
+		$config = array();
+		// $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-\=';
+        $config["base_url"] = base_url()."index.php/Jobs/search/";
+        $config["total_rows"] = $this->Job->search_record_count($keyword);
+        $config["per_page"] = 5;
+        $config["uri_segment"] = 3;
+        $config['use_page_numbers'] = TRUE;
+        $config["page_query_string"] = true;
+        $config["enable_query_strings"] = true;
+        $config['query_string_segment'] = 'page'.$keyword;
+
+        //PAGINATION VIEW
+        $config['full_tag_open'] = '<ul class="pagination text-center">';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['next_link'] = false;
+        $config['prev_link'] = false;
+        $config['cur_tag_open'] = '<li class="active"><a href="">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $order_by = '';
+        $sort = '';
+        
+        if (!empty($this->input->post('sort_by'))) {
+        	$order_by = $this->input->post('sort_by');
+        	$sort = $this->input->post('sort_method');
+        }
+
+        $data = array(
+    		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
+    		'job_data' => $this->Job->search_all($config["per_page"], $page, $keyword, $order_by, $sort),
+    		'links' => $this->pagination->create_links(),
+    		'order_by' => $order_by,
+    		'sort' => $sort
     		);
 		$this->load->view('html_head', $data);
 		$this->load->view('header', $data);
@@ -83,11 +145,13 @@ class Jobs extends CI_Controller {
 		if ($this->session->userdata('logged') != false && $this->mem_type == 'C') { //IF USER COMPANY LOGIN
 			$cat_data = $this->Job->get_all_cats();
 			$skill_sets = $this->Skill->get_all();
+			$prov_data = $this->Location->get_all_prov(); 
 
 			$data = array(
 				'title' => "Buka Lowongan baru | SambilKerja.com",
 				'cat_data' => $cat_data,
-				'skill_sets' => $skill_sets
+				'skill_sets' => $skill_sets,
+				'prov_data' => $prov_data
 				);
 			$this->load->view('html_head', $data);
 			$this->load->view('header', $data);
@@ -122,6 +186,7 @@ class Jobs extends CI_Controller {
 				'file_desc' => $this->input->post('file_desc'),
 				'deadline' => $this->input->post('deadline'),
 				'salary' => $this->input->post('salary'),
+				'id_location' => $this->input->post('location'),
 			 	);
 			$insert = $this->Job->insert($data); // INSERTING INTO DATABASE
 

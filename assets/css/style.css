@@ -239,8 +239,28 @@ h6 .worker-name {
   color: #6E6E6E;
 }
 
-
 .edu-box .style-3{
   padding-top: 10px;
   margin-right: 10px;
+}
+
+.job-list .text-box {
+  padding: 20px;
+}
+
+.job-box .col-sm-1 {
+  padding-right: 0;
+  width: 5%;
+}
+
+.job-box i {
+  font-size: 20px;
+}
+
+.job-box .col-sm-4 {
+  padding-left: 10px;
+}
+
+.job-box .col-sm-4 select {
+  margin-bottom: 0;
 }

@@ -5,6 +5,9 @@
   $(function() {
     $('#skills').select2();
   });
+  $(function() {
+    $('#location').select2();
+  });
 </script>
 <!-- CONTENT -->
 <div id="page-content">
@@ -82,6 +85,27 @@
               </select>
             </div>
           </div>
+          <div class="form-group">
+              <label for="location" class="col-sm-4 control-label">Lokasi Pekerjaan</label>
+              <div class="col-sm-7">
+                <select name="location" id="location" style="width:100%; height:20%;" >
+                 <option>Pilih Kota lokasi pekerjaan</option>
+                  <?php
+                foreach ($prov_data as $prov) { //PROVINCE LOOPING
+                  $cur_id = $prov->id_province;
+                  $cities = $this->Location->get_cities($cur_id); ?>
+                  <optgroup label="<?php echo $prov->province_name; ?>"> 
+                  <?php
+                  foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
+                    <option value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>   
+                  <?php }
+                  ?>
+                  </optgroup>
+                  <?php } 
+                  ?>
+               </select>
+              </div>
+            </div>
           <div class="form-group">
             <div class="form-label">
             <label for="salary" class="col-sm-4 control-label">Gaji yang ditawarkan</label>

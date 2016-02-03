@@ -59,9 +59,41 @@
 						</div><!-- accordion -->
         </div><!-- col -->
 
-        <div class="col-sm-8">
-          <?php
-          if ($job_data !== false) {
+        <div class="col-sm-8 job-list">
+        <?php
+          if ($job_data == false) { ?>
+              <div class="text-box default">
+                <p>Hasil pencarian tidak ada yang sesuai.</p>
+              </div><!-- text-box -->
+          <?php } ?>
+          <div class="row">
+            <div class="col-sm-12 text-box job-box">
+              <div class="col-sm-1">
+                <i class="glyphicon glyphicon-sort-by-attributes"></i>
+              </div>
+              <div class="col-sm-4">
+                <?php
+                echo form_open('Jobs/lists');
+                ?>
+                <select name="sort_by" onchange='this.form.submit();'>
+                  <option <?php echo ($this->session->userdata('order_by') == '1') ? 'selected="selected"': '';?> value="1">Tanggal dibuka</option>
+                  <option <?php echo ($this->session->userdata('order_by') == '2') ? 'selected="selected"': '';?> value="2">Gaji yang ditawarkan</option>
+                  <option <?php echo ($this->session->userdata('order_by') == '3') ? 'selected="selected"': '';?> value="3">Deadline ditutup</option>
+                </select>  
+              </div>
+              <div class="col-sm-4">
+                <select name="sort_method" onchange='this.form.submit();'>
+                  <option <?php echo ($this->session->userdata('sort') == '1') ? 'selected="selected"': '';?> value="1">Sort Descending</option>
+                  <option <?php echo ($this->session->userdata('sort') == '2') ? 'selected="selected"': '';?> value="2">Sort Ascending</option>
+                </select>  
+                <input type="submit" name="sort" style="position: absolute; left: -9999px">
+                <?php
+                echo form_close();
+                ?>
+              </div>
+            </div>
+          </div>
+          <?php if ($job_data !== false) {
             foreach ($job_data as $job) {
               $description = character_limiter($job->description,100);
              ?>
@@ -114,14 +146,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <!-- <ul class="pagination text-center">
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                </ul> -->
                 <?php echo $links;?>
             </div><!-- col -->
         </div><!-- row -->
-    
     </div><!-- container -->
   </div>
