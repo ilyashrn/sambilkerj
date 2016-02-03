@@ -209,16 +209,21 @@ class Jobs extends CI_Controller {
 	function updating($id_post)
 	{
 		if (!empty($this->mem_id) && $this->mem_type == 'C' && $this->input->post('ins_job') !== false) {
-			$config['upload_path'] = './files/loker/';
-			$new_name = $this->username.' - '.$this->input->post('post_title');
-			$config['file_name'] = $new_name;
-			$config['overwrite'] = FALSE;
+			if ($_FILES['file']['size'] == 0) {
+				$file_name = $this->input->post('cur_file');	
+			} else {
+				$config['upload_path'] = './files/loker/';
+				$new_name = $this->username.' - '.$this->input->post('post_title');
+				$config['file_name'] = $new_name;
+				$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx';
+				$config['overwrite'] = FALSE;
 
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-			$upload = $this->upload->do_upload('file');	
-			$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
-			$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				$upload = $this->upload->do_upload('file');	
+				$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
+				$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
+			} 
 
 			$data = array( //ARRAY FOR INPUTS FROM FORM
 				'post_title' => $this->input->post('post_title'),
@@ -245,7 +250,7 @@ class Jobs extends CI_Controller {
 
 			$this->session->set_flashdata(
 					'msg', 
-					'<b>Lowongan pekerjaan</b> berhasil dibuat!'
+					'<b>Lowongan pekerjaan</b> berhasil diperbarui!'
 					);
 			redirect('Members/'.$this->username);
 		}		
@@ -308,6 +313,17 @@ class Jobs extends CI_Controller {
 						);
 			redirect('Members/'.$this->username);
 		}
+	}
+
+	function removing_file($file,$id_post) {
+		$data = array('file' => '', 'file_desc' => '');
+		$remove = $this->Job->update($data,$id_post);
+		unlink("./files/loker/".$file);
+		$this->session->set_flashdata(
+					'msg', 
+					'<b>File pendukung</b> berhasil dihapus!'
+					);
+		redirect('Jobs/edit_job/'.$id_post,'refresh');
 	}
 
 }

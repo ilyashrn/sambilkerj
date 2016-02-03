@@ -135,12 +135,24 @@
           <div class="form-group">
             <div class="form-label">
             <label for="file" class="col-sm-4 control-label">File Pendukung</label>
-              <span>Sertakan persayaratan, keterangan, atau informasi pendukung di file berikut.</span>
+              <span>Format yang diperbolehkan antara lain <b>.docx, .doc, .ppt, .pptx, .jpg, dan .pdf.</b></span>
             </div>
             <div class="col-sm-7">
               <input type="file" id="file" name="file" placeholder="Upload file">
+              <div class="pull-right" style="margin-bottom:5px;">
+                <?php
+                if ($edit == true && $post->file == '') { ?>
+                <span style="font-size:11px;">File saat ini: - </span>  
+                <?php } elseif ($edit == true && !empty($post->file)) { ?>
+                <input type="hidden" name="cur_file" value="<?php echo $post->file; ?>">
+                <span style="font-size:11px;">File saat ini: <a href=""><i class="mt-icon-file2"></i> <?php echo $post->file;?></a></b>
+                </span>
+                <a class="a-file" href="../removing_file/<?php echo $post->file.'/'.$post->id_post;?>"><i class="glyphicon glyphicon-remove"></i>Hapus file</a>
+                <?php }
+                ?>
+              </div>
               <input type="text" id="file_desc" name="file_desc" placeholder="Keterangan/nama file"
-              value="<?php echo ($edit == true) ? $post->file_desc : '';?>">
+              value="<?php echo ($edit == true) ? $post->file_desc : '';?>" style="margin-top:5px;">
             </div>
           </div>
           <div class="form-group">

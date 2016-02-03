@@ -127,7 +127,7 @@
 		        } else { ?>
 		          <img src="<?php echo base_url().'images/profil_photo/'.$row2->avatar;?>" alt="">
 		          <input type="hidden" name="cur_avatar" value="<?php echo $row2->avatar; ?>">
-		          <a href="../../../Companies/removing_photo/<?php echo $row2->id_company.'/'.$row2->avatar;?>" class="a-photo"><i class="glyphicon glyphicon-remove"></i>Hapus gambar</a>
+		          <a href="../../../Companies/removing_photo/<?php echo $row2->avatar.'/'.$row2->id_company;?>" class="a-photo"><i class="glyphicon glyphicon-remove"></i>Hapus gambar</a>
 		        <?php }
 		        ?>
                 <input type="file" id="avatar" name="avatar" placeholder="Upload gambar">

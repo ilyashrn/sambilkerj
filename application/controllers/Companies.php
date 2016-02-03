@@ -158,7 +158,7 @@ class Companies extends CI_Controller {
 		}		
 	}
 
-	function removing_photo($id_company) {
+	function removing_photo($file_name,$id_company) {
 		$data = array('avatar' => '');
 		$remove = $this->Company->update_identity($data,$id_company);
 		unlink("./images/profil_photo/".$file_name);

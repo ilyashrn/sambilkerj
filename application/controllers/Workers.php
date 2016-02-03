@@ -288,7 +288,7 @@ class Workers extends CI_Controller {
 		redirect('Members/edit_w/PP/'.$this->username,'refresh');
 	}	
 
-	function removing_photo($mem_id,$file_name) {
+	function removing_photo($file_name,$mem_id) {
 		$data = array('avatar' => '');
 		$remove = $this->Worker->update_identity($data,$mem_id);
 		unlink("./images/profil_photo/".$file_name);
