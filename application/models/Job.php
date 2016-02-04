@@ -64,13 +64,18 @@
 				p.file_desc as file_desc,
 				p.created_time as created_time,
 				p.deadline as deadline,
-				p.id_location as id_location
+				p.id_location as id_location,
+				ct.city_name as  city_name,
+				pr.province_name as province_name
 				');
 			$this->db->from('job_post as p');
 			$this->db->join('company as c', 'p.id_company = c.id_company');
 			$this->db->join('job_sub_categories as s', 'p.id_job_category = s.id_sub_category');
 			$this->db->join('job_categories as ca', 's.id_category = ca.id_category');
 			$this->db->join('c_identity as ci', 'c.id_company = ci.id_company');
+			$this->db->join('city as ct', 'p.id_location = ct.id_city', 'left');
+			$this->db->join('location as l', 'ct.id_city = l.id_city', 'left');
+			$this->db->join('province as pr', 'l.id_province = pr.id_province', 'left');
 
 			if ($order_by == '' || $sort == '') {
 				$this->db->order_by("p.created_time", "desc");
@@ -130,6 +135,41 @@
 		    else {
 		    	return false;
 		    }
+		}
+
+		function get_per_comp_count($id_company) {
+			$this->db->select('
+				p.id_post as id_post, 
+				p.post_title as post_title,
+				p.id_company as id_company,
+				ci.avatar as avatar,
+				c.company_name as company_name,
+				p.id_job_category as id_job_category,
+				s.sub_category_name as sub_category_name,
+				ca.category_name as category_name,
+				p.description as description,
+				p.salary as salary,
+				p.file as file,
+				p.file_desc as file_desc,
+				p.created_time as created_time,
+				p.deadline as deadline,
+				p.id_location as id_location,
+				ct.city_name as  city_name,
+				pr.province_name as province_name
+				');
+
+			$this->db->from('job_post as p');
+			$this->db->join('company as c', 'p.id_company = c.id_company');
+			$this->db->join('job_sub_categories as s', 'p.id_job_category = s.id_sub_category');
+			$this->db->join('job_categories as ca', 's.id_category = ca.id_category');
+			$this->db->join('c_identity as ci', 'c.id_company = ci.id_company');
+			$this->db->join('city as ct', 'p.id_location = ct.id_city', 'left');
+			$this->db->join('location as l', 'ct.id_city = l.id_city', 'left');
+			$this->db->join('province as pr', 'l.id_province = pr.id_province', 'left');
+			$this->db->where('p.id_company',$id_company);
+			
+			$query = $this->db->get();
+		    return $query->num_rows();
 		}
 
 		function get_post($id_post) {

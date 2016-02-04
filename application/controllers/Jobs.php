@@ -25,24 +25,37 @@ class Jobs extends CI_Controller {
 		}
 	}
 
-	// public function _remap($method,$args)
-	// {
-	// 	if (method_exists($this, $method)) {
-	// 		$this->$method($args);
-	// 	}
-	// 	else {
-	// 		$this->index($method,$args);
-	// 	}
-	// }
-
 	public function index()
 	{
 		redirect('Jobs/lists','refresh');
 	}
 
-	public function detail($id_post)
+	public function detail($id_post,$post_name)
 	{
+		$post_data = $this->Job->get_post($id_post);
+		$req_skill = $this->Job->get_req_skill($id_post);
+		$poster_data = $this->Job->get_poster($id_post);
+		foreach ($poster_data as $poster) {}
+		foreach ($post_data as $post) {}
+		$basic_data = $this->Company->get('id_company',$poster->id_company);
+		$ident_data = $this->Company->get_ident($poster->id_company);
+		$loc_data = $this->Company->get_loc($poster->id_company);
+		$post_count = $this->Job->get_per_comp_count($poster->id_company);
 
+		$data = array(
+			'title' => $post->post_title." | SambilKerja.com",
+			'post_data' => $post_data,
+			'req_skill' => $req_skill,
+			'basic_data' => $basic_data,
+			'ident_data' => $ident_data,
+			'loc_data' => $loc_data,
+			'post_count' => $post_count
+			);
+		$this->load->view('html_head', $data);
+		// $this->load->view('content/modal', $data);
+		$this->load->view('header', $data);
+		$this->load->view('content/job-detail', $data);
+		$this->load->view('footer', $data);		
 	}
 
 	public function lists()
@@ -51,7 +64,7 @@ class Jobs extends CI_Controller {
 		$config = array();
         $config["base_url"] = base_url()."Jobs/lists/";
         $config["total_rows"] = $this->Job->record_count();
-        $config['per_page'] = "2";
+        $config['per_page'] = "10";
         $config["uri_segment"] = 3;
         $config['use_page_numbers'] = TRUE;
         $config['page_query_string'] = TRUE;
@@ -101,7 +114,7 @@ class Jobs extends CI_Controller {
 	public function search()
 	{
 		$keyword = ($this->input->post('search')) ? $this->input->post('search') : "NIL";
-		
+
 		$keyword = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyword;
 
 		//PAGINATION SETUP

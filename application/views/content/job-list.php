@@ -68,12 +68,6 @@
         </div><!-- col -->
 
         <div class="col-sm-8 job-list">
-        <?php
-          if ($job_data == false) { ?>
-              <div class="text-box default">
-                <p>Hasil pencarian tidak ada yang sesuai.</p>
-              </div><!-- text-box -->
-          <?php } ?>
           <div class="row">
             <div class="col-sm-12 text-box job-box">
               <div class="col-sm-3">
@@ -104,22 +98,41 @@
               </div>
             </div>
           </div>
+          <?php
+          if ($job_data == false) { ?>
+              <div class="text-box default">
+                <p>Hasil pencarian tidak ada yang sesuai.</p>
+              </div><!-- text-box -->
+          <?php } ?>
           <?php if ($job_data !== false) {
             foreach ($job_data as $job) {
-              $description = character_limiter($job->description,100);
+              $description = character_limiter($job->description,150);
              ?>
               <div class="job-box service-box style-3 default" style="padding:20px;">
-              <h6>
-                <a href="#" class="title-job"><?php echo $job->post_title;?></a><br>
-                <span class="subtitle-job"><a href="#"><?php echo $job->category_name;?> </a> <span class="subtitle-job"> > </span><a href="#"><?php echo $job->sub_category_name;?></a></span>
-              </h6>
+              <div class="row">
+                <div class="col-sm-6">
+                  <h6>
+                    <a href="detail/<?php echo $job->id_post.'/'.$job->post_title?>" class="title-job"><?php echo $job->post_title;?></a><br>
+                    <span class="subtitle-job"><a href="#"><?php echo $job->category_name;?> </a> <span class="subtitle-job"> > </span><a href="#"><?php echo $job->sub_category_name;?></a></span>
+                  </h6>
+                </div>
+                <div class="col-sm-2 pull-right post-owner">
+                    <?php
+                    if ($job->avatar == '') { ?>
+                      <img src="<?php echo base_url().'images/profil_photo/nobody.jpg';?>">  
+                    <?php } else { ?>
+                      <img src="<?php echo base_url().'images/profil_photo/'.$job->avatar;?>">
+                    <?php } ?>
+                  </div>
+              </div>
               <div class="service-box-content">
                 <div class="row">
                   <div class="col-sm-8">
                     <p>
-                    <?php echo $description;?></p>
+                    <?php echo $description;?> <a href="detail/<?php echo $job->id_post.'/'.$job->post_title?>">Baca selengkapnya</a></p>
                   </div>
-                  <div class="col-sm-4 point-detail">
+                  <div class="col-sm-4 point-detail point-list">
+                    <i class="mt-icon-map-marker1"></i> <?php echo $job->city_name.', '.$job->province_name?><br>
                     <i class="mt-icon-timetable"></i> <?php echo date('j M Y', strtotime($job->deadline));?> <br>
                     <i class="mt-icon-money"></i> IDR <?php setlocale(LC_MONETARY, 'id_ID'); echo number_format($job->salary) ;?> <br>
                   </div>
@@ -136,15 +149,12 @@
                         foreach ($req_skills as $req) { ?>
                           <a href="#"><?php echo $req->skill_name;?></a>  
                         <?php } } ?>
-                        
                     </div>
                   </div>
-                  <div class="col-sm-2 pull-right post-owner">
-                    <img src="<?php echo base_url().'images/profil_photo/'.$job->avatar;?>">
-                  </div>
-                  <div class="col-sm-6 pull-right post-owner" style="padding-right:0;">
-                    oleh <a href="#"><?php echo $job->company_name;?></a> <br>
-                    dibuat <?php echo date('j M Y', strtotime($job->created_time));?>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 profil-log pull-right">
+                    Dibuka <?php echo date('j M Y', strtotime($job->created_time));?>
                   </div>
                 </div>
               </div><!-- services-boxes-content -->

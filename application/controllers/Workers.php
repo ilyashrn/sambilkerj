@@ -24,20 +24,7 @@ class Workers extends CI_Controller {
 
 	public function index()
 	{
-    	$data = array('title' => "Pekerja yang tersedia | SambilKerja.com");
-		$this->load->view('html_head', $data);
-		$this->load->view('header', $data);
-		$this->load->view('content/worker-list', $data);
-		$this->load->view('footer', $data);
-	}
-
-	public function profil()
-	{
-		$data = array('title' => "Ilyas Habiburrahman | SambilKerja.com");
-		$this->load->view('html_head', $data);
-		$this->load->view('header', $data);
-		$this->load->view('content/profil-detail', $data);
-		$this->load->view('footer', $data);
+    	
 	}
 
 	function inserting() {

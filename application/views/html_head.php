@@ -12,7 +12,7 @@
     <title><?php echo $title;?></title>
 
     <!-- FAVICON AND APPLE TOUCH -->
-    <link rel="shortcut icon" href="<?php echo base_url('assets/favicon.png');?>">
+    <link rel="shortcut icon" href="<?php echo base_url('assets/square_logo.png');?>">
 	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="apple-touch-180x180.png">
 
     <!-- FONTS -->

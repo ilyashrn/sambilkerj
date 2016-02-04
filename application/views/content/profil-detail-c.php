@@ -7,6 +7,11 @@ if ($ident_data !== false) {
   }
 }
 ?>
+<script>
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  });
+</script>
 <div id="page-content">
   <div class="container">
     <div class="row">
@@ -31,10 +36,15 @@ if ($ident_data !== false) {
             <h6>Informasi Kontak</h6>  
               <div class="service-box-content">
                 <div class="point-detail profil-point">
-                  <i class="mt-icon-map-marker2"></i> <?php echo ($ident_data !== false && $loc_data !== false ) ? $row->address.'<br>'.$location->city_name.', '.$location->province_name: '-';?><br>
-                  <i class="mt-icon-phone1"></i> <?php echo ($ident_data !== false) ? $row->telp_number: '-';?><br>
-                  <i class="mt-icon-at-sign"></i> <?php echo $basic_row->email; ?> <br>
-                  <i class="mt-icon-at-sign"></i> <?php echo $basic_row->secondary_email; ?> <br>
+                  <!-- <i class="mt-icon-map-marker2"></i> --> 
+                  <span class="profil-span"><b>Alamat Kantor</b></span><br>
+                  <?php echo ($ident_data !== false && $loc_data !== false ) ? $row->address.'<br>'.$location->city_name.', '.$location->province_name: '-';?><br>
+                  <!-- <i class="mt-icon-phone1"></i>  -->
+                  <span class="profil-span"><b>Nomor Telepon</b></span><br>
+                  <?php echo ($ident_data !== false) ? $row->telp_number: '-';?><br>
+                  <!-- <i class="mt-icon-at-sign"></i>  -->
+                  <span class="profil-span"><b>Alamat Email</b></span><br>
+                  <?php echo $basic_row->email; ?>/<?php echo $basic_row->secondary_email; ?> <br>
                 </div>
 					   </div><!-- services-boxes-content -->
              <?php
@@ -78,19 +88,25 @@ if ($ident_data !== false) {
                 } else {
                   foreach ($ident_data as $ident_row) {}
                 ?>
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                   <span class="profil-span"><b>Kepemiikan akun</b></span>  
+                  <p><?php echo ($ident_row->ownership !== '') ? 'atas nama <strong>'.$ident_row->ownership.'</strong>': '-';?></p>
+                  <span class="profil-span"><b>Bidang Kegiatan Perusahaan</b></span> 
+                  <p><?php echo ($ident_row->bidang !== '') ? $ident_row->bidang: '-';?></p>
+                </div>
+                <div class="col-sm-6">
+                  <span class="profil-span"><b>Nomor Pokok Wajib Pajak</b></span> 
                   <?php
                   if ($not_logged !== true) { ?>
                     <a href="<?php echo base_url().'Members/edit_c/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah informasi utama</a><br>
                   <?php } ?>
-                  <p><?php echo ($ident_row->ownership !== '') ? 'atas nama '.$ident_row->ownership: '-';?></p>
-                  <span class="profil-span"><b>Nomor Pokok Wajib Pajak</b></span> 
                   <p><?php echo ($ident_row->about !== '') ? $ident_row->NPWP: '-';?></p>
+                </div>
+                <div class="col-sm-6">
                   <span class="profil-span"><b>Bentuk Usaha</b></span> 
                   <p><?php echo ($ident_row->business_form !== '') ? $ident_row->business_form: '-';?></p>
-                  <span class="profil-span"><b>Bidang Kegiatan</b></span> 
-                  <p><?php echo ($ident_row->bidang !== '') ? $ident_row->bidang: '-';?></p>
+                </div>
+                <div class="col-sm-12">
                   <span class="profil-span"><b>Tentang Perusahaan</b></span>  
                   <p><?php echo ($ident_row->about !== '') ? $ident_row->about: '-';?></p>
                 </div>
@@ -99,9 +115,11 @@ if ($ident_data !== false) {
                 ?>
               </div>
                 <div class="row">
+                  <div class="col-sm-6 profil-log left">
+                    bergabung pada <?php echo date('j M Y', strtotime($basic_row->created_time)) ;?>
+                  </div>
                   <div class="col-sm-6 pull-right profil-log">
-                  bergabung pada <?php echo date('j M Y', strtotime($basic_row->created_time)) ;?><br>
-                  terakhir login pada <?php echo date('j M Y', strtotime($basic_row->last_login)) ;?>
+                    terakhir login pada <?php echo date('j M Y', strtotime($basic_row->last_login)) ;?>
                   </div>  
                 </div>
               </div>
@@ -133,7 +151,7 @@ if ($ident_data !== false) {
                         <i class="mt-icon-map-marker1"> <b>Domisili:</b> <?php echo $job->city_name.', '.$job->province_name?></i>
                       </div>
                       <div class="col-sm-2 pull-right" style="font-size:12px;">
-                        <a href="../Jobs/detail/<?php echo $job->id_post;?>">Baca selengkapnya</a>
+                        <a href="../Jobs/detail/<?php echo $job->id_post.'/'.$job->post_title;?>">Baca selengkapnya</a>
                       </div>
                     </div>
                     <div class="col-sm-2 btn-div">
@@ -142,7 +160,7 @@ if ($ident_data !== false) {
                           <a href="../Jobs/edit_job/<?php echo $job->id_post;?>" class="btn btn-black"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                           <a href="../Jobs/removing/<?php echo $job->id_post;?>" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
                       <?php } else { ?>
-                          <a href="../Jobs/edit_job/<?php echo $job->id_post;?>" class="btn btn-green"><i class="glyphicon glyphicon-check"></i> Daftar</a>
+                          <button id="daftar" class="btn btn-green" data-container="body" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-content="Login atau daftarkan diri anda terlebih dahulu untuk mendaftar lowongan!"><i class="glyphicon glyphicon-check"></i> Daftar</button>
                       <?php  } ?>
                     </div>
                 <?php } }

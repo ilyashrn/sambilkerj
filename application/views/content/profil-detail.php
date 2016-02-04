@@ -162,13 +162,15 @@ if ($ident_data !== false) {
                     <?php } } ?>
                   </div>
                 </div>
-                <div class="row">
+              </div>
+              <div class="row">
+                  <div class="col-sm-6 profil-log left">
+                    bergabung pada <?php echo date('j M Y', strtotime($basic_row->created_time)) ;?>  
+                  </div>
                   <div class="col-sm-6 pull-right profil-log">
-                  bergabung pada <?php echo date('j M Y', strtotime($basic_row->created_time)) ;?><br>
                   terakhir login pada <?php echo date('j M Y', strtotime($basic_row->last_login)) ;?>
                   </div>  
                 </div>
-              </div>
             </div><!-- services-boxes-content -->
           </div><!-- services-boxes -->
         </div>

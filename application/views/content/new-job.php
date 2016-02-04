@@ -86,7 +86,7 @@
                   foreach ($skill_sets as $skill) { ?>
                     <option value="<?php echo $skill->id_skill;?>"
                       <?php
-                        if ($req_skill_data !== false) {
+                        if ($edit == true && $req_skill_data !== false) {
                           foreach ($req_skill_data as $sk) {
                             if ($skill->id_skill == $sk->id_skill) {
                               echo 'selected="selected"';
