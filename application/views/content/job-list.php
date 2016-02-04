@@ -1,4 +1,16 @@
-<!-- CONTENT -->
+<script>
+  $(function() {
+    $('#category').select2({
+      placeholder: "Pilih Kategori"
+    });
+  });
+  $(function() {
+    $('#location').select2({
+      placeholder: "Pilih Lokasi"
+    });
+  });
+</script><!-- CONTENT -->
+
 <div id="page-content">
     <div id="page-header">
         <div class="container">
@@ -13,50 +25,46 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-4">
-          <div class="panel-group" id="categories">		
-							<div class="panel">
-								<div class="panel-heading">
-									<h4 class="panel-title category-title">
-										<a data-toggle="collapse" data-parent="#accordion1" href="#collapse2-1">Donec neque eu posuere</a>
-									</h4>
-								</div><!-- panel-heading -->
-								<div id="collapse2-1" class="panel-collapse collapse">
-									<div class="panel-body">
-										<p>Nullam interdum in purus non porttitor. Nulla mollis eu neque eu ornare. Proin eget placerat massa, ac maximus
-										massa. Nullam bibendum et velit sed volutpat. Donec rutrum lobortis nunc turpis, vel ultricies lacus tincidunt
-										porttitor nibh neque eu.</p>
-									</div><!-- panel-body -->
-								</div><!-- panel-collapse -->
-							</div><!-- panel -->
-							<div class="panel">
-								<div class="panel-heading">
-									<h4 class="panel-title category-title">
-										<a data-toggle="collapse" data-parent="#accordion1" href="#collapse3-1">Nulla mollis eu neque</a>
-									</h4>
-								</div><!-- panel-heading -->
-								<div id="collapse3-1" class="panel-collapse collapse">
-									<div class="panel-body">
-										<p>Aenean malesuada condimentum nisl, eu posuere leo porta sodales. Quisque semper faucibus nisl in maximus.
-										Morbi blandit eget risus ut aliquam. Fusce eget lobortis nunc turpis, vel ultricies lacus tincidunt faucibus est, at
-										molestie ex felis mi.</p>
-									</div><!-- panel-body -->
-								</div><!-- panel-collapse -->
-							</div><!-- panel -->
-							<div class="panel">
-								<div class="panel-heading">
-									<h4 class="panel-title category-title">
-										<a data-toggle="collapse" data-parent="#accordion1" href="#collapse4-1">Proin eget placerat</a>
-									</h4>
-								</div><!-- panel-heading -->
-								<div id="collapse4-1" class="panel-collapse collapse">
-									<div class="panel-body">
-										<p>Etiam tincidunt ligula nisl, nec tristique odio eleifend in. Phasellus mauris nibh, convallis vel ultrices vitae,
-										auctor a metus. Aenean aliquam vel diam non auctor lobortis nunc turpis, vel ultricies lacus tincidunt eget risus ut
-										aliquam auctor a metus.</p>
-									</div><!-- panel-body -->
-								</div><!-- panel-collapse -->
-							</div><!-- panel -->
-						</div><!-- accordion -->
+        <div class="text-box job-box">
+            <span>Refine search</span>
+            <?php echo form_open('Jobs/refine_search'); ?>
+              <input type="search" name="refine_search" placeholder="Masukkan kata kunci" style="margin-bottom:10px;">
+              <!-- <input type="submit" name="submit" value="" style="position: absolute; left: -9999px"> -->
+              <span>Lokasi Pekerjaan</span>
+              <select name="location[]" id="location" multiple="multiple">
+                <option selected="selected" value="default">Semua Lokasi Pekerjaan</option>
+                <?php
+                foreach ($prov_data as $prov) { //PROVINCE LOOPING
+                  $cur_id = $prov->id_province;
+                  $cities = $this->Location->get_cities($cur_id); ?>
+                  <optgroup label="<?php echo $prov->province_name; ?>"> 
+                  <?php
+                  foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
+                    <option value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>   
+                  <?php }
+                  ?>
+                  </optgroup>
+                  <?php } 
+                  ?>
+              </select>
+              <span>Kategori Pekerjaan</span>
+              <select name="category[]" id="category" multiple="multiple">
+                <option selected="selected"  value="default">Semua Kategori Pekerjaan</option>
+                  <?php
+                  foreach ($cat_data as $cat) {
+                    $cur_id = $cat->id_category;
+                    $sub_cat = $this->Job->get_subs($cur_id);
+                  ?>
+                    <optgroup label="<?php echo $cat->category_name; ?>"> 
+                      <?php foreach ($sub_cat as $sub) { ?> 
+                      <option value="<?php echo $sub->id_sub_category; ?>"><?php echo $sub->sub_category_name; ?></option>
+                      <?php } ?>
+                    </optgroup>
+                  <?php } ?>
+              </select>
+              <input type="submit" value="Cari Pekerjaan">
+              <?php echo form_close(); ?>
+          </div>
         </div><!-- col -->
 
         <div class="col-sm-8 job-list">
@@ -68,6 +76,9 @@
           <?php } ?>
           <div class="row">
             <div class="col-sm-12 text-box job-box">
+              <div class="col-sm-3">
+                <span>Sorting option</span>
+              </div>
               <div class="col-sm-1">
                 <i class="glyphicon glyphicon-sort-by-attributes"></i>
               </div>

@@ -278,6 +278,10 @@ h6 .worker-name {
   margin-bottom: 0;
 }
 
+.job-box input[type="submit"] {
+  margin-top: 10px;
+}
+
 .small-span {
   font-size: 11px;
   float: right;

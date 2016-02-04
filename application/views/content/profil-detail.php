@@ -33,7 +33,7 @@ if ($ident_data !== false) {
         <?php }
         ?>
 					<div class="social-media">
-            <a href="<?php echo base_url().'index.php/Members/edit_w/I/'.$username;?>" style="font-size:14px;"><i class="mt-icon-picture"></i> Ganti foto profil</a><br>
+            <a href="<?php echo base_url().'Members/edit_w/I/'.$username;?>" style="font-size:14px;"><i class="mt-icon-picture"></i> Ganti foto profil</a><br>
 					</div><!-- social-media -->
 				</div><!-- about-me-image -->
           <div class="service-box style-3 profil-information default hover-to-2" style="padding-top: 0; padding-bottom: 20px;">
@@ -47,7 +47,7 @@ if ($ident_data !== false) {
                   <i class="mt-icon-at-sign"></i> <?php echo $basic_row->email; ?> <br>
                 </div>
 					   </div><!-- services-boxes-content -->
-            <a href="<?php echo base_url().'index.php/Members/edit_w/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah informasi</a><br>
+            <a href="<?php echo base_url().'Members/edit_w/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah informasi</a><br>
 				</div><!-- services-boxes -->
 			</div><!-- about-me -->
 		</div><!-- col -->
@@ -57,7 +57,7 @@ if ($ident_data !== false) {
           <div class="job-box service-box style-3 default" style="padding:20px; margin-bottom:10px;">
             <h6 style="">
               <a href="#" class="worker-name"><?php echo ($ident_data !== false) ? $basic_row->fullname.' ('.$row->nickname.')': $basic_row->fullname; ?></a>
-              <a href="<?php echo base_url().'index.php/Members/edit_w/PA/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah nama/username</a>
+              <a href="<?php echo base_url().'Members/edit_w/PA/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah nama/username</a>
               <br>
               <span class="subtitle-job"><?php echo $basic_row->username; ?><br></span> 
             </h6>
@@ -77,7 +77,7 @@ if ($ident_data !== false) {
                   foreach ($ident_data as $ident_row) {}
                 ?>
                 <div class="col-sm-12">
-                  <span class="profil-span"><b>Sedikit tentang saya</b></span> <a href="<?php echo base_url().'index.php/Members/edit_w/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah tentang saya</a><br>  
+                  <span class="profil-span"><b>Sedikit tentang saya</b></span> <a href="<?php echo base_url().'Members/edit_w/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah tentang saya</a><br>  
                   <p><?php echo ($ident_row->about !== '') ? $ident_row->about: '-';?></p>
                 </div>
                 <?php
@@ -87,7 +87,7 @@ if ($ident_data !== false) {
               <div class="row">
                 <div class="col-sm-12">
                   <span class="profil-span"><b>Riwayat Pendidikan</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan/Kurangi Riwayat</a><br>  
+                  <a href="<?php echo base_url().'Members/edit_w/PP/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan/Kurangi Riwayat</a><br>  
                   <?php
                     if ($edu_data == false) {
                       echo '-'; }
@@ -142,7 +142,7 @@ if ($ident_data !== false) {
                 </div>
                 <div class="col-sm-12">
                   <span class="profil-span"><b>Keahlian yang dimiliki</b></span>
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Keahlian</a><br>  
+                  <a href="<?php echo base_url().'Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Keahlian</a><br>  
                   <div class="widget-tags required-skills">
                     <?php if ($skill_data == false) { ?>
                       <p>-</p>
@@ -152,7 +152,7 @@ if ($ident_data !== false) {
                     <?php } } ?>
                   </div>
                   <span class="profil-span"><b>Bahasa yang dikuasai</b></span> 
-                  <a href="<?php echo base_url().'index.php/Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Bahasa</a><br>  
+                  <a href="<?php echo base_url().'Members/edit_w/KB/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-plus"></i> Tambahkan Bahasa</a><br>  
                   <div class="widget-tags learned-languages">
                       <?php if ($lang_data == false) { ?>
                       <p>-</p>

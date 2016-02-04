@@ -22,7 +22,7 @@ if ($ident_data !== false) {
         <?php }
         if ($not_logged !== true) { ?>
           <div class="social-media">
-            <a href="<?php echo base_url().'index.php/Members/edit_c/I/'.$username;?>" style="font-size:14px;"><i class="mt-icon-picture"></i> Ganti foto profil</a><br>
+            <a href="<?php echo base_url().'Members/edit_c/I/'.$username;?>" style="font-size:14px;"><i class="mt-icon-picture"></i> Ganti foto profil</a><br>
           </div><!-- social-media -->
         <?php }
         ?>
@@ -39,7 +39,7 @@ if ($ident_data !== false) {
 					   </div><!-- services-boxes-content -->
              <?php
              if ($not_logged !== true) { ?>
-                <a href="<?php echo base_url().'index.php/Members/edit_c/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah informasi</a><br>
+                <a href="<?php echo base_url().'Members/edit_c/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah informasi</a><br>
              <?php } ?>
 				</div><!-- services-boxes -->
 			</div><!-- about-me -->
@@ -52,7 +52,7 @@ if ($ident_data !== false) {
               <a href="#" class="worker-name"><?php echo $basic_row->company_name; ?></a>
               <?php
               if ($not_logged !== true) { ?>
-                <a href="<?php echo base_url().'index.php/Members/edit_c/PA/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah nama/username</a>  
+                <a href="<?php echo base_url().'Members/edit_c/PA/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah nama/username</a>  
               <?php } ?>
               <br>
               <span class="subtitle-job"><?php echo $basic_row->username; ?><br></span> 
@@ -82,7 +82,7 @@ if ($ident_data !== false) {
                   <span class="profil-span"><b>Kepemiikan akun</b></span>  
                   <?php
                   if ($not_logged !== true) { ?>
-                    <a href="<?php echo base_url().'index.php/Members/edit_c/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah informasi utama</a><br>
+                    <a href="<?php echo base_url().'Members/edit_c/I/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah informasi utama</a><br>
                   <?php } ?>
                   <p><?php echo ($ident_row->ownership !== '') ? 'atas nama '.$ident_row->ownership: '-';?></p>
                   <span class="profil-span"><b>Nomor Pokok Wajib Pajak</b></span> 

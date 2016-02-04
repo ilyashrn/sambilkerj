@@ -49,11 +49,13 @@ class Jobs extends CI_Controller {
 	{
 		//PAGINATION SETUP
 		$config = array();
-        $config["base_url"] = base_url("index.php/Jobs/lists");
+        $config["base_url"] = base_url()."Jobs/lists/";
         $config["total_rows"] = $this->Job->record_count();
         $config['per_page'] = "2";
         $config["uri_segment"] = 3;
         $config['use_page_numbers'] = TRUE;
+        $config['page_query_string'] = TRUE;
+        $config['enable_query_strings'] = TRUE;
 
         //PAGINATION VIEW
         $config['full_tag_open'] = '<ul class="pagination text-center">';
@@ -79,11 +81,16 @@ class Jobs extends CI_Controller {
         	$sess_array = array('order_by' => $order_by, 'sort' => $sort);
         	$this->session->set_userdata($sess_array);
         }
+    
+        $cat_data = $this->Job->get_all_cats();
+		$prov_data = $this->Location->get_all_prov(); 
 
     	$data = array(
     		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
     		'job_data' => $this->Job->get_all($config["per_page"], $page, $order_by, $sort),
-    		'links' => $this->pagination->create_links()
+    		'links' => $this->pagination->create_links(),
+    		'cat_data' => $cat_data,
+    		'prov_data' => $prov_data
     		);
 		$this->load->view('html_head', $data);
 		$this->load->view('header', $data);
@@ -94,20 +101,30 @@ class Jobs extends CI_Controller {
 	public function search()
 	{
 		$keyword = ($this->input->post('search')) ? $this->input->post('search') : "NIL";
-
+		
 		$keyword = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyword;
 
 		//PAGINATION SETUP
-		$config = array();
-		// $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-\=';
-        $config["base_url"] = base_url()."index.php/Jobs/search/";
-        $config["total_rows"] = $this->Job->search_record_count($keyword);
-        $config["per_page"] = 5;
-        $config["uri_segment"] = 3;
-        $config['use_page_numbers'] = TRUE;
-        $config["page_query_string"] = true;
-        $config["enable_query_strings"] = true;
-        $config['query_string_segment'] = 'page'.$keyword;
+		// $config = array();
+  //       $config["base_url"] = site_url()."Jobs/search/".$keyword;
+  //       $config["total_rows"] = $this->Job->search_record_count($keyword);
+  //       $config['per_page'] = "1";
+  //       $config["uri_segment"] = 3;
+  //       $config['use_page_numbers'] = TRUE;
+  //       $config['page_query_string'] = TRUE;
+        // $config['enable_query_strings'] = TRUE;
+
+        $config['base_url'] = site_url("Jobs/search/$keyword/");
+        $config['total_rows'] = $this->Job->search_record_count($keyword);
+        $config['per_page'] = "1";
+        $config["uri_segment"] = 4;
+        $choice = $config["total_rows"]/$config["per_page"];
+        $config["num_links"] = floor($choice);
+        $config['use_page_numbers'] = true;
+        $config['page_query_string'] = false;
+        $config['enable_query_strings'] = false;
+
+
 
         //PAGINATION VIEW
         $config['full_tag_open'] = '<ul class="pagination text-center">';
@@ -120,6 +137,7 @@ class Jobs extends CI_Controller {
         $config['cur_tag_close'] = '</a></li>';
         $config['num_tag_open'] = '<li>';
         $config['num_tag_close'] = '</li>';
+        // $config["first_url"] = base_url()."Jobs/search/page/1";
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
@@ -130,19 +148,71 @@ class Jobs extends CI_Controller {
         if (!empty($this->input->post('sort_by'))) {
         	$order_by = $this->input->post('sort_by');
         	$sort = $this->input->post('sort_method');
+        	$sess_array = array('order_by' => $order_by, 'sort' => $sort);
+        	$this->session->set_userdata($sess_array);
         }
 
         $data = array(
     		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
     		'job_data' => $this->Job->search_all($config["per_page"], $page, $keyword, $order_by, $sort),
     		'links' => $this->pagination->create_links(),
-    		'order_by' => $order_by,
-    		'sort' => $sort
+    		'keyword' => $keyword
     		);
+
 		$this->load->view('html_head', $data);
 		$this->load->view('header', $data);
 		$this->load->view('content/job-list', $data);
 		$this->load->view('footer', $data);
+	}
+
+	public function refine_search() {
+		// $keyword = ($this->input->post('search')) ? $this->input->post('search') : "NIL";
+
+		// $keyword = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyword;
+
+		// //PAGINATION SETUP
+		// $config = array();
+		// // $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-\=';
+  //       $config["base_url"] = base_url()."Jobs/search/";
+  //       $config["total_rows"] = $this->Job->search_record_count($keyword);
+  //       $config['per_page'] = "8";
+  //       $config["uri_segment"] = 3;
+  //       $config['use_page_numbers'] = TRUE;
+
+  //       //PAGINATION VIEW
+  //       $config['full_tag_open'] = '<ul class="pagination text-center">';
+  //       $config['full_tag_close'] = '</ul>';
+  //       $config['first_link'] = false;
+  //       $config['last_link'] = false;
+  //       $config['next_link'] = false;
+  //       $config['prev_link'] = false;
+  //       $config['cur_tag_open'] = '<li class="active"><a href="">';
+  //       $config['cur_tag_close'] = '</a></li>';
+  //       $config['num_tag_open'] = '<li>';
+  //       $config['num_tag_close'] = '</li>';
+
+  //       $this->pagination->initialize($config);
+  //       $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+  //       $order_by = '';
+  //       $sort = '';
+        
+  //       if (!empty($this->input->post('sort_by'))) {
+  //       	$order_by = $this->input->post('sort_by');
+  //       	$sort = $this->input->post('sort_method');
+  //       }
+
+  //       $data = array(
+  //   		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
+  //   		'job_data' => $this->Job->search_all($config["per_page"], $page, $keyword, $order_by, $sort),
+  //   		'links' => $this->pagination->create_links(),
+  //   		'order_by' => $order_by,
+  //   		'sort' => $sort
+  //   		);
+		// $this->load->view('html_head', $data);
+		// $this->load->view('header', $data);
+		// $this->load->view('content/job-list', $data);
+		// $this->load->view('footer', $data);
 	}
 
 	public function new_job()

@@ -47,7 +47,8 @@
             <nav>
               <a id="mobile-menu-button" href="#"><i class="mt-icon-menu"></i></a>
               <ul class="menu clearfix" id="menu">
-                <li class="megamenu">
+                <li><a href="<?php echo base_url().'Jobs/';?>">Browse Jobs</a></li>
+                <!-- <li class="megamenu">
                   <a class="dropdown-toggle" href="#" data-toggle="dropdown">Browse <strong class="caret"></strong></a>
                   <div class="megamenu-container col-4 browse-cat">
                     <div class="section">
@@ -103,20 +104,20 @@
                       </ul>
                     </div>
                   </div>
-                </li>
+                </li> -->
                 <?php
                 if ($this->session->userdata('logged') !== false) { //NAVBAR IF USER IS A LOGGED IN USER
                   $cur_username = $this->session->userdata('logged');
                   if ($this->session->userdata('mem_type') == 'C') { ?>
-                  <li><a href="<?php echo base_url().'index.php/Jobs/new_job';?>">Open New Job</a></li>
+                  <li><a href="<?php echo base_url().'Jobs/new_job';?>">Open New Job</a></li>
                 <?php }
                 ?>
                 <li class="dropdown">
-                  <a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>"><?php echo $cur_username;?> <strong class="caret"></strong></a>
+                  <a href="<?php echo base_url().'Members/'.$cur_username;?>"><?php echo $cur_username;?> <strong class="caret"></strong></a>
                   <ul>
-                    <li><a href="<?php echo base_url().'index.php/Members/'.$cur_username;?>">Profile</a></li>
-                    <li><a href="<?php echo ($this->session->userdata('mem_type') == 'W') ? base_url().'index.php/Members/edit_w/PA/'.$cur_username : base_url().'index.php/Members/edit_c/PA/'.$cur_username ;?>">Settings</a></li>
-                    <li><a href="<?php echo base_url().'index.php/In/out';?>">Logout</a></li>
+                    <li><a href="<?php echo base_url().'Members/'.$cur_username;?>">Profile</a></li>
+                    <li><a href="<?php echo ($this->session->userdata('mem_type') == 'W') ? base_url().'Members/edit_w/PA/'.$cur_username : base_url().'Members/edit_c/PA/'.$cur_username ;?>">Settings</a></li>
+                    <li><a href="<?php echo base_url().'In/out';?>">Logout</a></li>
                   </ul>
                 </li>
 
@@ -124,7 +125,7 @@
                 } else {
                 ?>
                 <li>
-                  <a href="<?php echo base_url().'index.php/Main/new_user';?>">Regrister</a>
+                  <a href="<?php echo base_url().'Main/new_user';?>">Regrister</a>
                 </li>
                 <li class="dropdown">
                   <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
