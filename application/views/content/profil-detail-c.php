@@ -131,7 +131,7 @@ if ($ident_data !== false) {
             <div class="horizontal-tabs">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab-1-1" data-toggle="tab">Lowongan oleh perusahaan</a></li>
-                <li><a href="#tab-1-2" data-toggle="tab">Pekerja saat ini</a></li>
+                <li><a href="#tab-1-2" data-toggle="tab">Pekerja dan calon pekerja</a></li>
               </ul>                                            
                <div class="tab-content" style="margin-top:0;">
                 <div class="tab-pane fade in active " id="tab-1-1">
@@ -160,7 +160,7 @@ if ($ident_data !== false) {
                           <a href="../Jobs/edit_job/<?php echo $job->id_post;?>" class="btn btn-black"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                           <a href="../Jobs/removing/<?php echo $job->id_post;?>" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
                       <?php } else { ?>
-                          <button id="daftar" class="btn btn-green" data-container="body" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-content="Login atau daftarkan diri anda terlebih dahulu untuk mendaftar lowongan!"><i class="glyphicon glyphicon-check"></i> Daftar</button>
+                          <button id="daftar" class="btn btn-orange" data-container="body" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-content="Login atau daftarkan diri anda terlebih dahulu untuk mendaftar lowongan!">Daftar!</button>
                       <?php  } ?>
                     </div>
                 <?php } }

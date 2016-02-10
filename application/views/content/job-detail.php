@@ -7,6 +7,8 @@ if ($ident_data !== false) {
   }
 }
 foreach ($post_data as $post) {}
+$this->session->set_flashdata('redirect', $this->uri->uri_string());
+
 ?>
 <script>
   $(function () {
@@ -16,11 +18,13 @@ foreach ($post_data as $post) {}
       title:"Anda akan mendaftar pekerjaan ini",
       template: '<div class="popover" role="tooltip">'
                   +'<div class="arrow"> </div>'
+                  +'<form method="post" action="../../../Workers/applying/1/<?php echo $post->id_post.'/'.$this->session->userdata('mem_id').'/'.$basic_row->id_company;?>">'
                   +'<h3 class="popover-title"></h3>'
                   +'<div class="popover-content"></div>'
                   +'<div class="popover-footer">'
-                    +'<a href="" class="btn btn-black">Daftar sekarang!</a>'
+                    +'<input type="submit" id="apply" class="btn btn-black" value="Daftar sekarang!">'
                   +'</div>'
+                  +'</form>'
                 +'</div>'
     });
   });
@@ -105,7 +109,11 @@ foreach ($post_data as $post) {}
         </div><!-- col -->
         <div class="col-sm-8">
           <div class="job-box service-box style-3 default job-footer" style="padding:10px">
-            <button data-content='Lamaran berdasarkan profil yang sudah anda isi akan dikirimkan ke pihak perusahaan. <br><br><input type="checkbox" name="terms" value="1">Saya sudah membaca <a href="">ketentuan dan syarat yang berlaku</a>' data-placement="right"  data-toggle="popover" class="btn btn-orange">Daftar pekerjaan ini</button>
+            <button data-content=
+              'Lamaran berdasarkan profil yang sudah anda isi akan dikirimkan ke pihak perusahaan. <a href="../../members/$this->session->userdata("logged");">Cek kembali profil anda</a>. <br><br><input type="checkbox" name="terms" value="1">Saya sudah membaca <a href="">ketentuan dan syarat yang berlaku</a>' 
+              data-placement="right"  data-toggle="popover" class="btn btn-orange">
+              Daftar pekerjaan ini
+              </button>
             <span class="profil-span pull-right"><i class="glyphicon glyphicon-alert"></i> Sudah 50 orang mendaftar</span>              
           </div>    
         </div>

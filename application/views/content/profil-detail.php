@@ -175,5 +175,53 @@ if ($ident_data !== false) {
           </div><!-- services-boxes -->
         </div>
         </div>
+
+        <div class="row">
+          <div class="col-sm-12">    
+            <div class="horizontal-tabs">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab-1-1" data-toggle="tab">Lowongan yang diambil</a></li>
+                <li><a href="#tab-1-2" data-toggle="tab">Review oleh perusahaan</a></li>
+              </ul>                                            
+               <div class="tab-content" style="margin-top:0;">
+                <div class="tab-pane fade in active " id="tab-1-1">
+                  <div class="col-sm-12 service-box style-3 default"> 
+                <?php
+                if ($job_data == false) {
+                  echo 'Belum ada lowongan yang pernah didaftar.';
+                } else { 
+                    foreach ($job_data as $job) { ?>
+                    <div class="col-sm-12 job-profil-box service-box style-3 default" style="padding:10px;margin-bottom:10px;">
+                      <div class="col-sm-2 post-owner">
+                        <img src="<?php echo base_url().'images/profil_photo/'.$job->avatar?>" style="width:100%;">
+                      </div>
+                      <span><a href="../Jobs/detail/<?php echo $job->id_post;?>"><strong><?php echo $job->post_title;?></strong></a></span>
+                      <span class="small-span"><?php echo $job->created_time;?></span><br>
+                      <div class="col-sm-7 i-div">  
+                        <i class="mt-icon-timetable"></i> <b>Tanggal melamar:</b> <label class="label label-primary"><?php echo date('j M Y', strtotime($job->hire_date));?></label>
+                        <i class="glyphicon glyphicon-user"></i> <b>Status:</b> <label class="label label-warning">Waiting company confirmation</label><br>
+                        <i class="mt-icon-money"></i> <b>Gaji yang ditawarkan:</b> <label class="label label-primary">IDR <?php setlocale(LC_MONETARY, 'id_ID'); echo number_format($job->salary) ;?></label>
+                      </div>
+                      <div class="col-sm-3 pull-right">
+                        <?php
+                        if ($not_logged !== true) { ?>
+                            <a style="font-size:12px;" href="../Jobs/removing/<?php echo $job->id_post;?>" class="btn btn-default">Batalkan lowongan ini</a>
+                        <?php } else { ?>
+                            <button id="daftar" class="btn btn-orange" data-container="body" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-content="Login atau daftarkan diri anda terlebih dahulu untuk mendaftar lowongan!">Daftar!</button>
+                        <?php  } ?>
+                      </div>
+                    </div>
+                <?php } }
+                ?>
+                  </div>
+                </div><!-- tab-pane -->
+                <div class="tab-pane fade" id="tab-1-2">
+                  <h3><strong>Quisque eu tortor sed.</strong></h3>
+                  <p>Quisque dapibus, purus non congue pulvinar, odio nulla sodales tortor, fringilla faucibus risus massa nec nulla. Phasellus tempus erat elit vitae metus sed.</p>
+                </div><!-- tab-pane -->
+              </div><!-- tab-content -->
+            </div><!-- horizontal-tabs -->
+          </div><!-- col -->
+        </div>
       </div>
       </div>

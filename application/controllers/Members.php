@@ -11,14 +11,7 @@ class Members extends CI_Controller {
 	function __construct() 
 	{
 		parent::__construct();
-		$this->load->model('Worker');
-		$this->load->model('Company');
-		$this->load->model('Location');
-		$this->load->model('Skill');
-		$this->load->model('Language');
-		$this->load->model('School');
-		$this->load->model('Mayor');
-		$this->load->model('Job');
+		date_default_timezone_set('Asia/Jakarta');
 
 		if ($this->session->userdata('logged') !== false) {
 			$this->username = $this->session->userdata('logged');
@@ -68,6 +61,7 @@ class Members extends CI_Controller {
 				$ach_data = $this->Worker->get_ach($this->mem_id);
 				$loc_data = $this->Worker->get_loc($this->mem_id);
 				$pob_data = $this->Worker->get_pob($this->mem_id);
+				$job_data = $this->Applier->get_per_id('h.id_worker',$this->mem_id);
 
 				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 					$this->fullname = $key->fullname;
@@ -85,6 +79,7 @@ class Members extends CI_Controller {
 					'edu_data' => $edu_data,
 					'exp_data' => $exp_data,
 					'train_data' => $train_data,
+					'job_data' => $job_data,
 					'loc_data' => $loc_data,
 					'pob_data' => $pob_data,
 					'ach_data' => $ach_data

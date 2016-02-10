@@ -10,7 +10,9 @@ class Workers extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
+		date_default_timezone_set('Asia/Jakarta');
 		$this->load->model('Worker');
+		$this->load->model('Applier');
 
 		if ($this->session->userdata('logged') != true) {
 			$sess_data = array('last_page' => current_url());
@@ -286,4 +288,30 @@ class Workers extends CI_Controller {
 		redirect('Members/edit_w/I/'.$this->username,'refresh');
 	}
 
+	function applying($id_status,$id_job,$id_worker,$id_company) {
+		$datestring = '%Y-%m-%d %h:%i:%s';
+      	$now = mdate($datestring,now('Asia/Jakarta'));
+      	$this->form_validation->set_rules('terms', 'Syarat dan Ketentuan', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata(
+					'msg', 
+					'<b>Baca syarat dan ketentuan yang berlaku!</b>'
+					);
+			redirect($this->session->flashdata('redirect'),'refresh');		
+		} else {
+			$input = array(
+			'id_company' => $id_company,
+			'id_worker' => $id_worker,
+			'id_status' => $id_status,
+			'id_job' =>  $id_job,
+			'hire_date' => $now
+			);
+			$ins = $this->Applier->apply($input);
+			$this->session->set_flashdata(
+					'msg', 
+					'<b>Anda berhasil mendaftar pekerjaan!</b> Silahkan tunggu pemberitahuan lebih lanjut dari pihak perusahaan.'
+					);
+			redirect('Members/'.$this->username,'refresh');
+		} 
+	}
 }
