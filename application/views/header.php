@@ -109,7 +109,7 @@
                 if ($this->session->userdata('logged') !== false) { //NAVBAR IF USER IS A LOGGED IN USER
                   $cur_username = $this->session->userdata('logged');
                   if ($this->session->userdata('mem_type') == 'C') { ?>
-                  <li><a href="<?php echo base_url().'Jobs/new_job';?>">Open New Job</a></li>
+                  <li class="sign-in"><a style="color:#fff;" href="<?php echo base_url().'Jobs/new_job';?>">Open New Job</a></li>
                 <?php }
                 ?>
                 <li class="dropdown">
@@ -124,11 +124,11 @@
                 <?php 
                 } else {
                 ?>
-                <li>
+                <li class="regrister">
                   <a href="<?php echo base_url().'Main/new_user';?>">Regrister</a>
                 </li>
-                <li class="dropdown">
-                  <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+                <li class="dropdown sign-in">
+                  <a style="color:#fff;" class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
                   <div class="dropdown-menu login-dropdown">
                     <div class="dropdown-content">
                       <?php

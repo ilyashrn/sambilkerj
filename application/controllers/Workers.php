@@ -7,12 +7,11 @@ class Workers extends CI_Controller {
 	private $mem_id = null;
 	private $mem_type = null;
 	private $fullname = null;
+	private $last_page = null;
 
 	public function __construct() {
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
-		$this->load->model('Worker');
-		$this->load->model('Applier');
 
 		if ($this->session->userdata('logged') != true) {
 			$sess_data = array('last_page' => current_url());
@@ -21,6 +20,10 @@ class Workers extends CI_Controller {
 			$this->username = $this->session->userdata('logged');
 			$this->mem_id = $this->session->userdata('mem_id');
 			$this->mem_type = $this->session->userdata('mem_type');
+
+			$sess_data = array('last_page' => current_url());
+			$this->session->set_userdata($sess_data);
+			$this->last_page= $this->session->userdata('last_page');
 		}
 	}
 
@@ -299,19 +302,37 @@ class Workers extends CI_Controller {
 					);
 			redirect($this->session->flashdata('redirect'),'refresh');		
 		} else {
-			$input = array(
-			'id_company' => $id_company,
-			'id_worker' => $id_worker,
-			'id_status' => $id_status,
-			'id_job' =>  $id_job,
-			'hire_date' => $now
-			);
-			$ins = $this->Applier->apply($input);
-			$this->session->set_flashdata(
-					'msg', 
-					'<b>Anda berhasil mendaftar pekerjaan!</b> Silahkan tunggu pemberitahuan lebih lanjut dari pihak perusahaan.'
-					);
-			redirect('Members/'.$this->username,'refresh');
+			$check = $this->Applier->check_worker($id_worker,$id_job);
+			if ($check == true) {
+				$this->session->set_flashdata(
+						'msg', 
+						'<b>Anda sudah mendaftar pekerjaan ini!</b> Silahkan mendaftar pekerjaan lainnya.'
+						);
+				redirect($this->session->flashdata('redirect'),'refresh');
+			} else{
+				$input = array(
+				'id_company' => $id_company,
+				'id_worker' => $id_worker,
+				'id_status' => $id_status,
+				'id_job' =>  $id_job,
+				'hire_date' => $now
+				);
+				$ins = $this->Applier->apply($input);
+				$this->session->set_flashdata(
+						'msg', 
+						'<b>Anda berhasil mendaftar pekerjaan!</b> Silahkan tunggu pemberitahuan lebih lanjut dari pihak perusahaan.'
+						);
+				redirect('Members/'.$this->username,'refresh');
+			}
 		} 
+	}
+
+	function unapplying($id_hired) {
+		$remove = $this->Applier->unapply($id_hired);
+		$this->session->set_flashdata(
+					'msg', 
+					'<b>Anda berhasil membatalkan lowongan pekerjaan!</b>'
+					);
+		redirect('Members/'.$this->username,'refresh');
 	}
 }

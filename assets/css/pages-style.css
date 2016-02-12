@@ -41,7 +41,7 @@
 	}
 
 	.boxed {
-		background: url(../images/bg-pattern-1.png) repeat top left;
+		background: url(../images/wild_oliva.png) repeat top left;
 	}
 
 	.boxed #page-wrapper {
@@ -176,7 +176,8 @@
 		letter-spacing: 0.5px;
 		text-decoration: none;
 		text-transform: uppercase;
-		border-bottom: none;
+		/*border-bottom: none;*/
+		padding: 8px;
 	}
 
 	.menu > li:first-child > a {
@@ -543,6 +544,7 @@
 
 	#header-sticky .menu > li > a {
 		padding-bottom: 24px;
+		padding-bottom: 10px;
 	}
 
 	#header-sticky .sf-arrows .sf-with-ul:after {

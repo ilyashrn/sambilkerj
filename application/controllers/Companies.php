@@ -7,11 +7,11 @@ class Companies extends CI_Controller {
 	private $mem_id = null;
 	private $mem_type = null;
 	private $fullname = null;
+	private $last_page = null;
 
 	public function __construct() {
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
-		$this->load->model('Company');
 
 		if ($this->session->userdata('logged') != true) {
 			$sess_data = array('last_page' => current_url());
@@ -20,21 +20,16 @@ class Companies extends CI_Controller {
 			$this->username = $this->session->userdata('logged');
 			$this->mem_id = $this->session->userdata('mem_id');
 			$this->mem_type = $this->session->userdata('mem_type');
+
+			$sess_data = array('last_page' => current_url());
+			$this->session->set_userdata($sess_data);
+			$this->last_page= $this->session->userdata('last_page');
 		}
 	}
 
 	public function index()
 	{
     	
-	}
-
-	public function profil()
-	{
-		$data = array('title' => "Ilyas Habiburrahman | SambilKerja.com");
-		$this->load->view('html_head', $data);
-		$this->load->view('header', $data);
-		$this->load->view('content/profil-detail', $data);
-		$this->load->view('footer', $data);
 	}
 
 	function inserting() {
@@ -168,5 +163,32 @@ class Companies extends CI_Controller {
 					'<b>Foto profil</b> berhasil dihapus!'
 					);
 		redirect('Members/edit_c/I/'.$this->username,'refresh');
+	}
+
+	function change_stat($id_stat,$id_hire) {
+		$data = array(
+			'id_status' => $id_stat
+			);
+		$update = $this->Applier->update($data,$id_hire);
+		$this->session->set_flashdata(
+					'msg', 
+					'<b>Status pelamar</b> berhasil diperbarui!'
+					);
+		redirect('Members/'.$this->username,'refresh');
+	}
+
+	function rate(){
+		if (!empty($this->mem_id) && $this->input->post('ra') !== false) {
+		$input = array(
+			'stars' => $this->input->post('rating'),
+			'review' => $this->input->post('review')
+			 );	
+		}
+		$review = $this->Applier->update($input,$this->input->post('id'));
+		$this->session->set_flashdata(
+					'msg', 
+					'<b>Review untuk '.$this->input->post('fullname').'</b> berhasil diberikan!'
+					);
+		redirect('Members/'.$this->username,'refresh');		
 	}
 }

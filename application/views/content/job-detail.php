@@ -27,6 +27,10 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
                   +'</form>'
                 +'</div>'
     });
+
+    $('[data-toggle="popoverrr"]').popover()
+    $('[data-toggle="tooltip"]').tooltip()
+    $('#syarat').modal(options)
   });
 </script>
 <div id="page-content">
@@ -38,7 +42,6 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
               <div class="col-sm-12">
                 <h6 class="row-job">
                   <b><a href="#" class="worker-name"><?php echo $post->post_title;?></a></b>
-                  <!-- <a href="<?php echo base_url().'Members/edit_w/PA/'.$username;?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-edit"></i> Ubah nama/username</a> -->
                   <br>
                   <b><span class="subtitle-job"><a href="#"><?php echo $post->category_name;?> </a> <span class="subtitle-job"> / </span><a href="#"><?php echo $post->sub_category_name;?></a></span></b>
                 </h6>
@@ -62,7 +65,7 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
                 <span class="profil-span"><b>Deskripsi Kerja</b></span>
                 <p><?php echo $post->description;?></p>
               </div>
-                <div class="col-sm-12">
+              <div class="col-sm-12">
                   <span class="profil-span"><b>Keahlian yang dibutuhkan</b></span>
                   <div class="widget-tags required-skills">
                     <?php if ($req_skill == false) { ?>
@@ -72,7 +75,11 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
                       <a href="#"><?php echo $skill->skill_name;?></a>
                     <?php } } ?>
                   </div>
-                </div>
+              </div>
+              <div class="col-sm-12">
+                <span class="profil-span"><b>Berkas Pendukung</b></span>
+                <p><i class="mt-icon-file2"></i> <a href="<?php echo base_url().'files/loker/'.$post->file;?>"> <?php echo $post->file;?></a> (<?php echo $post->file_desc;?>)</p>
+              </div>
               </div>
               <div class="row">
                   <div class="col-sm-6 profil-log left">
@@ -106,15 +113,28 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
             </div>
             <a class="profil-job" href="../../../Members/<?php echo $basic_row->username;?>"><?php echo $post_count;?> Pekerjaan tersedia di <?php echo $post->company_name?></a>
           </div>
+          <div class="alert alert-warning">
+            Pekerja nantinya wajib menyisihkan <b>2,5%</b> gaji yang diterima dari pekerjakan untuk biaya administrasi sambilkerja.com.
+             <a type="button" data-toggle="modal" data-target="#syarat" href="">Baca selengkapnya</a>
+          </div>
         </div><!-- col -->
         <div class="col-sm-8">
           <div class="job-box service-box style-3 default job-footer" style="padding:10px">
+          <?php
+            if ($mem_type == null) { ?>
+              <button id="daftar" class="btn btn-orange" data-container="body" data-placement="bottom" data-trigger="focus" data-toggle="popoverrr" data-content="Login atau daftarkan diri anda terlebih dahulu untuk mendaftar lowongan!">Daftar pekerjaan ini</button>
+          <?php 
+          } elseif ($mem_type == 'C') { ?>
+              <button disabled type="button" data-toggle="tooltip" data-placement="top" title="Perusahaan tidak bisa melamar" id="daftar" class="btn btn-orange">Daftar pekerjaan ini</button>
+          <?php } elseif ($mem_type == 'W') { ?>
             <button data-content=
               'Lamaran berdasarkan profil yang sudah anda isi akan dikirimkan ke pihak perusahaan. <a href="../../members/$this->session->userdata("logged");">Cek kembali profil anda</a>. <br><br><input type="checkbox" name="terms" value="1">Saya sudah membaca <a href="">ketentuan dan syarat yang berlaku</a>' 
               data-placement="right"  data-toggle="popover" class="btn btn-orange">
               Daftar pekerjaan ini
-              </button>
-            <span class="profil-span pull-right"><i class="glyphicon glyphicon-alert"></i> Sudah 50 orang mendaftar</span>              
+            </button>
+          <?php }
+          ?>
+            <span class="profil-span pull-right"><i class="glyphicon glyphicon-alert"></i> Sudah <?php echo $app_count;?> orang mendaftar</span>              
           </div>    
         </div>
       </div>

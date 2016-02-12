@@ -1,5 +1,5 @@
 body{
-    font-family: "Open Sans",sans-serif;
+    font-family: "Lato","Open Sans",sans-serif;
 }
 
 .browse-cat li{
@@ -82,7 +82,7 @@ h6 .worker-name {
 
 .point-detail {
   line-height: 30px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .point-list {
@@ -234,7 +234,7 @@ h6 .worker-name {
 
 .profil-span {
   color: black;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .edu-span {
@@ -278,7 +278,7 @@ h6 .worker-name {
 }
 
 .i-div {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .i-div i {
@@ -369,4 +369,23 @@ input[type="checkbox"] {
   width: inherit;
   display: inline;
   margin-right: 10px;
+}
+
+.a-option, a.-option label {
+  font-size: 14px;
+  float: right;
+  margin-right: 5px;
+}
+
+.sign-in > a {
+    border: 1px solid #56B68B;
+    /*border-radius: 4px;*/
+    background: #56B68B;
+    color: #fff;
+    background-color: #1FCC64;
+    border-color: #1cb659;
+}
+
+.regrister > a {
+    border:1px solid #1cb659;
 }

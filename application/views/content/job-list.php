@@ -10,7 +10,7 @@
     });
   });
 </script><!-- CONTENT -->
-
+<?php echo $this->session->userdata('keyword');?>
 <div id="page-content">
     <div id="page-header">
         <div class="container">
@@ -40,7 +40,16 @@
                   <optgroup label="<?php echo $prov->province_name; ?>"> 
                   <?php
                   foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
-                    <option value="<?php echo $city->id_city; ?>"><?php echo $city->city_name;?></option>   
+                    <option value="<?php echo $city->id_city; ?>"
+                    <?php
+                      if ($this->session->userdata('lokasi') !== false) {
+                         foreach ($this->session->userdata('lokasi') as $lok) {
+                          if ($city->id_city == $lok) {
+                            echo 'selected="selected"';
+                          }
+                        }
+                       }  ?>
+                    ><?php echo $city->city_name;?></option>   
                   <?php }
                   ?>
                   </optgroup>
@@ -49,7 +58,19 @@
               </select>
               <span>Kategori Pekerjaan</span>
               <select name="category[]" id="category" multiple="multiple">
-                <option selected="selected"  value="default">Semua Kategori Pekerjaan</option>
+                <option value="default" 
+                <?php 
+                  if ($this->session->userdata('kategori') !== false) {
+                    foreach ($this->session->userdata('kategori') as $kat) {
+                      if ($kat == 'default') {
+                        echo 'selected="selected"'; 
+                      }
+                    }
+                  } else {
+                    echo 'selected="selected"';
+                  } 
+                ?>
+                >Semua Kategori Pekerjaan</option>
                   <?php
                   foreach ($cat_data as $cat) {
                     $cur_id = $cat->id_category;
@@ -57,12 +78,21 @@
                   ?>
                     <optgroup label="<?php echo $cat->category_name; ?>"> 
                       <?php foreach ($sub_cat as $sub) { ?> 
-                      <option value="<?php echo $sub->id_sub_category; ?>"><?php echo $sub->sub_category_name; ?></option>
+                      <option value="<?php echo $sub->id_sub_category; ?>"
+                        <?php 
+                          if ($this->session->userdata('kategori') !== false) {
+                             foreach ($this->session->userdata('kategori') as $kat) {
+                              if ($sub->id_sub_category == $kat) {
+                                echo 'selected="selected"';
+                              }
+                            }  
+                          } ?>
+                      ><?php echo $sub->sub_category_name; ?></option>
                       <?php } ?>
                     </optgroup>
                   <?php } ?>
               </select>
-              <input type="submit" value="Cari Pekerjaan">
+              <input name="refine" type="submit" value="Cari Pekerjaan">
               <?php echo form_close(); ?>
           </div>
         </div><!-- col -->
@@ -71,14 +101,14 @@
           <div class="row">
             <div class="col-sm-12 text-box job-box">
               <div class="col-sm-3">
-                <span>Sorting option</span>
+                <span>Sorting options</span>
               </div>
               <div class="col-sm-1">
                 <i class="glyphicon glyphicon-sort-by-attributes"></i>
               </div>
               <div class="col-sm-4">
                 <?php
-                echo form_open('Jobs/lists');
+                echo form_open('Jobs/lists/');
                 ?>
                 <select name="sort_by" onchange='this.form.submit();'>
                   <option <?php echo ($this->session->userdata('order_by') == '1') ? 'selected="selected"': '';?> value="1">Tanggal dibuka</option>
@@ -119,9 +149,9 @@
                 <div class="col-sm-2 pull-right post-owner">
                     <?php
                     if ($job->avatar == '') { ?>
-                      <img src="<?php echo base_url().'images/profil_photo/nobody.jpg';?>">  
+                      <a href="../Members/<?php echo $job->username;?>"><img src="<?php echo base_url().'images/profil_photo/nobody.jpg';?>"></a>
                     <?php } else { ?>
-                      <img src="<?php echo base_url().'images/profil_photo/'.$job->avatar;?>">
+                      <a href="../Members/<?php echo $job->username;?>"><img src="<?php echo base_url().'images/profil_photo/'.$job->avatar;?>"></a>
                     <?php } ?>
                   </div>
               </div>
@@ -167,7 +197,10 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <?php echo $links;?>
+                <?php 
+                foreach ($links as $link) {
+                  echo $link;
+                } ?>
             </div><!-- col -->
         </div><!-- row -->
     </div><!-- container -->

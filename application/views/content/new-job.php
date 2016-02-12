@@ -145,7 +145,7 @@
                 <span style="font-size:11px;">File saat ini: - </span>  
                 <?php } elseif ($edit == true && !empty($post->file)) { ?>
                 <input type="hidden" name="cur_file" value="<?php echo $post->file; ?>">
-                <span style="font-size:11px;">File saat ini: <a href=""><i class="mt-icon-file2"></i> <?php echo $post->file;?></a></b>
+                <span style="font-size:11px;">File saat ini: <a href="<?php echo base_url().'files/loker/'.$post->file;?>"><i class="mt-icon-file2"></i> <?php echo $post->file;?></a></b>
                 </span>
                 <a class="a-file" href="../removing_file/<?php echo $post->file.'/'.$post->id_post;?>"><i class="glyphicon glyphicon-remove"></i>Hapus file</a>
                 <?php }

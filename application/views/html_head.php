@@ -18,6 +18,7 @@
     <!-- FONTS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,300italic,300,500,500italic,700,700italic">
     <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     
     <!-- NOTIFICATIONSTYLES -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/NotificationStyles/normalize.css');?>" />
@@ -31,6 +32,7 @@
 
     <!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css';?>">
+    <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/star-rating.min.css';?>">
 
     <!-- MT ICONS FONT -->
     <link rel="stylesheet" href="<?php echo base_url().'assets/fonts/mt-icons/mt-icons.css';?>">
@@ -81,6 +83,7 @@
 
     <!-- BOOTSTRAP JS -->
     <script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js';?>"></script>
+    <script src="<?php echo base_url().'assets/bootstrap/js/star-rating.min.js';?>"></script>
 
     <!-- VIEWPORT -->
     <script src="<?php echo base_url().'assets/plugins/viewport/jquery.viewport.js';?>"></script>
@@ -142,4 +145,4 @@
 
 </head>
 
-<body>
+<body class="boxed">

@@ -7,6 +7,7 @@ class Members extends CI_Controller {
 	private $mem_id = null;
 	private $mem_type = null;
 	private $fullname = null;
+	private $last_page = null;
 
 	function __construct() 
 	{
@@ -17,6 +18,10 @@ class Members extends CI_Controller {
 			$this->username = $this->session->userdata('logged');
 			$this->mem_id = $this->session->userdata('mem_id');
 			$this->mem_type = $this->session->userdata('mem_type');
+
+			$sess_data = array('last_page' => current_url());
+			$this->session->set_userdata($sess_data);
+			$this->last_page = $this->session->userdata('last_page');
 		} else {
 			$sess_data = array('last_page' => current_url());
 			$this->session->set_userdata($sess_data);
@@ -62,6 +67,9 @@ class Members extends CI_Controller {
 				$loc_data = $this->Worker->get_loc($this->mem_id);
 				$pob_data = $this->Worker->get_pob($this->mem_id);
 				$job_data = $this->Applier->get_per_id('h.id_worker',$this->mem_id);
+				$job_count = $this->Applier->count_rows('id_worker',$this->mem_id);
+				$review_data = $this->Applier->get_review('h.id_worker',$this->mem_id);
+				$review_count = $this->Applier->count_rev('id_worker',$this->mem_id);
 
 				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 					$this->fullname = $key->fullname;
@@ -80,6 +88,9 @@ class Members extends CI_Controller {
 					'exp_data' => $exp_data,
 					'train_data' => $train_data,
 					'job_data' => $job_data,
+					'job_count' => $job_count,
+					'review_data' => $review_data,
+					'review_count' => $review_count,
 					'loc_data' => $loc_data,
 					'pob_data' => $pob_data,
 					'ach_data' => $ach_data
@@ -103,6 +114,9 @@ class Members extends CI_Controller {
 				$ident_data = $this->Company->get_ident($this->mem_id);
 				$loc_data = $this->Company->get_loc($this->mem_id);
 				$job_data = $this->Job->get_per_comp($this->mem_id);
+				$job_count = $this->Job->get_per_comp_count($this->mem_id);
+				$app_data = $this->Applier->get_per_id('h.id_company',$this->mem_id);
+				$app_count = $this->Applier->count_rows('id_company',$this->mem_id);
 
 				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 					$this->fullname = $key->company_name;
@@ -115,6 +129,9 @@ class Members extends CI_Controller {
 					'basic_data' => $basic_data,
 					'ident_data' => $ident_data,
 					'job_data' => $job_data,
+					'app_data' => $app_data,
+					'job_count' => $job_count,
+					'app_count' => $app_count,
 					'loc_data' => $loc_data
 					);
 

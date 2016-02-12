@@ -11,6 +11,9 @@ if ($ident_data !== false) {
   $(function () {
     $('[data-toggle="popover"]').popover()
   });
+  $(function() {
+    $("#input-id").rating();
+  });
 </script>
 <div id="page-content">
   <div class="container">
@@ -130,19 +133,19 @@ if ($ident_data !== false) {
           <div class="col-sm-12">    
             <div class="horizontal-tabs">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab-1-1" data-toggle="tab">Lowongan oleh perusahaan</a></li>
-                <li><a href="#tab-1-2" data-toggle="tab">Pekerja dan calon pekerja</a></li>
+                <li class="active"><a href="#tab-1-1" data-toggle="tab">Lowongan oleh perusahaan <span class="badge"><?php echo $job_count?></span></a></li>
+                <li><a href="#tab-1-2" data-toggle="tab">Pekerja dan calon pekerja <span class="badge"><?php echo $app_count?></span></a></li>
               </ul>                                            
                <div class="tab-content" style="margin-top:0;">
                 <div class="tab-pane fade in active " id="tab-1-1">
                   <div class="col-sm-12 service-box style-3 default"> 
                 <?php
-                if ($job_data == false) {
-                  echo 'Belum ada lowongan yang dibuat perusahaan.';
-                } else { 
+                if ($job_data == false) { ?>
+                  <label class="label label-danger">Belum ada lowongan yang pernah dibuka perusahaan.</label>
+                <?php } else { 
                     foreach ($job_data as $job) { ?>
                     <div class="col-sm-10 job-profil-box service-box style-3 default" style="padding:20px;margin-bottom:10px;padding-bottom:10px;">
-                      <span><a href="../Jobs/detail/<?php echo $job->id_post;?>"><strong><?php echo $job->post_title;?></strong></a></span>
+                      <span><a href="../Jobs/detail/<?php echo $job->id_post.'/'.$job->post_title;?>"><strong><?php echo $job->post_title;?></strong></a></span>
                       <span class="small-span"><?php echo $job->created_time;?></span><br>
                       <span class="subtitle-job"><?php echo $job->category_name;?><span class="subtitle-job"> > </span><?php echo $job->sub_category_name;?></span><br>
                       <div class="col-sm-9 i-div">
@@ -168,8 +171,71 @@ if ($ident_data !== false) {
                   </div>
                 </div><!-- tab-pane -->
                 <div class="tab-pane fade" id="tab-1-2">
-                  <h3><strong>Quisque eu tortor sed.</strong></h3>
-                  <p>Quisque dapibus, purus non congue pulvinar, odio nulla sodales tortor, fringilla faucibus risus massa nec nulla. Phasellus tempus erat elit vitae metus sed.</p>
+                  <div class="col-sm-12 service-box style-3 default"> 
+                    <?php
+                    if ($app_data == false) { ?>
+                      <label class="label label-danger">Belum ada pekerja yang melamar di perusahaan.</label>
+                    <?php } else { 
+                        foreach ($app_data as $job) { ?>
+                        <div class="hover-to col-sm-12 job-profil-box service-box style-3 default" style="padding:20px;margin-bottom:10px;padding-bottom:10px;">
+                          <div class="col-sm-1 post-owner">
+                            <?php
+                            if ($job->worker_avatar == '') { ?>
+                              <img src="<?php echo base_url().'images/nobody.jpg';?>" alt="">
+                            <?php 
+                            } else { ?>
+                            <img src="<?php echo base_url().'images/profil_photo/'.$job->worker_avatar?>" style="width:100%;">
+                            <?php } ?>
+                          </div>
+                          <span><a href="../Members/<?php echo $job->worker_username;?>"><strong><?php echo $job->fullname.' ('.$job->worker_username.')';?></strong></a></span>
+                          <?php 
+                          echo ($job->id_status !== '3' && $job->id_status !== '1' && $job->id_status !== '4') ? '<a class="a-option" href="../Companies/change_stat/3/'.$job->id_hired.'"><label class="label label-warning"><i class="glyphicon glyphicon-minus-sign"></i> Non Aktifkan</label></a>' : '';
+                          echo ($job->id_status !== '4' && $job->id_status !== '2') ? '<a class="a-option" href="../Companies/change_stat/4/'.$job->id_hired.'"><label class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i> Tolak lamaran</label></a>' : '';
+                          echo ($job->id_status !== '2') ? '<a class="a-option" href="../Companies/change_stat/2/'.$job->id_hired.'"><label class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i> Pekerjakaan</label></a>' : '';
+                          echo ($job->id_status == '2' && $job->review == '') ? '<a href="#collapseExample-'.$job->id_hired.'" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" class="a-option"><label class="label label-info"><i class="mt-icon-stars"></i> Rate and review</label></a>' : '';
+                          ?>
+                          <div class="collapse" id="collapseExample-<?php echo $job->id_hired;?>">
+                            <div class="well">
+                              <div class="row">
+                                <?php echo form_open('Companies/rate'); ?>
+                                <div class="col-md-6">
+                                  <div class="alert alert-info">
+                                    Berikan rating dan review pada <strong><b><?php echo $job->fullname;?></b></strong> berdasarkan kinerjanya selama bekerja bersama anda
+                                    pada lowongan berjudul <strong>"<?php echo $job->post_title;?>"</strong>. 
+                                  </div>
+                                  <div class="alert alert-danger">
+                                    Pemberian rating dan review ini tidak bisa dirubah, pastikan anda sudah memikirkannya sebelum memberi.
+                                  </div>
+                                </div>
+                                <div class="col-sm-5">
+                                  <div class="col-sm-12">
+                                    <label><strong>Rating (0-5)</strong> untuk <?php echo $job->fullname?></label>
+                                    <input id="input-id" name="rating" type="number" class="rating" value="<?php echo $job->stars;?>" min=0 max=5 step=0.5 data-size="xs" data-show-clear="false">
+                                  </div>
+                                  <div class="col-sm-12">
+                                    <label><strong>Review</strong> untuk <?php echo $job->fullname?></label>
+                                    <textarea placeholder="write your review here" name="review" class="form-control"></textarea>
+                                  </div>
+                                  <div class="col-sm-6 pull-right">
+                                    <input type="hidden" name="id" value="<?php echo $job->id_hired;?>"></input>
+                                    <input type="hidden" name="fullname" value="<?php echo $job->fullname;?>"></input>
+                                    <input class="btn-black" type="submit" name="ra" value="submit my review"></input>
+                                  </div>
+                                </div>
+                                <?php echo form_close(); ?>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="a-option" href="../Members/<?php echo $job->worker_username;?>"><label class="label label-primary"><i class="glyphicon glyphicon-user"></i> Lihat profil</label></a>
+                          <div class="col-sm-9 i-div">
+                            <b>Lowongan yang didaftarkan:<b> <a href="../Jobs/detail/<?php echo $job->id_post.'/'.$job->post_title;?>"><label class="label label-default"><?php echo $job->post_title;?></label> </a>
+                            <b> Tanggal melamar:</b> <label class="label label-primary"><?php echo date('j M Y', strtotime($job->hire_date));?></label> 
+                            <b> Status:</b> <label class="label <?php echo 'label-'.$job->label;?>"><?php echo $job->status;?></label>
+                          </div>
+                        </div>
+                    <?php } }
+                    ?>
+                    </div>
                 </div><!-- tab-pane -->
               </div><!-- tab-content -->
             </div><!-- horizontal-tabs -->
