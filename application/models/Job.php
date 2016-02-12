@@ -273,13 +273,15 @@
 			$this->db->join('job_sub_categories as s', 'p.id_job_category = s.id_sub_category');
 			$this->db->join('job_categories as ca', 's.id_category = ca.id_category');
 			$this->db->join('c_identity as ci', 'c.id_company = ci.id_company');
-			$this->db->join('city as ct', 'p.id_location = ct.id_city', 'left');
-			$this->db->join('location as l', 'ct.id_city = l.id_city', 'left');
+			$this->db->join('location as l', 'p.id_location = l.id_city', 'left');
+			$this->db->join('city as ct', 'l.id_city = ct.id_city', 'left');
 			$this->db->join('province as pr', 'l.id_province = pr.id_province', 'left');
 			$this->db->like('p.post_title', $st);
 			$this->db->or_like('c.company_name', $st);
 			$this->db->or_like('s.sub_category_name', $st);
 			$this->db->or_like('ca.category_name', $st);
+			$this->db->or_like('ct.city_name', $st);
+			$this->db->or_like('pr.province_name', $st);
 
 			if ($order_by == '' || $sort == '') {
 				$this->db->order_by("p.created_time", "desc");
@@ -301,11 +303,7 @@
 		    }
 		}
 
-		function refine_search($limit,$start,$st,$order_by,$sort,$lokasi,$kategori) {
-			if ($st == "NIL") {
-				$st = "";
-			}
-
+		function refine_search($limit,$start,$st,$order_by,$sort,$lok,$kat) {
 			$this->db->select('
 				p.id_post as id_post, 
 				p.post_title as post_title,
@@ -331,26 +329,25 @@
 			$this->db->join('job_sub_categories as s', 'p.id_job_category = s.id_sub_category');
 			$this->db->join('job_categories as ca', 's.id_category = ca.id_category');
 			$this->db->join('c_identity as ci', 'c.id_company = ci.id_company');
-			$this->db->join('city as ct', 'p.id_location = ct.id_city', 'left');
-			$this->db->join('location as l', 'ct.id_city = l.id_city', 'left');
+			$this->db->join('location as l', 'p.id_location = l.id_city', 'left');
+			$this->db->join('city as ct', 'l.id_city = ct.id_city', 'left');
 			$this->db->join('province as pr', 'l.id_province = pr.id_province', 'left');
-			$this->db->like('p.post_title', $st);
-			$this->db->or_like('c.company_name', $st);
-			$this->db->or_like('s.sub_category_name', $st);
-			$this->db->or_like('ca.category_name', $st);
 
-			foreach ($lokasi as $lok) {
-				if ($lok == 'default') {
-					break;
-				}
-				$this->db->or_where('p.id_location',$lok);
+			if ($st !== "") {
+				$this->db->like('p.post_title', $st);
+				$this->db->or_like('c.company_name', $st);
+				$this->db->or_like('s.sub_category_name', $st);
+				$this->db->or_like('ca.category_name', $st);
+				$this->db->or_like('ct.city_name', $st);
+				$this->db->or_like('pr.province_name', $st);
 			}
 			
-			foreach ($kategori as $kat) {
-				if ($kat == 'default') {
-					break;
-				}
-				$this->db->or_where('p.id_job_category',$kat);	
+			if ($lok !== 'default') {
+				$this->db->where('l.id_province',$lok);
+			}
+
+			if ($kat !== 'default') {
+				$this->db->where('s.id_category',$kat);			
 			}
 
 			if ($order_by == '' || $sort == '') {
@@ -373,17 +370,14 @@
 		    }
 		}
 
-		function refine_search_record_count($st,$lokasi,$kategori) {
-			if ($st == "NIL") {
-				$st = "";
-			}
-
+		function refine_search_record_count($st,$lok,$kat) {
 			$this->db->select('
 				p.id_post as id_post, 
 				p.post_title as post_title,
 				p.id_company as id_company,
 				ci.avatar as avatar,
 				c.company_name as company_name,
+				c.username as username,
 				p.id_job_category as id_job_category,
 				s.sub_category_name as sub_category_name,
 				ca.category_name as category_name,
@@ -392,32 +386,37 @@
 				p.file as file,
 				p.file_desc as file_desc,
 				p.created_time as created_time,
-				p.deadline as deadline
+				p.deadline as deadline,
+				p.id_location as id_location,
+				ct.city_name as  city_name,
+				pr.province_name as province_name
 				');
 			$this->db->from('job_post as p');
 			$this->db->join('company as c', 'p.id_company = c.id_company');
 			$this->db->join('job_sub_categories as s', 'p.id_job_category = s.id_sub_category');
 			$this->db->join('job_categories as ca', 's.id_category = ca.id_category');
 			$this->db->join('c_identity as ci', 'c.id_company = ci.id_company');
-			$this->db->like('p.post_title', $st);
-			$this->db->or_like('c.company_name', $st);
-			$this->db->or_like('s.sub_category_name', $st);
-			$this->db->or_like('ca.category_name', $st);
-
-			foreach ($lokasi as $lok) {
-				if ($lok == 'default') {
-					break;
-				}
-				$this->db->or_where('p.id_location',$lok);
-			}
+			$this->db->join('location as l', 'p.id_location = l.id_city', 'left');
+			$this->db->join('city as ct', 'l.id_city = ct.id_city', 'left');
+			$this->db->join('province as pr', 'l.id_province = pr.id_province', 'left');
 			
-			foreach ($kategori as $kat) {
-				if ($kat == 'default') {
-					break;
-				}
-				$this->db->or_where('p.id_job_category',$kat);	
+			if ($st !== "") {
+				$this->db->like('p.post_title', $st);
+				$this->db->or_like('c.company_name', $st);
+				$this->db->or_like('s.sub_category_name', $st);
+				$this->db->or_like('ca.category_name', $st);
+				$this->db->or_like('ct.city_name', $st);
+				$this->db->or_like('pr.province_name', $st);
 			}
 
+			if ($lok !== 'default') {
+				$this->db->where('l.id_province',$lok);
+			}
+
+			if ($kat !== 'default') {
+				$this->db->where('s.id_category',$kat);			
+			} 
+		
 			$query = $this->db->get();
         	return $query->num_rows();
 		}
@@ -452,13 +451,15 @@
 			$this->db->join('job_sub_categories as s', 'p.id_job_category = s.id_sub_category');
 			$this->db->join('job_categories as ca', 's.id_category = ca.id_category');
 			$this->db->join('c_identity as ci', 'c.id_company = ci.id_company');
-			$this->db->join('city as ct', 'p.id_location = ct.id_city', 'left');
-			$this->db->join('location as l', 'ct.id_city = l.id_city', 'left');
+			$this->db->join('location as l', 'p.id_location = l.id_city', 'left');
+			$this->db->join('city as ct', 'l.id_city = ct.id_city', 'left');
 			$this->db->join('province as pr', 'l.id_province = pr.id_province', 'left');
 			$this->db->like('p.post_title', $st);
 			$this->db->or_like('c.company_name', $st);
 			$this->db->or_like('s.sub_category_name', $st);
 			$this->db->or_like('ca.category_name', $st);
+			$this->db->or_like('ct.city_name', $st);
+			$this->db->or_like('pr.province_name', $st);
 
 			$query = $this->db->get();
         	return $query->num_rows();

@@ -70,7 +70,7 @@ class Jobs extends CI_Controller {
 		$this->session->unset_userdata('lokasi');
 		$this->session->unset_userdata('kategori');
 		// $this->session->unset_userdata('keyword');
-
+		$search = false;
 		// Initialize empty array.
 		$config = array();
 		// Set base_url for every links
@@ -78,7 +78,7 @@ class Jobs extends CI_Controller {
 		// Set total rows in the result set you are creating pagination for.
 		$config["total_rows"] = $this->Job->record_count();
 		// Number of items you intend to show per page.
-		$config["per_page"] = 1;
+		$config["per_page"] = 10;
 		//Set that how many number of pages you want to view.
 		$config['num_links'] = $config["total_rows"];
 
@@ -119,7 +119,8 @@ class Jobs extends CI_Controller {
     		'cat_data' => $cat_data,
     		'prov_data' => $prov_data,
     		'page' => $page,
-    		'rows' => $config["total_rows"]
+    		'rows' => $config["total_rows"],
+    		'search' => $search
     		);
 
 		$this->load->view('html_head', $data);
@@ -138,7 +139,7 @@ class Jobs extends CI_Controller {
 		}
 
 		$keyword = ($this->session->userdata('keyword')) ? $this->session->userdata('keyword') : $keyword;
-
+		$search = true;
 		//PAGINATION SETUP
 		// Initialize empty array.
 		$config = array();
@@ -147,19 +148,11 @@ class Jobs extends CI_Controller {
 		// Set total rows in the result set you are creating pagination for.
 		$config["total_rows"] = $this->Job->search_record_count($keyword);
 		// Number of items you intend to show per page.
-		$config["per_page"] = 1;
+		$config["per_page"] = 10;
 		//Set that how many number of pages you want to view.
 		$config['num_links'] = $config["total_rows"];
 
-        // $config['base_url'] = site_url("Jobs/search/$keyword/");
-        // $config['total_rows'] = $this->Job->search_record_count($keyword);
-        // $config['per_page'] = "1";
         $config["uri_segment"] = 4;
-        // $choice = $config["total_rows"]/$config["per_page"];
-        // $config["num_links"] = floor($choice);
-        // $config['use_page_numbers'] = true;
-        // $config['page_query_string'] = false;
-        // $config['enable_query_strings'] = false;
 
         //PAGINATION VIEW
         $config['full_tag_open'] = '<ul class="pagination text-center">';
@@ -193,12 +186,14 @@ class Jobs extends CI_Controller {
 
         $data = array(
     		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
+    		'total_rows' => $config["total_rows"],
     		'job_data' => $this->Job->search_all($config["per_page"], $page, $keyword, $order_by, $sort),
     		'links' => explode('&nbsp;',$str_links),
     		'keyword' => $keyword,
     		'cat_data' => $cat_data,
     		'prov_data' => $prov_data,
-    		'keyword' => $keyword
+    		'keyword' => $keyword,
+    		'search' => $search
     		);
 
 		$this->load->view('html_head', $data);
@@ -208,30 +203,38 @@ class Jobs extends CI_Controller {
 	}
 
 	public function refine_search() {
-		if ($this->input->post('refine') !== false && false !== $this->input->post('location') && false !== $this->input->post('category')) {
-			if (!empty($this->input->post('location')) && !empty($this->input->post('category'))) {
-				$lokasi = $this->input->post('location');
-				$kategori = $this->input->post('category');	
-				$sess_array2 = array(
-					'kategori' => $kategori,
-					'lokasi' => $lokasi 
+		if ($this->input->post('refine') !== false) {
+			$keyword = ($this->input->post('refine_search')) ? $this->input->post('refine_search') : "";
+			$lokasi = $this->input->post('location');
+			$kategori = $this->input->post('category');
+		
+			if (false !== $this->input->post('refine')) {
+				$sess = array(
+					'refine_keyword' => $this->input->post('refine_search'),
+					'lokasi' => $lokasi,
+					'kategori' => $kategori
 					);
-				$this->session->set_userdata($sess_array2);
+				$this->session->set_userdata($sess);	
 			}
 
-			$keyword = ($this->input->post('refine_search')) ? $this->input->post('refine_search') : "NIL";
+			$keyword = ($this->session->userdata('refine_keyword')) ? $this->session->userdata('refine_keyword') : $keyword;
+			$lokasi = ($this->session->userdata('lokasi')) ? $this->session->userdata('lokasi') : $lokasi;
+			$kategori = ($this->session->userdata('kategori')) ? $this->session->userdata('kategori') : $kategori;
 
-			$keyword = ($this->uri->segment(3)) ? $this->uri->segment(3) : $keyword;
+			$search = "refine";
+			//PAGINATION SETUP
+			// Initialize empty array.
+			$config = array();
+			// Set base_url for every links
+			$config["base_url"] = base_url()."Jobs/refine_search/$keyword/";
+			// Set total rows in the result set you are creating pagination for.
+			$config["total_rows"] = $this->Job->refine_search_record_count($keyword,$lokasi,$kategori);
+			// Number of items you intend to show per page.
+			$config["per_page"] = 10;
+			//Set that how many number of pages you want to view.
+			$config['num_links'] = $config["total_rows"];
 
-	        $config['base_url'] = site_url("Jobs/refine_search/$keyword/");
-	        $config['total_rows'] = $this->Job->refine_search_record_count($keyword, $lokasi, $kategori);
-	        $config['per_page'] = "1";
 	        $config["uri_segment"] = 4;
-	        $choice = $config["total_rows"]/$config["per_page"];
-	        $config["num_links"] = floor($choice);
-	        $config['use_page_numbers'] = true;
-	        $config['page_query_string'] = false;
-	        $config['enable_query_strings'] = false;
 
 	        //PAGINATION VIEW
 	        $config['full_tag_open'] = '<ul class="pagination text-center">';
@@ -247,7 +250,8 @@ class Jobs extends CI_Controller {
 	        // $config["first_url"] = base_url()."Jobs/search/page/1";
 
 	        $this->pagination->initialize($config);
-	        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+	        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+	        $str_links = $this->pagination->create_links();
 
 	        $order_by = '';
 	        $sort = '';
@@ -263,25 +267,22 @@ class Jobs extends CI_Controller {
 			$prov_data = $this->Location->get_all_prov(); 
 
 	        $data = array(
-	    		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
+	    		'title' => "Refine search | SambilKerja.com",
+	    		'total_rows' => $config["total_rows"],
 	    		'job_data' => $this->Job->refine_search($config["per_page"], $page, $keyword, $order_by, $sort, $lokasi, $kategori),
-	    		'links' => $this->pagination->create_links(),
+	    		'links' => explode('&nbsp;',$str_links),
 	    		'keyword' => $keyword,
 	    		'cat_data' => $cat_data,
-	    		'prov_data' => $prov_data
+	    		'prov_data' => $prov_data,
+	    		'keyword' => $keyword,
+	    		'search' => $search
 	    		);
 
 			$this->load->view('html_head', $data);
 			$this->load->view('header', $data);
 			$this->load->view('content/job-list', $data);
-			$this->load->view('footer', $data);	
-		} else {
-			$this->session->set_flashdata(
-				'msg', 
-				'Lakukan refine search dengan mengisikan kolom pencarian, kategori dan lokasi.');
-			redirect('Jobs','refresh');
-		}
-		
+			$this->load->view('footer', $data);
+		} 
 	}
 
 	public function new_job()

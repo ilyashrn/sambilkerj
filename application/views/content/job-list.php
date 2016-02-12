@@ -10,7 +10,6 @@
     });
   });
 </script><!-- CONTENT -->
-<?php echo $this->session->userdata('keyword');?>
 <div id="page-content">
     <div id="page-header">
         <div class="container">
@@ -31,65 +30,20 @@
               <input type="search" name="refine_search" placeholder="Masukkan kata kunci" style="margin-bottom:10px;">
               <!-- <input type="submit" name="submit" value="" style="position: absolute; left: -9999px"> -->
               <span>Lokasi Pekerjaan</span>
-              <select name="location[]" id="location" multiple="multiple">
-                <option selected="selected" value="default">Semua Lokasi Pekerjaan</option>
+              <select name="location" id="location">
+                <option <?php echo ($this->session->userdata('lokasi') == 'default') ? 'selected="selected"': '';?> value="default">Semua Lokasi Pekerjaan</option>
                 <?php
-                foreach ($prov_data as $prov) { //PROVINCE LOOPING
-                  $cur_id = $prov->id_province;
-                  $cities = $this->Location->get_cities($cur_id); ?>
-                  <optgroup label="<?php echo $prov->province_name; ?>"> 
-                  <?php
-                  foreach ($cities as $city) { ?> //CITY IN CURRENT PROVINCE LOOPING 
-                    <option value="<?php echo $city->id_city; ?>"
-                    <?php
-                      if ($this->session->userdata('lokasi') !== false) {
-                         foreach ($this->session->userdata('lokasi') as $lok) {
-                          if ($city->id_city == $lok) {
-                            echo 'selected="selected"';
-                          }
-                        }
-                       }  ?>
-                    ><?php echo $city->city_name;?></option>   
+                  foreach ($prov_data as $prov) { ?> //CITY IN CURRENT PROVINCE LOOPING 
+                    <option <?php echo ($this->session->userdata('lokasi') == $prov->id_province) ? 'selected="selected"': '';?> value="<?php echo $prov->id_province;?>"><?php echo $prov->province_name;?></option>   
                   <?php }
-                  ?>
-                  </optgroup>
-                  <?php } 
                   ?>
               </select>
               <span>Kategori Pekerjaan</span>
-              <select name="category[]" id="category" multiple="multiple">
-                <option value="default" 
-                <?php 
-                  if ($this->session->userdata('kategori') !== false) {
-                    foreach ($this->session->userdata('kategori') as $kat) {
-                      if ($kat == 'default') {
-                        echo 'selected="selected"'; 
-                      }
-                    }
-                  } else {
-                    echo 'selected="selected"';
-                  } 
-                ?>
-                >Semua Kategori Pekerjaan</option>
+              <select name="category" id="category" >
+                <option <?php echo ($this->session->userdata('kategori') == 'default') ? 'selected="selected"': '';?> value="default">Semua Kategori Pekerjaan</option>
                   <?php
-                  foreach ($cat_data as $cat) {
-                    $cur_id = $cat->id_category;
-                    $sub_cat = $this->Job->get_subs($cur_id);
-                  ?>
-                    <optgroup label="<?php echo $cat->category_name; ?>"> 
-                      <?php foreach ($sub_cat as $sub) { ?> 
-                      <option value="<?php echo $sub->id_sub_category; ?>"
-                        <?php 
-                          if ($this->session->userdata('kategori') !== false) {
-                             foreach ($this->session->userdata('kategori') as $kat) {
-                              if ($sub->id_sub_category == $kat) {
-                                echo 'selected="selected"';
-                              }
-                            }  
-                          } ?>
-                      ><?php echo $sub->sub_category_name; ?></option>
-                      <?php } ?>
-                    </optgroup>
+                  foreach ($cat_data as $cat) { ?>
+                      <option <?php echo ($this->session->userdata('kategori') == $cat->id_category) ? 'selected="selected"': '';?> value="<?php echo $cat->id_category; ?>"><?php echo $cat->category_name; ?></option>
                   <?php } ?>
               </select>
               <input name="refine" type="submit" value="Cari Pekerjaan">
@@ -108,7 +62,13 @@
               </div>
               <div class="col-sm-4">
                 <?php
-                echo form_open('Jobs/lists/');
+                if ($search == false) {
+                  echo form_open('Jobs/lists/');
+                } elseif ($search == true) {
+                  echo form_open('Jobs/search/');
+                } elseif ($search == 'refine') {
+                  echo form_open('Jobs/refine_search');
+                }
                 ?>
                 <select name="sort_by" onchange='this.form.submit();'>
                   <option <?php echo ($this->session->userdata('order_by') == '1') ? 'selected="selected"': '';?> value="1">Tanggal dibuka</option>
@@ -135,7 +95,12 @@
               </div><!-- text-box -->
           <?php } ?>
           <?php if ($job_data !== false) {
-            foreach ($job_data as $job) {
+                  if ($search == true) { ?>
+                    <div class="text-box">
+                      <p><b>Refine search:</b> Ditemukan <?php echo $total_rows?> hasil pencarian.</p>
+                    </div>
+            <?php } ?>
+            <?php foreach ($job_data as $job) {
               $description = character_limiter($job->description,150);
              ?>
               <div class="job-box service-box style-3 default" style="padding:20px;">
