@@ -389,3 +389,13 @@ input[type="checkbox"] {
 .regrister > a {
     border:1px solid #1cb659;
 }
+
+.login-headline img {
+  width: 30%;
+  margin-bottom: 20px;
+}
+
+.login-headline {
+  margin-bottom: 50px;
+  margin-top: 80px;
+}

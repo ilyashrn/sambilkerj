@@ -38,6 +38,26 @@ class Members extends CI_Controller {
 		}
 	}
 
+	public function login()
+	{
+		if (!empty($this->username)) {
+			redirect('Main','refresh');
+		}
+		$data = array(
+			'title' => 'SambilKerja.com login page');
+		$this->load->view('html_head',$data);
+		$this->load->view('content/login',$data);
+	}
+
+	public function forget_pass()
+	{
+
+		$data = array(
+			'title' => 'Forget Password | SambilKerja.com');
+		$this->load->view('html_head',$data);
+		$this->load->view('content/forget-pass',$data);	
+	}
+
 	public function index($username) 
 	{
 		$check1 = $this->Worker->get('username',$username); //CHECK WETHER USER IS WORKER OR NOT

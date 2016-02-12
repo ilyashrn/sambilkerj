@@ -131,17 +131,22 @@
                   <a style="color:#fff;" class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
                   <div class="dropdown-menu login-dropdown">
                     <div class="dropdown-content">
-                      <?php
-                      echo form_open('in/process');
-                      ?>
-                        Username or E-mail
-                        <input id="user_username" style="margin-bottom: 15px;" type="text" name="name_email" size="30" placeholder="Username or E-mail" />
-                        Password
-                        <input id="user_password" style="margin-bottom: 15px;" type="password" name="password" size="30" placeholder="Password" />
-                        <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" value="1" />
-                        <label class="string optional" for="user_remember_me"> Remember me</label>
-                        <input class="btn btn-primary" style="float: right; font-size: 12px; text-transform: none;" type="submit" name="in" value="Sign me in" />
-                      </form>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <?php
+                          $attributes = array('class' => 'form-horizontal');
+                          echo form_open('in/process', $attributes);
+                          ?>
+                            Username or E-mail
+                            <input id="user_username" style="margin-bottom: 15px;" type="text" name="name_email" size="30" placeholder="Username or E-mail" />
+                            Password
+                            <input id="user_password" style="margin-bottom: 15px;" type="password" name="password" size="30" placeholder="Password" />
+                            <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="remember_me" value="1" />
+                            <label class="string optional" for="user_remember_me"> Remember me</label>
+                            <input class="btn btn-primary" style="float: right; font-size: 14px; font-weight: normal; text-transform: none;" type="submit" name="in" value="SIGN ME IN" />
+                          <?php echo form_close();?>
+                        </div>
+                      </div>
                     </div>
                     <div class="dropdown-footer">
                       <a href="#" style="color: #337ab7;">I forgot my password.</a>

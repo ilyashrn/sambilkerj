@@ -37,13 +37,12 @@
     <div class="col-sm-offset-3 col-sm-6">
 
       <div class="widget widget-search">
-
-        <form name="search" method="get" action="#">
+        <?php echo form_open('Jobs/search/');?>
           <fieldset>
             <input type="search" name="search" placeholder="search...">
             <input type="submit" name="submit" value="">
           </fieldset>
-        </form>
+        <?php echo form_close();?>
 
       </div><!-- widget-search -->
 

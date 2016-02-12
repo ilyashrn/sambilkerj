@@ -97,7 +97,7 @@
           <?php if ($job_data !== false) {
                   if ($search == true) { ?>
                     <div class="text-box">
-                      <p><b>Refine search:</b> Ditemukan <?php echo $total_rows?> hasil pencarian.</p>
+                      <p><b>(Refine) search:</b> Ditemukan <?php echo $total_rows?> hasil pencarian.</p>
                     </div>
             <?php } ?>
             <?php foreach ($job_data as $job) {

@@ -27,7 +27,7 @@ class In extends CI_Controller { //LOGIN CONTROLLER
 				$check2 = $this->Company->log_in($login_id,$pass);
 				
 				if ($check2 == false) { // USERNAME/EMAIL ISN'T IN ANY TABLES
-					redirect($prev_page);
+					redirect('Members/login', 'refresh');
 				}
 				else { //USERNAME/EMAIL IS IN COMPANY
 					foreach ($check2 as $row) { //LOOPING FOR A COMPANY USERNAME
@@ -62,6 +62,12 @@ class In extends CI_Controller { //LOGIN CONTROLLER
 					);
 				redirect($prev_page);
 			}	
+
+			if($this->input->post('remember_me'))
+	        {
+	            $cookie = $this->input->cookie('ci_session'); // we get the cookie
+	            $this->input->set_cookie('ci_session', $cookie, '35580000'); // and add one year to it's expiration
+	        }
 		}
 		else { // SUBMIT BUTTON WASN'T PRESSED
 			redirect($prev_page);
@@ -73,6 +79,10 @@ class In extends CI_Controller { //LOGIN CONTROLLER
 	{
 		// $prev_page = $this->session->userdata('last_page');
 		$this->session->unset_userdata('logged');
+		if ($this->input->cookie('ci_session')) {
+			delete_cookie('ci_session');	
+		}
+
 		$this->session->set_flashdata(
 					'msg', 
 					'Anda sudah logout. Sampai bertemu kembali!'
