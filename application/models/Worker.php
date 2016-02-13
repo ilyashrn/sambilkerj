@@ -19,6 +19,20 @@
       }
     }
 
+    function check_username($username) {
+      $this->db->select('*');
+      $this->db->from('worker');
+      $this->db->where('username', $username);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     function log_in($login_id,$pass) {
       $this->db->select('*');
       $this->db->from('worker');
@@ -210,6 +224,7 @@
 
     function insert($data) { //INSERT WORKER
       $this->db->insert('worker',$data);
+      return $this->db->insert_id();
     }
 
     function insert_identity($data) { //INSERT IDENTITY OF WORKER 
@@ -278,6 +293,21 @@
     function update($data,$where_value) {
       $this->db->where('id_worker',$where_value);
       $this->db->update('worker',$data);
+    }
+
+    function delete_ident($where_value) {
+      $this->db->where('id_worker',$where_value);
+      $this->db->delete('w_identity');      
+    }
+
+    function delete($where_value) {
+      $this->db->where('id_worker',$where_value);
+      $this->db->delete('worker');      
+    }
+
+    function delete_loker($where_value) {
+      $this->db->where('id_worker',$where_value);
+      $this->db->delete('c_hired');       
     }
   }
 ?>

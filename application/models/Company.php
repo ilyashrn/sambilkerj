@@ -22,6 +22,20 @@
       }
     }
 
+    function check_username($username) {
+      $this->db->select('*');
+      $this->db->from('company');
+      $this->db->where('username', $username);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     function update_login($id_company) {
       $datestring = '%Y-%m-%d %h:%i:%s';
       $this->db->set('last_login',mdate($datestring,now('Asia/Jakarta')));
@@ -94,6 +108,7 @@
 
     function insert($data) {
       $this->db->insert('company',$data);
+      return $this->db->insert_id();
     }
 
     function insert_identity($data) {
@@ -103,7 +118,19 @@
     function update($data,$where_value) {
       $this->db->where('id_company',$where_value);
       $this->db->update('company',$data);
-      
+    }
+
+    function delete_hire($where_value) {
+      $this->db->where('id_company',$where_value);
+      $this->db->delete('c_hired');
+    }
+
+    function delete($where_value) {
+      $this->db->where('id_company',$where_value);
+      $this->db->delete('c_identity');      
+
+      $this->db->where('id_company',$where_value);
+      $this->db->delete('company');      
     }
   }
 ?>
