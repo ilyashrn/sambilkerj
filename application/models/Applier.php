@@ -46,7 +46,7 @@
       $this->db->from('c_hired as h');
       $this->db->join('worker as w', 'h.id_worker = w.id_worker');
       $this->db->join('company as c', 'h.id_company = c.id_company');
-      $this->db->join('c_identity as ci', 'c.id_company = ci.id_company');
+      $this->db->join('c_identity as ci', 'c.id_company = ci.id_company','left');
       $this->db->join('c_hired_status as s','h.id_status = s.id_status');
       $this->db->join('job_post as j', 'h.id_job = j.id_post');
       $this->db->where($where_what,$where_value);
@@ -66,8 +66,8 @@
       $this->db->join('worker as w', 'h.id_worker = w.id_worker');
       $this->db->join('w_identity as wi', 'w.id_worker = wi.id_worker');
       $this->db->join('company as c', 'h.id_company = c.id_company');
-      $this->db->join('c_identity as ci', 'c.id_company = ci.id_company');
-      $this->db->join('c_hired_status as s','h.id_status = s.id_status');
+      $this->db->join('c_identity as ci', 'c.id_company = ci.id_company','left');
+      $this->db->join('c_hired_status as s','h.id_status = s.id_status','left');
       $this->db->join('job_post as j', 'h.id_job = j.id_post');
       $this->db->where($where_what,$where_value);
 
@@ -99,6 +99,21 @@
 
     function unapply($id_where) {
       $this->db->where('id_hired',$id_where);
+      $this->db->delete('c_hired');
+    }
+
+    function delete($id_where) {
+      $this->db->where('id_job',$id_where);
+      $this->db->delete('c_hired');
+    }
+
+    function delete_a($id_where) {
+      $this->db->where('id_worker',$id_where);
+      $this->db->delete('c_hired');
+    }
+
+    function delete_c($id_where) {
+      $this->db->where('id_company',$id_where);
       $this->db->delete('c_hired');
     }
 

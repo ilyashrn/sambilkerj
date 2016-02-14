@@ -21150,6 +21150,8 @@ code {
   color: #555555;
   text-decoration: none;
   display: block;
+  float: left;
+  margin: 20px;
 }
 .gallery .gallery-item > img {
   width: 100%;
@@ -21188,12 +21190,12 @@ code {
   width: 47%;
 }
 .gallery .gallery-item:hover {
-  -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+  /*-moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);*/
 }
 .gallery .gallery-item:hover:before {
-  cursor: pointer;
+  /*cursor: pointer;
   content: " ";
   position: absolute;
   left: 0px;
@@ -21220,10 +21222,10 @@ code {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   -webkit-animation: appear 200ms;
-  animation: appear 200ms;
+  animation: appear 200ms;*/
 }
 .gallery .gallery-item:hover:after {
-  cursor: pointer;
+  /*cursor: pointer;
   background: rgba(255, 255, 255, 0.8);
   width: 50px;
   height: 50px;
@@ -21256,7 +21258,7 @@ code {
   -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-animation: appear 200ms;
-  animation: appear 200ms;
+  animation: appear 200ms;*/
 }
 .dev-page-error {
   float: left;

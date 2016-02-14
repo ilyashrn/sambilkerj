@@ -48,6 +48,7 @@ class Jobs extends CI_Controller {
 
 		$data = array(
 			'title' => $post->post_title." | SambilKerja.com",
+			'contacts' => $this->Hcontent->get_all('contacts'),
 			'post_data' => $post_data,
 			'req_skill' => $req_skill,
 			'basic_data' => $basic_data,
@@ -114,13 +115,15 @@ class Jobs extends CI_Controller {
 
     	$data = array(
     		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
+    		'contacts' => $this->Hcontent->get_all('contacts'),
     		'job_data' => $this->Job->get_all($config["per_page"], $page, $order_by, $sort),
     		'links' => explode('&nbsp;',$str_links),
     		'cat_data' => $cat_data,
     		'prov_data' => $prov_data,
     		'page' => $page,
     		'rows' => $config["total_rows"],
-    		'search' => $search
+    		'search' => $search,
+    		'job_count' => $this->Job->record_count()
     		);
 
 		$this->load->view('html_head', $data);
@@ -186,6 +189,7 @@ class Jobs extends CI_Controller {
 
         $data = array(
     		'title' => "Lowongan kerja yang tersedia | SambilKerja.com",
+    		'contacts' => $this->Hcontent->get_all('contacts'),
     		'total_rows' => $config["total_rows"],
     		'job_data' => $this->Job->search_all($config["per_page"], $page, $keyword, $order_by, $sort),
     		'links' => explode('&nbsp;',$str_links),
@@ -268,6 +272,7 @@ class Jobs extends CI_Controller {
 
 	        $data = array(
 	    		'title' => "Refine search | SambilKerja.com",
+	    		'contacts' => $this->Hcontent->get_all('contacts'),
 	    		'total_rows' => $config["total_rows"],
 	    		'job_data' => $this->Job->refine_search($config["per_page"], $page, $keyword, $order_by, $sort, $lokasi, $kategori),
 	    		'links' => explode('&nbsp;',$str_links),
@@ -295,6 +300,7 @@ class Jobs extends CI_Controller {
 
 			$data = array(
 				'title' => "Buka Lowongan baru | SambilKerja.com",
+				'contacts' => $this->Hcontent->get_all('contacts'),
 				'sub_title' => 'Buka Lowongan Baru',
 				'sub_subtitle' => 'Mulai Lowongan Baru',
 				'cat_data' => $cat_data,
@@ -325,6 +331,7 @@ class Jobs extends CI_Controller {
 
 			$data = array(
 				'title' => "Edit Lowongan | SambilKerja.com",
+				'contacts' => $this->Hcontent->get_all('contacts'),
 				'sub_title' => "Edit Lowongan",
 				'sub_subtitle' => "Perbarui Lowongan Lama",
 				'cat_data' => $cat_data,
@@ -450,6 +457,7 @@ class Jobs extends CI_Controller {
 		$poster = $this->Job->get_poster($id_post);
 		foreach ($poster as $poster ) {}
 		if ($this->mem_id == $poster->id_company) {
+			$this->Applier->delete_c($id_post);
 			$rem_skill = $this->Job->delete_skill($id_post);
 			$rem_post = $this->Job->delete($id_post);
 			

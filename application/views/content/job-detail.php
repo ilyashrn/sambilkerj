@@ -16,7 +16,7 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
       container: 'body',
       html:true,
       title:"Anda akan mendaftar pekerjaan ini",
-      template: '<div class="popover" role="tooltip">'
+      template: '<div class="popover" role="tooltip" style="z-index:0;">'
                   +'<div class="arrow"> </div>'
                   +'<form method="post" action="../../../Workers/applying/1/<?php echo $post->id_post.'/'.$this->session->userdata('mem_id').'/'.$basic_row->id_company;?>">'
                   +'<h3 class="popover-title"></h3>'
@@ -108,7 +108,7 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
               </div><!-- about-me-image -->
               <div class="col-sm-7">
                 <span><a href="../../../Members/<?php echo $basic_row->username;?>"><?php echo $post->company_name; ?></a></span>
-                <p><?php echo $basic_row->email.'<br>'.$row->telp_number;?></p>
+                <p><?php echo ($ident_data) ? $basic_row->email.'<br>'.$row->telp_number : $basic_row->email;?></p>
               </div>
             </div>
             <a class="profil-job" href="../../../Members/<?php echo $basic_row->username;?>"><?php echo $post_count;?> Pekerjaan tersedia di <?php echo $post->company_name?></a>
@@ -128,8 +128,8 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
               <button disabled type="button" data-toggle="tooltip" data-placement="top" title="Perusahaan tidak bisa melamar" id="daftar" class="btn btn-orange">Daftar pekerjaan ini</button>
           <?php } elseif ($mem_type == 'W') { ?>
             <button data-content=
-              'Lamaran berdasarkan profil yang sudah anda isi akan dikirimkan ke pihak perusahaan. <a href="../../members/$this->session->userdata("logged");">Cek kembali profil anda</a>. <br><br><input type="checkbox" name="terms" value="1">Saya sudah membaca <a href="">ketentuan dan syarat yang berlaku</a>' 
-              data-placement="right"  data-toggle="popover" class="btn btn-orange">
+              'Lamaran berdasarkan profil yang sudah anda isi akan dikirimkan ke pihak perusahaan. <a href="../../../members/<?php echo $this->session->userdata("logged");?>">Cek kembali profil anda</a>. <br><br><input type="checkbox" name="terms" value="1">Saya sudah membaca <a type="button" data-toggle="modal" data-target="#syarat"  href="">ketentuan dan syarat yang berlaku</a>' 
+              tabindex="0" data-placement="right" data-toggle="popover" class="btn btn-orange">
               Daftar pekerjaan ini
             </button>
           <?php }

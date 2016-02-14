@@ -197,7 +197,7 @@ class Workers extends CI_Controller {
 					'msg', 
 					'Informasi <b>riwayat pendidikan</b> berhasil diperbarui!'
 					);
-			redirect('Members/'.$this->username,'refresh');
+			redirect('Members/edit_w/PP/'.$this->username,'refresh');
 		}	
 	}
 
@@ -215,7 +215,7 @@ class Workers extends CI_Controller {
 					'msg', 
 					'Informasi <b>riwayat pekerjaan</b> berhasil diperbarui!'
 					);
-			redirect('Members/'.$this->username,'refresh');
+			redirect('Members/edit_w/PP/'.$this->username,'refresh');
 		}
 	}
 
@@ -232,7 +232,7 @@ class Workers extends CI_Controller {
 					'msg', 
 					'Informasi <b>riwayat pelatihan</b> berhasil diperbarui!'
 					);
-			redirect('Members/'.$this->username,'refresh');
+			redirect('Members/edit_w/PP/'.$this->username,'refresh');
 		}
 	}
 
@@ -240,7 +240,7 @@ class Workers extends CI_Controller {
 		if (!empty($this->mem_id) && false !== $this->input->post('ins_ach')) {
 			$ach_data = array(
 				'id_worker' => $this->mem_id,
-				'achievement' => $this->input->post('achievement'),
+				'ach_name' => $this->input->post('achievement'),
 				'institution' => $this->input->post('institution'),
 				'year' => $this->input->post('year')
 				 );
@@ -249,7 +249,7 @@ class Workers extends CI_Controller {
 					'msg', 
 					'Informasi <b>riwayat prestasi</b> berhasil diperbarui!'
 					);
-			redirect('Members/'.$this->username,'refresh');
+			redirect('Members/edit_w/PP/'.$this->username,'refresh');
 		}
 	}
 
@@ -276,6 +276,15 @@ class Workers extends CI_Controller {
 		$this->session->set_flashdata(
 					'msg', 
 					'<b>Riwayat pelatihan</b> berhasil dihapus!'
+					);
+		redirect('Members/edit_w/PP/'.$this->username,'refresh');
+	}	
+
+	function removing_ach($id_w_ach) {
+		$remove_exp = $this->Worker->remove_ach($id_w_ach);
+		$this->session->set_flashdata(
+					'msg', 
+					'<b>Riwayat prestasi</b> berhasil dihapus!'
 					);
 		redirect('Members/edit_w/PP/'.$this->username,'refresh');
 	}	
@@ -334,5 +343,36 @@ class Workers extends CI_Controller {
 					'<b>Anda berhasil membatalkan lowongan pekerjaan!</b>'
 					);
 		redirect('Members/'.$this->username,'refresh');
+	}
+
+	function del_ac() {
+		if ($this->Worker->log_in($this->input->post('username'), md5($this->input->post('password')))) {
+			$this->Applier->delete_a($this->mem_id);
+			$this->Worker->delete_edu($this->mem_id);
+			$this->Worker->delete_exp($this->mem_id);
+			$this->Worker->delete_ach($this->mem_id);
+			$this->Worker->remove_lang($this->mem_id);
+			$this->Worker->remove_skill($this->mem_id);
+			$this->Worker->delete_train($this->mem_id);
+			$this->Worker->delete_loker($this->mem_id);
+
+			$this->Worker->delete_ident($this->mem_id);
+			$this->Worker->delete($this->mem_id);		
+
+			$this->session->set_flashdata(
+								'msg', 
+								'Akun berhasil dihapus. Feel free to join <b>SambilKerja</b> again!'
+								);
+			if ($this->input->cookie('ci_session')) {
+				delete_cookie('ci_session');	
+			}
+			redirect('Main','refresh');	
+		} else {
+			$this->session->set_flashdata(
+								'msg', 
+								'Username, e-mail, atau password yang anda masukkan salah'
+								);
+			redirect('Members/edit_w/PA/'.$this->username,'refresh');	
+		}
 	}
 }

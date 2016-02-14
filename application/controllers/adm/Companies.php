@@ -60,7 +60,7 @@ class Companies extends CI_Controller {
 		}
 
 		$data = array(
-			'title' => 'Edit user | FSMS',
+			'title' => 'Edit user | SambilKerja Admin Panel',
 			'username' => $username,
 			'basic_data' => $basic_data,
 			'ident_data' => $ident_data,
@@ -119,7 +119,7 @@ class Companies extends CI_Controller {
 			$update = $this->Company->update($pass,$id);	
 		}
 
-		if ($this->input->post('avatar') !== '') {
+		if ($_FILES['avatar']['size'] !== 0) {
 			$config['upload_path'] = './images/profil_photo/';
 			$config['allowed_types'] = 'gif|jpg|png';
 			$config['encrypt_name'] = TRUE;
@@ -148,9 +148,11 @@ class Companies extends CI_Controller {
 	{
 		$this->Company->delete_hire($id_user);
 		$posts = $this->Job->get_per_comp($id_user);
-		foreach ($posts as $post) {
-			$this->Job->delete_skill($post->id_post);
-			$this->Job->delete($post->id_post);
+		if ($posts) {
+			foreach ($posts as $post) {
+				$this->Job->delete_skill($post->id_post);
+				$this->Job->delete($post->id_post);
+			}	
 		}
 
 		$this->Company->delete($id_user);		

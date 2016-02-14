@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4>Lowongan pekerjaan terbuka</h4>
+                    <h4><?php echo $job_count; ?> Lowongan pekerjaan terbuka</h4>
                 </div><!-- col -->
             </div><!-- row -->
         </div><!-- container -->
@@ -42,8 +42,15 @@
               <select name="category" id="category" >
                 <option <?php echo ($this->session->userdata('kategori') == 'default') ? 'selected="selected"': '';?> value="default">Semua Kategori Pekerjaan</option>
                   <?php
-                  foreach ($cat_data as $cat) { ?>
-                      <option <?php echo ($this->session->userdata('kategori') == $cat->id_category) ? 'selected="selected"': '';?> value="<?php echo $cat->id_category; ?>"><?php echo $cat->category_name; ?></option>
+                  foreach ($cat_data as $cat) {
+                    $cur_id = $cat->id_category;
+                    $sub_cat = $this->Job->get_subs($cur_id);
+                  ?>
+                    <optgroup label="<?php echo $cat->category_name;  ?>"> 
+                      <?php foreach ($sub_cat as $sub) { ?> 
+                      <option <?php echo ($this->session->userdata('kategori') == $sub->id_sub_category) ? 'selected="selected"': '';?>  value="<?php echo $sub->id_sub_category; ?>"><?php echo $sub->sub_category_name; ?></option>
+                      <?php } ?>
+                    </optgroup>
                   <?php } ?>
               </select>
               <input name="refine" type="submit" value="Cari Pekerjaan">

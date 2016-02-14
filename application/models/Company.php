@@ -22,6 +22,14 @@
       }
     }
 
+    function record_count() {
+      $this->db->select('*');
+      $this->db->from('company');
+
+      $query = $this->db->get();
+      return $query->num_rows();
+    }
+
     function check_username($username) {
       $this->db->select('*');
       $this->db->from('company');

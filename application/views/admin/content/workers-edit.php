@@ -255,17 +255,14 @@ if ($ident_data !== false) {
                                                 </div>
                                                 <div class="panel-body" style="line-height: 20px;">
                                                     <div class="col-md-6">
-                                                        <b>Rating</b> <label class="label label-success"><?php echo $job->stars;?></label>
-                                                        <br>
-                                                        <b>Review</b> <br>
-                                                        <label class="label label-success"><?php echo($job->review) ? '"'.$job->review.'"' : '-'?></label>    <br>
-                                                        <b>Tanggal direview</b>
-                                                        <label class="label label-primary"><?php echo ($job->review_date) ? date('j M Y', strtotime($job->review_date)) : 'Belum dirating';?></label>
+                                                        <b>Tanggal review dan rating:</b> <?php echo ($job->review_date) ? date('j M Y', strtotime($job->review_date)) : 'Belum dirating';?></i><br>
+                                                        <i><b>Rating</b> <?php echo $job->stars;?><br>
+                                                        <b>Review:</b><br> <?php echo($job->review) ? '"'.$job->review.'"' : '-'?>
                                                     </div>
                                                     <div class="col-md-6">  
-                                                        <b>Tanggal melamar</b> <label class="label label-primary"><?php echo date('j M Y', strtotime($job->hire_date));?></label><br>
-                                                        <b>Status</b> <label class="label <?php echo 'label-'.$job->label;?>"><?php echo $job->status;?></label><br>
-                                                        <b>Gaji yang ditawarkan</b> <label class="label label-primary">IDR <?php setlocale(LC_MONETARY, 'id_ID'); echo number_format($job->salary) ;?></label>
+                                                        <i><b>Tanggal melamar:</b> <?php echo date('j M Y', strtotime($job->hire_date));?></label><br>
+                                                        <b>Status:</b> <?php echo $job->status;?><br>
+                                                        <b>Gaji yang ditawarkan:</b> IDR <?php setlocale(LC_MONETARY, 'id_ID'); echo number_format($job->salary) ;?></i>
                                                     </div>
                                                     <div class="col-md-5" style="margin-top: 30px;">
                                                         <?php

@@ -179,16 +179,18 @@ class Companies extends CI_Controller {
 
 	function rate(){
 		if (!empty($this->mem_id) && $this->input->post('ra') !== false) {
-		$input = array(
-			'stars' => $this->input->post('rating'),
-			'review' => $this->input->post('review')
-			 );	
+			$datestring = '%Y-%m-%d %h:%i:%s';
+			$input = array(
+				'stars' => $this->input->post('rating'),
+				'review' => $this->input->post('review'),
+				'review_date' => mdate($datestring,now())
+				 );	
+			$review = $this->Applier->update($input,$this->input->post('id'));
+			$this->session->set_flashdata(
+						'msg', 
+						'<b>Review untuk '.$this->input->post('fullname').'</b> berhasil diberikan!'
+						);
+			redirect('Members/'.$this->username,'refresh');		
 		}
-		$review = $this->Applier->update($input,$this->input->post('id'));
-		$this->session->set_flashdata(
-					'msg', 
-					'<b>Review untuk '.$this->input->post('fullname').'</b> berhasil diberikan!'
-					);
-		redirect('Members/'.$this->username,'refresh');		
 	}
 }

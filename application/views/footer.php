@@ -7,7 +7,7 @@
             <div class="col-sm-6">
               <div class="widget widget-text">
                 <div>
-                  <p>Ilyas Habiburrahman powered by Dakota &copy; 2016. All Rights Reserved</p>
+                  <p>Sambilkerja &copy; 2016. All Rights Reserved</p>
                 </div>
               </div><!-- widget-text -->
             </div><!-- col -->

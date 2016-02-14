@@ -19,6 +19,14 @@
       }
     }
 
+    function record_count() {
+      $this->db->select('*');
+      $this->db->from('worker');
+
+      $query = $this->db->get();
+      return $query->num_rows();
+    }
+
     function check_username($username) {
       $this->db->select('*');
       $this->db->from('worker');
@@ -263,12 +271,22 @@
       $this->db->delete('w_education');
     }
 
+    function delete_edu($where_value) { //REMOVE OR CLEAN EDUCATION OF WORKER
+      $this->db->where('id_worker',$where_value);
+      $this->db->delete('w_education');
+    }
+
     function insert_exp($data) { //INSERT EXPERIENCE OF WORKER
       $this->db->insert('w_experience',$data);
     }
 
     function remove_exp($where_value) { //REMOVE OR CLEAN EXPERIENCE OF WORKER
       $this->db->where('id_w_experience',$where_value);
+      $this->db->delete('w_experience');
+    }
+
+    function delete_exp($where_value) { //REMOVE OR CLEAN EXPERIENCE OF WORKER
+      $this->db->where('id_worker',$where_value);
       $this->db->delete('w_experience');
     }
 
@@ -281,12 +299,22 @@
       $this->db->delete('w_training');
     }
 
+    function delete_train($where_value) { //REMOVE OR CLEAN EXPERIENCE OF WORKER
+      $this->db->where('id_worker',$where_value);
+      $this->db->delete('w_training');
+    }
+
     function insert_ach($data) { //INSERT EXPERIENCE OF WORKER
       $this->db->insert('w_achievement',$data);
     }
 
     function remove_ach($where_value) { //REMOVE OR CLEAN EXPERIENCE OF WORKER
       $this->db->where('id_w_achievement',$where_value);
+      $this->db->delete('w_achievement');
+    }
+
+    function delete_ach($where_value) { //REMOVE OR CLEAN EXPERIENCE OF WORKER
+      $this->db->where('id_worker',$where_value);
       $this->db->delete('w_achievement');
     }
 

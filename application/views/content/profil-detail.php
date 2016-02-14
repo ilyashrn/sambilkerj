@@ -10,7 +10,6 @@ if ($ident_data !== false) {
   if ($pob_data !== false) {
     foreach ($pob_data as $pob) {}
   }
-
 }
 ?>
 <div id="page-content">
@@ -152,9 +151,9 @@ if ($ident_data !== false) {
                     if ($ach_data == false) {
                       echo '-'; }
                     else { 
-                      foreach ($train_data as $train) { ?>
+                      foreach ($ach_data as $ach) { ?>
                         <div class="edu-div col-md-5">
-                          <h4><?php echo $ach->course_name.' ('.$ach->year.')'; ?></h4>
+                          <h4><?php echo $ach->ach_name.' ('.$ach->year.')'; ?></h4>
                           <h5><?php echo 'Dianugerahkan oleh: '.$ach->institution; ?></h5>
                         </div>
                       <?php } } ?>
@@ -218,9 +217,14 @@ if ($ident_data !== false) {
                     foreach ($job_data as $job) { ?>
                     <div class="col-sm-12 job-profil-box service-box style-3 default" style="padding:10px;margin-bottom:10px;">
                       <div class="col-sm-2 post-owner">
-                        <img src="<?php echo base_url().'images/profil_photo/'.$job->avatar?>" style="width:100%;">
+                        <?php if ($job->avatar == '') { ?>
+                          <img src="<?php echo base_url().'images/nobody.jpg'?>" style="width:80%;float: left;">
+                        <?php } else{ ?>
+                          <a href="<?php echo $job->username;?>"><img src="<?php echo base_url().'images/profil_photo/'.$job->avatar?>" style="width:80%;float: left;"></a>
+                        <?php }
+                        ?>
                       </div>
-                      <span><a href="../Jobs/detail/<?php echo $job->id_post;?>"><strong><?php echo $job->post_title;?></strong></a></span>
+                      <span><a href="../Jobs/detail/<?php echo $job->id_post.'/'.$job->post_title;?>"><strong><?php echo $job->post_title;?></strong></a></span>
                       <span class="small-span"><?php echo $job->created_time;?></span><br>
                       <div class="col-sm-7 i-div">  
                         <i class="mt-icon-timetable"></i> <b>Tanggal melamar:</b> <label class="label label-primary"><?php echo date('j M Y', strtotime($job->hire_date));?></label>

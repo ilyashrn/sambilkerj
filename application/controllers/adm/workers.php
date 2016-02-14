@@ -73,7 +73,7 @@ class Workers extends CI_Controller {
 		}
 
 		$data = array(
-			'title' => 'Edit user | FSMS',
+			'title' => 'Edit user | SambilKerja Admin Panel',
 			'username' => $username,
 			'fullname' => $fullname,
 			'basic_data' => $basic_data,
@@ -143,7 +143,7 @@ class Workers extends CI_Controller {
 			$update = $this->Worker->update($pass,$id);	
 		}
 
-		if ($this->input->post('avatar') !== '') {
+		if ($_FILES['avatar']['size'] !== 0) {
 			$config['upload_path'] = './images/profil_photo/';
 			$config['allowed_types'] = 'gif|jpg|png';
 			$config['encrypt_name'] = TRUE;
@@ -191,11 +191,13 @@ class Workers extends CI_Controller {
 
 	public function deleting($id_user)
 	{
-		$this->Worker->remove_edu($id_user);
-		$this->Worker->remove_exp($id_user);
-		$this->Worker->remove_ach($id_user);
+		$this->Applier->delete_a($id_user);
+		$this->Worker->delete_edu($id_user);
+		$this->Worker->delete_exp($id_user);
+		$this->Worker->delete_ach($id_user);
 		$this->Worker->remove_lang($id_user);
-		$this->Worker->remove_train($id_user);
+		$this->Worker->remove_skill($id_user);
+		$this->Worker->delete_train($id_user);
 		$this->Worker->delete_loker($id_user);
 
 		$this->Worker->delete_ident($id_user);

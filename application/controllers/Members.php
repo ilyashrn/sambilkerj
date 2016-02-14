@@ -44,7 +44,9 @@ class Members extends CI_Controller {
 			redirect('Main','refresh');
 		}
 		$data = array(
-			'title' => 'SambilKerja.com login page');
+			'title' => 'SambilKerja.com login page',
+			'contacts' => $this->Hcontent->get_all('contacts')
+			);
 		$this->load->view('html_head',$data);
 		$this->load->view('content/login',$data);
 	}
@@ -73,54 +75,61 @@ class Members extends CI_Controller {
 						$this->mem_id = $key->id_worker;	
 					}
 					$not_logged = true;
+					$this->session->set_flashdata(
+									'msg', 
+									'<b>Oops!</b> Anda tidak dipekernankan melihat profil pelamar lain.'
+									);
+					redirect('errors/Page_not_found','refresh');
+				} else {
+					//LOAD ALL MEMBER'S DATA
+					$basic_data = $this->Worker->get('username',$username);
+					$ident_data = $this->Worker->get_ident($this->mem_id);
+					$lang_data = $this->Worker->get_lang($this->mem_id);
+					$skill_data = $this->Worker->get_skill($this->mem_id);
+					$edu_data = $this->Worker->get_edu($this->mem_id);
+					$exp_data = $this->Worker->get_exp($this->mem_id);
+					$train_data = $this->Worker->get_train($this->mem_id);
+					$ach_data = $this->Worker->get_ach($this->mem_id);
+					$loc_data = $this->Worker->get_loc($this->mem_id);
+					$pob_data = $this->Worker->get_pob($this->mem_id);
+					$job_data = $this->Applier->get_per_id('h.id_worker',$this->mem_id);
+					$job_count = $this->Applier->count_rows('id_worker',$this->mem_id);
+					$review_data = $this->Applier->get_review('h.id_worker',$this->mem_id);
+					$review_count = $this->Applier->count_rev('id_worker',$this->mem_id);
+
+					foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
+						$this->fullname = $key->fullname;
+					}
+
+					$data = array( //INSERTING DATA FOR VIEW
+						'title' => $this->fullname." | SambilKerja.com",
+						'contacts' => $this->Hcontent->get_all('contacts'),
+						'username' => $username,
+						'fullname' => $this->fullname,
+						'not_logged' => $not_logged,
+						'basic_data' => $basic_data,
+						'ident_data' => $ident_data,
+						'lang_data' => $lang_data,
+						'skill_data' => $skill_data,
+						'edu_data' => $edu_data,
+						'exp_data' => $exp_data,
+						'train_data' => $train_data,
+						'job_data' => $job_data,
+						'job_count' => $job_count,
+						'review_data' => $review_data,
+						'review_count' => $review_count,
+						'loc_data' => $loc_data,
+						'pob_data' => $pob_data,
+						'ach_data' => $ach_data
+						);
+
+					//LOADING VIEWS FOR WORKER PROFIL
+					$this->load->view('html_head', $data);
+					$this->load->view('header', $data);
+					$this->load->view('content/profil-detail', $data);
+					$this->load->view('footer', $data);	
 				}
 
-				//LOAD ALL MEMBER'S DATA
-				$basic_data = $this->Worker->get('username',$username);
-				$ident_data = $this->Worker->get_ident($this->mem_id);
-				$lang_data = $this->Worker->get_lang($this->mem_id);
-				$skill_data = $this->Worker->get_skill($this->mem_id);
-				$edu_data = $this->Worker->get_edu($this->mem_id);
-				$exp_data = $this->Worker->get_exp($this->mem_id);
-				$train_data = $this->Worker->get_train($this->mem_id);
-				$ach_data = $this->Worker->get_ach($this->mem_id);
-				$loc_data = $this->Worker->get_loc($this->mem_id);
-				$pob_data = $this->Worker->get_pob($this->mem_id);
-				$job_data = $this->Applier->get_per_id('h.id_worker',$this->mem_id);
-				$job_count = $this->Applier->count_rows('id_worker',$this->mem_id);
-				$review_data = $this->Applier->get_review('h.id_worker',$this->mem_id);
-				$review_count = $this->Applier->count_rev('id_worker',$this->mem_id);
-
-				foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
-					$this->fullname = $key->fullname;
-				}
-
-				$data = array( //INSERTING DATA FOR VIEW
-					'title' => $this->fullname." | SambilKerja.com",
-					'username' => $username,
-					'fullname' => $this->fullname,
-					'not_logged' => $not_logged,
-					'basic_data' => $basic_data,
-					'ident_data' => $ident_data,
-					'lang_data' => $lang_data,
-					'skill_data' => $skill_data,
-					'edu_data' => $edu_data,
-					'exp_data' => $exp_data,
-					'train_data' => $train_data,
-					'job_data' => $job_data,
-					'job_count' => $job_count,
-					'review_data' => $review_data,
-					'review_count' => $review_count,
-					'loc_data' => $loc_data,
-					'pob_data' => $pob_data,
-					'ach_data' => $ach_data
-					);
-
-				//LOADING VIEWS FOR WORKER PROFIL
-				$this->load->view('html_head', $data);
-				$this->load->view('header', $data);
-				$this->load->view('content/profil-detail', $data);
-				$this->load->view('footer', $data);	
 			}
 			elseif ($check2 !== false) { //IDENTIFY MEMBER (COMPANY)
 				if ($username !== $this->username) { //MEANS THE NOT-LOGGEDIN USER SEES THEIR OWN/OTHERS PROFULE
@@ -144,6 +153,7 @@ class Members extends CI_Controller {
 
 				$data = array( //INSERTING DATA FOR VIEW
 					'title' => $this->fullname." | SambilKerja.com",
+					'contacts' => $this->Hcontent->get_all('contacts'),
 					'username' => $username,
 					'not_logged' => $not_logged,
 					'basic_data' => $basic_data,
@@ -200,6 +210,7 @@ class Members extends CI_Controller {
 			$data = array( //INSERTING DATA FOR VIEW
 				'tab_param' => $tab_param,
 				'title' => $this->fullname." | SambilKerja.com",
+				'contacts' => $this->Hcontent->get_all('contacts'),
 				'username' => $this->username,
 				'basic_data' => $basic_data,
 				'ident_data' => $ident_data,
@@ -250,6 +261,7 @@ class Members extends CI_Controller {
 			$data = array(
 				'tab_param' => $tab_param,
 				'title' => $this->company_name." | SambilKerja.com",
+				'contacts' => $this->Hcontent->get_all('contacts'),
 				'username' => $this->username,
 				'basic_data' => $basic_data,
 				'ident_data' => $ident_data,

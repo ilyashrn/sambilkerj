@@ -1,3 +1,6 @@
+<?php
+foreach ($contacts as $cont) {}
+?>
 <div id="page-wrapper">
   <!-- HEADER -->
   <header>
@@ -9,12 +12,12 @@
               <ul>
                 <li>
                   <i class="mt-icon-telephone1"></i>
-                  <span class="hidden-xs">xxx xxx xxx</span>
-                  <a class="visible-xs-inline" href="tel:2082904995">xxxxxx xxxx </a>
+                  <span class="hidden-xs"><?php echo $cont->telp?></span>
+                  <a class="visible-xs-inline" href="tel:<?php echo $cont->telp?>"><?php echo $cont->telp?> </a>
                 </li>
                 <li>
                   <i class="mt-icon-mail"></i>
-                  <a href="mailto:">customerservice@sambilkerja.com</a>
+                  <a href="mailto:"><?php echo $cont->email;?></a>
                 </li>
               </ul>
             </div><!-- widget-contact -->
@@ -22,9 +25,10 @@
           <div class="col-sm-5">
             <div class="widget widget-social">
               <div class="social-media">
-                <a class="facebook" href="http://www.facebook.com/sambilkerja"><i class="mt-icon-facebook"></i></a>
-                <a class="twitter" href="http://www.twitter.com/sambilkerja"><i class="mt-icon-twitter"></i></a>
-                <a class="google" href="http://wwww.plus.google.com/sambilkerja"><i class="mt-icon-google-plus"></i></a>
+              
+                <a class="facebook" href="<?php echo (strpos($cont->facebook,'http://www.')) ? $cont->facebook : 'http://www.'.$cont->facebook?>"><i class="mt-icon-facebook"></i></a>
+                <a class="twitter" href="http://www.twitter.com/<?php echo $cont->twitter?>"><i class="mt-icon-twitter"></i></a>
+                <a class="google" href="<?php echo (strpos($cont->google,'http://www.')) ? $cont->google : 'http://www.'.$cont->google ?>"><i class="mt-icon-google-plus"></i></a>
               </div><!-- social-media -->
             </div><!-- widget-social -->
           </div><!-- col -->

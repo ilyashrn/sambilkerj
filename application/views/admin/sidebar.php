@@ -32,8 +32,8 @@
                             <img src="<?php echo base_url().'images/nobody.jpg'?>">
                         </div>
                         <div class="profile-info">
-                            <h4><?php echo $this->session->userdata('fullname');?></h4>
-                            <span><?php echo $this->session->userdata('prev');?></span>
+                            <h4><?php echo $this->session->userdata('administrator_name');?></h4>
+                            <span><?php echo $this->session->userdata('usrnm');?></span>
                         </div>                        
                     </div>
                     
@@ -43,7 +43,7 @@
                             <a href="<?php echo base_url().'adm/dashboard'?>"><i class="fa fa-desktop"></i> <span>Dashboard</span></a>
                         </li>
                         <li <?php echo ($this->uri->segment(2) === 'users' || $this->uri->segment(2) === 'administrators' || $this->uri->segment(2) === 'workers') || $this->uri->segment(2) === 'companies' ? 'class="active"' : ''?>>
-                            <a href="<?php echo base_url().'adm/users'?>"><i class="fa fa-group (alias)"></i> <span>Users Management</span></a>
+                            <a href="#"><i class="fa fa-group (alias)"></i> <span>Users Management</span></a>
                             <ul>
                                 <li <?php echo ($this->uri->segment(2) === 'administrators') ? 'class="active"' : ''?>>
                                     <a href="<?php echo base_url().'adm/administrators'?>"> <span>Administrators</span></a>
@@ -54,28 +54,27 @@
                                 <li <?php echo ($this->uri->segment(2) === 'companies') ? 'class="active"' : ''?>>
                                     <a href="<?php echo base_url().'adm/companies'?>"> <span>Companies</span></a>
                                 </li>                    
-                                <!-- <li>
-                                    <a href="#">Second Level</a>
-                                    <ul>
-                                        <li><a href="#">Third Level</a></li>
-                                        <li><a href="#">Third Level</a></li>
-                                        <li><a href="#">Third Level</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Second Level</a></li> -->
                             </ul>
                         </li>                        
                         <li <?php echo ($this->uri->segment(2) === 'lokers') ? 'class="active"' : ''?>>
                             <a href="<?php echo base_url().'adm/lokers'?>"><i class="fa fa-file-o"></i> <span>Loker Management</span></a>
                         </li>
-                        <li <?php echo ($this->uri->segment(2) === 'skillsets') ? 'class="active"' : ''?>>
-                            <a href="<?php echo base_url().'adm/skillsets'?>"><i class="fa fa-briefcase"></i> <span>Skills sets Management</span></a>
-                        </li>
-                        <li <?php echo ($this->uri->segment(2) === 'languages') ? 'class="active"' : ''?>>
-                            <a href="<?php echo base_url().'adm/languages'?>"><i class="fa fa-flag-checkered"></i> <span>Languages sets Management</span></a>
-                        </li>
-                        <li <?php echo ($this->uri->segment(2) === 'contents') ? 'class="active"' : ''?>>
-                            <a href="<?php echo base_url().'adm/content'?>"><i class="fa fa-list"></i> <span>Content Management</span></a>
+                        <li <?php echo ($this->uri->segment(2) === 'contents' || $this->uri->segment(2) === 'FAQS' || $this->uri->segment(2) === 'hcontents' || $this->uri->segment(2) === 'terms') ? 'class="active"' : ''?>>
+                            <a href="#"><i class="fa fa-list"></i> <span>Content Management</span></a>
+                            <ul>
+                                <li <?php echo ($this->uri->segment(2) === 'contents') ? 'class="active"' : ''?>>
+                                    <a href="<?php echo base_url().'adm/contents'?>"><span>Content sets Management</span></a>
+                                </li>
+                                <li <?php echo ($this->uri->segment(2) === 'FAQS') ? 'class="active"' : ''?>>
+                                    <a href="<?php echo base_url().'adm/FAQS'?>"><span>Frequently Asked Questions</span></a>
+                                </li>
+                                <li <?php echo ($this->uri->segment(2) === 'hcontents') ? 'class="active"' : ''?>>
+                                    <a href="<?php echo base_url().'adm/hcontents'?>"><span>Home Content Management</span></a>
+                                </li>
+                                <li <?php echo ($this->uri->segment(2) === 'terms') ? 'class="active"' : ''?>>
+                                    <a href="<?php echo base_url().'adm/terms'?>"><span>Hak dan Kewajiban Management</span></a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     

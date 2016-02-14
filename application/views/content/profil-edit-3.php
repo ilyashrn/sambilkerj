@@ -217,8 +217,8 @@
                         foreach ($ach_data as $ach) {    ?>
                           <div class="col-md-5 service-box style-3 blue">
                             <div class="edu-div hover-to">
-                              <a href="../../../Workers/removing_ach/<?php echo $train->id_w_achievement; ?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
-                              <h4><?php echo $ach->achievement; ?></h4>
+                              <a href="../../../Workers/removing_ach/<?php echo $ach->id_w_achievement; ?>" style="font-size:10px;" class="a-white"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
+                              <h4><?php echo $ach->ach_name; ?></h4>
                               <h5><?php echo $ach->institution; ?></h5>
                               <h6><?php echo $ach->year; ?></h6>
                             </div>

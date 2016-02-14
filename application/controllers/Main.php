@@ -15,7 +15,16 @@ class Main extends CI_Controller {
 
 	public function index() // MAIN PAGE
 	{
-		$data = array('title' => "SambilKerja.com");
+		// $data['contacts'] = $this->Hcontent->get_all('contacts');
+		$data = array(
+			'title' => "SambilKerja.com",
+			'sliders' => $this->Hcontent->get_all('slider'),
+			'contacts' => $this->Hcontent->get_all('contacts'),
+			'faqs' => $this->FAQ->get_all(),
+			'job_count' => $this->Job->record_count(),
+			'worker_count' => $this->Worker->record_count(),
+			'comp_count' => $this->Company->record_count()
+			);
 		// echo $this->session->userdata('logged');
 
 		$this->load->view('html_head', $data);
@@ -27,7 +36,10 @@ class Main extends CI_Controller {
 	public function new_user() //REGRISTRATION PAGE
 	{
 		if ($this->session->userdata('logged') == false) {
-			$data = array('title' => "Regristration page | SambilKerja.com");
+			$data = array(
+				'title' => "Regristration page | SambilKerja.com",
+				'contacts' => $this->Hcontent->get_all('contacts')
+				);
 			$this->load->view('html_head', $data);
 			$this->load->view('header', $data);
 			$this->load->view('content/regrister-login', $data);
@@ -44,7 +56,8 @@ class Main extends CI_Controller {
 		if ($this->session->userdata('fullname') !== false) {
 			$data = array( //DATA FOR VIEWS
 				'title' => "Regristration sucessfull! | SambilKerja.com",
-				'fullname' => $this->session->userdata('fullname')
+				'fullname' => $this->session->userdata('fullname'),
+				'contacts' => $this->Hcontent->get_all('contacts')
 				);
 
 			$this->load->view('html_head', $data);
@@ -56,7 +69,8 @@ class Main extends CI_Controller {
 		elseif ($this->session->userdata('company_name') !==  false) {
 			$data = array( //DATA FOR VIEWS
 				'title' => "Regristration sucessfull! | SambilKerja.com",
-				'fullname' => $this->session->userdata('company_name')
+				'fullname' => $this->session->userdata('company_name'),
+				'contacts' => $this->Hcontent->get_all('contacts')
 				);
 
 			$this->load->view('html_head', $data);

@@ -52,7 +52,7 @@ class Administrators extends CI_Controller {
 	{
 
 		$data = array(
-			'title' => 'Edit user | FSMS',
+			'title' => 'Edit user | SambilKerja Admin Panel',
 			'basic_data' => $this->Administrator->get_user($id_user)
 			);
 

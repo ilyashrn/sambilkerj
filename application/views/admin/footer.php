@@ -19,22 +19,14 @@
             <!-- page footer -->    
             <div class="dev-page-footer dev-page-footer-fixed"> <!-- dev-page-footer-closed dev-page-footer-fixed -->
                 <ul class="dev-page-footer-controls">
-                    <li><a class="tip" title="Settings"><i class="fa fa-cogs"></i></a></li>
-                    <li><a class="tip" title="Support"><i class="fa fa-life-ring"></i></a></li>
+                    <!-- <li><a class="tip" title="Settings"><i class="fa fa-cogs"></i></a></li> -->
                     <li><a class="tip" title="Logoff" href="logout"><i class="fa fa-power-off"></i></a></li>
                    
                     <li class="pull-right">
                         <a class="dev-page-sidebar-minimize tip" title="Toggle navigation"><i class="fa fa-outdent"></i></a>
                     </li>
                 </ul>
-                
-                <!-- page footer buttons -->
-                <ul class="dev-page-footer-buttons">                    
-                    <li><a href="#footer_content_1" class="dev-page-footer-container-open"><i class="fa fa-database"></i></a></li>                    
-                    <li><a href="#footer_content_2" class="dev-page-footer-container-open"><i class="fa fa-bar-chart"></i></a></li>
-                    <li><a href="#footer_content_3" class="dev-page-footer-container-open"><i class="fa fa-server"></i></a></li>
-                </ul>
-                <!-- ./page footer buttons -->
+            
                 <!-- page footer container -->
                 <div class="dev-page-footer-container">
                     
@@ -199,6 +191,7 @@
         <script type="text/javascript" src="<?php echo base_url().'assets/js/demo.js'?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/js/dev-app.js'?>"></script>
         <script type="text/javascript" src="<?php echo base_url().'assets/js/demo-dashboard.js'?>"></script>
+        <script type="text/javascript" src="<?php echo base_url().'assets/js/dev-faq.js'?>"></script>
         <!-- ./javascript -->
     </body>
 </html>

@@ -1,3 +1,11 @@
+                <script>
+                $(function() {
+                  $('[data-toggle="tooltip"]').tooltip()
+                  $('[data-toggle="popover"]').popover({
+                    html:true
+                  })
+                });
+                </script>
                 <div class="tab-pane fade <?php echo ($tab_param == 'PA') ? 'in active': '';?>" id="tab-6-4">
                 	<div class="col-sm-12 service-box style-3 green">
                 		<h4>Ubah Password</h4>
@@ -37,7 +45,7 @@
 
                     <div class="col-sm-12 service-box style-3 green">
                       <h4>Ubah Username</h4>
-                        <p>Username (dan E-mail) digunakan sebagai identitas untuk melakukan login ke <span class="text-default">SambilKerja</span></p>
+                        <label class="alert alert-warning">Username (dan E-mail) digunakan sebagai identitas untuk melakukan login ke <span class="text-default">SambilKerja</span></label> 
                           <?php
                           $attributes = array('class' =>'form-horizontal', 'data-toggle' => 'validator');
                           echo form_open('Workers/updating_username', $attributes);
@@ -52,6 +60,42 @@
                               <div class="form-group pull-right" style="margin-right:0px;">
                                 <div class="col-sm-offset-2 col-sm-10">
                                   <button name="upd_ue" type="submit" class="btn btn-default" style="float:left;">Update</button>
+                                </div>
+                              </div>
+                            <?php
+                            echo form_close();
+                            ?>
+                    </div>
+
+                    <div class="col-sm-12 service-box style-3 green">
+                      <h4>Hapus Akun</h4>
+                        <label class="alert alert-danger">Ketikkan username, email, dan password untuk melakukan penghapusan akun <span class="text-default">SambilKerja</span>. <i>This action can not be undone.</i></label>
+                          <?php
+                          $attributes = array('class' =>'form-horizontal', 'data-toggle' => 'validator');
+                          echo form_open('Workers/del_ac/', $attributes);
+                          ?>
+                            <!-- <form class="form-horizontal"> -->
+                              <div class="form-group">
+                                <label for="username" class="col-sm-4 control-label" >Username</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="email" class="col-sm-4 control-label" >E-mail</label>
+                                <div class="col-sm-7">
+                                  <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="email" class="col-sm-4 control-label" >Password</label>
+                                <div class="col-sm-7">
+                                  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                </div>
+                              </div>
+                              <div class="form-group pull-right" style="margin-right:0px;">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                  <button type="submit"  class="btn btn-default" style="float:left;">Delete my account</button>
                                 </div>
                               </div>
                             <?php

@@ -11,7 +11,7 @@ class Login extends CI_Controller {
 	{
 		if ($this->session->userdata('usrnm') == null ) {
 			$data = array(
-				'title' => 'Login page | FSMS');
+				'title' => 'Login page | SambilKerja Admin Panel');
 
 			$this->load->view('admin/html_head',$data);
 			$this->load->view('admin/content/login',$data);
