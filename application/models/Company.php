@@ -44,6 +44,20 @@
       }
     }
 
+    function check_email($email) {
+      $this->db->select('*');
+      $this->db->from('company');
+      $this->db->where('email', $email);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     function update_login($id_company) {
       $datestring = '%Y-%m-%d %h:%i:%s';
       $this->db->set('last_login',mdate($datestring,now('Asia/Jakarta')));

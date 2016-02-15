@@ -59,21 +59,47 @@ if ($ident_data !== false) {
                                     <?php
                                     echo form_open_multipart('adm/companies/editing');
                                     ?>
+                                    <?php
+                                if ($this->session->flashdata('msg')) { ?>
+                                    <div clas="row">
+                                        <div class="col-md-9">
+                                            <div class="alert alert-success alert-dismissible" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <?php echo $this->session->flashdata('msg');?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php } if ($this->session->flashdata('warn')) { ?>
+                                    <div clas="row">
+                                        <div class="col-md-9">
+                                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <?php echo $this->session->flashdata('warn');?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
                                     <div class="page-subtitle margin-bottom-0">
                                         <h3>Account details</h3>
                                     </div>
                                     <div class="form-group-one-unit margin-bottom-40">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <div class="form-group form-group-custom">
                                                     <label>Login/username</label>
-                                                    <input name="username" type="text" class="form-control" value="<?php echo $basic_row->username;?>"/>                                            
+                                                    <input name="" disabled type="text" class="form-control" value="<?php echo $basic_row->username;?>"/>                                            
+                                                </div>                        
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Change username</label>
+                                                    <input name="username" type="text" class="form-control" value=""/>                                            
                                                 </div>                        
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group form-group-custom">
                                                     <label>Change Password</label>
-                                                    <input name="password" type="password" class="form-control" value=""/>                                            
+                                                    <input name="password" type="password" name="confirm_password" class="form-control" value=""/>                                            
                                                 </div>                        
                                             </div>
                                             <div class="col-md-3">
@@ -84,19 +110,31 @@ if ($ident_data !== false) {
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group form-group-custom">
                                                     <label>Email Address</label>
-                                                    <input name="email" type="text" class="form-control" value="<?php echo $basic_row->email;?>"/>
+                                                    <input name="" disabled type="text" class="form-control" value="<?php echo $basic_row->email;?>"/>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Change Email</label>
+                                                    <input name="email" type="email" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
                                                 <div class="form-group form-group-custom">
                                                     <label>Secondary Email Address</label>
-                                                    <input name="secondary_email" type="text" class="form-control" value="<?php echo $basic_row->secondary_email;?>"/>
+                                                    <input name="" disabled type="email" class="form-control" value="<?php echo $basic_row->secondary_email;?>"/>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Change Secondary Email</label>
+                                                    <input name="secondary_email" type="email" class="form-control" value=""/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
                                                 <div class="form-group form-group-custom">
                                                     <label>Account Ownership</label>
                                                     <input name="ownership" type="text" class="form-control" value="<?php echo ($ident_data !== false) ? $row->ownership : '';?>"/>
@@ -108,6 +146,7 @@ if ($ident_data !== false) {
                                                     <input disabled type="text" class="form-control" value="<?php echo $basic_row->id_company;?>"/>
                                                     <input type="hidden" value="<?php echo $basic_row->id_company;?>" name="id"/>
                                                     <input type="hidden" value="<?php echo $basic_row->username;?>" name="origin_username"/>
+                                                    <input type="hidden" name="uri" value="<?php echo $this->uri->uri_string();?>"></input>
                                                 </div>
                                             </div>
                                         </div>                                                              

@@ -43,24 +43,15 @@ class Hcontents extends CI_Controller {
 			$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
 
 			if (!$upload) {
-				$this->session->set_flashdata(
-							'warn', 
-							$this->upload->display_errors()
-							);	
+				$this->session->set_flashdata('warn', $this->upload->display_errors());	
 			} else{
 				$input = array('img' => $file_name);
 
 				$this->Hcontent->insert('slider',$input);
-				$this->session->set_flashdata(
-								'msg', 
-								'Well done! New image is sucessfully inserted!'
-								);
+				$this->session->set_flashdata('msg', 'Well done! New image is sucessfully inserted!');
 			}
 		} else {
-			$this->session->set_flashdata(
-							'warn', 
-							'Please select an image file'
-							);
+			$this->session->set_flashdata('warn', 'Please select an image file');
 		}
 		redirect('adm/hcontents','refresh');
 	}

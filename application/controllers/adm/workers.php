@@ -27,21 +27,43 @@ class Workers extends CI_Controller {
 		$this->load->view('admin/footer',$data);
 	}
 
+	public function is_username_exist($username) {
+		if ($this->Worker->check_username($username)) {
+			$this->form_validation->set_message('is_username_exist','Username you inserted is already exist.');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function is_email_exist($email) {
+		if ($this->Worker->check_email($email)) {
+			$this->form_validation->set_message('is_email_exist','E-mail you inserted is already exist.');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public function inserting()
 	{
-		$input = array(
-			'fullname' => $this->input->post('fullname'),
-			'username' => $this->input->post('username'),
-			'email' => $this->input->post('email'),
-			'password' => md5($this->input->post('password')) //MD5 ENCRYPTED
-			 );	
-		$inserting = $this->Worker->insert($input);
-		$new_id = array('id_worker' => $inserting);
-		$inserting2 = $this->Worker->insert_identity($new_id);
-		$this->session->set_flashdata(
-							'msg', 
-							'Well done! New user is sucessfully inserted!'
-							);
+		$this->form_validation->set_rules('username', 'Username', 'required|callback_is_username_exist');
+		$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|callback_is_email_exist');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[confirm_password]');
+		if ($this->form_validation->run()) {
+			$input = array(
+				'fullname' => $this->input->post('fullname'),
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'password' => md5($this->input->post('password')) //MD5 ENCRYPTED
+				 );	
+			$inserting = $this->Worker->insert($input);
+			$new_id = array('id_worker' => $inserting);
+			$inserting2 = $this->Worker->insert_identity($new_id);
+			$this->session->set_flashdata('msg', 'Well done! New user is sucessfully inserted!');	
+		} else {
+			$this->session->set_flashdata('warn', validation_errors());
+		}
 		redirect('adm/workers','refresh');
 	}
 
@@ -105,18 +127,8 @@ class Workers extends CI_Controller {
 
 	public function editing($id)
 	{
-		// $id = $this->input->post('id');
-		// echo $id;
-		// if (($this->input->post('origin_username') !== $this->input->post('username')) && ($this->Company->check_username($this->input->post('username')) || $this->Worker->check_username($this->input->post('username')))) {
-		// 		$this->session->set_flashdata(
-		// 					'warn', 
-		// 					'Username you insert is existed, try a new one!'
-		// 					);
-		// 		redirect('adm/workers/editing/'.$id,'refresh');
-		// }
 		if (false == $this->Worker->get_ident($id)) {
 			$new_id = array('id_worker' => $id);
-			// echo $this->input->post('id');
 			$inserting2 = $this->Worker->insert_identity($new_id);
 		}
 
@@ -132,15 +144,39 @@ class Workers extends CI_Controller {
 			'address' => $this->input->post('address')
 			);
 		
-		$basic = array(
-			'username' => $this->input->post('username'),
-			'fullname' => $this->input->post('fullname'),
-			'email' => $this->input->post('email')
-			);
+		$basic = array('fullname' => $this->input->post('fullname'));
+		
+		if ($this->input->post('email') !== '') {
+			$this->form_validation->set_rules('email', 'E-mail', 'valid_email|callback_is_email_exist');
+			if ($this->form_validation->run()) {
+				$email = array('email' => $this->input->post('email'));
+				$update = $this->Worker->update($email,$id);
+			} else {
+				$this->session->set_flashdata('warn', validation_errors());	
+				redirect($this->input->post('uri'),'refresh');
+			}
+		}
+
+		if ($this->input->post('username') !== '') {
+			$this->form_validation->set_rules('username', 'Username', 'callback_is_username_exist');
+			if ($this->form_validation->run()) {
+				$usernm = array('username' => $this->input->post('username'));
+				$update = $this->Worker->update($usernm,$id);
+			} else {
+				$this->session->set_flashdata('warn', validation_errors());	
+				redirect($this->input->post('uri'),'refresh');
+			}
+		}
 
 		if ($this->input->post('password') !== '') {
-			$pass = array('password' => md5($this->input->post('password')));
-			$update = $this->Worker->update($pass,$id);	
+			$this->form_validation->set_rules('password', 'Password', 'trim|min_length[6]|matches[confirm_password]');
+			if ($this->form_validation->run()) {
+				$pass = array('password' => md5($this->input->post('password')));
+				$update = $this->Worker->update($pass,$id);		
+			} else {
+				$this->session->set_flashdata('warn', validation_errors());	
+				redirect($this->input->post('uri'),'refresh');
+			}
 		}
 
 		if ($_FILES['avatar']['size'] !== 0) {
@@ -154,18 +190,18 @@ class Workers extends CI_Controller {
 			$upload = $this->upload->do_upload('avatar');	
 			$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
 			$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
-			// echo $this->upload->display_errors();
-			$avatar = array('avatar' => $file_name);
-			$update = $this->Worker->update_identity($avatar,$id);	
+			if (!$upload) {
+				$this->session->set_flashdata('warn', $this->upload->display_errors());	
+			} else {
+				$avatar = array('avatar' => $file_name);
+				$update = $this->Worker->update_identity($avatar,$id);	
+			}
 		}
 
 		$update = $this->Worker->update($basic,$id);
 		$insert = $this->Worker->update_identity($mem_data,$id);
-		$this->session->set_flashdata(
-							'msg', 
-							'Well done! User data is sucessfully updated!'
-							);
-		redirect('adm/workers','refresh');
+		$this->session->set_flashdata('msg', 'Well done! User data is sucessfully updated!');
+		redirect('adm/Workers','refresh');
 	}
 
 	public function store($id_hired) {

@@ -4,9 +4,16 @@
     <div class="col-sm-12">
       <div class="headline">
         <h3>Daftarkan dirimu sekarang juga</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Daftar sebagai salah satu bagian dari <span class="text-default">SambilKerja</span> disini sekarang juga.</p>
       </div><!-- headline -->
     </div><!-- col -->
+    <div class="col-md-6 col-md-offset-3">
+        <?php if ($this->session->flashdata('warn')) { ?>
+        <div class="alert alert-danger">
+          <?php echo $this->session->flashdata('warn'); ?>
+        </div>
+      <?php } ?>
+    </div>
   </div><!-- row -->
 </div><!-- container -->
 
@@ -70,10 +77,10 @@
             </div><!-- col -->
           
           <div class="col-sm-5">
-						<div class="service-box style-3 default">
+						<div class="service-box style-3 default" style="padding-bottom: 60px;">
 							<h6><a href="#">Daftar sebagai pekerja</a></h6>
 							<div class="service-box-content">
-								<p>Quisque porta dui id risus luctus porta. Sed eu lacus semper, viverra sapien vel, ullamcorper turpis lacina omis elit.</p>
+								<p>Daftar sebagai pekerja sekarang juga dan temukan pekerjaan impian disini.</p>
 							</div><!-- services-boxes-content -->
 						</div><!-- services-boxes -->
 					</div><!-- col -->
@@ -133,11 +140,11 @@
               </div><!-- col -->
               <div class="col-sm-5">
 
-						<div class="service-box style-3 default">
+						<div class="service-box style-3 default" style="padding-bottom: 60px;">
 							<!-- <i class="mt-icon-writingtool"></i> -->
 							<h6><a href="#">Daftarkan perusahaan anda</a></h6>
 							<div class="service-box-content">
-								<p>Quisque porta dui id risus luctus porta. Sed eu lacus semper, viverra sapien vel, ullamcorper turpis lacina omis elit.</p>
+								<p>Daftarkan perusahaan anda sekarang juga dan biarkan para pekerja 'menikmati' lowongan dari perusahaan anda.</p>
 							</div><!-- services-boxes-content -->
 						</div><!-- services-boxes -->
 					</div><!-- col -->

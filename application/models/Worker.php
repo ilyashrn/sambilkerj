@@ -41,6 +41,20 @@
       }
     }
 
+    function check_email($email) {
+      $this->db->select('*');
+      $this->db->from('worker');
+      $this->db->where('email', $email);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     function log_in($login_id,$pass) {
       $this->db->select('*');
       $this->db->from('worker');

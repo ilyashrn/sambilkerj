@@ -23,8 +23,22 @@
 
     function check_username($username) {
       $this->db->select('*');
-      $this->db->from('company');
+      $this->db->from('administrator');
       $this->db->where('username', $username);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
+    function check_email($email) {
+      $this->db->select('*');
+      $this->db->from('administrator');
+      $this->db->where('email', $email);
 
       $query = $this->db->get();
       if ($query->num_rows() > 0) {

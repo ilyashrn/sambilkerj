@@ -32,24 +32,43 @@ class Workers extends CI_Controller {
     	
 	}
 
-	function inserting() {
-		$data = array( //ARRAY FOR INPUTS FROM FORM
-			'fullname' => $this->input->post('fullname'),
-			'username' => $this->input->post('username'),
-			'email' => $this->input->post('email'),
-			'password' => md5($this->input->post('password')) //MD5 ENCRYPTED
-		 	);
+	public function is_username_exist($username) {
+		if ($this->Worker->check_username($username)) {
+			$this->form_validation->set_message('is_username_exist','Username you inserted is already exist.');
+			return false;
+		} else {
+			return true;
+		}
+	}
 
-		// echo $this->input->post('ins_worker');
-		// $this->form_validation->set_rules('ins_worker', 'Button', 'required');
-		if (null !== $this->input->post('ins_worker')) {
+	public function is_email_exist($email) {
+		if ($this->Worker->check_email($email)) {
+			$this->form_validation->set_message('is_email_exist','E-mail you inserted is already exist.');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function inserting() {
+		$this->form_validation->set_rules('username', 'Username', 'required|callback_is_username_exist');
+		$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|callback_is_email_exist');
+		if ($this->form_validation->run()) {
+			$data = array( //ARRAY FOR INPUTS FROM FORM
+				'fullname' => $this->input->post('fullname'),
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'password' => md5($this->input->post('password')) //MD5 ENCRYPTED
+			 	);	
+
 			$insert = $this->Worker->insert($data); // INSERTING INTO DATABASE
 
 			$sess_array = array('fullname' => $this->input->post('fullname'));
 			$this->session->set_userdata($sess_array); //SESSION-ING THE FULLNAME REGRISTRATOR
-			if ($this->session->userdata('fullname') !== false) {
-				redirect('Main/regristration_success');
-			}
+			redirect('Main/regristration_success');
+		} else {
+			$this->session->set_flashdata('warn', validation_errors());
+			redirect('Main/new_user','refresh');
 		}
 	}
 

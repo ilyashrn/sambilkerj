@@ -89,10 +89,16 @@ if ($ident_data !== false) {
                                     </div>
                                     <div class="form-group-one-unit margin-bottom-40">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <div class="form-group form-group-custom">
                                                     <label>Login/username</label>
-                                                    <input name="username" type="text" class="form-control" value="<?php echo $basic_row->username;?>"/>                                            
+                                                    <input name="" disabled type="text" class="form-control" value="<?php echo $basic_row->username;?>"/>                                            
+                                                </div>                        
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Change username</label>
+                                                    <input name="username" type="text" class="form-control" value=""/>                                            
                                                 </div>                        
                                             </div>
                                             <div class="col-md-3">
@@ -103,16 +109,22 @@ if ($ident_data !== false) {
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group form-group-custom">
-                                                    <label>Re-Password</label>
-                                                    <input type="password" class="form-control" value=""/>                                            
+                                                    <label>Confirm Password</label>
+                                                    <input type="password" class="form-control" name="confirm_password" value=""/>                                            
                                                 </div>                        
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <div class="form-group form-group-custom">
                                                     <label>Email Address</label>
-                                                    <input name="email" type="text" class="form-control" value="<?php echo $basic_row->email;?>"/>
+                                                    <input name="" disabled type="text" class="form-control" value="<?php echo $basic_row->email;?>"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Change Email</label>
+                                                    <input name="email" type="email" class="form-control" value=""/>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -121,6 +133,7 @@ if ($ident_data !== false) {
                                                     <input disabled type="text" class="form-control" value="<?php echo $basic_row->id_worker;?>"/>
                                                     <input type="hidden" value="<?php echo $basic_row->id_worker;?>" name="id"/>
                                                     <input type="hidden" value="<?php echo $basic_row->username;?>" name="origin_username"/>
+                                                    <input type="hidden" name="uri" value="<?php echo $this->uri->uri_string();?>"></input>
                                                 </div>
                                             </div>
                                         </div>                                                              

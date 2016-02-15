@@ -31,25 +31,45 @@ class Companies extends CI_Controller {
 	{
     	
 	}
+	
+	public function is_username_exist($username) {
+		if ($this->Company->check_username($username)) {
+			$this->form_validation->set_message('is_username_exist','Username you inserted is already exist.');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function is_email_exist($email) {
+		if ($this->Company->check_email($email)) {
+			$this->form_validation->set_message('is_email_exist','E-mail you inserted is already exist.');
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	function inserting() {
-
-		$data = array( //ARRAY FOR INPUTS FROM FORM
-			'company_name' => $this->input->post('company_name'),
-			'username' => $this->input->post('username'),
-			'email' => $this->input->post('email'),
-			'secondary_email' => $this->input->post('2nd_email'),
-			'password' => md5($this->input->post('password')) //MD5 ENCRYPTED
-		 	);
-
-		if (null !== $this->input->post('ins_comp')) {
+		
+		$this->form_validation->set_rules('username', 'Username', 'required|callback_is_username_exist');
+		$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|callback_is_email_exist');
+		if ($this->form_validation->run()) {
+			$data = array( //ARRAY FOR INPUTS FROM FORM
+				'company_name' => $this->input->post('company_name'),
+				'username' => $this->input->post('username'),
+				'email' => $this->input->post('email'),
+				'secondary_email' => $this->input->post('2nd_email'),
+				'password' => md5($this->input->post('password')) //MD5 ENCRYPTED
+			 	);	
 			$insert = $this->Company->insert($data); // INSERTING INTO DATABASE
 
 			$sess_array = array('company_name' => $this->input->post('company_name'));
 			$this->session->set_userdata($sess_array); //SESSION-ING THE FULLNAME REGRISTRATOR
-			if ($this->session->userdata('company_name') !== false) {
-				redirect('Main/regristration_success');
-			}
+			redirect('Main/regristration_success');
+		} else {
+			$this->session->set_flashdata('warn', validation_errors());
+			redirect('Main/new_user','refresh');
 		}
 	}
 
