@@ -3,6 +3,7 @@ foreach ($basic_data as $basic_row) {}
 if ($ident_data !== false) {
   foreach ($ident_data as $row) {
     $gender = ($row->gender == 1) ? 'Laki-laki': 'Perempuan';
+    $dob = ($row->dob !== '0000-00-00') ? ', '.date('j M Y', strtotime($row->dob)): ', - ';
   }
   if ($loc_data !== false) {
     foreach ($loc_data as $location) {}
@@ -47,7 +48,7 @@ if ($ident_data !== false) {
             <h6>Informasi Singkat</h6>  
               <div class="service-box-content">
                 <div class="point-detail profil-point">
-                  <span class="profil-span"><b>Tempat, tanggal lahir</b></span><br> <?php echo ($ident_data !== false && $pob_data !== false) ? $pob->city_name.', '.date('j M Y', strtotime($row->dob)): '-';?> <br>
+                  <span class="profil-span"><b>Tempat, tanggal lahir</b></span><br> <?php echo ($ident_data !== false && $pob_data !== false) ? $pob->city_name.''.$dob: '-';?> <br>
                   <span class="profil-span"><b>Jenis Kelamin</b></span> <br><?php echo ($ident_data !== false) ? $gender: '-';?> <br>
                   <span class="profil-span"><b>Alamat tempat tinggal</b></span><br> <?php echo ($ident_data !== false && $loc_data !== false ) ? $row->address.', '.$location->city_name.', '.$location->province_name: '-';?><br>
                   <span class="profil-span"><b>Nomor Telepon</b></span> <br><?php echo ($ident_data !== false) ? $row->telp_number: '-';?><br>

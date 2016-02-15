@@ -5,6 +5,22 @@
     $(function(){
       $('#mayor').select2();
     });
+
+    function yesnoCheck(that) {
+        if (that.checked) {
+            document.getElementById("year_out").style.display = "none";
+        } else if (!that.checked) {
+            document.getElementById("year_out").style.display = "block";
+        } 
+    }
+
+    function yesnoCheck2(that) {
+        if (that.checked) {
+            document.getElementById("year_out2").style.display = "none";
+        } else if (!that.checked) {
+            document.getElementById("year_out2").style.display = "block";
+        } 
+    }
 </script>	
 
 
@@ -42,7 +58,7 @@
                   </label>
                   <div class="col-sm-7">
                   <select name="univ" id="univ" style="width:100%; height:20%;" required="required">
-                    <option>Pilih Sekolah/Universitas</option>
+                    <option value="-9999">Pilih Sekolah/Universitas</option>
                     <?php
                     foreach ($sch_sets as $sch) { ?>
                       <option value="<?php echo $sch->id_school?>"><?php echo $sch->school_name; ?></option>  
@@ -54,7 +70,7 @@
                   <label for="mayor" class="col-sm-4 control-label">Jurusan/Program Studi</label>
                   <div class="col-sm-7">
               		<select name="mayor" id="mayor" style="width:100%; height:20%;" required="required">
-              			<option>Pilih Jurusan/Program Studi</option>
+              			<option value="-9999">Pilih Jurusan/Program Studi</option>
                     <?php
                     foreach ($may_sets as $may) { ?>
                       <option value="<?php echo $may->id_mayor?>"><?php echo $may->mayor_name; ?></option>  
@@ -66,13 +82,14 @@
                   <div class="col-md-6">
                     <label for="year_in" class="col-sm-5 control-label">Tahun Masuk</label>
                     <div class="col-sm-7">
-                      <input type="text" id="year_in" name="year_in" placeholder="yyyy" value="">
+                      <input type="year" id="year_in" name="year_in" placeholder="yyyy" value="">
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <label for="year_in" class="col-sm-5 control-label">Tahun Lulus</label>
+                  <div class="col-md-6 year_out">
+                    <label for="year_out" class="col-sm-5 control-label">Tahun Lulus</label>
                     <div class="col-sm-7">
-                      <input type="text" id="year_out" name="year_out" placeholder="yyyy" value="">
+                      <input type="year" id="year_out" name="year_out" placeholder="yyyy" value="">
+                      <input onchange="yesnoCheck(this);" type="checkbox" id="edu_check" name="year_out" placeholder="yyyy" value="Sekarang"> Masih menjalani kuliah
                     </div>
                   </div>
                 </div>
@@ -131,13 +148,14 @@
                       <div class="col-md-6">
                         <label for="year_in" class="col-sm-5 control-label">Tahun Masuk</label>
                         <div class="col-sm-7">
-                          <input type="text" id="year_in" name="year_in" placeholder="yyyy" value="">
+                          <input type="year" id="year_in" name="year_in" placeholder="yyyy" value="">
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <label for="year_in" class="col-sm-5 control-label">Tahun Keluar</label>
+                      <div class="col-md-6 year_out">
+                        <label for="year_out" class="col-sm-5 control-label">Tahun Keluar</label>
                         <div class="col-sm-7">
-                          <input type="text" id="year_out" name="year_out" placeholder="yyyy" value="">
+                          <input type="year" id="year_out2" name="year_out" placeholder="yyyy" value="">
+                          <input onchange="yesnoCheck2(this);" type="checkbox" id="work_check" name="year_out" placeholder="yyyy" value="Sekarang">Masih bekerja
                         </div>
                       </div>
                     </div>

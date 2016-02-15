@@ -184,7 +184,7 @@ class Workers extends CI_Controller {
 	}
 
 	function updating_edu() {
-		if (!empty($this->mem_id) && false !== $this->input->post('ins_edu')) {
+		if (!empty($this->mem_id) && false !== $this->input->post('ins_edu') && $this->input->post('mayor') !== '-9999' && $this->input->post('univ') !== '-9999') {
 			$edu_data = array(
 				'id_worker' => $this->mem_id,
 				'id_school' => $this->input->post('univ'),
@@ -198,11 +198,22 @@ class Workers extends CI_Controller {
 					'Informasi <b>riwayat pendidikan</b> berhasil diperbarui!'
 					);
 			redirect('Members/edit_w/PP/'.$this->username,'refresh');
-		}	
+		} else {
+			$this->session->set_flashdata(
+					'msg', 
+					'Silahkan isi form <b>riwayat pendidikan</b> dengan benar. Pastikan semua terisi.'
+					);
+			redirect('Members/edit_w/PP/'.$this->username,'refresh');
+		}
 	}
 
 	function updating_exp() {
-		if (!empty($this->mem_id) && false !== $this->input->post('ins_exp')) {
+		if (!empty($this->mem_id) && 
+			false !== $this->input->post('ins_exp') && 
+			$this->input->post('company') !== '' && 
+			$this->input->post('position') !== '' && 
+			$this->input->post('year_in') !== '' && 
+			$this->input->post('year_out') !== '') {
 			$exp_data = array(
 				'id_worker' => $this->mem_id,
 				'company' => $this->input->post('company'),
@@ -216,11 +227,21 @@ class Workers extends CI_Controller {
 					'Informasi <b>riwayat pekerjaan</b> berhasil diperbarui!'
 					);
 			redirect('Members/edit_w/PP/'.$this->username,'refresh');
+		} else {
+			$this->session->set_flashdata(
+					'msg', 
+					'Silahkan isi form <b>riwayat pekerjaan</b> dengan benar. Pastikan semua terisi.'
+					);
+			redirect('Members/edit_w/PP/'.$this->username,'refresh');
 		}
 	}
 
 	function updating_train() {
-		if (!empty($this->mem_id) && false !== $this->input->post('ins_train')) {
+		if (!empty($this->mem_id) && 
+			false !== $this->input->post('ins_train') && 
+			$this->input->post('course_name') !== '' && 
+			$this->input->post('institution') !== '' &&
+			$this->input->post('year') !== '' ) {
 			$train_data = array(
 				'id_worker' => $this->mem_id,
 				'course_name' => $this->input->post('course_name'),
@@ -233,11 +254,21 @@ class Workers extends CI_Controller {
 					'Informasi <b>riwayat pelatihan</b> berhasil diperbarui!'
 					);
 			redirect('Members/edit_w/PP/'.$this->username,'refresh');
+		} else {
+			$this->session->set_flashdata(
+					'msg', 
+					'Silahkan isi form <b>riwayat pelatihan</b> dengan benar. Pastikan semua terisi.'
+					);
+			redirect('Members/edit_w/PP/'.$this->username,'refresh');
 		}
 	}
 
 	function updating_ach() {
-		if (!empty($this->mem_id) && false !== $this->input->post('ins_ach')) {
+		if (!empty($this->mem_id) && 
+			false !== $this->input->post('ins_ach') && 
+			$this->input->post('achievement') !== '' && 
+			$this->input->post('institution') !== '' && 
+			$this->input->post('year') !== '') {
 			$ach_data = array(
 				'id_worker' => $this->mem_id,
 				'ach_name' => $this->input->post('achievement'),
@@ -248,6 +279,12 @@ class Workers extends CI_Controller {
 			$this->session->set_flashdata(
 					'msg', 
 					'Informasi <b>riwayat prestasi</b> berhasil diperbarui!'
+					);
+			redirect('Members/edit_w/PP/'.$this->username,'refresh');
+		} else {
+			$this->session->set_flashdata(
+					'msg', 
+					'Silahkan isi form <b>riwayat prestasi</b> dengan benar. Pastikan semua terisi.'
 					);
 			redirect('Members/edit_w/PP/'.$this->username,'refresh');
 		}

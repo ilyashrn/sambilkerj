@@ -399,3 +399,12 @@ input[type="checkbox"] {
   margin-bottom: 50px;
   margin-top: 80px;
 }
+
+.year_out input[type="checkbox"] {
+  width: initial;
+  margin-top: 15px;
+}
+
+.year_out input[type="year"] {
+  margin-bottom: 5px;
+}
