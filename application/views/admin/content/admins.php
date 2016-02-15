@@ -63,7 +63,7 @@
                                             <td><a href="<?php echo base_url()?>adm/administrators/edit/<?php echo $user->id_admin.'/'.$user->administrator_name?>"><?php echo $user->administrator_name;?></a></td>
                                             <td><?php echo $user->username;?></td>
                                             <td><?php echo $user->email;?></td>
-                                            <td><?php echo $user->last_login;?></td>
+                                            <td><?php echo ($user->last_login!== '0000-00-00 00:00:00') ? $user->last_login : 'Never login';?></td>
                                             <td><?php echo $user->created_time;?></td>
                                         </tr>
                                         <?php } } ?>

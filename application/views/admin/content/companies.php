@@ -41,6 +41,7 @@
                                             <th>Company Name</th>
                                             <th>Username</th>
                                             <th>Email</th>
+                                            <th>Jobs Opened</th>
                                             <th>Last login</th>
                                             <th>Signup date</th>
                                             
@@ -55,7 +56,8 @@
                                             <td><a href="<?php echo base_url()?>adm/companies/edit/<?php echo $user->id_company.'/'.$user->username?>"><?php echo $user->company_name;?></a></td>
                                             <td><?php echo $user->username;?></td>
                                             <td><?php echo $user->email;?></td>
-                                            <td><?php echo $user->last_login;?></td>
+                                            <td><?php echo $this->Job->get_per_comp_count($user->id_company)?></td>
+                                            <td><?php echo ($user->last_login!== '0000-00-00 00:00:00') ? $user->last_login : 'Never login';?></td>
                                             <td><?php echo $user->created_time;?></td>
                                         </tr>
                                         <?php } } ?>

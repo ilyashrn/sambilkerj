@@ -12,7 +12,11 @@ class Dashboard extends CI_Controller {
 	public function index() //PROCESSING LOGIN
 	{
 		$data = array(
-			'title' => 'SambilKerja Dashboard'
+			'title' => 'SambilKerja Dashboard',
+			'job_count' => $this->Job->record_count(),
+			'worker_count' => $this->Worker->record_count(),
+			'comp_count' => $this->Company->record_count(),
+			'adm_count' => $this->Administrator->record_count()
 			);
 
 		$this->load->view('admin/html_head',$data);

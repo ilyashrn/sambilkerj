@@ -184,7 +184,12 @@ class Workers extends CI_Controller {
 	}
 
 	function updating_edu() {
-		if (!empty($this->mem_id) && false !== $this->input->post('ins_edu') && $this->input->post('mayor') !== '-9999' && $this->input->post('univ') !== '-9999') {
+		if (!empty($this->mem_id) && 
+			false !== $this->input->post('ins_edu') && 
+			$this->input->post('mayor') !== '-9999' && 
+			$this->input->post('univ') !== '-9999' && 
+			$this->input->post('year_out') !== '' && 
+			$this->input->post('year_in') !== '') {
 			$edu_data = array(
 				'id_worker' => $this->mem_id,
 				'id_school' => $this->input->post('univ'),
@@ -338,15 +343,16 @@ class Workers extends CI_Controller {
 	}
 
 	function applying($id_status,$id_job,$id_worker,$id_company) {
+		// $redirect = $this->session->flashdata('redirect');
 		$datestring = '%Y-%m-%d %h:%i:%s';
       	$now = mdate($datestring,now('Asia/Jakarta'));
       	$this->form_validation->set_rules('terms', 'Syarat dan Ketentuan', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata(
 					'msg', 
-					'<b>Baca syarat dan ketentuan yang berlaku!</b>'
+					'<b>Tolong baca syarat dan ketentuan yang berlaku terlebih dahulu.</b>'
 					);
-			redirect($this->session->flashdata('redirect'),'refresh');		
+			redirect($this->input->post('uri'),'refresh');		
 		} else {
 			$check = $this->Applier->check_worker($id_worker,$id_job);
 			if ($check == true) {
@@ -354,7 +360,7 @@ class Workers extends CI_Controller {
 						'msg', 
 						'<b>Anda sudah mendaftar pekerjaan ini!</b> Silahkan mendaftar pekerjaan lainnya.'
 						);
-				redirect($this->session->flashdata('redirect'),'refresh');
+				redirect($this->input->post('uri'),'refresh');
 			} else{
 				$input = array(
 				'id_company' => $id_company,

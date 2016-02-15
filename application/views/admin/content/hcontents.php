@@ -143,7 +143,7 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label></label>
-                                              <button name="ins_im" type="submit" class="btn btn-default">Regrister contact information</button>
+                                              <button name="ins_im" type="submit" class="btn btn-default">Update contact information</button>
                                               <?php echo form_close(); ?>
                                           </div>
                                       </div>

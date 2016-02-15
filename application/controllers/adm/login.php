@@ -41,7 +41,8 @@ class Login extends CI_Controller {
 				$sess_array = array(
 					'usrnm' => $row->username,
 					'administrator_name' => $row->administrator_name,
-					'memid' => $row->id_admin
+					'memid' => $row->id_admin,
+					'avatar' => $row->avatar
 					);
 
 				$this->session->set_userdata($sess_array); //SET USERDATA WITH LOGGED IN USER

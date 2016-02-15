@@ -22206,10 +22206,10 @@ code {
   position: relative;
 }
 .profile .profile-image img {
-  width: 100px;
-  height: 100px;
+  width: 50%;
+  /*height: 100px;*/
   border: 5px solid rgba(255, 255, 255, 0.8);
-  -webkit-border-top-right-radius: 50%;
+  /*-webkit-border-top-right-radius: 50%;
   -webkit-border-bottom-right-radius: 0;
   -webkit-border-bottom-left-radius: 0;
   -webkit-border-top-left-radius: 0;
@@ -22230,7 +22230,7 @@ code {
   -webkit-transition: all 200ms ease;
   -moz-transition: all 200ms ease;
   -ms-transition: all 200ms ease;
-  -o-transition: all 200ms ease;
+  -o-transition: all 200ms ea*/se;
   transition: all 200ms ease;
 }
 .profile .profile-image .profile-badges .profile-badges-left,

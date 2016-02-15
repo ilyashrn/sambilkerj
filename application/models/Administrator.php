@@ -61,6 +61,14 @@
         }      
     }
 
+    function record_count() {
+      $this->db->select('*');
+      $this->db->from('administrator');
+
+      $query = $this->db->get();
+      return $query->num_rows();
+    }
+
     function get_all() {
       $this->db->select('*');
       $this->db->from('administrator');

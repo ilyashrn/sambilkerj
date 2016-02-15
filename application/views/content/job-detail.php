@@ -7,7 +7,7 @@ if ($ident_data !== false) {
   }
 }
 foreach ($post_data as $post) {}
-$this->session->set_flashdata('redirect', $this->uri->uri_string());
+// $this->session->set_flashdata('redirect', $this->uri->uri_string());
 
 ?>
 <script>
@@ -23,6 +23,7 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
                   +'<div class="popover-content"></div>'
                   +'<div class="popover-footer">'
                     +'<input type="submit" id="apply" class="btn btn-black" value="Daftar sekarang!">'
+                    +'<input type="hidden" name="uri" value="<?php echo $this->uri->uri_string();?>">'
                   +'</div>'
                   +'</form>'
                 +'</div>'
@@ -37,6 +38,10 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
   <div class="container">
     <div class="row">
         <div class="col-md-8 hover-to">
+          <?php if ($this->session->flashdata('msg')) { ?>
+          <label class="alert alert-danger"><?php echo $this->session->flashdata('msg');?></label>
+          <?php }
+          ?>
           <div class="job-box service-box style-3 default" style="padding:20px; margin-bottom:10px;">
             <div class="row">
               <div class="col-sm-12">
@@ -78,7 +83,13 @@ $this->session->set_flashdata('redirect', $this->uri->uri_string());
               </div>
               <div class="col-sm-12">
                 <span class="profil-span"><b>Berkas Pendukung</b></span>
-                <p><i class="mt-icon-file2"></i> <a href="<?php echo base_url().'files/loker/'.$post->file;?>"> <?php echo $post->file;?></a> (<?php echo $post->file_desc;?>)</p>
+                <p>
+                <?php if ($post->file !== '') { ?>
+                    <i class="mt-icon-file2"></i> <a href="<?php echo base_url().'files/loker/'.$post->file;?>"> <?php echo $post->file;?></a> (<?php echo $post->file_desc;?>)
+                 <?php } else{
+                    echo '-';
+                  } ;?>
+                </p>
               </div>
               </div>
               <div class="row">
