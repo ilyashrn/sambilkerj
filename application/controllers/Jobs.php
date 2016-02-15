@@ -197,7 +197,8 @@ class Jobs extends CI_Controller {
     		'cat_data' => $cat_data,
     		'prov_data' => $prov_data,
     		'keyword' => $keyword,
-    		'search' => $search
+    		'search' => $search,
+    		'job_count' => $this->Job->record_count()
     		);
 
 		$this->load->view('html_head', $data);
@@ -280,7 +281,8 @@ class Jobs extends CI_Controller {
 	    		'cat_data' => $cat_data,
 	    		'prov_data' => $prov_data,
 	    		'keyword' => $keyword,
-	    		'search' => $search
+	    		'search' => $search,
+	    		'job_count' => $this->Job->record_count()
 	    		);
 
 			$this->load->view('html_head', $data);

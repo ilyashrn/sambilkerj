@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h4><?php echo $job_count; ?> Lowongan pekerjaan terbuka</h4>
+                    <h4><?php echo $job_count; ?> Lowongan pekerjaan terbuka di sambilkerja</h4>
                 </div><!-- col -->
             </div><!-- row -->
         </div><!-- container -->
