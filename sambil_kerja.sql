@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 14, 2016 at 04:35 AM
+-- Generation Time: Feb 15, 2016 at 04:30 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -771,7 +771,7 @@ CREATE TABLE IF NOT EXISTS `job_post` (
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deadline` date NOT NULL,
   `id_location` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `job_post`
@@ -2580,14 +2580,14 @@ CREATE TABLE IF NOT EXISTS `worker` (
   `password` varchar(50) NOT NULL,
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `worker`
 --
 
 INSERT INTO `worker` (`id_worker`, `fullname`, `username`, `email`, `password`, `created_time`, `last_login`) VALUES
-(1, 'Ilyas Habiburrahman', 'yayashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-01-23 06:58:39', '2016-02-14 03:16:59'),
+(1, 'Ilyas Habiburrahman', 'yayashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-01-23 06:58:39', '2016-02-15 02:30:05'),
 (2, 'Idris Izzaturrahman H', 'idrisih', 'idrisizzaturrahman@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:13:57', '0000-00-00 00:00:00'),
 (3, 'Isyah Auliarahmani Rafifa', 'isyahAR', 'isyahauliahamani@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:21:32', '0000-00-00 00:00:00'),
 (9, 'Kurnia Dwi Agustin', 'kurniadwiarr', 'kurniadwiar@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-01 11:07:46', '2016-01-31 18:04:51'),
@@ -2605,7 +2605,7 @@ CREATE TABLE IF NOT EXISTS `w_achievement` (
   `ach_name` varchar(30) NOT NULL,
   `institution` varchar(30) NOT NULL,
   `year` year(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -2619,17 +2619,18 @@ CREATE TABLE IF NOT EXISTS `w_education` (
   `id_school` int(11) NOT NULL,
   `id_mayor` int(11) NOT NULL,
   `year_in` year(4) NOT NULL,
-  `year_out` year(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  `year_out` varchar(12) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_education`
 --
 
 INSERT INTO `w_education` (`id_w_education`, `id_worker`, `id_school`, `id_mayor`, `year_in`, `year_out`) VALUES
-(1, 1, 4, 120, 2012, 2016),
-(2, 1, 10, 52, 1994, 1998),
-(3, 1, 48, 28, 2012, 2013);
+(1, 1, 4, 120, 2012, '2016'),
+(2, 1, 10, 52, 1994, '1998'),
+(4, 1, 48, 120, 2012, 'Sekarang'),
+(5, 1, 48, 8, 2013, 'Sekarang');
 
 -- --------------------------------------------------------
 
@@ -2643,7 +2644,7 @@ CREATE TABLE IF NOT EXISTS `w_experience` (
   `company` varchar(45) NOT NULL,
   `position` varchar(30) NOT NULL,
   `year_in` year(4) NOT NULL,
-  `year_out` year(4) NOT NULL
+  `year_out` varchar(12) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
@@ -2651,8 +2652,9 @@ CREATE TABLE IF NOT EXISTS `w_experience` (
 --
 
 INSERT INTO `w_experience` (`id_w_experience`, `id_worker`, `company`, `position`, `year_in`, `year_out`) VALUES
-(1, 1, 'Google Inc.', 'Database Administrator', 2012, 2014),
-(2, 9, 'IPB', 'Dosen Arsitektur', 2012, 2011);
+(1, 1, 'Google Inc.', 'Database Administrator', 2012, '2014'),
+(2, 9, 'IPB', 'Dosen Arsitektur', 2012, '2011'),
+(3, 1, 'Web Developper', 'IBM Corp.', 2015, 'Sekarang');
 
 -- --------------------------------------------------------
 
@@ -2672,7 +2674,7 @@ CREATE TABLE IF NOT EXISTS `w_identity` (
   `domicile` int(11) DEFAULT NULL,
   `about` text NOT NULL,
   `avatar` varchar(60) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_identity`
@@ -2695,7 +2697,7 @@ CREATE TABLE IF NOT EXISTS `w_language` (
 `id_w_language` int(11) NOT NULL,
   `id_worker` int(11) NOT NULL,
   `id_language` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_language`
@@ -2716,7 +2718,7 @@ CREATE TABLE IF NOT EXISTS `w_skill` (
 `id_w_skill` int(11) NOT NULL,
   `id_worker` int(11) NOT NULL,
   `id_skill` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_skill`
@@ -2742,7 +2744,7 @@ CREATE TABLE IF NOT EXISTS `w_training` (
   `course_name` varchar(35) NOT NULL,
   `institution` varchar(35) NOT NULL,
   `year` year(4) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_training`
@@ -2987,7 +2989,7 @@ MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `job_post`
 --
 ALTER TABLE `job_post`
-MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `job_req_skill`
 --
@@ -3042,17 +3044,17 @@ MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `worker`
 --
 ALTER TABLE `worker`
-MODIFY `id_worker` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `id_worker` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `w_achievement`
 --
 ALTER TABLE `w_achievement`
-MODIFY `id_w_achievement` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id_w_achievement` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `w_education`
 --
 ALTER TABLE `w_education`
-MODIFY `id_w_education` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id_w_education` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `w_experience`
 --
@@ -3062,22 +3064,22 @@ MODIFY `id_w_experience` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `w_identity`
 --
 ALTER TABLE `w_identity`
-MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `w_language`
 --
 ALTER TABLE `w_language`
-MODIFY `id_w_language` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+MODIFY `id_w_language` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `w_skill`
 --
 ALTER TABLE `w_skill`
-MODIFY `id_w_skill` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=91;
+MODIFY `id_w_skill` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=85;
 --
 -- AUTO_INCREMENT for table `w_training`
 --
 ALTER TABLE `w_training`
-MODIFY `id_w_training` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id_w_training` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
