@@ -128,16 +128,12 @@ if ($ident_data !== false) {
                                                     <input name="" disabled type="email" class="form-control" value="<?php echo $basic_row->secondary_email;?>"/>
                                                 </div>
                                             </div>
+                                        </div>    
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group form-group-custom">
                                                     <label>Change Secondary Email</label>
                                                     <input name="secondary_email" type="email" class="form-control" value=""/>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="form-group form-group-custom">
-                                                    <label>Account Ownership</label>
-                                                    <input name="ownership" type="text" class="form-control" value="<?php echo ($ident_data !== false) ? $row->ownership : '';?>"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -149,7 +145,13 @@ if ($ident_data !== false) {
                                                     <input type="hidden" name="uri" value="<?php echo $this->uri->uri_string();?>"></input>
                                                 </div>
                                             </div>
-                                        </div>                                                              
+                                            <div class="col-md-5">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Ownership</label>
+                                                    <input name="ownership" type="text" class="form-control" value="<?php echo $row->ownership;?>"/>
+                                                </div>
+                                            </div>
+                                        </div>                                                          
                                     </div>
                                     
                                     

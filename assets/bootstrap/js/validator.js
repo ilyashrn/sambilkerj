@@ -89,7 +89,16 @@
     'minlength': function ($el) {
       var minlength = $el.data('minlength')
       return !$el.val() || $el.val().length >= minlength
+    },
+    'datecompare': function ($el) {
+      var datecompare = $el.data('datecompare')
+      return !$el.val() || $el.val() >= $(datecompare).val()
+    },
+    'deadline': function ($el) {
+      var deadline = $el.data('deadline')
+      return !$el.val() || $el.val() > $(deadline).val()
     }
+
   }
 
   Validator.prototype.validateInput = function (e) {

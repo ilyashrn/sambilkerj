@@ -116,13 +116,7 @@ if ($post_data !== false) {
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group form-group-custom">
-                                                    <label>Gaji yang ditawarkan</label>
-                                                    <input name="salary" type="number" class="form-control" value="<?php echo $post->salary;?>"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group form-group-custom">
-                                                    <label>Deadline</label>
+                                                    <label>Deadline lowongan</label>
                                                     <input name="deadline" type="date" class="form-control" value="<?php echo $post->deadline;?>"/>
                                                 </div>
                                             </div>
@@ -154,6 +148,26 @@ if ($post_data !== false) {
                                                       ?>
                                                    </select>
                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Mulai Bekerja</label>
+                                                    <input name="start_date" type="date" class="form-control" value="<?php echo $post->start_date;?>"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Selesai Bekerja</label>
+                                                    <input name="end_date" type="date" class="form-control" value="<?php echo $post->end_date;?>"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group form-group-custom">
+                                                    <label>Gaji yang ditawarkan</label>
+                                                    <input name="salary" type="number" class="form-control" value="<?php echo $post->salary;?>"/>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">

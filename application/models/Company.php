@@ -58,6 +58,20 @@
       }
     }
 
+    function check_telp($telp) {
+      $this->db->select('*');
+      $this->db->from('c_identity');
+      $this->db->where('telp_number', $telp);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     function update_login($id_company) {
       $datestring = '%Y-%m-%d %h:%i:%s';
       $this->db->set('last_login',mdate($datestring,now('Asia/Jakarta')));

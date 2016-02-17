@@ -35,7 +35,7 @@
     
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 service-box style-3 default profil-tab">
+        <div class="col-sm-10 col-md-offset-1 service-box style-3 default profil-tab">
           <?php
           $attributes = array('id' => 'fileForm','class' => 'form-horizontal','data-toggle' => 'validator');
           echo form_open_multipart(($edit == false) ? 'Jobs/inserting' : 'Jobs/updating/'.$id_post, $attributes);
@@ -47,7 +47,7 @@
             </div>
             <div class="col-sm-7">
               <input type="text" id="post_title" name="post_title" placeholder="Judul Informasi Lowongan" required="required"
-              value="<?php echo ($edit == true) ? $post->post_title : '';?>">
+              value="<?php echo ($edit == true) ? $post->post_title : set_value('post_title');?>">
             </div>
           </div>
           <div class="form-group">
@@ -78,7 +78,7 @@
           <div class="form-group">
             <div class="form-label">
               <label for="jobdesc" class="col-sm-4 control-label">Keahlian yang dibutuhkan</label>
-              <span>Tambahkan keahlian yang sebaiknya dimiliki pekerja.</span>
+              <span>Tambahkan keahlian yang sebaiknya dimiliki pekerja. Pilih dari list yang disediakan.</span>
             </div>
             <div class="col-sm-7">
               <select name="skills[]" id="skills" style="width:100%;" multiple="multiple" >
@@ -123,13 +123,21 @@
               </div>
             </div>
           <div class="form-group">
-            <div class="form-label">
-            <label for="salary" class="col-sm-4 control-label">Gaji yang ditawarkan</label>
-              <span>Sertakan gaji yang menarik para pelamar.</span>
+            <div class="col-md-6">
+              <label for="salary" class="col-sm-5 control-label">Gaji yang ditawarkan</label>
+              <div class="col-sm-7">
+                <input type="number" id="salary" name="salary" placeholder="Gaji dalam IDR"
+                value="<?php echo ($edit == true) ? $post->salary : '';?>">
+              </div>
             </div>
-            <div class="col-sm-7">
-              <input type="number" id="salary" name="salary" placeholder="Gaji dalam IDR"
-              value="<?php echo ($edit == true) ? $post->salary : '';?>">
+            <div class="col-md-6 form-group">
+              <label for="deadline" class="col-sm-5 control-label" >Deadline Lowongan</label>
+              <div class="col-sm-7">
+                <input type="date" data-deadline="#today" id="deadline" name="deadline" placeholder="mm/dd/yyyy"
+                value="<?php echo ($edit == true) ? $post->deadline : '';?>">
+                <span class="help-block">Deadline minimal adalah besok.</span>
+                <input type="hidden" name="today" id="today" value="<?php echo date("Y-m-d");?>"></input>
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -156,15 +164,25 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="deadline" class="col-sm-4 control-label" >Deadline Lowongan</label>
-            <div class="col-sm-7">
-              <input type="date" id="deadline" name="deadline" placeholder="mm/dd/yyyy"
-              value="<?php echo ($edit == true) ? $post->deadline : '';?>">
+            <div class="col-md-6">
+              <label for="start_date" class="col-sm-4 control-label" >Mulai bekerja</label>
+              <div class="col-sm-7">
+                <input type="date" id="start_date" name="start_date" placeholder="mm/dd/yyyy"
+                value="<?php echo ($edit == true) ? $post->start_date : '';?>">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="end_date" class="col-sm-4 control-label" >Tanggal selesai</label>
+              <div class="col-sm-7">
+                <input type="date" data-datecompare="#start_date" id="end_date" name="end_date" placeholder="mm/dd/yyyy"
+                value="<?php echo ($edit == true) ? $post->end_date : '';?>">
+              </div>
             </div>
           </div>
           <div class="form-group pull-right">
             <div class="col-sm-offset-2 col-sm-10">
               <button name="ins_job" type="submit" class="btn btn-default" style="margin-right:30px;"><?php echo ($edit == true) ? 'update the job' : 'insert the job' ;?></button>
+              <input type="hidden" name="uri" value="<?php echo $this->uri->uri_string()?>"></input>
             </div>
           </div>
           <?php

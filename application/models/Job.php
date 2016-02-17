@@ -62,6 +62,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');
@@ -101,6 +103,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');
@@ -136,6 +140,8 @@
 				p.deadline as deadline,
 				p.id_location as id_location,
 				ct.city_name as  city_name,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				pr.province_name as province_name
 				');
 			$this->db->from('job_post as p');
@@ -184,6 +190,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');
@@ -224,6 +232,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');
@@ -259,6 +269,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');
@@ -304,6 +316,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');
@@ -360,6 +374,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');
@@ -427,6 +443,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');
@@ -482,6 +500,8 @@
 				p.created_time as created_time,
 				p.deadline as deadline,
 				p.id_location as id_location,
+				p.start_date as start_date,
+				p.end_date as end_date,
 				ct.city_name as  city_name,
 				pr.province_name as province_name
 				');

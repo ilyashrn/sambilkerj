@@ -79,6 +79,21 @@
       } 
     }
 
+    function prvilege_worker_prof($id_company,$username) {
+      $this->db->select('*');
+      $this->db->from('c_hired as c');
+      $this->db->join('worker as w', 'c.id_worker = w.id_worker', 'left');
+      $this->db->where('id_company', $id_company);
+      $this->db->where('username', $username);
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     function check_worker($id_worker,$id_job) {
       $this->db->select('*');
       $this->db->from('c_hired');

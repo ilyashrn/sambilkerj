@@ -70,17 +70,14 @@ class Members extends CI_Controller {
 			$prov_data = $this->Location->get_all_prov(); 
 
 			if ($check1 !== false) { //IDENTIFY MEMBER (WORKER)
-				if ($username !== $this->username) { //MEANS THE NOT-LOGGEDIN USER SEES THEIR OWN/OTHERS PROFULE
-					foreach ($check1 as $key) {
-						$this->mem_id = $key->id_worker;	
+				$check3 = false;
+				if ($this->mem_type == 'C') {
+					$check3 = $this->Applier->prvilege_worker_prof($this->mem_id,$username);
+					if ($check3) {
+						$not_logged = true;
 					}
-					$not_logged = true;
-					$this->session->set_flashdata(
-									'msg', 
-									'<b>Oops!</b> Anda tidak dipekernankan melihat profil pelamar lain.'
-									);
-					redirect('errors/Page_not_found','refresh');
-				} else {
+				}
+				if ($check3 || $username == $this->username) {
 					//LOAD ALL MEMBER'S DATA
 					$basic_data = $this->Worker->get('username',$username);
 					$ident_data = $this->Worker->get_ident($this->mem_id);
@@ -129,7 +126,11 @@ class Members extends CI_Controller {
 					$this->load->view('content/profil-detail', $data);
 					$this->load->view('footer', $data);	
 				}
-
+				else {//MEANS THE NOT-LOGGEDIN USER SEES THEIR OWN/OTHERS PROFULE
+					$not_logged = true;
+					$this->session->set_flashdata('msg', '<b>Oops!</b> Anda tidak dipekernankan melihat profil pekerja ini.');
+					redirect('errors/Page_not_found','refresh');
+				}
 			}
 			elseif ($check2 !== false) { //IDENTIFY MEMBER (COMPANY)
 				if ($username !== $this->username) { //MEANS THE NOT-LOGGEDIN USER SEES THEIR OWN/OTHERS PROFULE

@@ -39,7 +39,7 @@ class Lokers extends CI_Controller {
 		foreach ($this->Company->get('id_company',$this->input->post('id_company')) as $key) {}
 		
 		$file_name = '';
-		if ($_FILES['avatar']['size'] !== 0) {
+		if ($_FILES['file']['size'] !== 0) {
 			$username = $key->username;
 			$config['upload_path'] = './files/loker/';
 			$new_name = $username.' - '.$this->input->post('post_title');
@@ -64,6 +64,8 @@ class Lokers extends CI_Controller {
 			'deadline' => $this->input->post('deadline'),
 			'salary' => $this->input->post('salary'),
 			'id_location' => $this->input->post('location'),
+			'start_date' => $this->input->post('start_date'),
+			'end_date' => $this->input->post('end_date')
 		 	);
 
 		$insert = $this->Job->insert($data); // INSERTING INTO DATABASE
@@ -110,6 +112,8 @@ class Lokers extends CI_Controller {
 			'deadline' => $this->input->post('deadline'),
 			'salary' => $this->input->post('salary'),
 			'id_location' => $this->input->post('location'),
+			'start_date' => $this->input->post('start_date'),
+			'end_date' => $this->input->post('end_date')
 		 	);
 
 		if ($_FILES['file']['size'] !== 0) {

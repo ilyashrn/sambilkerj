@@ -12,6 +12,10 @@
 	<div class="col-sm-12 service-box style-3 green profil-tab">
 	<div class="col-sm-12">
 		<h4>Informasi Dasar</h4>	
+    <?php
+    echo ($this->session->flashdata('warn')) ? '<label class="alert alert-danger">E-mail yang anda masukkan sudah digunakan. Silahkan masukkan e-mail lain</label>' : '';
+    echo ($this->session->flashdata('warn2')) ? '<label class="alert alert-danger">Nomor telepon tidak boleh sama dengan pengguna lain. Silahkan masukkan nomor lain.</label>' : '';
+    ?>
         <?php
         $attributes = array('id' => 'fileForm','class' => 'form-horizontal','data-toggle' => 'validator');
         echo form_open_multipart('Companies/updating_ident', $attributes);
@@ -29,7 +33,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="ownership" class="col-sm-4 control-label" >Kepemelikan Akun</label>
+              <label for="npwp" class="col-sm-4 control-label" >Kepemilikan Akun</label>
               <div class="col-sm-7">
                 <input type="text" id="ownership" name="ownership" placeholder="Kepemilikan Akun"
                 value="<?php echo ($ident_data !== false) ? $row2->ownership: '';?>">
@@ -47,6 +51,8 @@
               <div class="col-sm-7">
                 <input type="email" id="email" name="email" placeholder="E-mail Primer"
                 value="<?php echo $row->email;?>">
+                <input type="hidden" id="email" name="origin_email" placeholder="E-mail Primer"
+                value="<?php echo $row->email;?>">
               </div>
             </div>
             <div class="form-group">
@@ -54,12 +60,15 @@
               <div class="col-sm-7">
                 <input type="email" id="secondary_email" name="secondary_email" placeholder="E-mail Sekunder"
                 value="<?php echo $row->secondary_email;?>">
+                <input type="hidden" id="secondary_email" name="origin_secondary_email" placeholder="E-mail Sekunder"
+                value="<?php echo $row->secondary_email;?>">
               </div>
             </div>
             <div class="form-group">
               <label for="telp_number" class="col-sm-4 control-label">Nomor Telepon</label>
               <div class="col-sm-7">
                 <input type="text"  id="telp_number" name="telp_number" placeholder="Nomor Telepon" value="<?php echo ($ident_data !== false) ? $row2->telp_number: '';?>">
+                <input type="hidden"  id="origin_telp_number" name="origin_telp_number" value="<?php echo ($ident_data !== false) ? $row2->telp_number: '';?>">
               </div>
             </div>
             <div class="form-group">

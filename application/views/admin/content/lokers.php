@@ -163,7 +163,7 @@
                                       <textarea placeholder="Deskripsi Kerja" rows="5" class="form-control" name="description"></textarea>
                                     </div>  
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                       <label>Berkas Pendukung</label>
                                       <input type="file" class="form-control" name="file"/>                                            
@@ -172,6 +172,16 @@
                                       <label>Keterangan Berkas (jika ada)</label>
                                       <input type="text" class="form-control" name="file_desc">
                                     </div>  
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                      <label>Mulai Bekerja</label>
+                                      <input type="date" class="form-control" id="start_date" name="start_date" placeholder="Tanggal mulai">
+                                    </div>
+                                    <div class="form-group">
+                                      <label>Selesai Bekerja</label>
+                                      <input type="date" class="form-control" id="end_date" name="end_date" placeholder="Tanggal selesai">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">

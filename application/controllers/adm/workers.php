@@ -28,7 +28,7 @@ class Workers extends CI_Controller {
 	}
 
 	public function is_username_exist($username) {
-		if ($this->Worker->check_username($username)) {
+		if ($this->Worker->check_username($username) || $this->Company->check_username($username)) {
 			$this->form_validation->set_message('is_username_exist','Username you inserted is already exist.');
 			return false;
 		} else {
@@ -37,7 +37,7 @@ class Workers extends CI_Controller {
 	}
 
 	public function is_email_exist($email) {
-		if ($this->Worker->check_email($email)) {
+		if ($this->Worker->check_email($email) || $this->Company->check_email($email)) {
 			$this->form_validation->set_message('is_email_exist','E-mail you inserted is already exist.');
 			return false;
 		} else {

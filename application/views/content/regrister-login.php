@@ -22,11 +22,11 @@
     <div class="col-sm-12">
       <div class="horizontal-tabs big-tabs wow fadeIn">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab-1-1" data-toggle="tab"><i class="glyphicon glyphicon-user"></i>Pekerja</a></li>
-          <li><a href="#tab-1-2" data-toggle="tab"><i class="glyphicon glyphicon-lock"></i>Perusahaan</a></li>
+          <li class="<?php echo (!$tab) ? 'active' : ''?>"><a href="#tab-1-1" data-toggle="tab"><i class="glyphicon glyphicon-user"></i>Pekerja</a></li>
+          <li class="<?php echo ($tab) ? 'active' : ''?>"><a href="#tab-1-2" data-toggle="tab"><i class="glyphicon glyphicon-lock"></i>Perusahaan</a></li>
         </ul>
          <div class="tab-content">
-          <div class="tab-pane fade in active" id="tab-1-1">
+          <div class="tab-pane fade <?php echo (!$tab) ? 'in active' : ''?>" id="tab-1-1">
             <div class="row">
               <div class="col-sm-7">
                 <?php
@@ -37,19 +37,19 @@
                     <div class="form-group">
                       <label for="fullname" class="col-sm-4 control-label" >Nama Lengkap</label>
                       <div class="col-sm-7">
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nama Lengkap" required="required">
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nama Lengkap" required="required" value="<?php echo $this->session->flashdata('fullname');?>"> 
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="username" class="col-sm-4 control-label">Username</label>
                       <div class="col-sm-7">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required" value="<?php echo $this->session->flashdata('username1');?>">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="email" class="col-sm-4 control-label">E-mail</label>
                       <div class="col-sm-7">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required="required" data-error="Bruh, that email address is invalid">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required="required" value="<?php echo $this->session->flashdata('email1');?>">
                       </div>
                     </div>
                     <div class="form-group">
@@ -87,7 +87,7 @@
         </div><!-- row -->
 
           </div><!-- tab-pane -->
-          <div class="tab-pane fade" id="tab-1-2">
+          <div class="tab-pane fade <?php echo ($tab) ? 'in active' : ''?>" id="tab-1-2">
             <div class="row">
               <div class="col-sm-7">
                 <?php
@@ -97,31 +97,32 @@
                   <div class="form-group">
                     <label for="company_name" class="col-sm-4 control-label">Nama Perusahaan</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Nama Perusahaan/Organisasi" required="required">
+                      <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Nama Perusahaan/Organisasi" required="required" value="<?php echo $this->session->flashdata('company_name');?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="username" class="col-sm-4 control-label">Username</label>
                     <div class="col-sm-7">
-                      <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
+                      <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required" value="<?php echo $this->session->flashdata('username');?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="email" class="col-sm-4 control-label">E-mail</label>
                     <div class="col-sm-7">
-                      <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required="required">
+                      <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required="required" value="<?php echo $this->session->flashdata('email');?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="email" class="col-sm-4 control-label">E-mail Kedua</label>
                     <div class="col-sm-7">
-                      <input type="email" class="form-control" id="2ndemail" name="2nd_email" placeholder="Secondary E-mail" required="required">
+                      <input type="email" class="form-control" id="2ndemail" name="2nd_email" placeholder="Secondary E-mail" required="required" value="<?php echo $this->session->flashdata('2nd_email');?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
                     <div class="col-sm-7">
-                      <input type="password" class="form-control" id="inputPassword2" name="password" placeholder="Password" required="required">
+                      <input type="password" data-minlength="6" class="form-control" id="inputPassword2" name="password" placeholder="Password" required="required">
+                      <span class="help-block">Minimum of 6 characters</span>
                     </div>
                   </div>
                   <div class="form-group">
@@ -158,3 +159,8 @@
 </div><!-- PAGE CONTENT -->
 
 
+<script>
+$(document).ready(function() {
+    $('#differentForm').formValidation();
+});
+</script>

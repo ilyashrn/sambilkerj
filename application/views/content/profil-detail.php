@@ -77,15 +77,22 @@ if ($ident_data !== false) {
             <div class="service-box-content">
               <div class="row">
                 <?php
-                if ($ident_data == false) { ?>
-                
-                <div class="col-sm-12 profil-alert">
-                  <div class="text-box">
-                    <p>Maaf! sepertinya anda baru terdaftar. Silahkan lengkapi informasi diri anda sekarang juga <a href="<?php echo "edit_w/I/".$basic_row->username; ?>">disini.</a></p>
-                  </div><!-- text-box -->
-                </div><!-- col -->  
+                if ($ident_data == false) { 
+                  if ($not_logged !== true) { ?>
+                    <div class="col-sm-12 profil-alert">
+                      <div class="text-box">
+                        <p>Maaf! sepertinya anda baru terdaftar. Silahkan lengkapi informasi diri anda sekarang juga <a href="<?php echo "edit_w/I/".$basic_row->username; ?>">disini.</a></p>
+                      </div><!-- text-box -->
+                    </div><!-- col -->  
+                  <?php } else {
+                  ?>
+                  <div class="col-sm-12 profil-alert">
+                      <div class="text-box">
+                        <p>Sepertinya akun ini baru terdaftar, profil akun ini masih kosong. </a></p>
+                      </div><!-- text-box -->
+                    </div><!-- col -->  
                 <?php
-                } else {
+                } } else {
                   foreach ($ident_data as $ident_row) {}
                 ?>
                 <div class="col-md-12">

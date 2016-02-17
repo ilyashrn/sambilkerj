@@ -33,7 +33,7 @@ class Workers extends CI_Controller {
 	}
 
 	public function is_username_exist($username) {
-		if ($this->Worker->check_username($username)) {
+		if ($this->Worker->check_username($username) || $this->Company->check_username($username)) {
 			$this->form_validation->set_message('is_username_exist','Username you inserted is already exist.');
 			return false;
 		} else {
@@ -42,7 +42,7 @@ class Workers extends CI_Controller {
 	}
 
 	public function is_email_exist($email) {
-		if ($this->Worker->check_email($email)) {
+		if ($this->Worker->check_email($email) || $this->Company->check_email($email)) {
 			$this->form_validation->set_message('is_email_exist','E-mail you inserted is already exist.');
 			return false;
 		} else {
@@ -67,6 +67,9 @@ class Workers extends CI_Controller {
 			$this->session->set_userdata($sess_array); //SESSION-ING THE FULLNAME REGRISTRATOR
 			redirect('Main/regristration_success');
 		} else {
+			$this->session->set_flashdata('fullname', $this->input->post('fullname'));
+			$this->session->set_flashdata('username1', $this->input->post('username'));
+			$this->session->set_flashdata('email1', $this->input->post('email'));
 			$this->session->set_flashdata('warn', validation_errors());
 			redirect('Main/new_user','refresh');
 		}

@@ -1,6 +1,7 @@
                 <div class="tab-pane fade <?php echo ($tab_param == 'PA') ? 'in active': '';?>" id="tab-6-3">
                   <div class="col-sm-12 service-box style-3 green">
                     <h4>Ubah Password</h4>
+                      <label class="alert alert-warning"><p>Ubah password dengan memasukkan password lama. Pastikan password baru terdiri dari 6 karakter atau lebih.</p></label>
                         <?php
                         $attributes = array('class' =>'form-horizontal', 'data-toggle' => 'validator');
                         echo form_open('Companies/updating_password', $attributes);
@@ -15,7 +16,8 @@
                             <div class="form-group">
                               <label for="new_pass" class="col-sm-4 control-label">Password baru</label>
                               <div class="col-sm-7">
-                                <input type="password" class="form-control" id="new_pass" name="new_pass" placeholder="Password baru">
+                                <input type="password" data-minlength="6" class="form-control" id="new_pass" name="new_pass" placeholder="Password baru">
+                                <span class="help-block">Minimum of 6 characters</span>
                               </div>
                             </div>
                             <div class="form-group">
@@ -37,7 +39,7 @@
 
                     <div class="col-sm-12 service-box style-3 green">
                       <h4>Ubah Username</h4>
-                        <p>Username (dan E-mail) digunakan sebagai identitas untuk melakukan login ke <span class="text-default">SambilKerja</span>.</p>
+                        <label class="alert alert-warning"><p>Username (dan E-mail) digunakan sebagai identitas untuk melakukan login ke <span class="text-default">SambilKerja</span>.</p></label>
                           <?php
                           $attributes = array('class' =>'form-horizontal', 'data-toggle' => 'validator');
                           echo form_open('Companies/updating_username', $attributes);

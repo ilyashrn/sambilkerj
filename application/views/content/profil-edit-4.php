@@ -23,7 +23,8 @@
                             <div class="form-group">
                               <label for="new_pass" class="col-sm-4 control-label">Password baru</label>
                               <div class="col-sm-7">
-                                <input type="password" class="form-control" id="new_pass" name="new_pass" placeholder="Password baru">
+                                <input data-minlength="6" type="password" class="form-control" id="new_pass" name="new_pass" placeholder="Password baru">
+                                <span class="help-block">Minimum of 6 characters</span>
                               </div>
                             </div>
                             <div class="form-group">

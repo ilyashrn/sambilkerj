@@ -41,6 +41,15 @@ class Companies extends CI_Controller {
 		}
 	}
 
+	public function is_telp_exist($telp) {
+		if ($this->Company->check_telp($telp)) {
+			$this->form_validation->set_message('is_telp_exist','Telphone number you inserted is already exist.');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public function is_email_exist($email) {
 		if ($this->Company->check_email($email)) {
 			$this->form_validation->set_message('is_email_exist','E-mail you inserted is already exist.');
@@ -54,7 +63,17 @@ class Companies extends CI_Controller {
 		
 		$this->form_validation->set_rules('username', 'Username', 'required|callback_is_username_exist');
 		$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|callback_is_email_exist');
-		if ($this->form_validation->run()) {
+		$this->form_validation->set_rules('2nd_email', 'E-mail', 'required|valid_email|callback_is_email_exist');
+		if ($this->input->post('email') == $this->input->post('2nd_email')) {
+			$this->session->set_flashdata('warn', 'Email dan e-mail kedua tidak boleh sama.');
+			$this->session->set_flashdata('company_name', $this->input->post('company_name'));
+			$this->session->set_flashdata('username', $this->input->post('username'));
+			$this->session->set_flashdata('email', $this->input->post('email'));
+			$this->session->set_flashdata('2nd_email', $this->input->post('2nd_email'));
+			$this->session->set_flashdata('tab', true);
+			redirect('Main/new_user','refresh');
+		}
+		elseif ($this->form_validation->run()) {
 			$data = array( //ARRAY FOR INPUTS FROM FORM
 				'company_name' => $this->input->post('company_name'),
 				'username' => $this->input->post('username'),
@@ -68,6 +87,11 @@ class Companies extends CI_Controller {
 			$this->session->set_userdata($sess_array); //SESSION-ING THE FULLNAME REGRISTRATOR
 			redirect('Main/regristration_success');
 		} else {
+			$this->session->set_flashdata('company_name', $this->input->post('company_name'));
+			$this->session->set_flashdata('username', $this->input->post('username'));
+			$this->session->set_flashdata('email', $this->input->post('email'));
+			$this->session->set_flashdata('2nd_email', $this->input->post('2nd_email'));
+			$this->session->set_flashdata('tab', true);
 			$this->session->set_flashdata('warn', validation_errors());
 			redirect('Main/new_user','refresh');
 		}
@@ -90,11 +114,41 @@ class Companies extends CI_Controller {
 				$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
 				$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
 			}
-			
+			if ($this->input->post('origin_email') !== $this->input->post('email')) {
+				$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|callback_is_email_exist');		
+				if ($this->form_validation->run()) {
+					$email = array('email' => $this->input->post('email'));
+					$this->Company->update($email,$this->mem_id);	
+				} else {
+					$this->session->set_flashdata('warn', validation_errors());
+					redirect('Members/edit_c/I/'.$this->username,'refresh');
+				}
+			}
+
+			if ($this->input->post('origin_secondary_email') !== $this->input->post('secondary_email')) {
+				$this->form_validation->set_rules('secondary_email', 'Secondary E-mail', 'required|valid_email|callback_is_email_exist');		
+				if ($this->form_validation->run()) {
+					$email = array('secondary_email' => $this->input->post('secondary_email'));
+					$this->Company->update($email,$this->mem_id);	
+				} else {
+					$this->session->set_flashdata('warn', validation_errors());
+					redirect('Members/edit_c/I/'.$this->username,'refresh');
+				}	
+			}
+
+			if ($this->input->post('origin_telp_number') !== $this->input->post('telp_number')) {
+				$this->form_validation->set_rules('telp_number', 'Telephone number', 'required|callback_is_telp_exist');		
+				if ($this->form_validation->run()) {
+					$telp = array('telp_number' => $this->input->post('telp_number'));
+					$this->Company->update($telp,$this->mem_id);	
+				} else {
+					$this->session->set_flashdata('warn2', validation_errors());
+					redirect('Members/edit_c/I/'.$this->username,'refresh');
+				}	
+			}
 			$mem_data = array(
-				'NPWP' => $this->input->post('npwp'),
-				'telp_number' => $this->input->post('telp_number'),
 				'ownership' => $this->input->post('ownership'),
+				'NPWP' => $this->input->post('npwp'),
 				'about' => $this->input->post('about'),
 				'domicile' => $this->input->post('domicile'),
 				'bidang' => $this->input->post('bidang'),
@@ -103,16 +157,10 @@ class Companies extends CI_Controller {
 				'avatar' => $file_name
 				);
 			$basic = array(
-				'company_name' => $this->input->post('company_name'),
-				'email' => $this->input->post('email'),
-				'secondary_email' => $this->input->post('secondary_email')
-				);
+				'company_name' => $this->input->post('company_name'));
 			$update = $this->Company->update($basic,$this->mem_id);
 			$insert = $this->Company->update_identity($mem_data,$this->mem_id);
-			$this->session->set_flashdata(
-					'msg', 
-					'<b>Identitas Perusahaan</b> berhasil diperbarui!'
-					);
+			$this->session->set_flashdata('msg', '<b>Identitas Perusahaan</b> berhasil diperbarui!');
 			redirect('Members/'.$this->username);
 		}
 		else {
@@ -124,21 +172,13 @@ class Companies extends CI_Controller {
 		if (!empty($this->mem_id) && false !== $this->input->post('upd_pass')) {
 			$check = $this->Company->log_in($this->username,md5($this->input->post('password')));
 			if ($check == false) {
-				$this->session->set_flashdata(
-					'msg', 
-					'<b>Password lama</b> yang anda masukkan salah! Silahkan coba lagi.'
-					);
+				$this->session->set_flashdata('msg', '<b>Password lama</b> yang anda masukkan salah! Silahkan coba lagi.');
 				redirect('Members/edit_c/PA/'.$this->username,'refresh');
 			}
 			else {
-				$pass_data = array(
-						'password' => md5($this->input->post('new_pass'))
-						);
+				$pass_data = array('password' => md5($this->input->post('new_pass')));
 				$ins_edu = $this->Company->update($pass_data,$this->mem_id);
-				$this->session->set_flashdata(
-						'msg', 
-						'<b>Password</b> berhasil diperbarui!'
-						);
+				$this->session->set_flashdata('msg', '<b>Password</b> berhasil diperbarui!');
 				redirect('Members/edit_c/PA/'.$this->username,'refresh');
 			}
 		}
@@ -152,10 +192,7 @@ class Companies extends CI_Controller {
 				$data = array('username' => $this->input->post('username'));
 				$check = $this->Company->get('username',$this->input->post('username'));
 				if ($check !== false) {
-					$this->session->set_flashdata(
-						'msg', 
-						'<b>Username</b> ini sudah dipakai. Silahkan pilih username lain.'
-						);
+					$this->session->set_flashdata('msg', '<b>Username</b> ini sudah dipakai. Silahkan pilih username lain.');
 					redirect('Members/edit_c/PA/'.$this->username,'refresh');	
 				}
 				else {

@@ -26,7 +26,7 @@ class Companies extends CI_Controller {
 	}
 
 	public function is_username_exist($username) {
-		if ($this->Company->check_username($username)) {
+		if ($this->Company->check_username($username) || $this->Worker->check_username($username)) {
 			$this->form_validation->set_message('is_username_exist','Username you inserted is already exist.');
 			return false;
 		} else {
@@ -35,7 +35,7 @@ class Companies extends CI_Controller {
 	}
 
 	public function is_email_exist($email) {
-		if ($this->Company->check_email($email)) {
+		if ($this->Company->check_email($email) || $this->Worker->check_email($email)) {
 			$this->form_validation->set_message('is_email_exist','E-mail you inserted is already exist.');
 			return false;
 		} else {
@@ -113,7 +113,6 @@ class Companies extends CI_Controller {
 		$mem_data = array(
 			'NPWP' => $this->input->post('npwp'),
 			'telp_number' => $this->input->post('telp_number'),
-			'ownership' => $this->input->post('ownership'),
 			'about' => $this->input->post('about'),
 			'domicile' => $this->input->post('domicile'),
 			'bidang' => $this->input->post('bidang'),

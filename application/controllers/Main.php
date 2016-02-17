@@ -38,7 +38,8 @@ class Main extends CI_Controller {
 		if ($this->session->userdata('logged') == false) {
 			$data = array(
 				'title' => "Regristration page | SambilKerja.com",
-				'contacts' => $this->Hcontent->get_all('contacts')
+				'contacts' => $this->Hcontent->get_all('contacts'),
+				'tab' => $this->session->flashdata('tab')
 				);
 			$this->load->view('html_head', $data);
 			$this->load->view('header', $data);

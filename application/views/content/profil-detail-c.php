@@ -47,7 +47,8 @@ if ($ident_data !== false) {
                   <?php echo ($ident_data !== false) ? $row->telp_number: '-';?><br>
                   <!-- <i class="mt-icon-at-sign"></i>  -->
                   <span class="profil-span"><b>Alamat Email</b></span><br>
-                  <?php echo $basic_row->email; ?>/<?php echo $basic_row->secondary_email; ?> <br>
+                  <?php echo $basic_row->email; ?> <br>
+                  <?php echo $basic_row->secondary_email; ?>
                 </div>
 					   </div><!-- services-boxes-content -->
              <?php
@@ -92,8 +93,8 @@ if ($ident_data !== false) {
                   foreach ($ident_data as $ident_row) {}
                 ?>
                 <div class="col-sm-6">
-                  <span class="profil-span"><b>Kepemiikan akun</b></span>  
-                  <p><?php echo ($ident_row->ownership !== '') ? 'atas nama <strong>'.$ident_row->ownership.'</strong>': '-';?></p>
+                  <span class="profil-span"><b>Kepemilikan Akun</b></span> 
+                  <p><?php echo ($ident_row->ownership !== '') ? $ident_row->ownership: '-';?></p>
                   <span class="profil-span"><b>Bidang Kegiatan Perusahaan</b></span> 
                   <p><?php echo ($ident_row->bidang !== '') ? $ident_row->bidang: '-';?></p>
                 </div>
@@ -122,7 +123,7 @@ if ($ident_data !== false) {
                     bergabung pada <?php echo date('j M Y', strtotime($basic_row->created_time)) ;?>
                   </div>
                   <div class="col-sm-6 pull-right profil-log">
-                    terakhir login pada <?php echo date('j M Y', strtotime($basic_row->last_login)) ;?>
+                    <?php echo ($basic_row->last_login == '0000-00-00 00:00:00') ? 'Belum pernah login' : 'terakhir login pada '.date('j M Y', strtotime($basic_row->last_login)) ;?>
                   </div>  
                 </div>
               </div>
@@ -160,8 +161,8 @@ if ($ident_data !== false) {
                     <div class="col-sm-2 btn-div">
                       <?php
                       if ($not_logged !== true) { ?>
-                          <a href="../Jobs/edit_job/<?php echo $job->id_post;?>" class="btn btn-black"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                          <a href="../Jobs/removing/<?php echo $job->id_post;?>" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
+                          <a href="../Jobs/edit_job/<?php echo $job->id_post.'/'.$job->post_title;?>" class="btn btn-black"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                          <a href="../Jobs/removing/<?php echo $job->id_post.'/'.$job->post_title;?>" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
                       <?php } else { ?>
                           <button id="daftar" class="btn btn-orange" data-container="body" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-content="Login atau daftarkan diri anda terlebih dahulu untuk mendaftar lowongan!">Daftar!</button>
                       <?php  } ?>

@@ -9,7 +9,7 @@
             <div class="dev-page-header">
                 
                 <div class="dph-logo">
-                    <a href="<?php echo base_url().'adm/dashboard'?>">SambilKerja Admin Panel</a>
+                    <img src="<?php echo base_url().'assets/images/logo.png'?>" style="display: block;width: 80%;margin: 5px;">
                     <a class="dev-page-sidebar-collapse">
                         <div class="dev-page-sidebar-collapse-icon">
                             <span class="line-one"></span>

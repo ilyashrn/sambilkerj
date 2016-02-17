@@ -320,7 +320,7 @@ class Jobs extends CI_Controller {
 		}
 	}
 
-	public function edit_job($id_post) 
+	public function edit_job($id_post,$post_title) 
 	{
 		if ($this->session->userdata('logged') != false && $this->mem_type == 'C') { //IF USER COMPANY LOGIN
 			$cat_data = $this->Job->get_all_cats();
@@ -372,7 +372,6 @@ class Jobs extends CI_Controller {
 				$upload = $this->upload->do_upload('file');	
 				$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
 				$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
-				echo $file_name;
 			} 
 
 			$data = array( //ARRAY FOR INPUTS FROM FORM
@@ -384,24 +383,20 @@ class Jobs extends CI_Controller {
 				'deadline' => $this->input->post('deadline'),
 				'salary' => $this->input->post('salary'),
 				'id_location' => $this->input->post('location'),
+				'start_date' => $this->input->post('start_date'),
+				'end_date' => $this->input->post('end_date')
 			 	);
 			$update = $this->Job->update($data,$id_post); // UPDATING
 
 			$cleaning = $this->Job->delete_skill($id_post);
 			if (false !== $this->input->post('skills')) {
 				foreach ($this->input->post('skills') as $row ) {
-					$data = array(
-						'id_post' => $id_post,
-						'id_skill' => $row
-						 );
+					$data = array('id_post' => $id_post,'id_skill' => $row);
 					$ins_skill = $this->Job->insert_skill($data); 
 				}
 			}
 
-			$this->session->set_flashdata(
-					'msg', 
-					'<b>Lowongan pekerjaan</b> berhasil diperbarui!'
-					);
+			$this->session->set_flashdata('msg', '<b>Lowongan pekerjaan</b> berhasil diperbarui!');
 			redirect('Members/'.$this->username);
 		} else {
 			redirect('errors/Page_not_found','refresh');
@@ -421,7 +416,7 @@ class Jobs extends CI_Controller {
 			$upload = $this->upload->do_upload('file');	
 			$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
 			$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
-			// echo $file_name;
+			
 			$data = array( //ARRAY FOR INPUTS FROM FORM
 				'id_company' => $this->mem_id,
 				'post_title' => $this->input->post('post_title'),
@@ -432,30 +427,26 @@ class Jobs extends CI_Controller {
 				'deadline' => $this->input->post('deadline'),
 				'salary' => $this->input->post('salary'),
 				'id_location' => $this->input->post('location'),
+				'start_date' => $this->input->post('start_date'),
+				'end_date' => $this->input->post('end_date')
 			 	);
 			$insert = $this->Job->insert($data); // INSERTING INTO DATABASE
 
 			if (false !== $this->input->post('skills')) {
 				foreach ($this->input->post('skills') as $row ) {
-					$data = array(
-						'id_post' => $insert,
-						'id_skill' => $row
-						 );
+					$data = array('id_post' => $insert,'id_skill' => $row);
 					$ins_skill = $this->Job->insert_skill($data); 
 				}
 			}
-
-			$this->session->set_flashdata(
-					'msg', 
-					'<b>Lowongan pekerjaan</b> berhasil dibuat!'
-					);
+			$this->session->set_flashdata('msg', '<b>Lowongan pekerjaan</b> berhasil dibuat!');
 			redirect('Members/'.$this->username);
+
 		} else {
 			redirect('errors/Page_not_found','refresh');
 		}
 	}
 
-	function removing($id_post) {
+	function removing($id_post,$post_title) {
 		$poster = $this->Job->get_poster($id_post);
 		foreach ($poster as $poster ) {}
 		if ($this->mem_id == $poster->id_company) {
