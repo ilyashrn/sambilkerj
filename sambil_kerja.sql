@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 15, 2016 at 04:30 PM
+-- Generation Time: Feb 17, 2016 at 10:26 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -35,15 +35,17 @@ CREATE TABLE IF NOT EXISTS `administrator` (
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `avatar` varchar(40) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `administrator`
 --
 
 INSERT INTO `administrator` (`id_admin`, `administrator_name`, `username`, `email`, `password`, `created_time`, `last_login`, `avatar`) VALUES
-(2, 'administrator', 'userdewa', 'administrator@sambilkerja.com', 'b0615c473cffb2618f6111cc8c6c6b01', '2016-02-12 17:35:06', '2016-02-14 02:47:21', ''),
-(4, 'Faisal Rahman', 'faisalrn', 'faisalrahman@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-13 06:41:56', '0000-00-00 00:00:00', '');
+(2, 'administrator', 'userdewa', 'administrator@sambilkerja.com', 'b0615c473cffb2618f6111cc8c6c6b01', '2016-02-12 17:35:06', '2016-02-16 21:15:24', '8cf4d0fd037e4258c3b2bf275caa9495.jpg'),
+(4, 'Faisal Rahman', 'faisalrn', 'faisalrahman@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-13 06:41:56', '0000-00-00 00:00:00', ''),
+(5, 'Ilyas Habiburrahman', 'ilyashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 18:27:24', '0000-00-00 00:00:00', ''),
+(6, 'Idris Izzaturrahman H', 'idrisih', 'idrisizzaturrahman@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 18:59:08', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -577,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `company` (
   `password` varchar(50) NOT NULL,
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `company`
@@ -585,10 +587,13 @@ CREATE TABLE IF NOT EXISTS `company` (
 
 INSERT INTO `company` (`id_company`, `company_name`, `username`, `email`, `secondary_email`, `password`, `created_time`, `last_login`) VALUES
 (2, 'PT Sucacco TBK', 'succaco', 'succaco@succaco.com', 'succaco@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-24 09:50:38', '0000-00-00 00:00:00'),
-(4, 'GumCode Startup', 'gumcode11', 'gumcode@gmail.com', 'cs@gumcode.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-02 10:32:16', '2016-02-02 04:32:35'),
+(4, 'GumCode Startup', 'gumcode10', 'ilyashabhab@gmail.com', 'ilyashabhab@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-02 10:32:16', '2016-02-02 04:32:35'),
 (6, 'Sambilkerja', 'Administrator', 'administrator@sambilkerja.com', 'no-reply@sambilkerja.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-12 17:28:40', '2016-02-14 03:28:49'),
 (7, 'PT Bukalapak.com', 'bukalapak', 'bl@bukalapak.com', '', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-13 01:53:49', '0000-00-00 00:00:00'),
-(8, 'PT Indosat Ooredo', 'indosat', 'indosat@indosat.com', 'indosat@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-13 07:34:33', '2016-02-13 01:07:01');
+(8, 'PT Indosat Ooredo', 'indosat', 'ilyashabiburrahman@gmail.com', 'indosat@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-13 07:34:33', '2016-02-16 20:28:28'),
+(9, 'Universitas Brawijaya', 'unibraw', 'unibraw@gmail.com', 'unibraw2@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 19:47:12', '2016-02-15 19:47:44'),
+(10, 'Universitas Indonesia', 'UI', 'UI@gmail.com', '', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 20:41:43', '0000-00-00 00:00:00'),
+(11, 'Kodemerah', 'kodemerah', 'email@kodemerah.com', 'email2@kodemerah.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-16 07:26:03', '2016-02-15 19:53:51');
 
 -- --------------------------------------------------------
 
@@ -629,7 +634,7 @@ CREATE TABLE IF NOT EXISTS `c_hired` (
   `hire_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `review_date` timestamp NULL DEFAULT NULL,
   `store` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `c_hired`
@@ -637,7 +642,8 @@ CREATE TABLE IF NOT EXISTS `c_hired` (
 
 INSERT INTO `c_hired` (`id_hired`, `id_worker`, `id_company`, `id_job`, `id_status`, `review`, `stars`, `hire_date`, `review_date`, `store`) VALUES
 (3, 1, 8, 11, 2, 'Pekerjaannya bagus, rapih, dan sopan anaknya. ', 5, '2016-02-13 13:12:56', '2016-02-15 17:00:00', 0),
-(6, 1, 2, 15, 1, '', 0, '2016-02-14 03:25:17', NULL, 0);
+(6, 1, 2, 15, 1, '', 0, '2016-02-14 03:25:17', NULL, 0),
+(7, 12, 11, 16, 2, 'Mengecewakan', 0.5, '2016-02-16 07:51:55', '2016-02-15 19:51:55', 0);
 
 -- --------------------------------------------------------
 
@@ -670,26 +676,28 @@ INSERT INTO `c_hired_status` (`id_status`, `status`, `label`) VALUES
 CREATE TABLE IF NOT EXISTS `c_identity` (
 `id_identity` int(11) NOT NULL,
   `id_company` int(11) NOT NULL,
+  `ownership` varchar(35) NOT NULL,
   `NPWP` int(20) NOT NULL,
   `address` text NOT NULL,
   `telp_number` varchar(15) NOT NULL,
   `domicile` int(11) NOT NULL,
-  `ownership` varchar(45) NOT NULL,
   `business_form` varchar(15) NOT NULL,
   `bidang` varchar(30) NOT NULL,
   `avatar` varchar(40) NOT NULL,
   `about` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `c_identity`
 --
 
-INSERT INTO `c_identity` (`id_identity`, `id_company`, `NPWP`, `address`, `telp_number`, `domicile`, `ownership`, `business_form`, `bidang`, `avatar`, `about`) VALUES
-(3, 4, 0, '', '', 0, 'Zulfiar Ryan', 'BUMN', '', '', ''),
-(7, 2, 0, '', '', 0, '', 'BUMN', '', '2479ef95da9418e6d6fb16bc8f4e1afe.jpg', ''),
-(8, 8, 2147483647, 'Jl. Kemang Dahlia Raya E8\nKemang Pratama 2', '085719311994', 65, 'Ilyas Habiburrahman', 'BUMN', 'Telekomunikasi', 'b93a4b35b5f6fb8acccfdad8b9707585.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-(9, 6, 0, '', '', 0, '', 'BUMN', '', '', '');
+INSERT INTO `c_identity` (`id_identity`, `id_company`, `ownership`, `NPWP`, `address`, `telp_number`, `domicile`, `business_form`, `bidang`, `avatar`, `about`) VALUES
+(3, 4, '', 0, 'Jl. Kemang Dahlia Raya E8\nKemang Pratama 2', '', 0, 'BUMN', '', '', ''),
+(7, 2, '', 0, '', '', 0, 'BUMN', '', '2479ef95da9418e6d6fb16bc8f4e1afe.jpg', ''),
+(8, 8, 'Ilyas Habiburrahman', 2147483647, 'Jl. Kemang Dahlia Raya E8\nKemang Pratama 2', '085719311994', 65, 'BUMN', 'Telekomunikasi', 'b93a4b35b5f6fb8acccfdad8b9707585.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+(9, 6, '', 0, '', '', 0, 'BUMN', '', '', ''),
+(10, 10, '', 0, '', '', 0, 'BUMN', '', '', ''),
+(11, 11, '', 2147483647, 'Taman Harapan Baru', '087779222236', 87, 'PT', 'Software Perusahaan', '751b7663d77ce02da4506578fa2bad9d.jpg', 'Destop Software, Mobile Software, SEO');
 
 -- --------------------------------------------------------
 
@@ -770,17 +778,22 @@ CREATE TABLE IF NOT EXISTS `job_post` (
   `file_desc` varchar(30) NOT NULL,
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deadline` date NOT NULL,
-  `id_location` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+  `id_location` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `job_post`
 --
 
-INSERT INTO `job_post` (`id_post`, `id_company`, `post_title`, `id_job_category`, `description`, `salary`, `file`, `file_desc`, `created_time`, `deadline`, `id_location`) VALUES
-(10, 8, 'Asisten Manager', 1, 'belum tau', 9500000, 'indosat - Asisten Manager', '', '2016-02-13 07:35:58', '2016-02-17', 86),
-(11, 8, 'Setup Engineer', 35, 'bsdjfsdhfjksdhjfkdshjfkhjsdkf', 1000000, '', '', '2016-02-13 11:01:02', '2016-07-23', 162),
-(15, 2, 'Manager Finansial', 7, 'belum tau disuruh apa', 2575000, 'succaco_-_Manager_Finansial.pdf', 'File panduan', '2016-02-13 13:50:19', '2016-07-15', 241);
+INSERT INTO `job_post` (`id_post`, `id_company`, `post_title`, `id_job_category`, `description`, `salary`, `file`, `file_desc`, `created_time`, `deadline`, `id_location`, `start_date`, `end_date`) VALUES
+(10, 8, 'Asisten Manager', 1, 'belum tau', 9500000, 'indosat - Asisten Manager', '', '2016-02-13 07:35:58', '2016-02-17', 86, '0000-00-00', '0000-00-00'),
+(11, 8, 'Setup Engineer', 35, 'bsdjfsdhfjksdhjfkdshjfkhjsdkf', 1000000, '', '', '2016-02-13 11:01:02', '2016-07-23', 162, '0000-00-00', '0000-00-00'),
+(15, 2, 'Manager Finansial', 7, 'belum tau disuruh apa', 2575000, 'succaco_-_Manager_Finansial.pdf', 'File panduan', '2016-02-13 13:50:19', '2016-07-15', 241, '0000-00-00', '0000-00-00'),
+(16, 11, 'Judul Info Lowongan', 30, 'Membuat website dengan cepat', 4000000, 'kodemerah_-_Judul_Info_Lowongan.pdf', '', '2016-02-16 07:33:36', '2016-02-19', 87, '0000-00-00', '0000-00-00'),
+(17, 8, 'Apa aja lah', 10, 'Apa aja lah', 8999982, 'indosat_-_Apa_aja_lah.pdf', 'Apa aja lah', '2016-02-16 16:04:40', '2016-02-27', 1, '2016-02-16', '2016-02-26'),
+(19, 10, 'Coba lagi yuk', 7, 'apa ajalah', 950000, 'UI - Coba lagi yuk', '', '2016-02-16 16:31:07', '2016-02-20', 22, '2016-02-06', '2016-02-20');
 
 -- --------------------------------------------------------
 
@@ -792,7 +805,7 @@ CREATE TABLE IF NOT EXISTS `job_req_skill` (
 `id_job_req` int(11) NOT NULL,
   `id_post` int(11) NOT NULL,
   `id_skill` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `job_req_skill`
@@ -800,7 +813,11 @@ CREATE TABLE IF NOT EXISTS `job_req_skill` (
 
 INSERT INTO `job_req_skill` (`id_job_req`, `id_post`, `id_skill`) VALUES
 (41, 10, 3),
-(42, 10, 4);
+(42, 10, 4),
+(43, 16, 41),
+(47, 17, 2),
+(48, 17, 3),
+(49, 17, 4);
 
 -- --------------------------------------------------------
 
@@ -2580,18 +2597,20 @@ CREATE TABLE IF NOT EXISTS `worker` (
   `password` varchar(50) NOT NULL,
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `worker`
 --
 
 INSERT INTO `worker` (`id_worker`, `fullname`, `username`, `email`, `password`, `created_time`, `last_login`) VALUES
-(1, 'Ilyas Habiburrahman', 'yayashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-01-23 06:58:39', '2016-02-15 02:30:05'),
+(1, 'Ilyas Habiburrahman', 'yayashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-01-23 06:58:39', '2016-02-16 03:48:33'),
 (2, 'Idris Izzaturrahman H', 'idrisih', 'idrisizzaturrahman@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:13:57', '0000-00-00 00:00:00'),
-(3, 'Isyah Auliarahmani Rafifa', 'isyahAR', 'isyahauliahamani@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:21:32', '0000-00-00 00:00:00'),
+(3, 'Isyah Auliarahmani Rafifa', 'isyahARR', 'isyahauliahamani@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:21:32', '0000-00-00 00:00:00'),
 (9, 'Kurnia Dwi Agustin', 'kurniadwiarr', 'kurniadwiar@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-01 11:07:46', '2016-01-31 18:04:51'),
-(10, 'Cahya Wahyu Pratama', 'cahyawahyu', 'cahyawahyu@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-01 13:17:38', '2016-01-31 19:18:37');
+(10, 'Cahya Wahyu Pratama', 'cahyawahyu', 'cahyawahyu@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-01 13:17:38', '2016-01-31 19:18:37'),
+(11, 'Alif Lutfi Mulya Pratama', 'aliflmp', 'aliflmp@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 19:22:17', '0000-00-00 00:00:00'),
+(12, 'Naufal Fathin', 'nfathin', 'nfathin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-16 07:44:17', '2016-02-15 19:52:17');
 
 -- --------------------------------------------------------
 
@@ -2630,7 +2649,8 @@ INSERT INTO `w_education` (`id_w_education`, `id_worker`, `id_school`, `id_mayor
 (1, 1, 4, 120, 2012, '2016'),
 (2, 1, 10, 52, 1994, '1998'),
 (4, 1, 48, 120, 2012, 'Sekarang'),
-(5, 1, 48, 8, 2013, 'Sekarang');
+(5, 1, 48, 8, 2013, 'Sekarang'),
+(6, 12, 5, 4, 2013, 'Sekarang');
 
 -- --------------------------------------------------------
 
@@ -2645,7 +2665,7 @@ CREATE TABLE IF NOT EXISTS `w_experience` (
   `position` varchar(30) NOT NULL,
   `year_in` year(4) NOT NULL,
   `year_out` varchar(12) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_experience`
@@ -2654,7 +2674,8 @@ CREATE TABLE IF NOT EXISTS `w_experience` (
 INSERT INTO `w_experience` (`id_w_experience`, `id_worker`, `company`, `position`, `year_in`, `year_out`) VALUES
 (1, 1, 'Google Inc.', 'Database Administrator', 2012, '2014'),
 (2, 9, 'IPB', 'Dosen Arsitektur', 2012, '2011'),
-(3, 1, 'Web Developper', 'IBM Corp.', 2015, 'Sekarang');
+(3, 1, 'Web Developper', 'IBM Corp.', 2015, 'Sekarang'),
+(4, 12, 'PT. Gabut', 'Gabut', 2002, '2003');
 
 -- --------------------------------------------------------
 
@@ -2674,7 +2695,7 @@ CREATE TABLE IF NOT EXISTS `w_identity` (
   `domicile` int(11) DEFAULT NULL,
   `about` text NOT NULL,
   `avatar` varchar(60) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_identity`
@@ -2685,7 +2706,9 @@ INSERT INTO `w_identity` (`id_identity`, `id_worker`, `nickname`, `telp_number`,
 (13, 9, 'Kurnia', '034535', '1995-02-18', 169, 2, 'Jl. dfdsfsfsfsdfsf', 170, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'c5d2752c2b19c621b7d2873821396fad.jpg'),
 (14, 10, '', '', NULL, 0, NULL, '', NULL, '', ''),
 (15, 3, 'Isyah', '0', '0000-00-00', 0, 1, '', 0, '', ''),
-(18, 2, 'Idris', '0', '0000-00-00', 0, 1, '', 0, '', '');
+(18, 2, 'Idris', '0', '0000-00-00', 116, 1, 'Jl. Kemang Dahlia Raya E8\nKemang Pratama 2', 83, '', '7538cd95da9da875a94bc3042a15ac3c.jpg'),
+(19, 11, '', '', NULL, 0, NULL, '', NULL, '', ''),
+(20, 12, '', '08797657654', '2016-02-17', 88, 2, 'Bogor kampung', 162, 'anak kampung bogor', '436d1a0af3c4a1d9750098d7b252162f.png');
 
 -- --------------------------------------------------------
 
@@ -2697,7 +2720,7 @@ CREATE TABLE IF NOT EXISTS `w_language` (
 `id_w_language` int(11) NOT NULL,
   `id_worker` int(11) NOT NULL,
   `id_language` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_language`
@@ -2706,7 +2729,8 @@ CREATE TABLE IF NOT EXISTS `w_language` (
 INSERT INTO `w_language` (`id_w_language`, `id_worker`, `id_language`) VALUES
 (38, 1, 2),
 (39, 9, 2),
-(40, 9, 3);
+(40, 9, 3),
+(41, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -2718,7 +2742,7 @@ CREATE TABLE IF NOT EXISTS `w_skill` (
 `id_w_skill` int(11) NOT NULL,
   `id_worker` int(11) NOT NULL,
   `id_skill` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_skill`
@@ -2730,7 +2754,10 @@ INSERT INTO `w_skill` (`id_w_skill`, `id_worker`, `id_skill`) VALUES
 (81, 1, 5),
 (82, 9, 2),
 (83, 9, 3),
-(84, 9, 5);
+(84, 9, 5),
+(85, 12, 2),
+(86, 12, 3),
+(87, 12, 5);
 
 -- --------------------------------------------------------
 
@@ -2939,7 +2966,7 @@ ALTER TABLE `w_training`
 -- AUTO_INCREMENT for table `administrator`
 --
 ALTER TABLE `administrator`
-MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `city`
 --
@@ -2949,7 +2976,7 @@ MODIFY `id_city` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=501;
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-MODIFY `id_company` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id_company` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `contacts`
 --
@@ -2959,7 +2986,7 @@ MODIFY `id_cont` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `c_hired`
 --
 ALTER TABLE `c_hired`
-MODIFY `id_hired` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id_hired` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `c_hired_status`
 --
@@ -2969,7 +2996,7 @@ MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `c_identity`
 --
 ALTER TABLE `c_identity`
-MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `faq`
 --
@@ -2989,12 +3016,12 @@ MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `job_post`
 --
 ALTER TABLE `job_post`
-MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `job_req_skill`
 --
 ALTER TABLE `job_req_skill`
-MODIFY `id_job_req` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=43;
+MODIFY `id_job_req` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `job_sub_categories`
 --
@@ -3044,7 +3071,7 @@ MODIFY `id_img` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `worker`
 --
 ALTER TABLE `worker`
-MODIFY `id_worker` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id_worker` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `w_achievement`
 --
@@ -3059,22 +3086,22 @@ MODIFY `id_w_education` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `w_experience`
 --
 ALTER TABLE `w_experience`
-MODIFY `id_w_experience` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id_w_experience` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `w_identity`
 --
 ALTER TABLE `w_identity`
-MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `w_language`
 --
 ALTER TABLE `w_language`
-MODIFY `id_w_language` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+MODIFY `id_w_language` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `w_skill`
 --
 ALTER TABLE `w_skill`
-MODIFY `id_w_skill` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=85;
+MODIFY `id_w_skill` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT for table `w_training`
 --
