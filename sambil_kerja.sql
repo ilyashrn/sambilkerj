@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 17, 2016 at 10:26 AM
+-- Generation Time: Mar 05, 2016 at 05:58 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `administrator` (
 --
 
 INSERT INTO `administrator` (`id_admin`, `administrator_name`, `username`, `email`, `password`, `created_time`, `last_login`, `avatar`) VALUES
-(2, 'administrator', 'userdewa', 'administrator@sambilkerja.com', 'b0615c473cffb2618f6111cc8c6c6b01', '2016-02-12 17:35:06', '2016-02-16 21:15:24', '8cf4d0fd037e4258c3b2bf275caa9495.jpg'),
+(2, 'administrator', 'userdewa', 'administrator@sambilkerja.com', 'b0615c473cffb2618f6111cc8c6c6b01', '2016-02-12 17:35:06', '2016-02-17 18:26:58', '8cf4d0fd037e4258c3b2bf275caa9495.jpg'),
 (4, 'Faisal Rahman', 'faisalrn', 'faisalrahman@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-13 06:41:56', '0000-00-00 00:00:00', ''),
-(5, 'Ilyas Habiburrahman', 'ilyashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 18:27:24', '0000-00-00 00:00:00', ''),
+(5, 'Ilyas Habiburrahman', 'ilyashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 18:27:24', '2016-03-02 04:01:21', ''),
 (6, 'Idris Izzaturrahman H', 'idrisih', 'idrisizzaturrahman@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 18:59:08', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
@@ -590,7 +590,7 @@ INSERT INTO `company` (`id_company`, `company_name`, `username`, `email`, `secon
 (4, 'GumCode Startup', 'gumcode10', 'ilyashabhab@gmail.com', 'ilyashabhab@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-02 10:32:16', '2016-02-02 04:32:35'),
 (6, 'Sambilkerja', 'Administrator', 'administrator@sambilkerja.com', 'no-reply@sambilkerja.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-12 17:28:40', '2016-02-14 03:28:49'),
 (7, 'PT Bukalapak.com', 'bukalapak', 'bl@bukalapak.com', '', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-13 01:53:49', '0000-00-00 00:00:00'),
-(8, 'PT Indosat Ooredo', 'indosat', 'ilyashabiburrahman@gmail.com', 'indosat@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-13 07:34:33', '2016-02-16 20:28:28'),
+(8, 'PT Indosat Ooredo', 'indosat', 'ilyashabiburrahman@gmail.com', 'indosat@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-13 07:34:33', '2016-03-05 04:04:04'),
 (9, 'Universitas Brawijaya', 'unibraw', 'unibraw@gmail.com', 'unibraw2@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 19:47:12', '2016-02-15 19:47:44'),
 (10, 'Universitas Indonesia', 'UI', 'UI@gmail.com', '', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 20:41:43', '0000-00-00 00:00:00'),
 (11, 'Kodemerah', 'kodemerah', 'email@kodemerah.com', 'email2@kodemerah.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-16 07:26:03', '2016-02-15 19:53:51');
@@ -634,16 +634,17 @@ CREATE TABLE IF NOT EXISTS `c_hired` (
   `hire_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `review_date` timestamp NULL DEFAULT NULL,
   `store` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `c_hired`
 --
 
 INSERT INTO `c_hired` (`id_hired`, `id_worker`, `id_company`, `id_job`, `id_status`, `review`, `stars`, `hire_date`, `review_date`, `store`) VALUES
-(3, 1, 8, 11, 2, 'Pekerjaannya bagus, rapih, dan sopan anaknya. ', 5, '2016-02-13 13:12:56', '2016-02-15 17:00:00', 0),
+(3, 1, 8, 11, 3, 'Pekerjaannya bagus, rapih, dan sopan anaknya. ', 5, '2016-03-02 04:02:55', '2016-02-15 17:00:00', 0),
 (6, 1, 2, 15, 1, '', 0, '2016-02-14 03:25:17', NULL, 0),
-(7, 12, 11, 16, 2, 'Mengecewakan', 0.5, '2016-02-16 07:51:55', '2016-02-15 19:51:55', 0);
+(7, 12, 11, 16, 2, 'Mengecewakan', 0.5, '2016-02-16 07:51:55', '2016-02-15 19:51:55', 0),
+(8, 1, 10, 19, 1, '', 0, '2016-03-02 03:46:31', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -781,7 +782,7 @@ CREATE TABLE IF NOT EXISTS `job_post` (
   `id_location` int(11) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `job_post`
@@ -805,7 +806,7 @@ CREATE TABLE IF NOT EXISTS `job_req_skill` (
 `id_job_req` int(11) NOT NULL,
   `id_post` int(11) NOT NULL,
   `id_skill` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `job_req_skill`
@@ -2604,7 +2605,7 @@ CREATE TABLE IF NOT EXISTS `worker` (
 --
 
 INSERT INTO `worker` (`id_worker`, `fullname`, `username`, `email`, `password`, `created_time`, `last_login`) VALUES
-(1, 'Ilyas Habiburrahman', 'yayashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-01-23 06:58:39', '2016-02-16 03:48:33'),
+(1, 'Ilyas Habiburrahman', 'yayashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-01-23 06:58:39', '2016-03-05 04:04:29'),
 (2, 'Idris Izzaturrahman H', 'idrisih', 'idrisizzaturrahman@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:13:57', '0000-00-00 00:00:00'),
 (3, 'Isyah Auliarahmani Rafifa', 'isyahARR', 'isyahauliahamani@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:21:32', '0000-00-00 00:00:00'),
 (9, 'Kurnia Dwi Agustin', 'kurniadwiarr', 'kurniadwiar@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-01 11:07:46', '2016-01-31 18:04:51'),
@@ -2986,7 +2987,7 @@ MODIFY `id_cont` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `c_hired`
 --
 ALTER TABLE `c_hired`
-MODIFY `id_hired` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id_hired` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `c_hired_status`
 --
@@ -3016,12 +3017,12 @@ MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `job_post`
 --
 ALTER TABLE `job_post`
-MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `job_req_skill`
 --
 ALTER TABLE `job_req_skill`
-MODIFY `id_job_req` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
+MODIFY `id_job_req` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `job_sub_categories`
 --
