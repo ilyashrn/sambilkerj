@@ -9,7 +9,8 @@
       placeholder: "Pilih Lokasi"
     });
   });
-</script><!-- CONTENT -->
+</script>
+<!-- CONTENT -->
 <div id="page-content">
     <div id="page-header">
         <div class="container">

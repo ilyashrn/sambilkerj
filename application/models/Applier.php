@@ -60,6 +60,26 @@
       } 
     }
 
+    function get_not_store($where) {
+      $this->db->select('*, w.username as worker_username, wi.avatar as worker_avatar');
+      $this->db->from('c_hired as h');
+      $this->db->join('worker as w', 'h.id_worker = w.id_worker');
+      $this->db->join('w_identity as wi', 'w.id_worker = wi.id_worker');
+      $this->db->join('company as c', 'h.id_company = c.id_company');
+      $this->db->join('c_identity as ci', 'c.id_company = ci.id_company','left');
+      $this->db->join('c_hired_status as s','h.id_status = s.id_status','left');
+      $this->db->join('job_post as j', 'h.id_job = j.id_post');
+      $this->db->where('h.id_worker',$where);
+      $this->db->where('store', '0');
+
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      } else {
+        return false;
+      } 
+    }
+
     function get_per_id($where_what,$where_value) {
       $this->db->select('*, w.username as worker_username, wi.avatar as worker_avatar');
       $this->db->from('c_hired as h');

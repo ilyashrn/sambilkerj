@@ -198,6 +198,7 @@ class Members extends CI_Controller {
 			$exp_data = $this->Worker->get_exp($this->mem_id);
 			$train_data = $this->Worker->get_train($this->mem_id);
 			$ach_data = $this->Worker->get_ach($this->mem_id);
+			$job_data = $this->Applier->get_not_store($this->mem_id);
 
 			foreach ($basic_data as $key) { //GET FULLNAME OF CURRENT USER
 				$this->fullname = $key->fullname;
@@ -217,6 +218,7 @@ class Members extends CI_Controller {
 				'ident_data' => $ident_data,
 				'lang_data' => $lang_data,
 				'skill_data' => $skill_data,
+				'job_data' => $job_data,
 				'edu_data' => $edu_data,
 				'exp_data' => $exp_data,
 				'train_data' => $train_data,
@@ -234,6 +236,7 @@ class Members extends CI_Controller {
 			$this->load->view('content/profil-edit-1', $data);
 			$this->load->view('content/profil-edit-2', $data);
 			$this->load->view('content/profil-edit-3', $data);
+			$this->load->view('content/profil-edit-5', $data);
 			$this->load->view('content/profil-edit-4', $data);
 			$this->load->view('footer', $data);	
 		} else {

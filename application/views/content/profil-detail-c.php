@@ -192,8 +192,8 @@ if ($ident_data !== false) {
                           <?php 
                           if ($not_logged !== true) {
                           echo ($job->id_status !== '3' && $job->id_status !== '1' && $job->id_status !== '4') ? '<a class="a-option" href="../Companies/change_stat/3/'.$job->id_hired.'"><label class="label label-warning"><i class="glyphicon glyphicon-minus-sign"></i> Non Aktifkan</label></a>' : '';
-                          echo ($job->id_status !== '4' && $job->id_status !== '2') ? '<a class="a-option" href="../Companies/change_stat/4/'.$job->id_hired.'"><label class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i> Tolak lamaran</label></a>' : '';
-                          echo ($job->id_status !== '2') ? '<a class="a-option" href="../Companies/change_stat/2/'.$job->id_hired.'"><label class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i> Pekerjakaan</label></a>' : '';
+                          echo ($job->id_status !== '4' && $job->id_status !== '2' && $job->id_status !== '3') ? '<a class="a-option" href="../Companies/change_stat/4/'.$job->id_hired.'"><label class="label label-danger"><i class="glyphicon glyphicon-remove-sign"></i> Tolak lamaran</label></a>' : '';
+                          echo ($job->id_status !== '2' && $job->id_status !== '3') ? '<a class="a-option" href="../Companies/change_stat/2/'.$job->id_hired.'"><label class="label label-success"><i class="glyphicon glyphicon-ok-sign"></i> Pekerjakaan</label></a>' : '';
                           echo ($job->id_status == '2' && $job->review == '') ? '<a href="#collapseExample-'.$job->id_hired.'" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" class="a-option"><label class="label label-info"><i class="mt-icon-stars"></i> Rate and review</label></a>' : '';
                           }
                           ?>

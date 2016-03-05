@@ -52,63 +52,7 @@ foreach ($contacts as $cont) {}
               <a id="mobile-menu-button" href="#"><i class="mt-icon-menu"></i></a>
               <ul class="menu clearfix" id="menu">
                 <li><a href="<?php echo base_url().'Jobs/';?>">Browse Jobs</a></li>
-                <!-- <li class="megamenu">
-                  <a class="dropdown-toggle" href="#" data-toggle="dropdown">Browse <strong class="caret"></strong></a>
-                  <div class="megamenu-container col-4 browse-cat">
-                    <div class="section">
-                      <ul>
-                        <li class="cat-head"><a href="shortcodes-grid.html">Jasa Keuangan</a></li>
-                        <li><a href="shortcodes-typography.html">Typography</a></li>
-                        <li><a href="shortcodes-lists.html">Lists</a></li>
-                        <li><a href="shortcodes-headlines.html">Headlines</a></li>
-                        <li><a href="shortcodes-tables.html">Tables</a></li>
-                        <li><a href="shortcodes-forms.html">Forms</a></li>
-                        <li><a href="shortcodes-buttons.html">Buttons</a></li>
-                        <li><a href="shortcodes-dividers.html">Dividers</a></li>
-                        <li><a href="shortcodes-icons-pack.html">Icons pack</a></li>
-                      </ul>
-                    </div>
-                    <div class="section">
-                      <ul>
-                        <li><a href="shortcodes-alerts.html">Alerts</a></li>
-                        <li><a href="shortcodes-text-boxes.html">Text boxes</a></li>
-                        <li><a href="shortcodes-image-boxes.html">Image boxes</a></li>
-                        <li><a href="shortcodes-services-boxes.html">Services boxes</a></li>
-                        <li><a href="shortcodes-process-steps.html">Process steps</a></li>
-                        <li><a href="shortcodes-pricing-plans.html">Pricing plans</a></li>
-                        <li><a href="shortcodes-team.html">Team</a></li>
-                        <li><a href="shortcodes-testimonials.html">Testimonials</a></li>
-                        <li><a href="shortcodes-widgets.html">Widgets</a></li>
-                      </ul>
-                    </div>
-                    <div class="section">
-                      <ul>
-                        <li><a href="shortcodes-accordions.html">Accordions</a></li>
-                        <li><a href="shortcodes-tabs.html">Tabs</a></li>
-                        <li><a href="shortcodes-maps.html">Maps</a></li>
-                        <li><a href="shortcodes-clients.html">Clients</a></li>
-                        <li><a href="shortcodes-galleries.html">Galleries</a></li>
-                        <li><a href="shortcodes-media-content.html">Media content</a></li>
-                        <li><a href="shortcodes-social-media.html">Social media</a></li>
-                        <li><a href="shortcodes-filters.html">Filters</a></li>
-                        <li><a href="shortcodes-paginations.html">Paginations</a></li>
-                      </ul>
-                    </div>
-                    <div class="section">
-                      <ul>
-                        <li><a href="shortcodes-counters.html">Counters</a></li>
-                        <li><a href="shortcodes-pie-charts.html">Pie charts</a></li>
-                        <li><a href="shortcodes-progress-bars.html">Progress bars</a></li>
-                        <li><a href="shortcodes-comparition-bars.html">Comparison bars</a></li>
-                        <li><a href="shortcodes-statistics.html">Statistics</a></li>
-                        <li><a href="shortcodes-sliders.html">Sliders</a></li>
-                        <li><a href="shortcodes-full-sections.html">Full sections</a></li>
-                        <li><a href="shortcodes-parallax-backgrounds.html">Parallax backgrounds</a></li>
-                        <li><a href="shortcodes-video-backgrounds.html">Video backgrounds</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </li> -->
+                <li><a href="<?php echo base_url().'Blog/';?>">Blog</a></li>
                 <?php
                 if ($this->session->userdata('logged') !== false) { //NAVBAR IF USER IS A LOGGED IN USER
                   $cur_username = $this->session->userdata('logged');
@@ -120,6 +64,9 @@ foreach ($contacts as $cont) {}
                   <a href="<?php echo base_url().'Members/'.$cur_username;?>"><?php echo $cur_username;?> <strong class="caret"></strong></a>
                   <ul>
                     <li><a href="<?php echo base_url().'Members/'.$cur_username;?>">Profile</a></li>
+                    <?php if ($this->session->userdata('mem_type') == 'W') { ?>
+                      <li><a href="<?php echo base_url().'Members/edit_w/P/'.$cur_username;?>">Payment</a></li>
+                    <?php } ?>
                     <li><a href="<?php echo ($this->session->userdata('mem_type') == 'W') ? base_url().'Members/edit_w/PA/'.$cur_username : base_url().'Members/edit_c/PA/'.$cur_username ;?>">Settings</a></li>
                     <li><a href="<?php echo base_url().'In/out';?>">Logout</a></li>
                   </ul>
