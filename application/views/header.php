@@ -64,6 +64,7 @@ foreach ($contacts as $cont) {}
                   <a href="<?php echo base_url().'Members/'.$cur_username;?>"><?php echo $cur_username;?> <strong class="caret"></strong></a>
                   <ul>
                     <li><a href="<?php echo base_url().'Members/'.$cur_username;?>">Profile</a></li>
+                    <li><a href="<?php echo base_url().'Messages/';?>">Messages</a></li>
                     <?php if ($this->session->userdata('mem_type') == 'W') { ?>
                       <li><a href="<?php echo base_url().'Members/edit_w/P/'.$cur_username;?>">Payment</a></li>
                     <?php } ?>

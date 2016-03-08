@@ -114,6 +114,21 @@
       }
     }
 
+    function get_company($id_worker) {
+      $this->db->select('*');
+      $this->db->from('c_hired as c');
+      $this->db->join('company as co', 'c.id_company = co.id_company', 'left');
+      $this->db->where('id_worker', $id_worker);
+
+      // $this->db->distinct();
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     function check_worker($id_worker,$id_job) {
       $this->db->select('*');
       $this->db->from('c_hired');
