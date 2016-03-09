@@ -12,7 +12,7 @@ if ($ident_data !== false) {
   }
 }
 ?>
-        <!-- page content -->
+            <!-- page content -->
                 <div class="dev-page-content">                    
                     <!-- page content container -->
                     <div class="container">
@@ -56,7 +56,8 @@ if ($ident_data !== false) {
                                     </div>
                                     
                                     <div class="list-group">
-                                        <a href="#" class="list-group-item active"><i class="fa fa-wrench"></i> Edit profile</a>
+                                        <a href="#" class="list-group-item <?php echo ($this->uri->segment(3) == 'edit') ? 'active': '';?>"><i class="fa fa-wrench"></i> Edit profile</a>
+                                        <a href="../../messages/<?php echo $basic_row->id_worker.'/'.$basic_row->username;?>" class="list-group-item <?php echo ($this->uri->segment(3) == 'messages') ? 'active': '';?>"><i class="fa fa-envelope-o"></i> Messages</a>
                                         <a href="../../deleting/<?php echo $basic_row->id_worker;?>" class="list-group-item"><i class="fa fa-remove"></i> Delete User</a>                           
                                     </div>
                                 </div>

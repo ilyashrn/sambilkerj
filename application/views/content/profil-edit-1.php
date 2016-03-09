@@ -10,7 +10,6 @@
     });
  </script>	
 
-
  <div class="tab-pane fade <?php echo ($tab_param == 'I') ? 'in active': '';?>" id="tab-6-6">
 	<div class="col-sm-12 service-box style-3 green profil-tab">
 	<div class="col-sm-12">

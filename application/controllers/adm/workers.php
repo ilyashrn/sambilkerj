@@ -67,6 +67,28 @@ class Workers extends CI_Controller {
 		redirect('adm/workers','refresh');
 	}
 
+	public function messages($id_user,$username) 
+	{
+		$basic_data = $this->Worker->get('username',$username);
+		$ident_data = $this->Worker->get_ident($id_user);
+		$loc_data = $this->Worker->get_loc($id_user);
+		$pob_data = $this->Worker->get_pob($id_user);
+
+		$data = array(
+			'title' => 'Edit Message | SambilKerja Admin Panel',
+			'messages' => $this->Message->get_messages('id_receiver',$id_user,2),
+			'replies' => $this->Message->get_messages('id_sender',$id_user,1),
+			'basic_data' => $basic_data,
+			'ident_data' => $ident_data,
+			'loc_data' => $loc_data,
+			'pob_data' => $pob_data,
+		);
+		$this->load->view('admin/html_head',$data);
+		$this->load->view('admin/sidebar',$data);
+		$this->load->view('admin/content/workers-mes',$data);
+		$this->load->view('admin/footer',$data);
+	}
+
 	public function edit($id_user,$username) 
 	{
 		$prov_data = $this->Location->get_all_prov(); 

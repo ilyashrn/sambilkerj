@@ -164,7 +164,7 @@ if ($ident_data !== false) {
                           <a href="../Jobs/edit_job/<?php echo $job->id_post.'/'.$job->post_title;?>" class="btn btn-black"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                           <a href="../Jobs/removing/<?php echo $job->id_post.'/'.$job->post_title;?>" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> Hapus</a>
                       <?php } else { ?>
-                          <button id="daftar" class="btn btn-orange" data-container="body" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-content="Login atau daftarkan diri anda terlebih dahulu untuk mendaftar lowongan!">Daftar!</button>
+                          <!-- <button id="daftar" class="btn btn-orange" data-container="body" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-content="Login atau daftarkan diri anda terlebih dahulu untuk mendaftar lowongan!">Daftar!</button> -->
                       <?php  } ?>
                     </div>
                 <?php } }

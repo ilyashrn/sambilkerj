@@ -10,7 +10,7 @@
       $this->db->select('*');
       $this->db->from('c_hired as h');
       $this->db->join('worker as w', 'h.id_worker = w.id_worker');
-      $this->db->join('company as c', 'h.id_company = w.id_company');
+      $this->db->join('company as c', 'h.id_company = c.id_company');
       $this->db->join('job_post as j', 'h.id_job = j.id_post');
       $this->db->join('c_hired_status as s','h.id_status = s.id_status');
 
@@ -60,7 +60,7 @@
       } 
     }
 
-    function get_not_store($where) {
+    function get_not_store($where) { // pekerjaan yang blm disetor
       $this->db->select('*, w.username as worker_username, wi.avatar as worker_avatar');
       $this->db->from('c_hired as h');
       $this->db->join('worker as w', 'h.id_worker = w.id_worker');
@@ -114,16 +114,34 @@
       }
     }
 
+    function get_worker($id_company) {
+      $this->db->select('*');
+      $this->db->from('c_hired as c');
+      $this->db->join('worker as co', 'c.id_worker = co.id_worker','left');
+      $this->db->where('c.id_company', $id_company);
+      $this->db->having('c.id_status = 1 or c.id_status = 2');
+
+      $this->db->distinct();
+      $query = $this->db->get();
+      if ($query->num_rows() > 0) {
+        return $query->result();
+      } else {
+        return false;
+      }
+    }
+
     function get_company($id_worker) {
       $this->db->select('*');
       $this->db->from('c_hired as c');
-      $this->db->join('company as co', 'c.id_company = co.id_company', 'left');
+      $this->db->join('company as co', 'c.id_company = co.id_company');
       $this->db->where('id_worker', $id_worker);
+      $this->db->where('id_status', 1);
+      $this->db->or_where('id_status', 2);
 
-      // $this->db->distinct();
+      $this->db->distinct();
       $query = $this->db->get();
       if ($query->num_rows() > 0) {
-        return true;
+        return $query->result();
       } else {
         return false;
       }

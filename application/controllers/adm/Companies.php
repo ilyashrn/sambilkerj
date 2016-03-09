@@ -101,6 +101,39 @@ class Companies extends CI_Controller {
 		$this->load->view('admin/footer',$data);
 	}
 
+	public function messages($id_user,$username)
+	{
+		$basic_data = $this->Company->get('username',$username);
+		$ident_data = $this->Company->get_ident($id_user);
+		$loc_data = $this->Company->get_loc($id_user);
+
+		$data = array(
+			'title' => 'Edit Message | SambilKerja Admin Panel',
+			'messages' => $this->Message->get_messages('id_receiver',$id_user,1),
+			'replies' => $this->Message->get_messages('id_sender',$id_user,2),
+			'basic_data' => $basic_data,
+			'ident_data' => $ident_data,
+			'loc_data' => $loc_data,
+		);
+		$this->load->view('admin/html_head',$data);
+		$this->load->view('admin/sidebar',$data);
+		$this->load->view('admin/content/companies-mes',$data);
+		$this->load->view('admin/footer',$data);
+	}
+
+	public function send()
+	{
+		$input = array(
+			'id_sender' => $this->session->userdata('memid'),
+			'id_receiver' => $this->input->post('receiver'),
+			'message_content' => $this->input->post('content'),
+			'message_type' => 4 
+		);
+		$this->Message->insert($input);
+		$this->session->set_flashdata('msg', 'Kirim pesan berhasil');
+		redirect('adm/Companies','refresh');
+	}
+
 	public function editing()
 	{
 		$id = $this->input->post('id');
