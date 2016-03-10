@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2016 at 05:58 PM
+-- Generation Time: Mar 10, 2016 at 10:02 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `administrator` (
 INSERT INTO `administrator` (`id_admin`, `administrator_name`, `username`, `email`, `password`, `created_time`, `last_login`, `avatar`) VALUES
 (2, 'administrator', 'userdewa', 'administrator@sambilkerja.com', 'b0615c473cffb2618f6111cc8c6c6b01', '2016-02-12 17:35:06', '2016-02-17 18:26:58', '8cf4d0fd037e4258c3b2bf275caa9495.jpg'),
 (4, 'Faisal Rahman', 'faisalrn', 'faisalrahman@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-13 06:41:56', '0000-00-00 00:00:00', ''),
-(5, 'Ilyas Habiburrahman', 'ilyashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 18:27:24', '2016-03-02 04:01:21', ''),
+(5, 'Ilyas Habiburrahman', 'ilyashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 18:27:24', '2016-03-10 18:33:26', ''),
 (6, 'Idris Izzaturrahman H', 'idrisih', 'idrisizzaturrahman@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 18:59:08', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
@@ -586,11 +586,11 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`id_company`, `company_name`, `username`, `email`, `secondary_email`, `password`, `created_time`, `last_login`) VALUES
-(2, 'PT Sucacco TBK', 'succaco', 'succaco@succaco.com', 'succaco@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-24 09:50:38', '0000-00-00 00:00:00'),
+(2, 'PT Sucacco TBK', 'succaco', 'succaco@succaco.com', 'succaco@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-24 09:50:38', '2016-03-10 02:09:45'),
 (4, 'GumCode Startup', 'gumcode10', 'ilyashabhab@gmail.com', 'ilyashabhab@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-02 10:32:16', '2016-02-02 04:32:35'),
 (6, 'Sambilkerja', 'Administrator', 'administrator@sambilkerja.com', 'no-reply@sambilkerja.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-12 17:28:40', '2016-02-14 03:28:49'),
 (7, 'PT Bukalapak.com', 'bukalapak', 'bl@bukalapak.com', '', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-13 01:53:49', '0000-00-00 00:00:00'),
-(8, 'PT Indosat Ooredo', 'indosat', 'ilyashabiburrahman@gmail.com', 'indosat@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-13 07:34:33', '2016-03-05 04:04:04'),
+(8, 'PT Indosat Ooredo', 'indosat', 'ilyashabiburrahman@gmail.com', 'indosat@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-13 07:34:33', '2016-03-11 05:07:40'),
 (9, 'Universitas Brawijaya', 'unibraw', 'unibraw@gmail.com', 'unibraw2@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 19:47:12', '2016-02-15 19:47:44'),
 (10, 'Universitas Indonesia', 'UI', 'UI@gmail.com', '', 'af1264cbdb9d5b3c7b401168118726fd', '2016-02-15 20:41:43', '0000-00-00 00:00:00'),
 (11, 'Kodemerah', 'kodemerah', 'email@kodemerah.com', 'email2@kodemerah.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-16 07:26:03', '2016-02-15 19:53:51');
@@ -634,7 +634,7 @@ CREATE TABLE IF NOT EXISTS `c_hired` (
   `hire_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `review_date` timestamp NULL DEFAULT NULL,
   `store` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `c_hired`
@@ -644,7 +644,8 @@ INSERT INTO `c_hired` (`id_hired`, `id_worker`, `id_company`, `id_job`, `id_stat
 (3, 1, 8, 11, 3, 'Pekerjaannya bagus, rapih, dan sopan anaknya. ', 5, '2016-03-02 04:02:55', '2016-02-15 17:00:00', 0),
 (6, 1, 2, 15, 1, '', 0, '2016-02-14 03:25:17', NULL, 0),
 (7, 12, 11, 16, 2, 'Mengecewakan', 0.5, '2016-02-16 07:51:55', '2016-02-15 19:51:55', 0),
-(8, 1, 10, 19, 1, '', 0, '2016-03-02 03:46:31', NULL, 0);
+(8, 1, 10, 19, 1, '', 0, '2016-03-02 03:46:31', NULL, 0),
+(9, 1, 8, 10, 1, '', 0, '2016-03-09 05:38:18', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -703,6 +704,31 @@ INSERT INTO `c_identity` (`id_identity`, `id_company`, `ownership`, `NPWP`, `add
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `c_payment`
+--
+
+CREATE TABLE IF NOT EXISTS `c_payment` (
+`id_payment` int(11) NOT NULL,
+  `id_c_hired` int(11) NOT NULL,
+  `nominal` double NOT NULL,
+  `sender` varchar(30) NOT NULL,
+  `info` text NOT NULL,
+  `proof` varchar(55) NOT NULL,
+  `verified` tinyint(1) NOT NULL,
+  `confirm_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `verified_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `c_payment`
+--
+
+INSERT INTO `c_payment` (`id_payment`, `id_c_hired`, `nominal`, `sender`, `info`, `proof`, `verified`, `confirm_time`, `verified_time`) VALUES
+(3, 3, 25000, 'Ilyas Habiburrahman', '', 'dea5f77c76b6390b09fd3c3190e81a80.jpg', 1, '2016-03-10 18:56:18', '2016-03-10 20:19:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `faq`
 --
 
@@ -740,6 +766,26 @@ INSERT INTO `hak` (`id_hak`, `hak`) VALUES
 (4, 'Memperoleh Informasi lowongan pekerjaan sambilan yang dilansir dari halaman web sambilkerja.com'),
 (5, 'Mengakses untuk memilih dan mendaftar pekerjaan dari para pekerjakan yang membuka lowongan kerja di sambilkerja.com'),
 (6, 'Mendapatkan rating dari pekerjakan atas pekerjaan yang telah dilakukan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice`
+--
+
+CREATE TABLE IF NOT EXISTS `invoice` (
+`id_invoice` int(11) NOT NULL,
+  `invoice_name` varchar(30) NOT NULL,
+  `invoice_bank` varchar(40) NOT NULL,
+  `invoice_number` varchar(40) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`id_invoice`, `invoice_name`, `invoice_bank`, `invoice_number`) VALUES
+(2, 'tes', 'tes', '220204234');
 
 -- --------------------------------------------------------
 
@@ -791,8 +837,8 @@ CREATE TABLE IF NOT EXISTS `job_post` (
 INSERT INTO `job_post` (`id_post`, `id_company`, `post_title`, `id_job_category`, `description`, `salary`, `file`, `file_desc`, `created_time`, `deadline`, `id_location`, `start_date`, `end_date`) VALUES
 (10, 8, 'Asisten Manager', 1, 'belum tau', 9500000, 'indosat - Asisten Manager', '', '2016-02-13 07:35:58', '2016-02-17', 86, '0000-00-00', '0000-00-00'),
 (11, 8, 'Setup Engineer', 35, 'bsdjfsdhfjksdhjfkdshjfkhjsdkf', 1000000, '', '', '2016-02-13 11:01:02', '2016-07-23', 162, '0000-00-00', '0000-00-00'),
-(15, 2, 'Manager Finansial', 7, 'belum tau disuruh apa', 2575000, 'succaco_-_Manager_Finansial.pdf', 'File panduan', '2016-02-13 13:50:19', '2016-07-15', 241, '0000-00-00', '0000-00-00'),
-(16, 11, 'Judul Info Lowongan', 30, 'Membuat website dengan cepat', 4000000, 'kodemerah_-_Judul_Info_Lowongan.pdf', '', '2016-02-16 07:33:36', '2016-02-19', 87, '0000-00-00', '0000-00-00'),
+(15, 2, 'Manager Finansial', 7, 'belum tau disuruh apa', 2575000, 'succaco_-_Manager_Finansial.pdf', 'File panduan', '2016-02-13 13:50:19', '2016-07-15', 241, '2016-03-08', '2016-03-18'),
+(16, 11, 'Apaan nih', 30, 'Membuat website dengan cepat', 4000000, 'kodemerah_-_Judul_Info_Lowongan.pdf', '', '2016-02-16 07:33:36', '2016-02-19', 87, '0000-00-00', '0000-00-00'),
 (17, 8, 'Apa aja lah', 10, 'Apa aja lah', 8999982, 'indosat_-_Apa_aja_lah.pdf', 'Apa aja lah', '2016-02-16 16:04:40', '2016-02-27', 1, '2016-02-16', '2016-02-26'),
 (19, 10, 'Coba lagi yuk', 7, 'apa ajalah', 950000, 'UI - Coba lagi yuk', '', '2016-02-16 16:31:07', '2016-02-20', 22, '2016-02-06', '2016-02-20');
 
@@ -1631,6 +1677,41 @@ INSERT INTO `mayors_set` (`id_mayor`, `mayor_name`) VALUES
 (174, 'Tingkat  IV  (ATT IV)'),
 (175, 'Tingkat  V   (ANT V)'),
 (176, 'Tingkat  V   (ATT V)');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE IF NOT EXISTS `messages` (
+`id_message` int(11) NOT NULL,
+  `id_sender` int(11) NOT NULL,
+  `id_receiver` int(11) NOT NULL,
+  `message_content` text NOT NULL,
+  `message_type` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id_message`, `id_sender`, `id_receiver`, `message_content`, `message_type`, `timestamp`) VALUES
+(2, 1, 10, 'lsklfsdlkjghdfjkghdfjkghdfjkghdfjkghjdfkghjkdfhgjkdfhgdjkfhgkjdf', 1, '2016-03-08 18:23:29'),
+(3, 8, 1, 'sdfhjsdfjksdhjkfs', 2, '2016-03-08 19:02:59'),
+(4, 1, 8, 'fkjhsdfjkhdsjkfhsjkfkds', 1, '2016-03-08 19:03:50'),
+(5, 1, 8, 'tes', 1, '2016-03-08 20:14:56'),
+(8, 8, 1, 'tes', 2, '2016-03-08 21:01:06'),
+(9, 8, 1, 't', 2, '2016-03-08 21:02:21'),
+(10, 8, 1, 'tes', 2, '2016-03-09 13:09:39'),
+(11, 8, 1, 'tes', 2, '2016-03-09 13:16:35'),
+(14, 8, 4, 'tes', 3, '2016-03-09 17:21:07'),
+(15, 8, 1, 'tes', 2, '2016-03-09 17:21:30'),
+(16, 8, 1, 'tes yas', 2, '2016-03-09 17:21:38'),
+(19, 2, 2, 'tes co', 2, '2016-03-10 02:29:00'),
+(20, 5, 2, 'tes co', 4, '2016-03-10 02:30:41'),
+(21, 5, 2, 'tes lagi co', 4, '2016-03-10 02:33:07');
 
 -- --------------------------------------------------------
 
@@ -2605,7 +2686,7 @@ CREATE TABLE IF NOT EXISTS `worker` (
 --
 
 INSERT INTO `worker` (`id_worker`, `fullname`, `username`, `email`, `password`, `created_time`, `last_login`) VALUES
-(1, 'Ilyas Habiburrahman', 'yayashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-01-23 06:58:39', '2016-03-05 04:04:29'),
+(1, 'Ilyas Habiburrahman', 'yayashrn', 'ilyashabhab@gmail.com', 'af1264cbdb9d5b3c7b401168118726fd', '2016-01-23 06:58:39', '2016-03-10 03:30:36'),
 (2, 'Idris Izzaturrahman H', 'idrisih', 'idrisizzaturrahman@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:13:57', '0000-00-00 00:00:00'),
 (3, 'Isyah Auliarahmani Rafifa', 'isyahARR', 'isyahauliahamani@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-01-23 07:21:32', '0000-00-00 00:00:00'),
 (9, 'Kurnia Dwi Agustin', 'kurniadwiarr', 'kurniadwiar@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2016-02-01 11:07:46', '2016-01-31 18:04:51'),
@@ -2696,7 +2777,7 @@ CREATE TABLE IF NOT EXISTS `w_identity` (
   `domicile` int(11) DEFAULT NULL,
   `about` text NOT NULL,
   `avatar` varchar(60) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `w_identity`
@@ -2828,6 +2909,12 @@ ALTER TABLE `c_identity`
  ADD PRIMARY KEY (`id_identity`), ADD KEY `id_company` (`id_company`), ADD KEY `domicile` (`domicile`);
 
 --
+-- Indexes for table `c_payment`
+--
+ALTER TABLE `c_payment`
+ ADD PRIMARY KEY (`id_payment`), ADD KEY `id_c_hired` (`id_c_hired`);
+
+--
 -- Indexes for table `faq`
 --
 ALTER TABLE `faq`
@@ -2838,6 +2925,12 @@ ALTER TABLE `faq`
 --
 ALTER TABLE `hak`
  ADD PRIMARY KEY (`id_hak`);
+
+--
+-- Indexes for table `invoice`
+--
+ALTER TABLE `invoice`
+ ADD PRIMARY KEY (`id_invoice`);
 
 --
 -- Indexes for table `job_categories`
@@ -2886,6 +2979,12 @@ ALTER TABLE `location`
 --
 ALTER TABLE `mayors_set`
  ADD PRIMARY KEY (`id_mayor`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+ ADD PRIMARY KEY (`id_message`);
 
 --
 -- Indexes for table `province`
@@ -2987,7 +3086,7 @@ MODIFY `id_cont` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `c_hired`
 --
 ALTER TABLE `c_hired`
-MODIFY `id_hired` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id_hired` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `c_hired_status`
 --
@@ -2999,6 +3098,11 @@ MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 ALTER TABLE `c_identity`
 MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
+-- AUTO_INCREMENT for table `c_payment`
+--
+ALTER TABLE `c_payment`
+MODIFY `id_payment` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
@@ -3008,6 +3112,11 @@ MODIFY `id_faq` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 ALTER TABLE `hak`
 MODIFY `id_hak` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `invoice`
+--
+ALTER TABLE `invoice`
+MODIFY `id_invoice` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `job_categories`
 --
@@ -3048,6 +3157,11 @@ MODIFY `id_location` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=501;
 --
 ALTER TABLE `mayors_set`
 MODIFY `id_mayor` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=177;
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+MODIFY `id_message` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `province`
 --
@@ -3092,7 +3206,7 @@ MODIFY `id_w_experience` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `w_identity`
 --
 ALTER TABLE `w_identity`
-MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `id_identity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `w_language`
 --
@@ -3126,6 +3240,12 @@ ADD CONSTRAINT `c_hired_ibfk_4` FOREIGN KEY (`id_company`) REFERENCES `company` 
 --
 ALTER TABLE `c_identity`
 ADD CONSTRAINT `c_identity_ibfk_1` FOREIGN KEY (`id_company`) REFERENCES `company` (`id_company`);
+
+--
+-- Constraints for table `c_payment`
+--
+ALTER TABLE `c_payment`
+ADD CONSTRAINT `c_payment_ibfk_1` FOREIGN KEY (`id_c_hired`) REFERENCES `c_hired` (`id_hired`);
 
 --
 -- Constraints for table `job_post`
