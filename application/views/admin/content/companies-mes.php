@@ -65,7 +65,7 @@ if ($ident_data !== false) {
                                                         </h4>
                                                     </div>                                
                                                     <div class="panel-body" id="accOneColOne" style="display: none;">
-                                                        <?php echo form_open('../../send/'); ?>
+                                                        <?php echo form_open('adm/companies/send'); ?>
                                                         <div class="form-group">
                                                             <textarea name="content" class="form-control" placeholder="Write new message here..."></textarea>
                                                             <input type="hidden" name="receiver" value="<?php echo $basic_row->id_company ?>"></input>
@@ -108,7 +108,7 @@ if ($ident_data !== false) {
                                                         <p><?php echo $mes->message_content; ?></p>
                                                     </div>
                                                     <div class="col-md-5" style="margin-top: 30px;">
-                                                        <a href=""><i class="fa fa-remove"></i>Hapus</a>
+                                                        <a href="../../delete_mes/<?php echo $mes->id_message.'/'.$basic_row->id_company.'/'.$basic_row->username ?>"><i class="fa fa-remove"></i>Hapus</a>
                                                     </div>
                                                 </div>                                        
                                             </div>
@@ -143,7 +143,7 @@ if ($ident_data !== false) {
                                                         <p><?php echo $mes->message_content; ?></p>
                                                     </div>
                                                     <div class="col-md-5" style="margin-top: 30px;">
-                                                        <a href=""><i class="fa fa-remove"></i>Hapus</a>
+                                                        <a href="../../delete_mes/<?php echo $mes->id_message.'/'.$basic_row->id_company.'/'.$basic_row->username ?>"><i class="fa fa-remove"></i>Hapus</a>
                                                     </div>
                                                 </div>                                        
                                             </div>

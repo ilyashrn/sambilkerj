@@ -13,9 +13,9 @@
 								<li <?php echo ($tab_param == 'PP') ? 'class="active"': '';?>>
 									<a href="#tab-6-3" data-toggle="tab">Riwayat Pengalaman</a>
 								</li>
-								<li <?php echo ($tab_param == 'P') ? 'class="active"': '';?>>
+								<!-- <li <?php echo ($tab_param == 'P') ? 'class="active"': '';?>>
 									<a href="#tab-6-5" data-toggle="tab">Pembayaran</a>
-								</li>
+								</li> -->
 								<li <?php echo ($tab_param == 'PA') ? 'class="active"': '';?>>
 									<a href="#tab-6-4" data-toggle="tab">Pengaturan Akun</a>
 								</li>

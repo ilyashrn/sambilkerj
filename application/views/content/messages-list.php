@@ -107,7 +107,16 @@
 										                <textarea class="form-control" rows="3" columns="12" id="content" name="content" placeholder="Write reply message..." style="margin-bottom:10px;"></textarea>
 										            </div>
 										            <div class="col-md-6">
-										            	<input type="hidden" name="receiver" value="<?php echo $mes->id_sender;?>"></input>
+										            	<input type="hidden" name="receiver" value="<?php 
+										            	if ($mem_type == 'W') {
+											              	echo $mes->id_sender;
+											              } else {
+											              	if ($mes->message_type == '1') {
+											              		echo $mes->id_sender.'|worker';
+											              	} else {
+											              		echo $mes->id_sender.'|admin';
+											              	}
+										              	  }?>"></input>
 										            	<input type="submit" class="btn btn-default" value="Send message"></input>
 										            </div>
 				                              		<?php echo form_close(); ?>
@@ -119,9 +128,9 @@
 									<?php } } ?>
 								</div><!-- tab-pane -->
 								<div class="tab-pane fade" id="tab-2">
-									<?php if ($replies) { ?>
+									<?php if (!$replies) { ?>
 										<div class="alert alert-info">Anda tidak mempunyai pesan keluar apapun saat ini.</div>
-									<?php } foreach ($replies as $mes) { ?>
+									<?php } else{ foreach ($replies as $mes) { ?>
 										<div class="col-sm-12 job-profil-box service-box style-3 default" style="padding:10px;margin-bottom:10px;">
 							              <span><strong class="text-default">To: 
 							              <?php if ($mem_type == 'W') {
@@ -137,7 +146,7 @@
 							              <p><?php echo $mes->message_content ?></p>
 							              <a class="pull-right" href="Messages/del/<?php echo $mes->id_message; ?>">Delete</a>
 							            </div>
-									<?php } } ?>
+									<?php } }?>
 								</div><!-- tab-pane -->
 							</div><!-- tab-content -->
 						</div>

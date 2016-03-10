@@ -42,6 +42,12 @@
                         <li <?php echo ($this->uri->segment(2) === 'dashboard') ? 'class="active"' : ''?>>
                             <a href="<?php echo base_url().'adm/dashboard'?>"><i class="fa fa-desktop"></i> <span>Dashboard</span></a>
                         </li>
+                        <li <?php echo ($this->uri->segment(2) === 'messages') ? 'class="active"' : ''?>>
+                            <a href="<?php echo base_url().'adm/messages'?>"><i class="fa fa-envelope-o"></i> <span>Messages</span></a>
+                        </li>
+                        <li <?php echo ($this->uri->segment(2) === 'payments') ? 'class="active"' : ''?>>
+                            <a href="<?php echo base_url().'adm/payments'?>"><i class="fa fa-money"></i> <span>Payment</span></a>
+                        </li>
                         <li <?php echo ($this->uri->segment(2) === 'users' || $this->uri->segment(2) === 'administrators' || $this->uri->segment(2) === 'workers') || $this->uri->segment(2) === 'companies' ? 'class="active"' : ''?>>
                             <a href="#"><i class="fa fa-group (alias)"></i> <span>Users Manager</span></a>
                             <ul>

@@ -234,7 +234,7 @@ class Companies extends CI_Controller {
 		redirect('Members/'.$this->username,'refresh');
 	}
 
-	function rate(){
+	function rate() {
 		if (!empty($this->mem_id) && $this->input->post('ra') !== false) {
 			$datestring = '%Y-%m-%d %h:%i:%s';
 			$input = array(
@@ -248,6 +248,35 @@ class Companies extends CI_Controller {
 						'<b>Review untuk '.$this->input->post('fullname').'</b> berhasil diberikan!'
 						);
 			redirect('Members/'.$this->username,'refresh');		
+		}
+	}
+
+	function verify() {
+		if (!empty($this->mem_id) && $this->input->post('ra') !== false) {
+			$config['upload_path'] = './images/proof/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['encrypt_name'] = TRUE;
+			$config['max_size'] = 2000;
+			$config['overwrite'] = FALSE;
+
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			$upload = $this->upload->do_upload('proof');	
+			$upload_data = $this->upload->data(); //UPLOAD DATA AFTER UPLOADING
+			$file_name = $upload_data['file_name']; //RETRIEVING FILE NAME
+
+			$input = array(
+				'id_c_hired' => $this->input->post('id'),
+				'nominal' => $this->input->post('nominal'),
+				'sender' => $this->input->post('sender'),
+				'proof' => $file_name
+			);
+			if (!$upload) {
+				echo $this->upload->display_errors();
+			}
+			$this->Payment->insert($input);
+			$this->session->set_flashdata('msg', '<b>Pembayaran berhasil dikonfirmasi </b>. Silahkan menunggu verifikasi dari sistem.');	
+			redirect('Members/edit_c/P/'.$this->username,'refresh');
 		}
 	}
 }

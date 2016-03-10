@@ -241,4 +241,11 @@ class Companies extends CI_Controller {
 							);
 		redirect('adm/Companies','refresh');	
 	}
+
+	public function delete_mes($id,$id_user,$username)
+	{
+		$this->Message->delete($id);
+		$this->session->set_flashdata('msg', 'Pesan berhasil dihapus');
+		redirect('adm/Companies/messages/'.$id_user.'/'.$username,'refresh');
+	}
 }

@@ -69,7 +69,7 @@
       $this->db->join('c_identity as ci', 'c.id_company = ci.id_company','left');
       $this->db->join('c_hired_status as s','h.id_status = s.id_status','left');
       $this->db->join('job_post as j', 'h.id_job = j.id_post');
-      $this->db->where('h.id_worker',$where);
+      $this->db->where('h.id_company',$where);
       $this->db->where('store', '0');
 
       $query = $this->db->get();

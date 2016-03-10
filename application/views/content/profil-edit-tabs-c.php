@@ -7,6 +7,9 @@
 								<li <?php echo ($tab_param == 'I') ? 'class="active"': '';?>>
 									<a href="#tab-6-6" data-toggle="tab">Informasi Perusahaan</a>
 								</li>
+								<li <?php echo ($tab_param == 'P') ? 'class="active"': '';?>>
+									<a href="#tab-6-5" data-toggle="tab">Pembayaran</a>
+								</li>
 								<li <?php echo ($tab_param == 'PA') ? 'class="active"': '';?>>
 									<a href="#tab-6-3" data-toggle="tab">Pengaturan Akun</a>
 								</li>

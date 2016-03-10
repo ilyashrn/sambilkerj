@@ -236,7 +236,7 @@ class Members extends CI_Controller {
 			$this->load->view('content/profil-edit-1', $data);
 			$this->load->view('content/profil-edit-2', $data);
 			$this->load->view('content/profil-edit-3', $data);
-			$this->load->view('content/profil-edit-5', $data);
+			// $this->load->view('content/profil-edit-5', $data);
 			$this->load->view('content/profil-edit-4', $data);
 			$this->load->view('footer', $data);	
 		} else {
@@ -252,6 +252,8 @@ class Members extends CI_Controller {
 			$prov_data = $this->Location->get_all_prov(); 
 			$basic_data = $this->Company->get('username',$this->username);
 			$ident_data = $this->Company->get_ident($this->mem_id);
+			$job_data = $this->Applier->get_not_store($this->mem_id);
+			$inv_data = $this->invoice->get_all();
 
 			foreach ($basic_data as $key) {
 				$this->company_name = $key->company_name;
@@ -269,7 +271,9 @@ class Members extends CI_Controller {
 				'username' => $this->username,
 				'basic_data' => $basic_data,
 				'ident_data' => $ident_data,
-				'prov_data' => $prov_data
+				'prov_data' => $prov_data,
+				'job_data' => $job_data,
+				'inv_data' => $inv_data
 				 );
 
 			$this->load->view('html_head', $data);
@@ -277,6 +281,7 @@ class Members extends CI_Controller {
 			$this->load->view('content/profil-edit-tabs-c', $data);
 			$this->load->view('content/profil-edit-1-c', $data);
 			$this->load->view('content/profil-edit-2-c', $data);
+			$this->load->view('content/profil-edit-4-c', $data);
 			$this->load->view('content/profil-edit-3-c', $data);
 			$this->load->view('footer', $data);	
 		}

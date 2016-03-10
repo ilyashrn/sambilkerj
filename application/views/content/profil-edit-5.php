@@ -10,7 +10,7 @@
 <div class="tab-pane fade <?php echo ($tab_param == 'P') ? 'in active': '';?>" id="tab-6-5">
   <div class="col-sm-12 service-box style-3 green">
     <h4>Daftar Pembayaran</h4>
-    <label class="alert alert-warning">Berikut merupakan daftar lowongan yang harus segera disetorkan ke <span class="text-default">SambilKerja</span> <b>sebanyak 2,5%</b>.</label>
+    <label class="alert alert-warning">Berikut merupakan daftar lowongan dengan gaji yang harus segera disetorkan ke <span class="text-default">SambilKerja</span> <b>sebanyak 2,5%</b>.</label>
         <?php
         if ($job_data == false) { ?>
             <div class="col-sm-12" style="margin-bottom:20px;">

@@ -265,7 +265,7 @@ if ($ident_data !== false) {
                                             foreach ($job_data as $job) { ?>
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    <h3 class="panel-title"><?php echo $job->post_title;?></h3>
+                                                    <h3 class="panel-title"><a href="../../../lokers/edit/<?php echo $job->id_post.'/'.$job->post_title; ?>"><?php echo $job->post_title;?></a></h3>
                                                 </div>
                                                 <div class="panel-body" style="line-height: 20px;">
                                                     <div class="col-md-6">
@@ -279,13 +279,13 @@ if ($ident_data !== false) {
                                                         <b>Gaji yang ditawarkan:</b> IDR <?php setlocale(LC_MONETARY, 'id_ID'); echo number_format($job->salary) ;?></i>
                                                     </div>
                                                     <div class="col-md-5" style="margin-top: 30px;">
-                                                        <?php
+                                                        <!-- <?php
                                                         if ($job->store) { ?>
                                                             <label class="label label-success">2,5% sudah disetor</label>      
                                                         <?php } else {
                                                         ?>
                                                         <a href="../../store/<?php echo $job->id_hired;?>"><i class="fa fa-check"></i>Tandai sudah menyetor 2,5% penghasilan</a>
-                                                        <?php } ?>
+                                                        <?php } ?> -->
                                                     </div>
                                                 </div>                                        
                                             </div>

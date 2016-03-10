@@ -38,19 +38,19 @@ class Message extends CI_Model {
 		$this->db->from('messages');
 		// $this->db->where('message_type', $type);
 		if ($type == 1) { // worker ke company
-			$this->db->join('company', 'id_receiver = id_company');
-			$this->db->join('worker', 'id_sender = id_worker');
+			$this->db->join('company', 'id_receiver = id_company','left');
+			$this->db->join('worker', 'id_sender = id_worker','left');
 			$this->db->join('administrator', 'id_sender  = id_admin','left');
 		} elseif ($type == 2) { // company ke worker
-			$this->db->join('company', 'id_sender = id_company');
-			$this->db->join('worker', 'id_receiver = id_worker');
+			$this->db->join('company', 'id_sender = id_company','left');
+			$this->db->join('worker', 'id_receiver = id_worker','left');
 			$this->db->join('administrator', 'id_receiver = id_admin','left');
 		} elseif ($type == 3) { // company ke admin
-			$this->db->join('company', 'id_sender = id_company');
-			$this->db->join('administrator', 'id_receiver = id_admin');
+			$this->db->join('company', 'id_sender = id_company','left');
+			$this->db->join('administrator', 'id_receiver = id_admin','left');
 		} elseif ($type == 4) { //admin ke company
-			$this->db->join('company', 'id_receiver= id_company');
-			$this->db->join('administrator', 'id_sender  = id_admin');
+			$this->db->join('company', 'id_receiver= id_company','left');
+			$this->db->join('administrator', 'id_sender  = id_admin','left');
 		}
 		$this->db->where($where_what, $id);
 		$this->db->order_by('timestamp', 'desc');

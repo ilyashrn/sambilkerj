@@ -65,8 +65,8 @@ foreach ($contacts as $cont) {}
                   <ul>
                     <li><a href="<?php echo base_url().'Members/'.$cur_username;?>">Profile</a></li>
                     <li><a href="<?php echo base_url().'Messages/';?>">Messages</a></li>
-                    <?php if ($this->session->userdata('mem_type') == 'W') { ?>
-                      <li><a href="<?php echo base_url().'Members/edit_w/P/'.$cur_username;?>">Payment</a></li>
+                    <?php if ($this->session->userdata('mem_type') == 'C') { ?>
+                      <li><a href="<?php echo base_url().'Members/edit_c/P/'.$cur_username;?>">Payment</a></li>
                     <?php } ?>
                     <li><a href="<?php echo ($this->session->userdata('mem_type') == 'W') ? base_url().'Members/edit_w/PA/'.$cur_username : base_url().'Members/edit_c/PA/'.$cur_username ;?>">Settings</a></li>
                     <li><a href="<?php echo base_url().'In/out';?>">Logout</a></li>
