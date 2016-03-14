@@ -149,7 +149,7 @@ if ($ident_data !== false) {
                                             <div class="col-md-5">
                                                 <div class="form-group form-group-custom">
                                                     <label>Ownership</label>
-                                                    <input name="ownership" type="text" class="form-control" value="<?php echo $row->ownership;?>"/>
+                                                    <input name="ownership" type="text" class="form-control" value="<?php echo ($ident_data !== false) ? $row->ownership : '';?>"/>
                                                 </div>
                                             </div>
                                         </div>                                                          

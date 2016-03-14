@@ -47,7 +47,7 @@ if ($ident_data !== false) {
                                         <div class="profile-info">
                                             <h4><?php echo $basic_row->fullname;?></h4>
                                             <?php
-                                            if ($row->avatar) { ?>
+                                            if ($ident_data && $row->avatar) { ?>
                                                 <span><a href="../../remove_photo/<?php echo $row->avatar.'/'.$basic_row->id_worker;?>"><i class="fa fa-remove"></i> Remove Avatar</a></span>
                                             <?php }
                                             ?>
