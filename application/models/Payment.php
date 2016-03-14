@@ -7,6 +7,20 @@ class Payment extends CI_Model {
 		$this->db->insert('c_payment', $input);
 	}	
 
+	function delete_check($where,$id) {
+		$this->db->select('*');
+		$this->db->from('c_payment as p');
+		$this->db->join('c_hired as h', 'p.id_c_hired = h.id_hired', 'left');
+		$this->db->where($where, $id);
+
+		$query = $this->db->get();
+		if ($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return false;
+		}
+	}
+
 	function check_entry($id) {
 		$this->db->select('*');
 		$this->db->from('c_payment');
@@ -94,6 +108,11 @@ class Payment extends CI_Model {
 		$update = array('verified' => 1);
 		$this->db->where('id_payment', $id);
 		$this->db->update('c_payment', $update);
+	}
+
+	function delete($id) {
+		$this->db->where('id_payment', $id);
+		$this->db->delete('c_payment');
 	}
 
 }

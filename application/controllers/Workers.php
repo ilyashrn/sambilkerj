@@ -402,6 +402,9 @@ class Workers extends CI_Controller {
 	}
 
 	function unapplying($id_hired) {
+		foreach ($this->Payment->delete_check('id_c_hired',$id_hired) as $key) { //c_payment wiht job
+			$this->Payment->delete($key->id_payment);
+		}
 		$remove = $this->Applier->unapply($id_hired);
 		$this->session->set_flashdata(
 					'msg', 

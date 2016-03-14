@@ -44,7 +44,7 @@ class Lokers extends CI_Controller {
 			$config['upload_path'] = './files/loker/';
 			$new_name = $username.' - '.$this->input->post('post_title');
 			$config['file_name'] = $new_name;
-			$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx';
+			$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx|jpeg|png';
 			$config['overwrite'] = FALSE;
 
 			$this->load->library('upload', $config);
@@ -121,7 +121,7 @@ class Lokers extends CI_Controller {
 			$config['upload_path'] = './files/loker/';
 			$new_name = $username.' - '.$this->input->post('post_title');
 			$config['file_name'] = $new_name;
-			$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx';
+			$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx|jpeg|png';
 			$config['overwrite'] = FALSE;
 
 			$this->load->library('upload', $config);
@@ -155,6 +155,11 @@ class Lokers extends CI_Controller {
 
 	public function deleting($id_job)
 	{
+		foreach ($this->Payment->delete_check('id_job',$id_job) as $key) { //c_payment wiht job
+			$this->Payment->delete($key->id_payment);
+		}
+		$this->Job->delete_skill($id_job);
+		$this->Job->delete($id_job);
 		$this->Applier->delete($id_job);
 		$this->Job->delete($id_job);
 

@@ -51,6 +51,7 @@
                                                     <div class="col-md-6">
                                                         <p><b>Nominal yang ditransfer</b> : <label class="label label-info">IDR <?php echo number_format($inc->nominal) ?></label></p>
                                                         <p><b>Nama pengirim</b> : <?php echo $inc->sender; ?></p>
+                                                        <p><b>Nama pengirim</b> : <?php echo $inc->info; ?></p>
                                                         <p><b>Tanggal konfirmasi</b> : <?php echo $inc->confirm_time?></p>
                                                     </div>
                                                     <div class="col-md-12" style="margin-top: 10px;">

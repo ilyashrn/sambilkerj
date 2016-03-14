@@ -364,7 +364,7 @@ class Jobs extends CI_Controller {
 				$config['upload_path'] = './files/loker/';
 				$new_name = $this->username.' - '.$this->input->post('post_title');
 				$config['file_name'] = $new_name;
-				$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx';
+				$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx|jpeg|png';
 				$config['overwrite'] = FALSE;
 
 				$this->load->library('upload', $config);
@@ -408,7 +408,7 @@ class Jobs extends CI_Controller {
 			$config['upload_path'] = './files/loker/';
 			$new_name = $this->username.' - '.$this->input->post('post_title');
 			$config['file_name'] = $new_name;
-			$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx';
+			$config['allowed_types'] = 'pdf|jpg|ppt|pptx|doc|docx|jpeg|png';
 			$config['overwrite'] = FALSE;
 
 			$this->load->library('upload', $config);
@@ -450,9 +450,12 @@ class Jobs extends CI_Controller {
 		$poster = $this->Job->get_poster($id_post);
 		foreach ($poster as $poster ) {}
 		if ($this->mem_id == $poster->id_company) {
-			$this->Applier->delete_c($id_post);
-			$rem_skill = $this->Job->delete_skill($id_post);
-			$rem_post = $this->Job->delete($id_post);
+			foreach ($this->Payment->delete_check('id_job',$id_post) as $key) { //c_payment wiht job
+				$this->Payment->delete($key->id_payment);
+			}
+			$this->Applier->delete($id_post); // c_hired
+			$rem_skill = $this->Job->delete_skill($id_post); //skill
+			$rem_post = $this->Job->delete($id_post); //job
 			
 			$this->session->set_flashdata(
 						'msg', 

@@ -49,6 +49,15 @@
                           <input type="text" placeholder="Nama di rekening pengirim" name="sender" class="form-control" required="required"></input>
                         </div>
                         <div class="form-group">
+                          <label><strong>Dikirim ke rekening</strong></label>
+                          <select class="form-control" name="receiver">
+                            <option>Pilih rekening SambilKerja</option>
+                            <?php foreach ($inv_data as $inv) { ?>
+                              <option value="<?php echo $inv->invoice_bank.' - '.$inv->invoice_number;?>"><?php echo $inv->invoice_bank.' - '.$inv->invoice_number;?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                        <div class="form-group">
                           <label><strong>Bukti pembayaran</strong></label>
                           <input name="proof" class="form-control" type="file"></input>
                         </div>

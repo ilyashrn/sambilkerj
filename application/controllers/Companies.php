@@ -269,7 +269,8 @@ class Companies extends CI_Controller {
 				'id_c_hired' => $this->input->post('id'),
 				'nominal' => $this->input->post('nominal'),
 				'sender' => $this->input->post('sender'),
-				'proof' => $file_name
+				'proof' => $file_name,
+				'info' => $this->input->post('receiver')
 			);
 			if (!$upload) {
 				echo $this->upload->display_errors();
