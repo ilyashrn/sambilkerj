@@ -56,7 +56,7 @@
                                                     </div>
                                                     <div class="col-md-12" style="margin-top: 10px;">
                                                         <a data-toggle="modal" data-target="#reply<?php echo $inc->id_payment;?>" class="btn btn-default btn-xs"><i class="fa fa-picture-o"></i> lihat Bukti transfer</a>
-                                                        <a href="verify/<?php echo $inc->id_payment; ?>" class="btn btn-primary btn-xs"><i class="fa fa-check"></i> Verify</a>
+                                                        <a href="payments/verify/<?php echo $inc->id_payment; ?>" class="btn btn-primary btn-xs"><i class="fa fa-check"></i> Verify</a>
                                                         <span class="pull-right">Tanggal verifikasi : <?php echo ($inc->verified_time == '0000-00-00 00:00:00') ? '-' : $inc->verified_time?></span>
                                                     </div>
                                                 </div>
