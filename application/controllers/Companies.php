@@ -13,18 +13,18 @@ class Companies extends CI_Controller {
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
 
-		if ($this->session->userdata('logged') != true) {
-			$sess_data = array('last_page' => current_url());
-			$this->session->set_userdata($sess_data);
-		} else {
-			$this->username = $this->session->userdata('logged');
-			$this->mem_id = $this->session->userdata('mem_id');
-			$this->mem_type = $this->session->userdata('mem_type');
+		// if ($this->session->userdata('logged') != true) {
+		// 	$sess_data = array('last_page' => current_url());
+		// 	$this->session->set_userdata($sess_data);
+		// } else {
+		// 	$this->username = $this->session->userdata('logged');
+		// 	$this->mem_id = $this->session->userdata('mem_id');
+		// 	$this->mem_type = $this->session->userdata('mem_type');
 
-			$sess_data = array('last_page' => current_url());
-			$this->session->set_userdata($sess_data);
-			$this->last_page= $this->session->userdata('last_page');
-		}
+		// 	$sess_data = array('last_page' => current_url());
+		// 	$this->session->set_userdata($sess_data);
+		// 	$this->last_page= $this->session->userdata('last_page');
+		// }
 	}
 
 	public function index()
